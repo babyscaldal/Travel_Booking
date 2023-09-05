@@ -31,7 +31,7 @@ export default function FilterSubMenu() {
       </Box>
 
       {/* Sắp xếp theo star*/}
-      <Accordion>
+      <Accordion disableGutters>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel2a-content"
@@ -47,7 +47,7 @@ export default function FilterSubMenu() {
       </Accordion>
 
       {/* Sắp xếp theo loại hình lưu trứ */}
-      <Accordion>
+      <Accordion disableGutters>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel2a-content"
