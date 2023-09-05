@@ -9,7 +9,7 @@ import {
   Button,
   Box,
 } from "@mui/material";
-import { ICity } from "../BookingTabs/HotelBookFormLayout";
+import { ICity } from "../../HomePage_Component/BookingTabPanel/BookingTabs/HotelBookFormLayout";
 
 const cities: ICity[] = [
   { id: 1, name: "New York", country: "United States", population: 8623000 },
@@ -61,9 +61,6 @@ export default function SearchField() {
               <Autocomplete
                 autoHighlight
                 autoComplete
-                // value={
-                //   value ? cities.find((city) => city.id === value.id) ?? null : null
-                // }
                 value={value}
                 options={cities}
                 getOptionLabel={(city: ICity) => city.name}

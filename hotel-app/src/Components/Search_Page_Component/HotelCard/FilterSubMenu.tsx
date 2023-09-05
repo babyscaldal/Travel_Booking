@@ -4,7 +4,6 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Box, Button } from "@mui/material";
-import SliderField from "./SliderField";
 import { RatingCheckBoxField } from "./RatingCheckBoxField";
 import { TypeCheckBoxField } from "./TypeCheckBoxField";
 
@@ -31,20 +30,7 @@ export default function FilterSubMenu() {
         </Typography>
       </Box>
 
-      <Accordion>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel2a-content"
-          id="panel2a-header"
-        >
-          <Typography sx={{ fontSize: "16px", fontWeight: "bold" }}>
-            Khoảng giá phòng mỗi đêm
-          </Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <SliderField />
-        </AccordionDetails>
-      </Accordion>
+      {/* Sắp xếp theo star*/}
       <Accordion>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
@@ -56,9 +42,11 @@ export default function FilterSubMenu() {
           </Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <RatingCheckBoxField name={"rating"} />
+          <RatingCheckBoxField name={"star"} />
         </AccordionDetails>
       </Accordion>
+
+      {/* Sắp xếp theo loại hình lưu trứ */}
       <Accordion>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}

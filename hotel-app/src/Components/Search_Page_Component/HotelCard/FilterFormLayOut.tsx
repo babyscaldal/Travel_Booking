@@ -7,19 +7,17 @@ import {
   Divider,
   Button,
 } from "@mui/material";
-import map from "../../assets/map.png";
+import map from "../../../assets/map.png";
 import { RadioField } from "./RadioField";
 import { FormProvider, useForm } from "react-hook-form";
 import FilterSubMenu from "./FilterSubMenu";
 import { DevTool } from "@hookform/devtools";
-import CitySearchField from "../BookingTabs/BookingFormField/CitySearchField";
 import SearchField from "./SearchField";
 
 export interface IFilterFormValue {
   radio: string;
-  rating: string;
+  star: string;
   type: string;
-  city: string;
 }
 
 const onSubmit = (data: IFilterFormValue) => {
@@ -30,9 +28,8 @@ export const FilterFormLayOut = () => {
   const form = useForm({
     defaultValues: {
       radio: "1",
-      rating: "",
+      star: "",
       type: "",
-      city: "",
     },
   });
 
