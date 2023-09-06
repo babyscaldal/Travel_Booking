@@ -1,15 +1,14 @@
-import * as React from 'react';
-import AspectRatio from '@mui/joy/AspectRatio';
-import Button from '@mui/joy/Button';
-import Card from '@mui/joy/Card';
-import CardContent from '@mui/joy/CardContent';
-import IconButton from '@mui/joy/IconButton';
-import Typography from '@mui/joy/Typography';
-import BookmarkAdd from '@mui/icons-material/BookmarkAddOutlined';
+import AspectRatio from "@mui/joy/AspectRatio";
+import Button from "@mui/joy/Button";
+import Card from "@mui/joy/Card";
+import CardContent from "@mui/joy/CardContent";
+import IconButton from "@mui/joy/IconButton";
+import Typography from "@mui/joy/Typography";
+import BookmarkAdd from "@mui/icons-material/BookmarkAddOutlined";
 
-export default function JOY() {
+export default function HotelInfo() {
   return (
-    <Card variant="outlined" sx={{ width: 320 }}>
+    <Card variant="outlined" sx={{ width: 280 }}>
       <div>
         <Typography level="title-lg">Yosemite National Park</Typography>
         <Typography level="body-sm">April 24 to May 02, 2021</Typography>
@@ -18,9 +17,9 @@ export default function JOY() {
           variant="plain"
           color="neutral"
           size="sm"
-          sx={{ position: 'absolute', top: '0.875rem', right: '0.5rem' }}
+          sx={{ position: "absolute", top: "0.875rem", right: "0.5rem" }}
         >
-          <BookmarkAdd />
+          {/* <BookmarkAdd /> */}
         </IconButton>
       </div>
       <AspectRatio minHeight="120px" maxHeight="200px">
@@ -43,7 +42,7 @@ export default function JOY() {
           size="md"
           color="primary"
           aria-label="Explore Bahamas Islands"
-          sx={{ ml: 'auto', alignSelf: 'center', fontWeight: 600 }}
+          sx={{ ml: "auto", alignSelf: "center", fontWeight: 600 }}
         >
           Explore
         </Button>

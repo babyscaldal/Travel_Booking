@@ -8,7 +8,7 @@ function App() {
   return (
     <Box>
       <CssBaseline />
-      <BookingTabPanel />
+      {/* <BookingTabPanel /> */}
       <FilterFormLayOut />
     </Box>
   );

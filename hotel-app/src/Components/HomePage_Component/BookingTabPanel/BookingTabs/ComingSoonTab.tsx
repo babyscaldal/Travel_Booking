@@ -40,15 +40,21 @@ export const ComingSoon = () => {
           }}
         >
           <Typography
-            fontFamily={"Pacifico, cursive"}
+            sx={{
+              marginBottom: "20px",
+              fontFamily: "Pacifico, cursive",
+              fontWeight: "bold",
+            }}
             variant="h2"
             color="textPrimary"
-            fontWeight="bold"
-            mb={2}
           >
             Coming Soon
           </Typography>
-          <Typography variant="h6" color="textSecondary" mb={2}>
+          <Typography
+            sx={{ marginBottom: "20px" }}
+            variant="h6"
+            color="textSecondary"
+          >
             We're working on something amazing!
           </Typography>
           <Typography variant="h6" color="textSecondary">

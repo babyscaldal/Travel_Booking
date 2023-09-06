@@ -8,6 +8,7 @@ import {
   Alert,
   Button,
   Box,
+  Grid,
 } from "@mui/material";
 import { ICity } from "../../HomePage_Component/BookingTabPanel/BookingTabs/HotelBookFormLayout";
 
@@ -43,61 +44,44 @@ export default function SearchField() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <Box
-        sx={{
-          display: "flex",
-          gap: "10px",
-          justifyContent: "space-between",
-          alignItems: "stretch",
-        }}
-      >
-        <FormControl fullWidth>
-          <Controller
-            rules={{ required: true }}
-            name="city"
-            control={control}
-            render={({ field: { onChange, value } }) => (
-              <Autocomplete
-                autoHighlight
-                autoComplete
-                value={value}
-                options={cities}
-                getOptionLabel={(city: ICity) => city.name}
-                onChange={(_, city: ICity | null) => onChange(city)}
-                isOptionEqualToValue={(option, value) => option.id === value.id}
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    label={"Thành phố, địa điểm:"}
-                    variant="outlined"
-                    InputProps={{
-                      ...params.InputProps,
-                      type: "search",
-                      endAdornment: (
-                        <InputAdornment position="start">
-                          <LocationOnRoundedIcon
-                            sx={{ color: "primary.main" }}
-                          />
-                        </InputAdornment>
-                      ),
-                    }}
-                    error={!!errors.city}
-                    size="small"
-                  />
-                )}
-              />
-            )}
-          />
-        </FormControl>
-        <Button
-          type="submit"
-          variant="contained"
-          sx={{ color: "primary.main" }}
-        >
-          🔍
-        </Button>
-      </Box>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      style={{ display: "flex", gap: "5px", alignItems: "stretch" }}
+    >
+      <FormControl fullWidth>
+        <Controller
+          rules={{ required: true }}
+          name="city"
+          control={control}
+          render={({ field: { onChange, value } }) => (
+            <Autocomplete
+              autoHighlight
+              autoComplete
+              value={value}
+              options={cities}
+              getOptionLabel={(city: ICity) => city.name}
+              onChange={(_, city: ICity | null) => onChange(city)}
+              isOptionEqualToValue={(option, value) => option.id === value.id}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  label={"Thành phố, địa điểm:"}
+                  variant="outlined"
+                  InputProps={{
+                    ...params.InputProps,
+                    type: "search",
+                  }}
+                  error={!!errors.city}
+                  size="small"
+                />
+              )}
+            />
+          )}
+        />
+      </FormControl>
+      <Button type="submit" variant="contained" sx={{ color: "primary.main" }}>
+        🔍
+      </Button>
       {errors?.city && <Alert severity="error">City is required</Alert>}
     </form>
   );
