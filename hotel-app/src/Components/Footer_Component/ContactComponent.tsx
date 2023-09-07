@@ -52,7 +52,7 @@ const ContactComponent = ({ title, arrContent }: ContactProps) => {
                   fontWeight: "500",
                   fontSize: "14px",
                   fontFamily:
-                    "Godwit,MuseoSans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;",
+                    "Godwit,MuseoSans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol",
                 }}
               >
                 {content}

@@ -1,0 +1,212 @@
+[
+  {
+    "location": "Vung Tau",
+    "type": "resort",
+    "id": "159",
+    "name": "Sunshine Resort",
+    "address": "123 ABC Street, Hoan Kiem, Vung Tau",
+    "description": "ABC Resort is a luxurious resort located in the heart of Hoan Kiem district. With stunning views, spacious rooms, and top-notch amenities, it offers a perfect getaway for relaxation and comfort.",
+    "rating": 4.7,
+    "price": 150,
+    "star": 5,
+    "amenities": ["Swimming pool", "Spa", "Fitness center", "Fine dining"],
+    "image": [
+      "https://a0.muscache.com/im/pictures/13ee20e4-8255-4e9b-9252-cf5146fc4599.jpg?im_w=960",
+      "https://a0.muscache.com/im/pictures/29a0069a-28d9-4fa9-914c-0cffa6bca754.jpg?im_w=720",
+      "https://a0.muscache.com/im/pictures/6c49f73e-284c-4e69-8012-9870e122f086.jpg?im_w=720",
+      "https://a0.muscache.com/im/pictures/b2298cc1-2df3-4d26-ac9c-15391b17e5a1.jpg?im_w=720",
+      "https://a0.muscache.com/im/pictures/0a6ed1ce-83ba-4ab2-bf94-70e911373ab8.jpg?im_w=720"
+    ]
+  },
+  {
+    "location": "Vung Tau",
+    "type": "resort",
+    "id": "160",
+    "name": "FLC Resort",
+    "address": "456 XYZ Street, Ba Dinh, Vung Tau",
+    "description": "XYZ Resort is a boutique resort nestled in the charming Ba Dinh neighborhood. It boasts beautifully designed rooms, a tranquil garden, and a range of amenities to ensure a memorable stay.",
+    "rating": 4.3,
+    "price": 120,
+    "star": 4,
+    "amenities": ["Garden", "Restaurant", "Bar", "Bicycle rental"],
+    "image": [
+      "https://a0.muscache.com/im/pictures/439de884-1265-4d22-9df5-46757053b337.jpg?im_w=960",
+      "https://a0.muscache.com/im/pictures/c14f70bf-99fb-47cb-8224-2ee5eb29b32b.jpg?im_w=720",
+      "https://a0.muscache.com/im/pictures/6ef50c90-bb06-400f-adcf-1e205f5bc140.jpg?im_w=720",
+      "https://a0.muscache.com/im/pictures/5c75a228-e026-46c4-a792-b0b841d29ef5.jpg?im_w=720",
+      "https://a0.muscache.com/im/pictures/25b77fa8-7225-4498-9118-15c2c7abb564.jpg?im_w=720"
+    ]
+  },
+  {
+    "location": "Vung Tau",
+    "type": "resort",
+    "id": "161",
+    "name": "Sunset Paradise Resort",
+    "address": "789 Tran Phu Street, Tay Ho, Vung Tau",
+    "description": "Sunset Paradise Resort offers a serene escape in the scenic Tay Ho district. With its picturesque lake views, spacious rooms, and a range of recreational activities, it's an ideal destination for a relaxing vacation.",
+    "rating": 4.5,
+    "price": 180,
+    "star": 5,
+    "amenities": ["Lake view", "Water sports", "Restaurant", "Spa"],
+    "image": [
+      "https://a0.muscache.com/im/pictures/miso/Hosting-613799251577405788/original/9bd23466-7591-455e-bfea-d420f2186fd3.jpeg?im_w=960",
+      "https://a0.muscache.com/im/pictures/miso/Hosting-613799251577405788/original/a1066b72-27b8-45bf-b883-bcc9e3c08fb7.jpeg?im_w=720",
+      "https://a0.muscache.com/im/pictures/miso/Hosting-613799251577405788/original/c576b1f6-6f98-4c32-95e8-db9b840d73a9.jpeg?im_w=720",
+      "https://a0.muscache.com/im/pictures/miso/Hosting-613799251577405788/original/2d29e325-0139-45e5-afc5-c50eb15aefe6.jpeg?im_w=720",
+      "https://a0.muscache.com/im/pictures/miso/Hosting-613799251577405788/original/24c1e27e-3449-4ad3-8f13-e7d235f8a944.jpeg?im_w=720"
+    ]
+  },
+  {
+    "location": "Vung Tau",
+    "type": "resort",
+    "id": "162",
+    "name": "Nature Retreat Resort",
+    "address": "10 Nguyen Du Street, Hai Ba Trung, Vung Tau",
+    "description": "Nature Retreat Resort offers a peaceful retreat in the bustling Hai Ba Trung district. Surrounded by lush greenery, it provides comfortable accommodation, nature trails, and a rejuvenating spa experience.",
+    "rating": 4.2,
+    "price": 130,
+    "star": 4,
+    "amenities": ["Nature trails", "Spa", "Restaurant", "Fitness center"],
+    "image": [
+      "https://a0.muscache.com/im/pictures/fa58cc00-600a-4219-a049-42413e8aed34.jpg?im_w=960",
+      "https://a0.muscache.com/im/pictures/f9b24fab-38fd-452b-afa2-f1872cbef49e.jpg?im_w=720",
+      "https://a0.muscache.com/im/pictures/2a3cc580-0c48-45d1-8ed8-c070b194fe33.jpg?im_w=720",
+      "https://a0.muscache.com/im/pictures/8d842c10-8cde-419e-8e3b-ce14a4c1d3a5.jpg?im_w=720",
+      "https://a0.muscache.com/im/pictures/fefca95f-ff9d-46f0-8faa-f7553abb78fe.jpg?im_w=720"
+    ]
+  },
+  {
+    "location": "Vung Tau",
+    "type": "resort",
+    "id": "163",
+    "name": "Riverside Resort",
+    "address": "15 Tran Quang Khai Street, Hoan Kiem, Vung Tau",
+    "description": "Riverside Resort is an enchanting retreat along the banks of the Red River. With its scenic location, comfortable rooms, and a riverside restaurant, it offers a delightful experience for nature lovers.",
+    "rating": 4.4,
+    "price": 160,
+    "star": 4,
+    "amenities": [
+      "River view",
+      "Restaurant",
+      "Outdoor activities",
+      "Conference facilities"
+    ],
+    "image": [
+      "https://a0.muscache.com/im/pictures/miso/Hosting-734962945624921461/original/526f07f3-20fb-4855-b65a-6c8fd5c69162.jpeg?im_w=960",
+      "https://a0.muscache.com/im/pictures/miso/Hosting-734962945624921461/original/3b5f1306-7db7-48df-8c8c-2da81c84afe1.jpeg?im_w=720",
+      "https://a0.muscache.com/im/pictures/miso/Hosting-734962945624921461/original/0fe23c0f-aee5-4c4a-942b-57ba8ae95d4c.jpeg?im_w=720",
+      "https://a0.muscache.com/im/pictures/miso/Hosting-734962945624921461/original/96bed602-b43a-4f53-8e38-9fda919459fe.jpeg?im_w=720",
+      "https://a0.muscache.com/im/pictures/miso/Hosting-734962945624921461/original/57e79b97-7100-422b-8556-6fa9d2a9357f.jpeg?im_w=720"
+    ]
+  },
+  {
+    "location": "Vung Tau",
+    "type": "resort",
+    "id": "164",
+    "name": "Tranquil Haven Resort",
+    "address": "20 Tran Hung Dao Street, Ba Dinh, Vung Tau",
+    "description": "Tranquil Haven Resort is a serene oasis in the heart of Ba Dinh district. With its elegant rooms, lush gardens, and a spa, it offers a peaceful environment for a rejuvenating stay.",
+    "rating": 4.6,
+    "price": 170,
+    "star": 5,
+    "amenities": ["Garden", "Spa", "Restaurant", "Pool"],
+    "image": [
+      "https://a0.muscache.com/im/pictures/miso/Hosting-842448767203259993/original/822ee467-e864-4f7c-8fb5-79571481b6b4.jpeg?im_w=1200",
+      "https://a0.muscache.com/im/pictures/miso/Hosting-842448767203259993/original/4ac2395f-0448-4c39-bcd1-d0868117a7a5.jpeg?im_w=1200",
+      "https://a0.muscache.com/im/pictures/miso/Hosting-842448767203259993/original/ab96a3a7-bacb-41a4-a146-ecb7a6e90975.jpeg?im_w=1200",
+      "https://a0.muscache.com/im/pictures/miso/Hosting-842448767203259993/original/bdb9b619-9ef2-40fc-a98e-7ee1c7ce9d53.jpeg?im_w=1200",
+      "https://a0.muscache.com/im/pictures/miso/Hosting-842448767203259993/original/f3c42380-1fbc-4a39-b98d-a2c6a9cd12de.jpeg?im_w=1200"
+    ]
+  },
+  {
+    "location": "Vung Tau",
+    "type": "resort",
+    "id": "165",
+    "name": "Harmony Resort",
+    "address": "25 Le Duan Street, Hoan Kiem, Vung Tau",
+    "description": "Harmony Resort is a harmonious blend of luxury and comfort in the Hoan Kiem district. With its stylish rooms, rooftop bar, and a range of wellness facilities, it offers an unforgettable experience.",
+    "rating": 4.8,
+    "price": 200,
+    "star": 5,
+    "amenities": [
+      "Rooftop bar",
+      "Wellness facilities",
+      "Spa",
+      "Fitness center"
+    ],
+    "image": [
+      "https://a0.muscache.com/im/pictures/miso/Hosting-792510074034625170/original/6a17e24d-d7c2-4bc8-ac29-7448d25adfdc.jpeg?im_w=960",
+      "https://a0.muscache.com/im/pictures/miso/Hosting-792510074034625170/original/03bebc4d-fdda-47b3-9bb2-22c58e3a7ba1.jpeg?im_w=720",
+      "https://a0.muscache.com/im/pictures/miso/Hosting-792510074034625170/original/3804027d-013d-4f8a-b61c-c09a70704503.jpeg?im_w=720",
+      "https://a0.muscache.com/im/pictures/miso/Hosting-792510074034625170/original/b3302040-fd3f-41e8-9d5d-1894a838886c.jpeg?im_w=720",
+      "https://a0.muscache.com/im/pictures/miso/Hosting-792510074034625170/original/6acb9d80-15f4-467c-b3ce-150f95b7e4c3.jpeg?im_w=720"
+    ]
+  },
+  {
+    "location": "Vung Tau",
+    "type": "resort",
+    "id": "166",
+    "name": "Serene Hideaway Resort",
+    "address": "35 Nguyen Chi Thanh Street, Dong Da, Vung Tau",
+    "description": "Serene Hideaway Resort is a tranquil escape nestled in the vibrant Dong Da district. With its peaceful ambiance, comfortable accommodations, and a range of recreational activities, it offers a perfect retreat from the city's hustle and bustle.",
+    "rating": 4.9,
+    "price": 250,
+    "star": 5,
+    "amenities": ["Infinity pool", "Private beach", "Fine dining", "Spa"],
+    "image": [
+      "https://a0.muscache.com/im/pictures/miso/Hosting-814937613380365669/original/7ee4b2be-ec19-4f57-bf2d-fe459b3b79cb.jpeg?im_w=960",
+      "https://a0.muscache.com/im/pictures/miso/Hosting-814937613380365669/original/198f0a2f-cf7d-46ea-8e36-98f75cfc9d61.jpeg?im_w=720",
+      "https://a0.muscache.com/im/pictures/miso/Hosting-814937613380365669/original/ffa346ad-807f-4599-87fa-fe49ff26885a.jpeg?im_w=720",
+      "https://a0.muscache.com/im/pictures/miso/Hosting-814937613380365669/original/befb402e-c658-4edb-812f-d0964a8c0bc7.jpeg?im_w=720",
+      "https://a0.muscache.com/im/pictures/miso/Hosting-814937613380365669/original/2a9ba535-e598-44a6-afb8-d8ecf2a3a910.jpeg?im_w=720"
+    ]
+  },
+  {
+    "location": "Vung Tau",
+    "type": "resort",
+    "id": "167",
+    "name": "Blissful Retreat Resort",
+    "address": "30 Tran Phu Street, Tay Ho, Vung Tau",
+    "description": "Blissful Retreat Resort is a peaceful haven located in the picturesque Tay Ho district. With its serene lake views, comfortable rooms, and a range of wellness activities, it offers a blissful experience for relaxation and rejuvenation.",
+    "rating": 4.7,
+    "price": 190,
+    "star": 4,
+    "amenities": [
+      "Lake view",
+      "Wellness activities",
+      "Restaurant",
+      "Swimming pool"
+    ],
+    "image": [
+      "https://a0.muscache.com/im/pictures/miso/Hosting-790544589420691779/original/d61c1432-a073-4bd3-b084-eee2d7bdb704.jpeg?im_w=960",
+      "https://a0.muscache.com/im/pictures/miso/Hosting-790544589420691779/original/b5072ea7-109f-44e0-94b3-2e59b558d5c5.jpeg?im_w=720",
+      "https://a0.muscache.com/im/pictures/miso/Hosting-790544589420691779/original/fba2be60-40c3-426e-8e1f-5bda26ddcf3f.jpeg?im_w=720",
+      "https://a0.muscache.com/im/pictures/miso/Hosting-790544589420691779/original/7488278a-0a64-4549-876b-95bf0bcb6671.jpeg?im_w=720",
+      "https://a0.muscache.com/im/pictures/miso/Hosting-790544589420691779/original/89b05c80-84df-42e3-974c-c0b8dc4a5b37.jpeg?im_w=720"
+    ]
+  },
+  {
+    "location": "Vung Tau",
+    "type": "resort",
+    "id": "168",
+    "name": "Green Oasis Resort",
+    "address": "40 Tran Hung Dao Street, Ba Dinh, Vung Tau",
+    "description": "Green Oasis Resort is a nature-inspired retreat in the heart of Ba Dinh district. Surrounded by lush greenery, it offers comfortable accommodations, a refreshing pool, and a peaceful atmosphere for a rejuvenating stay.",
+    "rating": 4.3,
+    "price": 140,
+    "star": 3,
+    "amenities": [
+      "Nature-inspired surroundings",
+      "Swimming pool",
+      "Restaurant",
+      "Garden"
+    ],
+    "image": [
+      "https://a0.muscache.com/im/pictures/miso/Hosting-940477253265220121/original/53f81f32-d670-40d2-b69b-d031488aae6c.jpeg?im_w=1200",
+      "https://a0.muscache.com/im/pictures/miso/Hosting-940477253265220121/original/2df25b83-ebcc-4831-b3c5-d90a35769537.png?im_w=1200",
+      "https://a0.muscache.com/im/pictures/miso/Hosting-940477253265220121/original/448d5938-ba92-4725-ae3f-0d116ab95b23.jpeg?im_w=1200",
+      "https://a0.muscache.com/im/pictures/miso/Hosting-940477253265220121/original/93dff1b6-b209-42a3-8db3-dafbd9795fde.jpeg?im_w=1200",
+      "https://a0.muscache.com/im/pictures/miso/Hosting-842448767203259993/original/5b04484f-06b1-4e45-80f2-0c3c90c7a6b9.jpeg?im_w=1200"
+    ]
+  }
+]

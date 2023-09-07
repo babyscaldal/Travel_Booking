@@ -12,9 +12,9 @@ import People from "./People.tsx";
 
 export type ICity = {
   id: number;
-  name: string;
-  country: string;
-  population: number;
+  name?: string;
+  country?: string;
+  population?: number;
 };
 
 type childAge = {
@@ -36,9 +36,7 @@ export default function HotelBookingFormLayout() {
     defaultValues: {
       city: {
         id: 1,
-        name: "New York",
-        country: "United States",
-        population: 8623000,
+        name: "Hà Nội",
       } as ICity,
       bookingDate: [dayjs(), dayjs().add(1, "day")],
       adult: 1,

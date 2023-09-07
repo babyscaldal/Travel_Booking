@@ -1,46 +1,49 @@
-import { Box, Rating, Stack, Typography, Container } from "@mui/material";
-import hotel from "../../assets/travel-themes.jpg";
+import AspectRatio from "@mui/joy/AspectRatio";
+import Card from "@mui/joy/Card";
+import CardContent from "@mui/joy/CardContent";
+import CardOverflow from "@mui/joy/CardOverflow";
+import Divider from "@mui/joy/Divider";
+import Typography from "@mui/joy/Typography";
 
-export interface IHotelCardProps {}
-
-export default function HotelCard() {
+export function HotelCard() {
   return (
-    <Container maxWidth="lg">
-      <Box display={"flex"} gap="10px" bgcolor={"purple"} borderRadius={"10px"}>
-        <Box width={"150px"} height={"150px"}>
+    <Card variant="outlined" sx={{ width: 270 }}>
+      <CardOverflow>
+        <AspectRatio ratio="2">
           <img
-            src={hotel}
-            width={"100%"}
-            height={"100%"}
-            style={{
-              objectFit: "cover",
-              borderTopLeftRadius: "10px",
-              borderBottomLeftRadius: "10px",
-            }}
+            src="https://th.bing.com/th/id/OIG.JxEAhYjKHZv8dat1PixG?pid=ImgGn"
+            srcSet="https://images.unsplash.com/photo-1532614338840-ab30cf10ed36?auto=format&fit=crop&w=318&dpr=2 2x"
+            loading="lazy"
+            alt=""
           />
-        </Box>
-        <Box flexGrow={1}>
-          <Stack spacing={1}>
-            <Typography variant="h6" color="initial">
-              AAAAAA
-            </Typography>
-            <Stack spacing={1}>
-              <Typography variant="body1" color="initial">
-                Khách sạn
-              </Typography>
-              <Rating name="read-only" value={3} readOnly />
-            </Stack>
-          </Stack>
-        </Box>
-        <Box width={"150px"}>
-          <Typography variant="body1" color="initial">
-            Price
+        </AspectRatio>
+      </CardOverflow>
+      <CardContent>
+        <Typography level="title-md">Yosemite National Park</Typography>
+        <Typography level="body-sm">California</Typography>
+      </CardContent>
+      <CardOverflow variant="soft" sx={{ bgcolor: "background.level1" }}>
+        <Divider inset="context" />
+        <CardContent
+          orientation="horizontal"
+          sx={{ display: "flex", justifyContent: "space-between" }}
+        >
+          <Typography
+            level="body-md"
+            fontWeight="md"
+            textColor="text.secondary"
+          >
+            $500/đêm
           </Typography>
-          <Typography variant="h6">
-            <span style={{ color: "red" }}>$50</span>/ đêm
+          <Typography
+            level="body-md"
+            fontWeight="md"
+            textColor="text.secondary"
+          >
+            ⭐5
           </Typography>
-        </Box>
-      </Box>
-    </Container>
+        </CardContent>
+      </CardOverflow>
+    </Card>
   );
 }

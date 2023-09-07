@@ -7,16 +7,15 @@ import {
   FormControl,
   Alert,
 } from "@mui/material";
-import { ICity } from "../HotelBookFormLayout";
-
-const cities: ICity[] = [
-  { id: 1, name: "New York", country: "United States", population: 8623000 },
-  { id: 2, name: "London", country: "United Kingdom", population: 8908081 },
-  { id: 3, name: "Paris", country: "France", population: 2140526 },
-  { id: 4, name: "Tokyo", country: "Japan", population: 13929286 },
-];
+import { IProvince } from "../../../../../types/provinceType";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../../../stores.ts/stores";
 
 export default function CitySearchField() {
+  const cities: IProvince[] = useSelector(
+    (state: RootState) => state.provincesReducer.listProvinces
+  );
+
   const {
     control,
     formState: { errors },
@@ -37,8 +36,8 @@ export default function CitySearchField() {
               // }
               value={value}
               options={cities}
-              getOptionLabel={(city: ICity) => city.name}
-              onChange={(_, city: ICity | null) => onChange(city)}
+              getOptionLabel={(city: IProvince) => city.name}
+              onChange={(_, city: IProvince | null) => onChange(city)}
               isOptionEqualToValue={(option, value) => option.id === value.id}
               renderInput={(params) => (
                 <TextField
