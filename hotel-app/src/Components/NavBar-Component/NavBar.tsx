@@ -15,7 +15,7 @@ import MyBooking from "./MyBooking/MyBooking";
 import LoginBtn from "./Login/LoginBtn";
 import RegisterBtn from "./Register/RegisterBtn";
 import { display } from "@mui/system";
-import LoginForm from "./Login/EditForm";
+import LoginForm from "./Login/LoginForm";
 
 export default function NavBar() {
   return (
@@ -71,8 +71,6 @@ export default function NavBar() {
                   <ArrowDropDownIcon />
                 </Button> */}
                 <Box sx={{ display: "flex" }}>
-                  {/* Sign In */}
-                  {/* <LoginBtn /> */}
                   <LoginForm />
 
                   {/* Sign Up */}

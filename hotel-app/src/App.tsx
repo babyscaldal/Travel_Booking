@@ -15,6 +15,7 @@ function App() {
       <SlideComponent />
       {/* <BookingTabPanel /> */}
       <FilterFormLayOut />
+      <AdvantageContainer />
       <Footer />
     </Box>
   );
