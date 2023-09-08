@@ -4,7 +4,15 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import { TransitionProps } from "@mui/material/transitions";
 import InputField from "./InputField";
-import { DialogTitle, Grid, Link, Slide, Stack } from "@mui/material";
+import {
+  Checkbox,
+  DialogTitle,
+  FormControlLabel,
+  Grid,
+  Link,
+  Slide,
+  Stack,
+} from "@mui/material";
 import { FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -14,6 +22,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useDispatch } from "react-redux";
 import { IUserLoginReq } from "../../../types/userType";
 import { LoginRes } from "../../../actions/login.actions";
+import { IFormLoginValues } from "../../../types/LoginTypes";
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -24,17 +33,9 @@ const Transition = React.forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export interface IFormValues {
-  email: string;
-  password: string;
-}
-
-// interface IEditForm {
-//   user: IUser;
-// }
-
 export default function LoginForm() {
   const [open, setOpen] = React.useState(false);
+  const [showPassword, setShowPassword] = React.useState<boolean>(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -53,7 +54,7 @@ export default function LoginForm() {
       .max(30, "Password length must be between 6 and 30 character!"),
   });
 
-  const form = useForm<IFormValues>({
+  const form = useForm<IFormLoginValues>({
     defaultValues: {
       email: "",
       password: "",
@@ -70,6 +71,10 @@ export default function LoginForm() {
   } = form;
 
   const dispatch = useDispatch();
+
+  const handleShowPassword = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setShowPassword(!showPassword);
+  };
 
   const onSubmit = (data: any) => {
     // console.log("data: ", data);
@@ -114,17 +119,27 @@ export default function LoginForm() {
             >
               {"Đăng nhập"}
             </DialogTitle>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(onSubmit)} noValidate>
               <FormProvider {...form}>
                 <Stack spacing={2}>
                   <InputField name="email" title="Email" type="email" />
                   <InputField
                     name="password"
                     title="Password"
-                    type="password"
+                    type={showPassword ? "text" : "password"}
                   />
 
-                  <Button variant="contained" color="warning" type="submit">
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={showPassword}
+                        onChange={handleShowPassword}
+                      />
+                    }
+                    label="Change to display password"
+                  />
+
+                  <Button variant="contained" color="primary" type="submit">
                     Login
                   </Button>
                   <Grid container>
@@ -148,7 +163,4 @@ export default function LoginForm() {
       </Dialog>
     </div>
   );
-}
-function onEditUser(id: any, data: any) {
-  throw new Error("Function not implemented.");
 }

@@ -1,3 +1,4 @@
+// Login
 export interface IUserLoginReq {
   user: {
     email: string;
@@ -12,5 +13,14 @@ export interface IUserLoginRes {
     bio: any;
     image: string;
     token: string;
+  };
+}
+
+// Register
+export interface IUserRegisterReq {
+  user: {
+    email: string;
+    password: string;
+    username: string;
   };
 }

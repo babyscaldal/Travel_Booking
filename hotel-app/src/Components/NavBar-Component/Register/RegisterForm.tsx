@@ -1,182 +1,189 @@
 import * as React from "react";
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Box from "@mui/material/Box";
-import VpnKeyIcon from "@mui/icons-material/VpnKey";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import * as yup from "yup";
-// import { IFormRegisterValues } from "../../../../types/LoginTypes";
-import { Controller, useForm } from "react-hook-form";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import { TransitionProps } from "@mui/material/transitions";
+import {
+  Box,
+  Checkbox,
+  DialogTitle,
+  FormControlLabel,
+  Slide,
+  Stack,
+} from "@mui/material";
+import { FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { IFormRegisterValues } from "../../../types/LoginTypes";
+import * as yup from "yup";
 
-// TODO remove, this demo shouldn't need to reset the theme.
-const defaultTheme = createTheme();
+import { useDispatch } from "react-redux";
+import { IUserLoginReq, IUserRegisterReq } from "../../../types/userType";
+import { LoginRes } from "../../../actions/login.actions";
+import InputField from "../Login/InputField";
+import { IFormRegisterValues } from "../../../types/LoginTypes";
+import HowToRegIcon from "@mui/icons-material/HowToReg";
+import { RegisterRes } from "../../../actions/register.actions";
+
+const Transition = React.forwardRef(function Transition(
+  props: TransitionProps & {
+    children: React.ReactElement<any, any>;
+  },
+  ref: React.Ref<unknown>
+) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
+
+export interface IFormValues {
+  email: string;
+  password: string;
+}
+
+// interface IEditForm {
+//   user: IUser;
+// }
 
 export default function RegisterForm() {
-  const schema = yup.object({
-    email: yup.string().email("Invalid email").required("Email is required"),
+  const [open, setOpen] = React.useState(false);
+  const [showPassword, setShowPassword] = React.useState<boolean>(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const schema = yup.object().shape({
+    email: yup.string().required("Email is required").email("Invalid email"),
     password: yup
       .string()
-      .required("Password is required")
+      .required("Name is required")
       .min(6, "Password length must be between 6 and 12 character!")
-      .max(12, "Password length must be between 6 and 12 character!"),
-    // .test(
-    //   "size-password",
-    //   "Password length must be between 8 and 12 characters",
-    //   (value) => {
-    //     return value && value.length >= 8 && value.length <= 12;
-    //   }
-    // ),
+      .max(30, "Password length must be between 6 and 30 character!"),
     confirmPassword: yup
       .string()
       .required("Confirm password is required")
       .oneOf([yup.ref("password")], "Passwords must match"),
-    nameUser: yup.string().required("Name is required"),
+    username: yup.string().required("Name is required"),
   });
 
   const form = useForm<IFormRegisterValues>({
     defaultValues: {
       email: "",
-      nameUser: "",
+      username: "",
       password: "",
       confirmPassword: "",
     },
+    // mode: "all",
     resolver: yupResolver(schema),
   });
+
   const {
+    control,
+    formState: { errors },
     handleSubmit,
     reset,
-    control,
-    formState: { errors, isValid },
   } = form;
 
-  const onSubmit = (data: any) => {
-    // setIsLogin(true);
-    // navigate("/home");
+  const dispatch = useDispatch();
+
+  const handleShowPassword = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setShowPassword(!showPassword);
+  };
+
+  const onSubmit = (data: IFormRegisterValues) => {
+    // console.log("data: ", data);
     console.log("submit Value: ", data);
-    reset;
+    handleClose();
+    const body: IUserRegisterReq = {
+      user: {
+        email: data.email,
+        password: data.password,
+        username: data.username,
+      },
+    };
+    dispatch(RegisterRes(body));
+    reset();
   };
 
   return (
-    <ThemeProvider theme={defaultTheme}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 3,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            <VpnKeyIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Đăng ký
-          </Typography>
-          <form
-            onSubmit={handleSubmit(onSubmit)}
-            style={{ marginTop: "10px", paddingBottom: "30px" }}
-          >
-            {/* Email */}
-            <Controller
-              name="email"
-              control={control}
-              render={({ field }) => (
-                <TextField
-                  onChange={field.onChange}
-                  value={field.value}
-                  margin="normal"
-                  fullWidth
-                  label="Email Address"
-                  type="email"
-                />
-              )}
-            />
-            {errors.email && (
-              <p style={{ color: "red" }}>{errors.email.message}</p>
-            )}
-
-            {/* Name user */}
-            <Controller
-              name="nameUser"
-              control={control}
-              render={({ field }) => (
-                <TextField
-                  onChange={field.onChange}
-                  value={field.value}
-                  margin="normal"
-                  fullWidth
-                  label="Name"
-                  type="text"
-                />
-              )}
-            />
-            {errors.nameUser && (
-              <p style={{ color: "red" }}>{errors.nameUser.message}</p>
-            )}
-
-            {/* Confirm Password */}
-            <Controller
-              name="password"
-              control={control}
-              render={({ field }) => (
-                <TextField
-                  onChange={field.onChange}
-                  value={field.value}
-                  type="password"
-                  margin="normal"
-                  fullWidth
-                  label="Password"
-                />
-              )}
-            />
-            {errors.password && (
-              <p style={{ color: "red" }}>{errors.password.message}</p>
-            )}
-
-            {/* Password */}
-            <Controller
-              name="confirmPassword"
-              control={control}
-              render={({ field }) => (
-                <TextField
-                  onChange={field.onChange}
-                  value={field.value}
-                  type="password"
-                  margin="normal"
-                  fullWidth
-                  label="Confirm Password"
-                />
-              )}
-            />
-            {errors.confirmPassword && (
-              <p style={{ color: "red" }}>{errors.confirmPassword.message}</p>
-            )}
-
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Lưu mật khẩu"
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+    <div>
+      <Button
+        variant="text"
+        sx={{ color: "text.primary" }}
+        onClick={() => {
+          handleClickOpen();
+        }}
+      >
+        <HowToRegIcon color="primary" sx={{ mr: 0.5 }} /> Đăng ký
+      </Button>
+      <Dialog
+        open={open}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handleClose}
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogActions>
+          <Stack spacing={3} sx={{ padding: "48px 32px", width: "450px" }}>
+            <DialogTitle
+              sx={{
+                fontWeight: "bold",
+                fontSize: "30px",
+                textAlign: "center",
+                padding: 0,
+              }}
             >
-              Đăng ký
-            </Button>
-          </form>
-        </Box>
-      </Container>
-    </ThemeProvider>
+              {"Đăng ký"}
+            </DialogTitle>
+            <form onSubmit={handleSubmit(onSubmit)} noValidate>
+              <FormProvider {...form}>
+                <Stack spacing={2}>
+                  {/* Email */}
+                  <InputField name="email" title="Email" type="email" />
+                  {/* User name */}
+                  <InputField name="username" title="Name" type="text" />
+                  {/* Password */}
+                  <InputField
+                    name="password"
+                    title="Password"
+                    type={showPassword ? "text" : "password"}
+                    placeholder="Password length must be between 6 and 12 character!"
+                  />
+                  {/* Confirm password */}
+                  <InputField
+                    name="confirmPassword"
+                    title="Confirm Password"
+                    type={showPassword ? "text" : "password"}
+                    placeholder="Must match the entered password"
+                  />
+                  {/* Show Password */}
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={showPassword}
+                        onChange={handleShowPassword}
+                      />
+                    }
+                    label="Change to display password"
+                  />
+                  <Box sx={{ width: "100%", paddingTop: "32px" }}>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      type="submit"
+                      fullWidth
+                    >
+                      Register
+                    </Button>
+                  </Box>
+                </Stack>
+              </FormProvider>
+            </form>
+          </Stack>
+          {/* <DevTool control={control} /> */}
+        </DialogActions>
+      </Dialog>
+    </div>
   );
 }

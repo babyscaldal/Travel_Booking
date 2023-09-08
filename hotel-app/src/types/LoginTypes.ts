@@ -5,7 +5,7 @@ export interface IFormLoginValues {
 
 export interface IFormRegisterValues {
   email: string;
-  nameUser: string;
+  username: string;
   password: string;
   confirmPassword: string;
 }

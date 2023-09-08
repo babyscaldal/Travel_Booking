@@ -1,6 +1,6 @@
 import { call, put } from "redux-saga/effects";
 import { actionTypes } from "../types/actions.types";
-import { IUserLoginReq, IUserLoginRes } from "../types/userType";
+import { IUserLoginRes } from "../types/userType";
 import userApi from "../app/userApi";
 
 interface IActionProps {

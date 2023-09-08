@@ -5,9 +5,6 @@ import {
   require_hoist_non_react_statics_cjs
 } from "./chunk-GYOI4P2W.js";
 import {
-  require_react
-} from "./chunk-2PA4WPI3.js";
-import {
   _objectWithoutPropertiesLoose,
   init_objectWithoutPropertiesLoose
 } from "./chunk-NNN4RV4Y.js";
@@ -15,6 +12,9 @@ import {
   _extends,
   init_extends
 } from "./chunk-BJM7UO3E.js";
+import {
+  require_react
+} from "./chunk-2PA4WPI3.js";
 import {
   __commonJS,
   __toESM

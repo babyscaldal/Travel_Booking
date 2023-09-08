@@ -64,9 +64,6 @@ import {
   wrapSagaDispatch
 } from "./chunk-GGFMN6KA.js";
 import {
-  compose
-} from "./chunk-C7VVT7PN.js";
-import {
   _objectWithoutPropertiesLoose,
   init_objectWithoutPropertiesLoose
 } from "./chunk-NNN4RV4Y.js";
@@ -74,6 +71,9 @@ import {
   _extends,
   init_extends
 } from "./chunk-BJM7UO3E.js";
+import {
+  compose
+} from "./chunk-C7VVT7PN.js";
 import "./chunk-ROME4SDB.js";
 
 // node_modules/@redux-saga/core/dist/redux-saga-core.esm.js

@@ -8,16 +8,18 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import MenuIcon from "@mui/icons-material/Menu";
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import HandshakeOutlinedIcon from "@mui/icons-material/HandshakeOutlined";
 import DownloadApp from "./DownLoad/DownloadApp";
 import MyBooking from "./MyBooking/MyBooking";
-import LoginBtn from "./Login/LoginBtn";
-import RegisterBtn from "./Register/RegisterBtn";
-import { display } from "@mui/system";
 import LoginForm from "./Login/LoginForm";
+import RegisterForm from "./Register/RegisterForm";
+import { UserState } from "../../reducers/login.reducer";
+import { useSelector } from "react-redux";
+import UserAccount from "./UserAccount/UserAccount";
 
 export default function NavBar() {
+  const userLogin: UserState = useSelector((state: any) => state.loginReducer);
+  console.log("useLogin: ", userLogin);
   return (
     <React.Fragment>
       <CssBaseline />
@@ -61,26 +63,31 @@ export default function NavBar() {
                 {/* My booking */}
                 <MyBooking />
 
-                {/* Language */}
-                {/* <Button color="inherit">
-                  <img
-                    src="https://d1785e74lyxkqq.cloudfront.net/_next/static/v2/a/a3478fc6e57b8681609c1458bd50cbb9.svg"
-                    alt=""
-                  />{" "}
-                  USA
-                  <ArrowDropDownIcon />
-                </Button> */}
-                <Box sx={{ display: "flex" }}>
+                <Box sx={{ display: `${userLogin.isLogin ? "none" : "flex"}` }}>
+                  {/* Login */}
                   <LoginForm />
 
                   {/* Sign Up */}
-                  <RegisterBtn />
+                  {/* <RegisterBtn /> */}
+                  <RegisterForm />
+                </Box>
+                {/* Logged User */}
+                <Box
+                  sx={{
+                    display: `${userLogin.isLogin ? "inline-block" : "none"}`,
+                  }}
+                >
+                  <UserAccount
+                    username={userLogin.user.username}
+                    avatar={userLogin.user.image}
+                  />
                 </Box>
               </Toolbar>
             </Box>
           </Container>
         </AppBar>
       </Box>
+      <h1></h1>
     </React.Fragment>
   );
 }
