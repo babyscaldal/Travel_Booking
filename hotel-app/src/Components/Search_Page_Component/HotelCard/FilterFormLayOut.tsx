@@ -5,9 +5,6 @@ import {
   Typography,
   Divider,
   Grid,
-  FormControl,
-  FormLabel,
-  FormHelperText,
 } from "@mui/material";
 import map from "../../../assets/map.png";
 import { RadioField } from "./RadioField";
@@ -15,13 +12,14 @@ import { FormProvider, useForm } from "react-hook-form";
 import FilterSubMenu from "./FilterSubMenu";
 import { DevTool } from "@hookform/devtools";
 import SearchField from "./SearchField";
-import HotelInfo from "./HotelInfo";
-import OverflowCard from "./OverflowCard";
+import { ICity } from "../../HomePage_Component/BookingTabPanel/BookingTabs/HotelBookFormLayout";
+import { HotelCard } from "./HotelCard";
 
 export interface IFilterFormValue {
   radio: string;
   star: string;
   type: string;
+  city: ICity;
 }
 
 const onSubmit = (data: IFilterFormValue) => {
@@ -29,11 +27,15 @@ const onSubmit = (data: IFilterFormValue) => {
 };
 
 export const FilterFormLayOut = () => {
-  const form = useForm({
+  const form = useForm<IFilterFormValue>({
     defaultValues: {
       radio: "1",
       star: "",
       type: "",
+      city: {
+        id: 1,
+        name: "Hà Nội",
+      } as ICity,
     },
   });
 
@@ -84,48 +86,43 @@ export const FilterFormLayOut = () => {
         </Grid>
         <Grid item xs={9}>
           <Grid container>
-            {/* <Grid item xs={12} sx={{ marginBottom: "20px" }}>
-              <SearchField />
-            </Grid> */}
             <Grid item xs={12} sx={{ marginBottom: "20px" }}>
               <Grid container spacing={3}>
                 <Grid item xs={4}>
-                  <OverflowCard />
+                  <HotelCard />
                 </Grid>
                 <Grid item xs={4}>
-                  <OverflowCard />
+                  <HotelCard />
                 </Grid>
                 <Grid item xs={4}>
-                  <OverflowCard />
+                  <HotelCard />
                 </Grid>
                 <Grid item xs={4}>
-                  <OverflowCard />
+                  <HotelCard />
                 </Grid>
                 <Grid item xs={4}>
-                  <OverflowCard />
+                  <HotelCard />
                 </Grid>
                 <Grid item xs={4}>
-                  <OverflowCard />
+                  <HotelCard />
                 </Grid>
                 <Grid item xs={4}>
-                  <OverflowCard />
+                  <HotelCard />
                 </Grid>
                 <Grid item xs={4}>
-                  <OverflowCard />
+                  <HotelCard />
                 </Grid>
                 <Grid item xs={4}>
-                  <OverflowCard />
+                  <HotelCard />
                 </Grid>
                 <Grid item xs={4}>
-                  <OverflowCard />
+                  <HotelCard />
                 </Grid>
               </Grid>
             </Grid>
           </Grid>
         </Grid>
       </Grid>
-      {/* </Box> */}
-      {/* <Button type="submit">Submit</Button> */}
       <DevTool control={control} />
     </Container>
   );

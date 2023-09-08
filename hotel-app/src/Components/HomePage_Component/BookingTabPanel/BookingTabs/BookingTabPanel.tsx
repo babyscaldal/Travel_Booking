@@ -47,7 +47,7 @@ function a11yProps(index: number) {
 }
 
 export default function BookingTabPanel() {
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState<number | null>(0);
 
   const handleChange = (_: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -116,25 +116,28 @@ export default function BookingTabPanel() {
             />
           </Tabs>
         </Box>
-
-        <CustomTabPanel value={value} index={0}>
-          <HotelBookingFormLayout />
-        </CustomTabPanel>
-        <CustomTabPanel value={value} index={1}>
-          <ComingSoon />
-        </CustomTabPanel>
-        <CustomTabPanel value={value} index={2}>
-          <ComingSoon />
-        </CustomTabPanel>
-        <CustomTabPanel value={value} index={3}>
-          <ComingSoon />
-        </CustomTabPanel>
-        <CustomTabPanel value={value} index={4}>
-          <ComingSoon />
-        </CustomTabPanel>
-        <CustomTabPanel value={value} index={5}>
-          <ComingSoon />
-        </CustomTabPanel>
+        {value !== null ? (
+          <>
+            <CustomTabPanel value={value} index={0}>
+              <HotelBookingFormLayout />
+            </CustomTabPanel>
+            <CustomTabPanel value={value} index={1}>
+              <ComingSoon />
+            </CustomTabPanel>
+            <CustomTabPanel value={value} index={2}>
+              <ComingSoon />
+            </CustomTabPanel>
+            <CustomTabPanel value={value} index={3}>
+              <ComingSoon />
+            </CustomTabPanel>
+            <CustomTabPanel value={value} index={4}>
+              <ComingSoon />
+            </CustomTabPanel>
+            <CustomTabPanel value={value} index={5}>
+              <ComingSoon />
+            </CustomTabPanel>
+          </>
+        ) : null}
       </Box>
     </Container>
   );

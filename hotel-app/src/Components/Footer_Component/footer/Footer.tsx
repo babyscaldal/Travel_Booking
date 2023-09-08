@@ -144,7 +144,7 @@ const MockComponent = () => {
                       fontWeight: "500",
                       fontSize: "16px",
                       fontFamily:
-                        "Godwit,MuseoSans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;",
+                        "Godwit,MuseoSans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol",
                     }}
                   >
                     Hợp tác với Traveloka
@@ -160,7 +160,7 @@ const MockComponent = () => {
                 fontWeight: "500",
                 fontSize: "16px",
                 fontFamily:
-                  "Godwit,MuseoSans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;",
+                  "Godwit,MuseoSans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol",
               }}
             >
               Đối tác thanh toán
@@ -235,7 +235,7 @@ const MockComponent = () => {
                           fontWeight: "500",
                           fontSize: "14px",
                           fontFamily:
-                            "Godwit,MuseoSans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;",
+                            "Godwit,MuseoSans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol",
                         }}
                       >
                         <img
@@ -268,7 +268,7 @@ const MockComponent = () => {
                           fontWeight: "500",
                           fontSize: "14px",
                           fontFamily:
-                            "Godwit,MuseoSans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;",
+                            "Godwit,MuseoSans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol",
                         }}
                       >
                         <img
@@ -301,7 +301,7 @@ const MockComponent = () => {
                           fontWeight: "500",
                           fontSize: "14px",
                           fontFamily:
-                            "Godwit,MuseoSans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;",
+                            "Godwit,MuseoSans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol",
                         }}
                       >
                         <img
@@ -334,7 +334,7 @@ const MockComponent = () => {
                           fontWeight: "500",
                           fontSize: "14px",
                           fontFamily:
-                            "Godwit,MuseoSans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;",
+                            "Godwit,MuseoSans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol",
                         }}
                       >
                         <img
@@ -416,7 +416,7 @@ const MockComponent = () => {
             fontWeight: "500",
             fontSize: "12px",
             fontFamily:
-              "Godwit,MuseoSans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;",
+              "Godwit,MuseoSans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol",
           }}
         >
           Công ty TNHH Traveloka Việt Nam. Mã số DN: 0313581779. Tòa nhà An Phú,
@@ -430,7 +430,7 @@ const MockComponent = () => {
             fontWeight: "500",
             fontSize: "14px",
             fontFamily:
-              "Godwit,MuseoSans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;",
+              "Godwit,MuseoSans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol",
           }}
         >
           Copyright © 2023 Traveloka

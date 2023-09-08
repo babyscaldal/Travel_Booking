@@ -4,7 +4,6 @@ import {
   FormControl,
   FormControlLabel,
   FormLabel,
-  Rating,
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import { Controller, useFormContext } from "react-hook-form";
@@ -57,7 +56,7 @@ export const TypeCheckBoxField = ({ name, label }: ITypeCheckBoxField) => {
     <FormControl size={"small"} variant={"outlined"}>
       <FormLabel component="legend">{label}</FormLabel>
       <Box>
-        {options.map((option: IOption, index) => {
+        {options.map((option: IOption) => {
           return (
             <Box
               display={"flex"}

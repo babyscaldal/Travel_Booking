@@ -1,7 +1,11 @@
 import axios from "axios";
+import queryString from "query-string";
 
-const axiosClient = axios.create({
-  baseURL: "https://api.realworld.io/api",
+export const axiosClient = axios.create({
+  headers: {
+    "content-type": "application/json",
+  },
+  paramsSerializer: (params) => queryString.stringify(params),
 });
 
 // Add a request interceptor
@@ -21,9 +25,16 @@ axiosClient.interceptors.response.use(
   function (response) {
     // Any status code that lie within the range of 2xx cause this function to trigger
     // Do something with response data
+<<<<<<< HEAD
     // console.log("status: ", response.status);
 
     return response.data;
+=======
+    if (response && response.data) {
+      return response.data;
+    }
+    return response;
+>>>>>>> features/SearchHotelList
   },
   function (error) {
     // Any status codes that falls outside the range of 2xx cause this function to trigger
@@ -35,5 +46,3 @@ axiosClient.interceptors.response.use(
     return Promise.reject(error);
   }
 );
-
-export default axiosClient;
