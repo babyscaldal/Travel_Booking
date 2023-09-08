@@ -16,6 +16,8 @@ export default function CitySearchField() {
     (state: RootState) => state.provincesReducer.listProvinces
   );
 
+  console.log(cities);
+
   const {
     control,
     formState: { errors },
@@ -38,7 +40,7 @@ export default function CitySearchField() {
               options={cities}
               getOptionLabel={(city: IProvince) => city.name}
               onChange={(_, city: IProvince | null) => onChange(city)}
-              isOptionEqualToValue={(option, value) => option.id === value.id}
+              isOptionEqualToValue={(city, value) => city.id === value.id}
               renderInput={(params) => (
                 <TextField
                   {...params}

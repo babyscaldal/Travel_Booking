@@ -5,12 +5,15 @@ import { Provider } from "react-redux";
 import { mainStore } from "./stores.ts/stores.tsx";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { BrowserRouter } from "react-router-dom";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   // <React.StrictMode>
   //   <App />
   // </React.StrictMode>,
-  <Provider store={mainStore}>
-    <App />
-  </Provider>
+  <BrowserRouter>
+    <Provider store={mainStore}>
+      <App />
+    </Provider>
+  </BrowserRouter>
 );

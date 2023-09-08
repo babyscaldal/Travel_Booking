@@ -5,12 +5,12 @@ import NavBar from "../../NavBar-Component/NavBar";
 import BookingModal from "./BookingModal";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../stores.ts/stores";
+import { Box } from "@mui/material";
 
 const Hero = styled.div`
   position: relative;
   width: 100%;
   height: 100vh;
-
   &::before {
     content: "";
     position: absolute;
@@ -18,7 +18,7 @@ const Hero = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0);
+    background-color: #000;
     opacity: 0.7;
     z-index: 1;
   }
@@ -42,15 +42,11 @@ const Caption = styled.div`
   }
 `;
 
-const HeroContainer = styled.div`
-  position: relative;
-`;
-
-const NavBarWrapper = styled.div`
-  position: fixed;
-  z-index: 3;
-  width: 100%;
-`;
+// const NavBarWrapper = styled.div`
+//   position: fixed;
+//   z-index: 3;
+//   width: 100%;
+// `;
 
 const captionStyle = {
   color: "#fff",
@@ -94,10 +90,7 @@ function ControlledCarousel() {
   });
 
   return (
-    <HeroContainer>
-      <NavBarWrapper>
-        <NavBar />
-      </NavBarWrapper>
+    <>
       <CarouselsBox>
         <Carousel
           activeIndex={index}
@@ -135,7 +128,7 @@ function ControlledCarousel() {
           <BookingModal />
         </Caption>
       </CarouselsBox>
-    </HeroContainer>
+    </>
   );
 }
 

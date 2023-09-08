@@ -42,10 +42,14 @@ export const FilterFormLayOut = () => {
   const { handleSubmit, control } = form;
 
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="lg" sx={{ paddingTop: 10 }}>
       {/* <Box display={"flex"} justifyContent={"space-between"} gap={"15px"}> */}
-      <Grid container spacing={2}>
-        <Grid item xs={3}>
+      <Grid
+        container
+        spacing={2}
+        sx={{ flexWrap: "nowrap", justifyContent: "center" }}
+      >
+        <Grid item xs={3} sx={{ minWidth: "250px" }}>
           <FormProvider {...form}>
             <form onSubmit={handleSubmit(onSubmit)}>
               <Stack spacing={2}>
@@ -85,44 +89,103 @@ export const FilterFormLayOut = () => {
           </FormProvider>
         </Grid>
         <Grid item xs={9}>
-          <Grid container>
-            <Grid item xs={12} sx={{ marginBottom: "20px" }}>
-              <Grid container spacing={3}>
-                <Grid item xs={4}>
-                  <HotelCard />
-                </Grid>
-                <Grid item xs={4}>
-                  <HotelCard />
-                </Grid>
-                <Grid item xs={4}>
-                  <HotelCard />
-                </Grid>
-                <Grid item xs={4}>
-                  <HotelCard />
-                </Grid>
-                <Grid item xs={4}>
-                  <HotelCard />
-                </Grid>
-                <Grid item xs={4}>
-                  <HotelCard />
-                </Grid>
-                <Grid item xs={4}>
-                  <HotelCard />
-                </Grid>
-                <Grid item xs={4}>
-                  <HotelCard />
-                </Grid>
-                <Grid item xs={4}>
-                  <HotelCard />
-                </Grid>
-                <Grid item xs={4}>
-                  <HotelCard />
-                </Grid>
-              </Grid>
+          <Grid container sx={{ justifyItems: "center" }}>
+            {/* <Grid item xs={12} sx={{ marginBottom: "20px" }}>
+              <Grid container spacing={3}> */}
+            <Grid item xs={12} sx={{ margin: "0 0 16px 0" }}>
+              <Typography
+                variant="body1"
+                color="initial"
+                sx={{ textIndent: "10px", fontWeight: "bold" }}
+              >
+                Tìm thấy XXXX cơ sở lưu trú tại XXXX
+              </Typography>
+            </Grid>
+            <Grid
+              item
+              md={6}
+              lg={4}
+              sx={{ margin: "auto", marginBottom: "15px" }}
+            >
+              <HotelCard />
+            </Grid>
+            <Grid
+              item
+              md={6}
+              lg={4}
+              sx={{ margin: "auto", marginBottom: "15px" }}
+            >
+              <HotelCard />
+            </Grid>
+            <Grid
+              item
+              md={6}
+              lg={4}
+              sx={{ margin: "auto", marginBottom: "15px" }}
+            >
+              <HotelCard />
+            </Grid>
+            <Grid
+              item
+              md={6}
+              lg={4}
+              sx={{ margin: "auto", marginBottom: "15px" }}
+            >
+              <HotelCard />
+            </Grid>
+            <Grid
+              item
+              md={6}
+              lg={4}
+              sx={{ margin: "auto", marginBottom: "15px" }}
+            >
+              <HotelCard />
+            </Grid>
+            <Grid
+              item
+              md={6}
+              lg={4}
+              sx={{ margin: "auto", marginBottom: "15px" }}
+            >
+              <HotelCard />
+            </Grid>
+            <Grid
+              item
+              md={6}
+              lg={4}
+              sx={{ margin: "auto", marginBottom: "15px" }}
+            >
+              <HotelCard />
+            </Grid>
+            <Grid
+              item
+              md={6}
+              lg={4}
+              sx={{ margin: "auto", marginBottom: "15px" }}
+            >
+              <HotelCard />
+            </Grid>
+            <Grid
+              item
+              md={6}
+              lg={4}
+              sx={{ margin: "auto", marginBottom: "15px" }}
+            >
+              <HotelCard />
+            </Grid>
+            <Grid
+              item
+              md={6}
+              lg={4}
+              sx={{ margin: "auto", marginBottom: "15px" }}
+            >
+              <HotelCard />
             </Grid>
           </Grid>
         </Grid>
       </Grid>
+      {/* </Grid>
+      </Grid> */}
       <DevTool control={control} />
     </Container>
   );

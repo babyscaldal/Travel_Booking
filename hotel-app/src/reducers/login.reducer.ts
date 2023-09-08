@@ -31,7 +31,7 @@ const loginReducer = (state = initState, action: IActionProps) => {
     case actionTypes.USER_LOGIN_FAILED:
       // console.log("aloho", action);
       // alert(`Tài khoảng hoặc mật khẩu không chính xác`);
-      alert(`Tài khoảng hoặc mật khẩu không chính xác (${action.message})`);
+      alert(`Tài khoản hoặc mật khẩu không chính xác (${action.message})`);
       return { ...state };
     case actionTypes.USER_REGISTER_SUCCEEDED:
       // console.log("action: ", action);
@@ -40,7 +40,7 @@ const loginReducer = (state = initState, action: IActionProps) => {
     case actionTypes.USER_REGISTER_FAILED:
       // console.log("aloho", action);
       // alert(`Tài khoảng hoặc mật khẩu không chính xác`);
-      alert(`Tài khoảng hoặc mật khẩu không chính xác (${action.message})`);
+      alert(`Tài khoản có thể đã tồn tại (${action.message})`);
       return { ...state };
     default:
       return state;

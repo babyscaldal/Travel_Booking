@@ -22,15 +22,15 @@ export const fetchUsersError = () => {
 };
 
 export const fetchAllProvince = (): any => {
-  return async (dispatch: any) => {
-    dispatch(fetchUsersRequest());
+  return async (dispatch1: any) => {
+    dispatch1(fetchUsersRequest());
     try {
       const data: any = await provincesAPI.getAll();
 
-      dispatch(fetchUsersSuccess(data));
+      dispatch1(fetchUsersSuccess(data));
     } catch (error) {
       console.log(error);
-      dispatch(fetchUsersError());
+      dispatch1(fetchUsersError());
     }
   };
 };

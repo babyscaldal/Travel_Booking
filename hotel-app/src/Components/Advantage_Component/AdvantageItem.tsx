@@ -23,7 +23,7 @@ export default function AdvantageItem({
       >
         <img src={imgSrc} alt={title} style={{ width: 150, height: 150 }} />
       </div>
-      <h3 style={{ margin: "48px 0 16px 0" }}>{title}</h3>
+      <h4 style={{ margin: "48px 0 16px 0" }}>{title}</h4>
       <p>{description}</p>
     </Stack>
   );

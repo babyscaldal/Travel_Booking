@@ -5,7 +5,6 @@ import Container from "@mui/material/Container";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import MenuIcon from "@mui/icons-material/Menu";
 import HandshakeOutlinedIcon from "@mui/icons-material/HandshakeOutlined";
@@ -16,6 +15,7 @@ import RegisterForm from "./Register/RegisterForm";
 import { UserState } from "../../reducers/login.reducer";
 import { useSelector } from "react-redux";
 import UserAccount from "./UserAccount/UserAccount";
+import { NavLink } from "react-router-dom";
 
 export default function NavBar() {
   const userLogin: UserState = useSelector((state: any) => state.loginReducer);
@@ -43,9 +43,16 @@ export default function NavBar() {
                 </IconButton>
 
                 {/* Logo Home */}
-                <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                  LOGO(HOME)
-                </Typography>
+                <Box sx={{ width: "10px", flexGrow: 1 }}>
+                  <NavLink to={"/homepage"}>
+                    <img
+                      src="../../../public/travel-dream-logo - ver2.png"
+                      alt="logo"
+                      width="50%"
+                      height="50%"
+                    />
+                  </NavLink>
+                </Box>
 
                 {/* Download app mobile */}
                 <DownloadApp />

@@ -7,7 +7,7 @@ import Typography from "@mui/joy/Typography";
 
 export function HotelCard() {
   return (
-    <Card variant="outlined" sx={{ width: 270 }}>
+    <Card variant="outlined" sx={{ width: 270, margin: "auto" }}>
       <CardOverflow>
         <AspectRatio ratio="2">
           <img

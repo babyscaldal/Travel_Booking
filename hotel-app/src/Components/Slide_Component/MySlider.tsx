@@ -3,19 +3,7 @@ import Slider from "react-slick";
 import PictureComponent from "./PictureComponent";
 import { useSelector } from "react-redux";
 import { RootState } from "../../stores.ts/stores";
-import { Container } from "@mui/material";
-
-// const PrevArrow = (props: any) => {
-//   const { className, style, onClick } = props;
-//   const arrowStyle = {
-//     ...style,
-//     zIndex: 1,
-//     backgroundColor: "#FF0000", // Customize the color here
-//     fontSize: "24px", // Customize the font size here
-//   };
-
-//   return <div className={className} style={arrowStyle} onClick={onClick}></div>;
-// };
+import { Box, Container } from "@mui/material";
 
 const MySlider: React.FC = () => {
   const settings = {
@@ -24,7 +12,6 @@ const MySlider: React.FC = () => {
     speed: 500,
     slidesToShow: 5,
     slidesToScroll: 1,
-    // prevArrow: <PrevArrow />,
   };
 
   const provincesList = useSelector(
@@ -32,15 +19,40 @@ const MySlider: React.FC = () => {
   );
 
   return (
-    <Container maxWidth="lg">
-      <div style={{ width: "auto", height: "500px", margin: "0 2rem" }}>
+    <Box
+      sx={{
+        backgroundColor: "primary.light",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        padding: "96px 0 48px 0",
+      }}
+    >
+      <Container maxWidth="lg">
+        {/* <Box
+          sx={{
+            width: "auto",
+            height: "500px",
+            // margin: "0 2rem",
+          }}
+        > */}
         <Slider {...settings}>
           {provincesList.map((province) => (
             <PictureComponent key={province.name} url={province.image} />
           ))}
         </Slider>
-      </div>
-    </Container>
+        <h2
+          style={{
+            textAlign: "center",
+            marginTop: "30px",
+            fontWeight: "bolder",
+          }}
+        >
+          Sale khách sạn hot 9.9
+        </h2>
+        {/* </Box> */}
+      </Container>
+    </Box>
   );
 };
 

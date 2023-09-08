@@ -6,7 +6,7 @@ import * as React from "react";
 export default function AdvantageContainer() {
   const advantage: IAdvatageItemProps[] = [
     {
-      title: "Giải pháp du lịch hoàn thiện",
+      title: "Giải pháp tối ưu nhất",
       imgSrc:
         "https://ik.imagekit.io/tvlk/image/imageResource/2017/05/17/1495008495760-d92160ea2b56fc1128cbdff93aa43774.png?tr=h-150,q-75,w-150",
       description:
@@ -36,8 +36,8 @@ export default function AdvantageContainer() {
   ];
   return (
     <React.Fragment>
-      <Container maxWidth="lg">
-        <h2 style={{ textAlign: "center" }}>
+      <Container maxWidth="lg" sx={{ padding: "48px 0" }}>
+        <h2 style={{ textAlign: "center", fontWeight: "bolder" }}>
           Tại sao nên đặt chỗ với TravelDream?
         </h2>
         <Grid container spacing={2}>

@@ -22,8 +22,8 @@ const arrProduct = [
   "Đưa đón sân bay",
 ];
 const arrOther = [
-  "Traveloka Affiliate",
-  "Traveloka Blog",
+  "Travel Dream Affiliate",
+  "Travel Dream Blog",
   "Chính sách quyền riêng tư",
   "Điều khoản & Điều kiện",
   "Quy chế hoạt động",
@@ -147,7 +147,7 @@ const MockComponent = () => {
                         "Godwit,MuseoSans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol",
                     }}
                   >
-                    Hợp tác với Traveloka
+                    Hợp tác với Travel Dream
                   </div>
                 </div>
               </Grid>
@@ -195,7 +195,7 @@ const MockComponent = () => {
               >
                 <div>
                   <ContactComponent
-                    title="Về Traveloka"
+                    title="Về Travel Dream"
                     arrContent={arrContact}
                   />
                   <h4
@@ -381,7 +381,7 @@ const MockComponent = () => {
                         color: "rgba(255,255,255,1.00)",
                       }}
                     >
-                      Tải ứng dụng Traveloka
+                      Tải ứng dụng
                     </h4>
                     <div>
                       <DownloadLink
@@ -419,8 +419,8 @@ const MockComponent = () => {
               "Godwit,MuseoSans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol",
           }}
         >
-          Công ty TNHH Traveloka Việt Nam. Mã số DN: 0313581779. Tòa nhà An Phú,
-          117-119 Lý Chính Thắng, P. 7, Q. 3, TPHCM
+          Công ty TNHH 4 Thành Viên - Travel Dream Việt Nam. Tòa nhà Hải Sơn,
+          Phường Trần Hải, Quận Văn Đỉnh, TP. Văn Mạnh
         </div>
         <div
           style={{
@@ -433,7 +433,7 @@ const MockComponent = () => {
               "Godwit,MuseoSans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol",
           }}
         >
-          Copyright © 2023 Traveloka
+          Design by © 2023 Travel Dreaming Team
         </div>
       </Container>
     </Box>
