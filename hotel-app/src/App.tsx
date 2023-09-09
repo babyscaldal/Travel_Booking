@@ -19,7 +19,8 @@ import { fetchAllProvince } from "./actions/province.action";
 import styled from "styled-components";
 import { FilterFormLayOut } from "./Components/Search_Page_Component/HotelCard/FilterFormLayOut";
 import { Routes, Route, Navigate } from "react-router-dom";
-import { HomePage } from "./Pages/Homepage/HomePage";
+import { HomePage } from "./pages/Homepage/HomePage";
+// import { HomePage } from "./Pages/Homepage/HomePage";
 
 const NavBarWrapper = styled.div`
   position: fixed;

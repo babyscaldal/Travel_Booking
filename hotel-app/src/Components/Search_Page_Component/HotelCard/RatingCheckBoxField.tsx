@@ -8,6 +8,8 @@ import {
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import { Controller, useFormContext } from "react-hook-form";
+import { handleFilterStarsHotel } from "../../../actions/sortHotel.actions";
+import { useDispatch, useSelector } from "react-redux";
 
 export interface IRatingCheckBoxField {
   name: string;
@@ -43,9 +45,21 @@ const options = [
 ];
 
 export const RatingCheckBoxField = ({ name, label }: IRatingCheckBoxField) => {
+  // get stars
+  const starsValue: number[] = useSelector(
+    (state: any) => state.sortHotel.filterStarHotel
+  );
+
   const { control, setValue } = useFormContext();
 
-  const [selectedItems, setSelectedItems] = useState<number[]>([]);
+  const [selectedItems, setSelectedItems] = useState<number[]>(starsValue);
+
+  useEffect(() => {
+    setSelectedItems(starsValue);
+  }, [starsValue]);
+
+  // START: handle filter stars
+  const dispatch = useDispatch();
 
   const handleSelect = (value: number) => {
     const isPresent = selectedItems.indexOf(value);
@@ -56,6 +70,12 @@ export const RatingCheckBoxField = ({ name, label }: IRatingCheckBoxField) => {
       setSelectedItems((prevItems: number[]) => [...prevItems, value]);
     }
   };
+  useEffect(() => {
+    console.log("start handleSelect: ", selectedItems);
+    dispatch(handleFilterStarsHotel(selectedItems));
+  }, [selectedItems]);
+
+  // END: handle filter stars
 
   useEffect(() => {
     setValue(name, selectedItems);
@@ -78,7 +98,8 @@ export const RatingCheckBoxField = ({ name, label }: IRatingCheckBoxField) => {
                   <Controller
                     name={name}
                     control={control}
-                    render={() => {
+                    render={({ field: { value } }) => {
+                      // console.log(value);
                       return (
                         <Checkbox
                           checked={selectedItems.includes(Number(option.value))}

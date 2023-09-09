@@ -6,6 +6,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
 import provincesReducer from "../reducers/ProvincesReducer";
 import { IProvince } from "../types/provinceType";
+import sortHotel from "../reducers/hotelList.reducer";
 
 export interface RootState {
   loginReducer: any;
@@ -17,6 +18,7 @@ export interface RootState {
 const allReducers = combineReducers({
   loginReducer,
   provincesReducer,
+  sortHotel,
 });
 
 const sagaMiddleware = createSagaMiddleware();
