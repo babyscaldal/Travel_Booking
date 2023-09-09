@@ -14,10 +14,17 @@ import { DevTool } from "@hookform/devtools";
 import SearchField from "./SearchField";
 import { ICity } from "../../HomePage_Component/BookingTabPanel/BookingTabs/HotelBookFormLayout";
 import { HotelCard } from "./HotelCard";
+import { useSelector } from "react-redux";
 
+// Test Ha Noi hotel
+import hanoiList from "../../../../public/test-data-accommudation/accommodation.json";
+import { IHotel } from "../../../types/hotelType";
+import { IInitHotelState } from "../../../reducers/hotelList.reducer";
+import { useEffect, useRef, useState } from "react";
+console.log("HaNoi: ", hanoiList);
 export interface IFilterFormValue {
   radio: string;
-  star: string;
+  // star: number[];
   type: string;
   city: ICity;
 }
@@ -30,16 +37,76 @@ export const FilterFormLayOut = () => {
   const form = useForm<IFilterFormValue>({
     defaultValues: {
       radio: "1",
-      star: "",
+      // star: [],
       type: "",
       city: {
         id: 1,
         name: "Hà Nội",
       } as ICity,
     },
+    mode: "all",
   });
 
-  const { handleSubmit, control } = form;
+  const { handleSubmit, control, getValues } = form;
+  // const starValue = getValues("star");
+  // console.log("starvalue:", starValue);
+  const sortHotel: IHotel[] = useSelector(
+    (state: any) => state.sortHotel.locationHotelList
+  );
+  console.log("sortHotel: ", sortHotel);
+
+  const [renderList, setRenderList] = useState<IHotel[]>(sortHotel);
+
+  // get stars
+  const starsValue: number[] = useSelector(
+    (state: any) => state.sortHotel.filterStarHotel
+  );
+  // get type accommodation
+  const accommodationValue: string[] = useSelector(
+    (state: any) => state.sortHotel.filterTypeAccommodation
+  );
+
+  // following
+  const check = sortHotel[1].id;
+  console.log("check: ", check);
+
+  useEffect(() => {
+    // All
+    if (!starsValue.length && !accommodationValue.length) {
+      setRenderList(sortHotel);
+      return;
+    }
+
+    // by stars
+    if (!accommodationValue.length) {
+      const newHotelList: IHotel[] = sortHotel.filter((item) =>
+        starsValue.includes(item.stars)
+      );
+      setRenderList(newHotelList);
+      return;
+    }
+
+    // by type accommodation
+    if (!starsValue.length) {
+      const newHotelList: IHotel[] = sortHotel.filter((item) =>
+        accommodationValue.includes(item.type)
+      );
+      setRenderList(newHotelList);
+      return;
+    }
+
+    // by stars and type accommodation
+    if (accommodationValue.length && starsValue.length) {
+      const newHotelList: IHotel[] = sortHotel.filter((item) => {
+        return (
+          accommodationValue.includes(item.type) &&
+          starsValue.includes(item.stars)
+        );
+      });
+      setRenderList(newHotelList);
+      return;
+    }
+  }, [check, starsValue, accommodationValue]);
 
   return (
     <Container maxWidth="lg" sx={{ paddingTop: 10 }}>
@@ -98,89 +165,36 @@ export const FilterFormLayOut = () => {
                 color="initial"
                 sx={{ textIndent: "10px", fontWeight: "bold" }}
               >
-                Tìm thấy XXXX cơ sở lưu trú tại XXXX
+                Tìm thấy{" "}
+                <span style={{ color: "red" }}>{renderList.length}</span> kết
+                quả phù hợp với yêu cầu của bạn!
               </Typography>
             </Grid>
-            <Grid
-              item
-              md={6}
-              lg={4}
-              sx={{ margin: "auto", marginBottom: "15px" }}
-            >
-              <HotelCard />
-            </Grid>
-            <Grid
-              item
-              md={6}
-              lg={4}
-              sx={{ margin: "auto", marginBottom: "15px" }}
-            >
-              <HotelCard />
-            </Grid>
-            <Grid
-              item
-              md={6}
-              lg={4}
-              sx={{ margin: "auto", marginBottom: "15px" }}
-            >
-              <HotelCard />
-            </Grid>
-            <Grid
-              item
-              md={6}
-              lg={4}
-              sx={{ margin: "auto", marginBottom: "15px" }}
-            >
-              <HotelCard />
-            </Grid>
-            <Grid
-              item
-              md={6}
-              lg={4}
-              sx={{ margin: "auto", marginBottom: "15px" }}
-            >
-              <HotelCard />
-            </Grid>
-            <Grid
-              item
-              md={6}
-              lg={4}
-              sx={{ margin: "auto", marginBottom: "15px" }}
-            >
-              <HotelCard />
-            </Grid>
-            <Grid
-              item
-              md={6}
-              lg={4}
-              sx={{ margin: "auto", marginBottom: "15px" }}
-            >
-              <HotelCard />
-            </Grid>
-            <Grid
-              item
-              md={6}
-              lg={4}
-              sx={{ margin: "auto", marginBottom: "15px" }}
-            >
-              <HotelCard />
-            </Grid>
-            <Grid
-              item
-              md={6}
-              lg={4}
-              sx={{ margin: "auto", marginBottom: "15px" }}
-            >
-              <HotelCard />
-            </Grid>
-            <Grid
-              item
-              md={6}
-              lg={4}
-              sx={{ margin: "auto", marginBottom: "15px" }}
-            >
-              <HotelCard />
-            </Grid>
+            {/* Map */}
+            {renderList.map(
+              ({ name, address, stars, rating, price, image, type }, index) => {
+                return (
+                  <Grid
+                    key={index}
+                    item
+                    md={6}
+                    lg={4}
+                    sx={{ margin: "auto", marginBottom: "15px" }}
+                  >
+                    <HotelCard
+                      address={address}
+                      name={name}
+                      star={stars}
+                      rating={rating}
+                      price={price}
+                      imgUrl={image[0]}
+                      subImgUrl={image[1]}
+                      typeAccommodation={type}
+                    />
+                  </Grid>
+                );
+              }
+            )}
           </Grid>
         </Grid>
       </Grid>

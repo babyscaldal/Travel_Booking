@@ -4,23 +4,66 @@ import CardContent from "@mui/joy/CardContent";
 import CardOverflow from "@mui/joy/CardOverflow";
 import Divider from "@mui/joy/Divider";
 import Typography from "@mui/joy/Typography";
+import { capitalizeFirstLetter } from "../../../Ultiliti/CapitalizeFirstLetter";
 
-export function HotelCard() {
+export interface IAccommodation {
+  address: string;
+  name: string;
+  star: number;
+  rating: number;
+  price: number;
+  imgUrl: string;
+  subImgUrl: string;
+  typeAccommodation: string;
+}
+
+export function HotelCard({
+  address,
+  name,
+  star,
+  rating,
+  price,
+  imgUrl,
+  subImgUrl,
+  typeAccommodation,
+}: IAccommodation) {
   return (
     <Card variant="outlined" sx={{ width: 270, margin: "auto" }}>
       <CardOverflow>
         <AspectRatio ratio="2">
-          <img
-            src="https://th.bing.com/th/id/OIG.JxEAhYjKHZv8dat1PixG?pid=ImgGn"
-            srcSet="https://images.unsplash.com/photo-1532614338840-ab30cf10ed36?auto=format&fit=crop&w=318&dpr=2 2x"
-            loading="lazy"
-            alt=""
-          />
+          <div>
+            <img
+              src={imgUrl}
+              srcSet={subImgUrl}
+              loading="lazy"
+              alt="hotel image"
+            />
+          </div>
         </AspectRatio>
       </CardOverflow>
       <CardContent>
-        <Typography level="title-md">Yosemite National Park</Typography>
-        <Typography level="body-sm">California</Typography>
+        <Typography
+          level="title-md"
+          textOverflow={"ellipsis"}
+          overflow={"hidden"}
+          whiteSpace={"nowrap"}
+        >
+          {name}
+        </Typography>
+        <Typography
+          level="body-sm"
+          textOverflow={"ellipsis"}
+          overflow={"hidden"}
+          whiteSpace={"nowrap"}
+        >
+          {address}
+        </Typography>
+        <Typography level="body-sm">
+          Rating: <span style={{ fontWeight: "bold" }}>{rating}</span> ❤️
+        </Typography>
+        <Typography level="body-sm">
+          🏠 {capitalizeFirstLetter(typeAccommodation)}
+        </Typography>
       </CardContent>
       <CardOverflow variant="soft" sx={{ bgcolor: "background.level1" }}>
         <Divider inset="context" />
@@ -33,14 +76,14 @@ export function HotelCard() {
             fontWeight="md"
             textColor="text.secondary"
           >
-            $500/đêm
+            ${price}/đêm
           </Typography>
           <Typography
             level="body-md"
             fontWeight="md"
             textColor="text.secondary"
           >
-            ⭐5
+            ⭐{star}
           </Typography>
         </CardContent>
       </CardOverflow>

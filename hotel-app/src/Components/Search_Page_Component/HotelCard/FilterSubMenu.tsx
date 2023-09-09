@@ -6,8 +6,11 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Box, Button } from "@mui/material";
 import { RatingCheckBoxField } from "./RatingCheckBoxField";
 import { TypeCheckBoxField } from "./TypeCheckBoxField";
+import { useDispatch } from "react-redux";
+import { handleResetFilter } from "../../../actions/sortHotel.actions";
 
 export default function FilterSubMenu() {
+  const dispatch = useDispatch();
   return (
     <Box>
       <Box
@@ -23,7 +26,7 @@ export default function FilterSubMenu() {
           <Typography sx={{ fontSize: "16px", fontWeight: "bold" }}>
             Lọc kết quả
           </Typography>
-          <Button>Reset</Button>
+          <Button onClick={() => dispatch(handleResetFilter())}>Reset</Button>
         </Box>
         <Typography sx={{ fontSize: "14px", color: "#687176" }}>
           Hiển thị kết quả phân loại theo:
@@ -46,7 +49,7 @@ export default function FilterSubMenu() {
         </AccordionDetails>
       </Accordion>
 
-      {/* Sắp xếp theo loại hình lưu trứ */}
+      {/* Sắp xếp theo loại hình lưu trú */}
       <Accordion disableGutters>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}

@@ -15,7 +15,6 @@ export default function SearchField() {
     (state: RootState) => state.provincesReducer.listProvinces
   );
 
-
   const {
     control,
     formState: { errors },
@@ -41,10 +40,6 @@ export default function SearchField() {
                   {...params}
                   label={"Thành phố, địa điểm:"}
                   variant="outlined"
-                  InputProps={{
-                    ...params.InputProps,
-                    type: "search",
-                  }}
                   error={!!errors.city}
                   size="small"
                 />
@@ -53,8 +48,12 @@ export default function SearchField() {
           )}
         />
       </FormControl>
-      <Button type="submit" variant="contained" sx={{ color: "primary.main" }}>
-        🔍
+      <Button
+        type="submit"
+        variant="contained"
+        sx={{ color: "background.paper" }}
+      >
+        Tìm kiếm
       </Button>
       {errors?.city && <Alert severity="error">City is required</Alert>}
     </>

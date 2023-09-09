@@ -26,7 +26,8 @@ const loginReducer = (state = initState, action: IActionProps) => {
   switch (action.type) {
     case actionTypes.USER_LOGIN_SUCCEEDED:
       // console.log("action: ", action);
-      alert(`Đăng nhập thành công`);
+      // alert(`Đăng nhập thành công`);
+
       return { isLogin: true, user: action.payload.user };
     case actionTypes.USER_LOGIN_FAILED:
       // console.log("aloho", action);

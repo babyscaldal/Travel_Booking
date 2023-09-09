@@ -7,6 +7,8 @@ import {
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import { Controller, useFormContext } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import { handleFilterTypeAccommodation } from "../../../actions/sortHotel.actions";
 
 export interface ITypeCheckBoxField {
   name: string;
@@ -21,32 +23,51 @@ export interface IOption {
 const options = [
   {
     label: "Hotel",
-    value: "1",
+    value: "hotel",
   },
   {
     label: "Motel",
-    value: "2",
+    value: "motel",
   },
   {
     label: "Resort",
-    value: "3",
+    value: "resort",
   },
 ];
 
 export const TypeCheckBoxField = ({ name, label }: ITypeCheckBoxField) => {
   const { control, setValue } = useFormContext();
 
-  const [selectedItems, setSelectedItems] = useState<number[]>([]);
+  const [selectedItems, setSelectedItems] = useState<string[]>([]);
 
-  const handleSelect = (value: number) => {
+  // get type accommodation
+  const accommodationValue: string[] = useSelector(
+    (state: any) => state.sortHotel.filterTypeAccommodation
+  );
+
+  // START: handle filter type accommodation
+  const dispatch = useDispatch();
+
+  const handleSelect = (value: string) => {
     const isPresent = selectedItems.indexOf(value);
     if (isPresent !== -1) {
-      const remaining = selectedItems.filter((item: number) => item !== value);
+      const remaining = selectedItems.filter((item: string) => item !== value);
       setSelectedItems(remaining);
     } else {
-      setSelectedItems((prevItems: number[]) => [...prevItems, value]);
+      setSelectedItems((prevItems: string[]) => [...prevItems, value]);
     }
   };
+
+  useEffect(() => {
+    console.log("start handleSelect: ", selectedItems);
+    dispatch(handleFilterTypeAccommodation(selectedItems));
+  }, [selectedItems]);
+
+  // END: handle filter type accommodation
+
+  useEffect(() => {
+    setSelectedItems(accommodationValue);
+  }, [accommodationValue]);
 
   useEffect(() => {
     setValue(name, selectedItems);
@@ -72,8 +93,8 @@ export const TypeCheckBoxField = ({ name, label }: ITypeCheckBoxField) => {
                     render={() => {
                       return (
                         <Checkbox
-                          checked={selectedItems.includes(Number(option.value))}
-                          onChange={() => handleSelect(Number(option.value))}
+                          checked={selectedItems.includes(option.value)}
+                          onChange={() => handleSelect(option.value)}
                         />
                       );
                     }}
