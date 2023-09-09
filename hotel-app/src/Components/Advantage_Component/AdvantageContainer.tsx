@@ -40,7 +40,7 @@ export default function AdvantageContainer() {
         <h2 style={{ textAlign: "center", fontWeight: "bolder" }}>
           Tại sao nên đặt chỗ với TravelDream?
         </h2>
-        <Grid container spacing={2}>
+        <Grid container spacing={4}>
           {advantage.map((item, index) => (
             <Grid item xs={12} sm={6} md={3} key={index}>
               <AdvantageItem

@@ -45,8 +45,8 @@ function App() {
         {/* <FilterFormLayOut /> */}
       </Box>
       <Routes>
-        <Route path="*" element={<Navigate to="./home" />} />
-        <Route path="/" element={<Navigate to="./home" />} />
+        <Route path="*" element={<Navigate to="./homepage" />} />
+        <Route path="/" element={<Navigate to="./homepage" />} />
         <Route path="/homepage" element={<HomePage />} />
         <Route path="/accommodation/:id" element={<FilterFormLayOut />} />
       </Routes>
