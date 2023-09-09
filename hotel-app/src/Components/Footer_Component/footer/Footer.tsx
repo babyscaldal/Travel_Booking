@@ -81,15 +81,15 @@ const MockComponent = () => {
             }}
           >
             <Grid container>
-              <Grid item xs={12} sx={{ backgroundColor: "black" }}>
+              <Grid item xs={12}>
                 <img
-                  src="../../../../public/logo-white.png"
+                  src="../../../../public/logo-black.png"
                   alt=""
                   style={{
                     objectFit: "fill",
                     objectPosition: "50% 50%",
-                    width: "80%",
-                    height: "80%",
+                    width: "100%",
+                    height: "100%",
                   }}
                 />
               </Grid>

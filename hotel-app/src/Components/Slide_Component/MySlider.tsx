@@ -15,7 +15,7 @@ const MySlider: React.FC = () => {
     slidesToScroll: 1,
     autoplay: true,
     centerPadding: "50px",
-    centerMode: true,
+    // centerMode: true,
     autoplaySpeed: 2000,
     adaptiveHeight: true,
     focusOnSelect: true,
