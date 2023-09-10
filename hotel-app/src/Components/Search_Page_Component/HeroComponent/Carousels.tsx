@@ -1,11 +1,9 @@
 import styled from "styled-components";
 import Carousel from "react-bootstrap/Carousel";
 import { useState } from "react";
-import NavBar from "../../NavBar-Component/NavBar";
 import BookingModal from "./BookingModal";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../stores.ts/stores";
-import { Box } from "@mui/material";
 
 const Hero = styled.div`
   position: relative;

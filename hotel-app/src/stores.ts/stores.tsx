@@ -7,11 +7,16 @@ import thunk from "redux-thunk";
 import provincesReducer from "../reducers/ProvincesReducer";
 import { IProvince } from "../types/provinceType";
 import sortHotel from "../reducers/hotelList.reducer";
+import { IHotel } from "../types/hotelType";
+import hotelsByLocationReducer from "../reducers/getHotels.reducer";
 
 export interface RootState {
   loginReducer: any;
   provincesReducer: {
     listProvinces: IProvince[];
+  };
+  hotelsByLocationReducer: {
+    hotelsListByLocation: IHotel[];
   };
 }
 
@@ -19,6 +24,7 @@ const allReducers = combineReducers({
   loginReducer,
   provincesReducer,
   sortHotel,
+  hotelsByLocationReducer,
 });
 
 const sagaMiddleware = createSagaMiddleware();

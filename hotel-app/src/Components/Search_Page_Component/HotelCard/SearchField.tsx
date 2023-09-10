@@ -28,6 +28,7 @@ export default function SearchField() {
           control={control}
           render={({ field: { onChange, value } }) => (
             <Autocomplete
+              autoSelect
               autoHighlight
               autoComplete
               value={value}
@@ -42,6 +43,7 @@ export default function SearchField() {
                   variant="outlined"
                   error={!!errors.city}
                   size="small"
+                  autoComplete="off"
                 />
               )}
             />

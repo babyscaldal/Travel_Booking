@@ -12,48 +12,37 @@ import { FormProvider, useForm } from "react-hook-form";
 import FilterSubMenu from "./FilterSubMenu";
 import { DevTool } from "@hookform/devtools";
 import SearchField from "./SearchField";
-import { ICity } from "../../HomePage_Component/BookingTabPanel/BookingTabs/HotelBookFormLayout";
 import { HotelCard } from "./HotelCard";
 import { useSelector } from "react-redux";
 
 // Test Ha Noi hotel
-import hanoiList from "../../../../public/test-data-accommudation/accommodation.json";
 import { IHotel } from "../../../types/hotelType";
-import { IInitHotelState } from "../../../reducers/hotelList.reducer";
-import { useEffect, useRef, useState } from "react";
-console.log("HaNoi: ", hanoiList);
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { getAllHotelsByLocation } from "../../../actions/getHotels.actions";
+import { IProvince } from "../../../types/provinceType";
+import { RootState } from "../../../stores.ts/stores";
 export interface IFilterFormValue {
   radio: string;
-  // star: number[];
-  type: string;
-  city: ICity;
+  city: IProvince | null;
 }
-
-const onSubmit = (data: IFilterFormValue) => {
-  console.log(data);
-};
 
 export const FilterFormLayOut = () => {
   const form = useForm<IFilterFormValue>({
     defaultValues: {
       radio: "1",
-      // star: [],
-      type: "",
-      city: {
-        id: 1,
-        name: "Hà Nội",
-      } as ICity,
+      city: null,
     },
-    mode: "all",
   });
 
-  const { handleSubmit, control, getValues } = form;
-  // const starValue = getValues("star");
-  // console.log("starvalue:", starValue);
+  const { handleSubmit, control, reset } = form;
   const sortHotel: IHotel[] = useSelector(
     (state: any) => state.sortHotel.locationHotelList
   );
-  console.log("sortHotel: ", sortHotel);
+
+  const provinces = useSelector(
+    (state: RootState) => state.provincesReducer.listProvinces
+  );
 
   const [renderList, setRenderList] = useState<IHotel[]>(sortHotel);
 
@@ -67,8 +56,7 @@ export const FilterFormLayOut = () => {
   );
 
   // following
-  const check = sortHotel[1].id;
-  console.log("check: ", check);
+  const check = sortHotel.length && sortHotel[1].id;
 
   useEffect(() => {
     // All
@@ -108,9 +96,16 @@ export const FilterFormLayOut = () => {
     }
   }, [check, starsValue, accommodationValue]);
 
+  const dispatch = useDispatch();
+
+  const onSubmit = (data: IFilterFormValue) => {
+    console.log(data);
+    data && data.city && dispatch(getAllHotelsByLocation(data.city.id));
+    reset();
+  };
+
   return (
     <Container maxWidth="lg" sx={{ paddingTop: 10 }}>
-      {/* <Box display={"flex"} justifyContent={"space-between"} gap={"15px"}> */}
       <Grid
         container
         spacing={2}
@@ -157,8 +152,6 @@ export const FilterFormLayOut = () => {
         </Grid>
         <Grid item xs={9}>
           <Grid container sx={{ justifyItems: "center" }}>
-            {/* <Grid item xs={12} sx={{ marginBottom: "20px" }}>
-              <Grid container spacing={3}> */}
             <Grid item xs={12} sx={{ margin: "0 0 16px 0" }}>
               <Typography
                 variant="body1"
@@ -167,9 +160,10 @@ export const FilterFormLayOut = () => {
               >
                 Tìm thấy{" "}
                 <span style={{ color: "red" }}>{renderList.length}</span> kết
-                quả phù hợp với yêu cầu của bạn!
+                quả phù hợp với yêu cầu của bạn tại ${provinces[0].name}
               </Typography>
             </Grid>
+
             {/* Map */}
             {renderList.map(
               ({ name, address, stars, rating, price, image, type }, index) => {
@@ -198,8 +192,7 @@ export const FilterFormLayOut = () => {
           </Grid>
         </Grid>
       </Grid>
-      {/* </Grid>
-      </Grid> */}
+
       <DevTool control={control} />
     </Container>
   );

@@ -59,7 +59,7 @@ export const TypeCheckBoxField = ({ name, label }: ITypeCheckBoxField) => {
   };
 
   useEffect(() => {
-    console.log("start handleSelect: ", selectedItems);
+    // console.log("start handleSelect: ", selectedItems);
     dispatch(handleFilterTypeAccommodation(selectedItems));
   }, [selectedItems]);
 

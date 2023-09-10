@@ -9,20 +9,17 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import CitySearchField from "./BookingFormField/CitySearchField.tsx";
 import People from "./People.tsx";
-
-export type ICity = {
-  id: number;
-  name?: string;
-  country?: string;
-  population?: number;
-};
+import { IProvince } from "../../../../types/provinceType.ts";
+import { getAllHotelsByLocation } from "../../../../actions/getHotels.actions.ts";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 type childAge = {
   age: number;
 };
 
 export type IBookingFormValue = {
-  city: ICity;
+  city: IProvince | null;
   bookingDate: Dayjs | null;
   nightNumber: string;
   adult: number;
@@ -32,12 +29,11 @@ export type IBookingFormValue = {
 };
 
 export default function HotelBookingFormLayout() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const form = useForm<IBookingFormValue>({
     defaultValues: {
-      city: {
-        id: 1,
-        name: "Hà Nội",
-      } as ICity,
+      city: null,
       bookingDate: [dayjs(), dayjs().add(1, "day")],
       adult: 1,
       child: 0,
@@ -46,7 +42,7 @@ export default function HotelBookingFormLayout() {
     },
   });
 
-  const { control, handleSubmit, watch, setValue } = form;
+  const { control, handleSubmit, watch, setValue, reset } = form;
 
   const { append, fields, remove } = useFieldArray({
     name: "childsAge",
@@ -103,6 +99,9 @@ export default function HotelBookingFormLayout() {
 
   const onSubmit = (data: IBookingFormValue) => {
     console.log(data);
+    data && data.city && dispatch(getAllHotelsByLocation(data.city.id));
+    navigate("./accommodation");
+    reset();
   };
 
   return (

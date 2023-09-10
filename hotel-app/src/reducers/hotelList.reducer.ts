@@ -1,6 +1,5 @@
 import { IHotel } from "../types/hotelType";
 // Test Ha Noi hotel
-import hanoiList from "../../public/test-data-accommudation/accommodation.json";
 import { actionTypes } from "../types/actions.types";
 
 export interface IActionProps {
@@ -17,10 +16,8 @@ export interface IInitHotelState {
   filterTypeAccommodation: string[];
 }
 
-const initSortHotel = hanoiList.slice().sort((a, b) => b.price - a.price);
-
 const initState: IInitHotelState = {
-  locationHotelList: initSortHotel,
+  locationHotelList: [],
   filterStarHotel: [],
   filterTypeAccommodation: [],
 };
@@ -39,6 +36,13 @@ const sortHotel = (state = initState, action: IActionProps) => {
       return { ...state, filterTypeAccommodation: action.payload };
     case actionTypes.RESET_FILTER:
       return { ...state, filterStarHotel: [], filterTypeAccommodation: [] };
+    case actionTypes.SEARCH_HOTELS_BY_LOCATION:
+      return {
+        ...state,
+        locationHotelList: action.payload
+          .slice()
+          .sort((a: IHotel, b: IHotel) => b.price - a.price),
+      };
 
     default:
       return state;

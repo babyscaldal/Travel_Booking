@@ -71,7 +71,7 @@ export const RatingCheckBoxField = ({ name, label }: IRatingCheckBoxField) => {
     }
   };
   useEffect(() => {
-    console.log("start handleSelect: ", selectedItems);
+    // console.log("start handleSelect: ", selectedItems);
     dispatch(handleFilterStarsHotel(selectedItems));
   }, [selectedItems]);
 

@@ -13,7 +13,7 @@ const INITIAL_STATE = {
 const provincesReducer = (state = INITIAL_STATE, action: IAction) => {
   switch (action.type) {
     case actionTypes.GET_PROVINCE_REQUEST:
-      console.log("FETCH_USERS_REQUEST:", action);
+      // console.log("FETCH_USERS_REQUEST:", action);
       return {
         ...state,
         isLoading: true,
@@ -21,7 +21,7 @@ const provincesReducer = (state = INITIAL_STATE, action: IAction) => {
       };
 
     case actionTypes.GET_PROVINCE_SUCCESS:
-      console.log("FETCH_USERS_SUCCESS:", action);
+      // console.log("FETCH_USERS_SUCCESS:", action);
 
       return {
         ...state,
@@ -31,7 +31,7 @@ const provincesReducer = (state = INITIAL_STATE, action: IAction) => {
       };
 
     case actionTypes.GET_PROVINCE_ERROR:
-      console.log("FETCH_USERS_ERROR:", action);
+      // console.log("FETCH_USERS_ERROR:", action);
       return {
         ...state,
         isLoading: false,

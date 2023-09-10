@@ -53,3 +53,8 @@ export const handleResetFilter = () => {
   console.log("Tao đã reset thành công");
   return { type: actionTypes.RESET_FILTER };
 };
+
+export const handleSearchHotelsByLocation = (hotelsData: IHotel[]) => {
+  console.log("Tao đã search rồi");
+  return { type: actionTypes.SEARCH_HOTELS_BY_LOCATION, payload: hotelsData };
+};

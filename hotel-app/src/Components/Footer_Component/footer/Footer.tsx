@@ -2,6 +2,10 @@ import { Box, Container, Grid, Stack } from "@mui/material";
 import PayComponent from "../PayComponent";
 import ContactComponent from "../ContactComponent";
 import DownloadLink from "../AppComponent";
+import YouTubeIcon from "@mui/icons-material/YouTube";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import TwitterIcon from "@mui/icons-material/Twitter";
+import InstagramIcon from "@mui/icons-material/Instagram";
 
 export const arrContact = [
   "Cách đặt chỗ",
@@ -252,7 +256,7 @@ const MockComponent = () => {
           </Grid>
           <Grid
             item
-            xs={12}
+            xs={6}
             md={8}
             sx={{
               textAlign: {
@@ -265,8 +269,8 @@ const MockComponent = () => {
             <Grid container spacing={2}>
               <Grid
                 item
-                xs={4}
-                // md={4}
+                xs={12}
+                md={4}
                 sx={{
                   textAlign: {
                     xs: "center",
@@ -284,8 +288,8 @@ const MockComponent = () => {
               <Grid
                 textAlign={"center"}
                 item
-                xs={4}
-                // md={4}
+                xs={12}
+                md={4}
                 sx={{
                   paddingLeft: "12px",
                   paddingRight: "12px",
@@ -300,8 +304,8 @@ const MockComponent = () => {
               <Grid
                 textAlign={"center"}
                 item
-                xs={4}
-                // md={4}
+                xs={12}
+                md={4}
                 sx={{
                   paddingLeft: "12px",
                   paddingRight: "12px",
@@ -322,128 +326,137 @@ const MockComponent = () => {
                       marginTop: "0px",
                     }}
                   >
-                    Theo dõi chúng tôi trên
+                    Theo dõi chúng tôi
                   </h4>
-
-                  <Box
+                  <Grid
+                    container
                     sx={{
                       display: {
-                        xs: "flex",
-                        md: "block",
+                        xs: "flex-end",
+                        md: "start",
                       },
-                      justifyContent: "center",
-                      gap: "15px",
                     }}
                   >
-                    <div>
-                      <a
-                        href=" "
-                        style={{
-                          display: "inline-flex",
-                          opacity: "0.65",
-                          color: "rgba(205,208,209,1.00)",
-                          textDecoration: "none",
-                          lineHeight: "20px",
-                          fontWeight: "bold",
-                          fontSize: "14px",
-                        }}
-                      >
-                        <img
-                          src="https://d1785e74lyxkqq.cloudfront.net/_next/static/v2/6/6904cd2e74ef73120833cff12185a320.svg"
-                          width="36"
-                          height="24"
+                    <Grid
+                      item
+                      xs={6}
+                      md={12}
+                      sx={{
+                        textAlign: {
+                          xs: "end",
+                          md: "start",
+                        },
+                      }}
+                    >
+                      <div>
+                        <a
+                          href=" "
                           style={{
-                            filter: "grayscale(1)",
-                            marginRight: "5px",
-                            objectFit: "fill",
-                            objectPosition: "50% 50%",
+                            display: "inline-flex",
+                            opacity: "0.65",
+                            color: "rgba(205,208,209,1.00)",
+                            textDecoration: "none",
+                            lineHeight: "20px",
+                            fontWeight: "bold",
+                            fontSize: "14px",
                           }}
-                        />
-                        Facebook
-                      </a>
-                    </div>
-                    <div>
-                      <a
-                        href=" "
-                        style={{
-                          display: "inline-flex",
-                          opacity: "0.65",
-                          color: "rgba(205,208,209,1.00)",
-                          textDecoration: "none",
-                          lineHeight: "20px",
-                          fontWeight: "bold",
-                          fontSize: "14px",
-                        }}
-                      >
-                        <img
-                          src="https://d1785e74lyxkqq.cloudfront.net/_next/static/v2/6/62a2fc240d7e00b05d0d6f6b4e785110.svg"
-                          width="36"
-                          height="24"
+                        >
+                          <FacebookIcon
+                            sx={{ width: "36px", height: "24px" }}
+                          />
+                          Facebook
+                        </a>
+                      </div>
+                    </Grid>
+                    <Grid
+                      item
+                      xs={6}
+                      md={12}
+                      sx={{
+                        textAlign: {
+                          xs: "start",
+                          md: "start",
+                        },
+                      }}
+                    >
+                      <div>
+                        <a
+                          href=" "
                           style={{
-                            filter: "grayscale(1)",
-                            marginRight: "5px",
-                            objectFit: "fill",
-                            objectPosition: "50% 50%",
+                            display: "inline-flex",
+                            opacity: "0.65",
+                            color: "rgba(205,208,209,1.00)",
+                            textDecoration: "none",
+                            lineHeight: "20px",
+                            fontWeight: "bold",
+                            fontSize: "14px",
                           }}
-                        />
-                        Instagram
-                      </a>
-                    </div>
-                    <div>
-                      <a
-                        href=" "
-                        style={{
-                          display: "inline-flex",
-                          opacity: "0.65",
-                          color: "rgba(205,208,209,1.00)",
-                          textDecoration: "none",
-                          lineHeight: "20px",
-                          fontWeight: "bold",
-                          fontSize: "14px",
-                        }}
-                      >
-                        <img
-                          src="https://d1785e74lyxkqq.cloudfront.net/_next/static/v2/b/b593add66303beb2a0cae9e96963e68b.svg"
-                          width="36"
-                          height="24"
+                        >
+                          <TwitterIcon sx={{ width: "36px", height: "24px" }} />
+                          Twitter
+                        </a>
+                      </div>
+                    </Grid>
+                    <Grid
+                      item
+                      xs={6}
+                      md={12}
+                      sx={{
+                        textAlign: {
+                          xs: "end",
+                          md: "start",
+                        },
+                      }}
+                    >
+                      <div>
+                        <a
+                          href=" "
                           style={{
-                            filter: "grayscale(1)",
-                            marginRight: "5px",
-                            objectFit: "fill",
-                            objectPosition: "50% 50%",
+                            display: "inline-flex",
+                            opacity: "0.65",
+                            color: "rgba(205,208,209,1.00)",
+                            textDecoration: "none",
+                            lineHeight: "20px",
+                            fontWeight: "bold",
+                            fontSize: "14px",
                           }}
-                        />
-                        Youtube
-                      </a>
-                    </div>
-                    <div>
-                      <a
-                        href=" "
-                        style={{
-                          display: "inline-flex",
-                          opacity: "0.65",
-                          color: "rgba(205,208,209,1.00)",
-                          textDecoration: "none",
-                          lineHeight: "20px",
-                          fontWeight: "bold",
-                          fontSize: "14px",
-                        }}
-                      >
-                        <img
-                          src="https://d1785e74lyxkqq.cloudfront.net/_next/static/v2/4/471f17c1510d49a98bec08a48b84c607.svg"
-                          width="36"
-                          height="24"
+                        >
+                          <YouTubeIcon sx={{ width: "36px", height: "24px" }} />
+                          Youtube
+                        </a>
+                      </div>
+                    </Grid>
+                    <Grid
+                      item
+                      xs={6}
+                      md={12}
+                      sx={{
+                        textAlign: {
+                          xs: "start",
+                        },
+                      }}
+                    >
+                      <div>
+                        <a
+                          href=" "
                           style={{
-                            filter: "grayscale(1)",
-                            marginRight: "5px",
-                            objectFit: "fill",
-                            objectPosition: "50% 50%",
+                            display: "inline-flex",
+                            opacity: "0.65",
+                            color: "rgba(205,208,209,1.00)",
+                            textDecoration: "none",
+                            lineHeight: "20px",
+                            fontWeight: "bold",
+                            fontSize: "14px",
                           }}
-                        />
-                        Tiktok
-                      </a>
-                    </div>
-                  </Box>
+                        >
+                          <InstagramIcon
+                            sx={{ width: "36px", height: "24px" }}
+                          />
+                          Instagram
+                        </a>
+                      </div>
+                    </Grid>
+                  </Grid>
                 </Box>
               </Grid>
               <Grid item xs={12} md={4}></Grid>
