@@ -43,13 +43,14 @@ export default function NavBar() {
                 </IconButton>
 
                 {/* Logo Home */}
-                <Box sx={{ width: "10px", flexGrow: 1 }}>
+                <Box sx={{ width: "50px", flexGrow: 1 }}>
                   <NavLink to={"/homepage"}>
                     <img
-                      src="../../../public/travel-dream-logo - ver2.png"
-                      alt="logo"
-                      width="50%"
-                      height="50%"
+                      src="../../../public/logo-black-aaabgRemoved.png"
+                      // alt="logo"
+                      // width="50%"
+                      height="60px"
+                      // style={{ objectFit: "cover" }}
                     />
                   </NavLink>
                 </Box>
