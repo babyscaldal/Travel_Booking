@@ -220,19 +220,12 @@ export const FilterFormLayOut = () => {
               (
                 {
                   name,
-
                   address,
-
                   stars,
-
                   rating,
-
                   price,
-
                   image,
-
                   type,
-
                   numberOfRoom,
                   id,
                 },
@@ -243,9 +236,18 @@ export const FilterFormLayOut = () => {
                   <Grid
                     key={index}
                     item
+                    xs={12}
                     md={6}
                     lg={4}
-                    sx={{ margin: "auto", marginBottom: "15px" }}
+                    sx={{
+                      margin: "auto",
+                      marginBottom: "15px",
+                      transition: "all 0.25s",
+                      "&:hover": {
+                        cursor: "pointer",
+                        transform: "translateY(-15px)",
+                      },
+                    }}
                   >
                     <Link to={String(id)} style={{ textDecoration: "none" }}>
                       <HotelCard
