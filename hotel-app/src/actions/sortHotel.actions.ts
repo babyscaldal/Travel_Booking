@@ -1,4 +1,3 @@
-import { useSelector } from "react-redux";
 import { IHotel } from "../types/hotelType";
 import { actionTypes } from "../types/actions.types";
 

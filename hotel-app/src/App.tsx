@@ -12,7 +12,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { HomePage } from "./Pages/Homepage/HomePage";
 import { RootState } from "./stores.ts/stores";
 import { handleSearchHotelsByLocation } from "./actions/sortHotel.actions";
-import { DatePickerWithRange } from "./Components/HomePage_Component/BookingTabPanel/BookingTabs/BookingFormField/ShadCNDateRangePicker";
+import { HotelInfoPage } from "./Components/HotelInfoComponents/HotelInfoPage";
 
 const NavBarWrapper = styled.div`
   position: fixed;
@@ -25,6 +25,10 @@ function App() {
   const hotelsDataByLocation = useSelector(
     (state: RootState) => state.hotelsByLocationReducer.hotelsListByLocation
   );
+
+  // const provinces = useSelector(
+  //   (state: RootState) => state.provincesReducer.listProvinces
+  // );
 
   useEffect(() => {
     dispatch(fetchAllProvince());
@@ -45,10 +49,12 @@ function App() {
       <Routes>
         <Route path="*" element={<Navigate to="/" />} />
         <Route path="/" element={<HomePage />} />
-        <Route path="/accommodation" element={<FilterFormLayOut />}>
-          <Route path=":id" element={<FilterFormLayOut />} />
+        <Route path={`/accommodation/`} element={<FilterFormLayOut />}>
+          {/* <Route path=":domain" element={<FilterFormLayOut />} /> */}
         </Route>
+        {/* <Route path={`/accommodation/:city/:number`} element={<FilterFormLayOut />} /> */}
       </Routes>
+      <HotelInfoPage />
     </>
   );
 }

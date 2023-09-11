@@ -2,25 +2,21 @@ import { Box, Button, Grid, MenuItem } from "@mui/material";
 import { FormProvider, useFieldArray, useForm } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
 import dayjs, { Dayjs } from "dayjs";
-import DateRangePickerField from "./BookingFormField/DateRangePickerField.tsx";
-import InputField from "./BookingFormField/InputField.tsx";
-import SelectField from "./BookingFormField/SelectField.tsx";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
-import CitySearchField from "./BookingFormField/CitySearchField.tsx";
-import People from "./People.tsx";
-import { IProvince } from "../../../../types/provinceType.ts";
-import { getAllHotelsByLocation } from "../../../../actions/getHotels.actions.ts";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
-import { RootState } from "../../../../stores.ts/stores.tsx";
+// import { useDispatch } from "react-redux";
+// import { useNavigate } from "react-router-dom";
+import DateRangePickerField from "../HomePage_Component/BookingTabPanel/BookingTabs/BookingFormField/DateRangePickerField";
+import { IProvince } from "../../types/provinceType";
+import People from "../HomePage_Component/BookingTabPanel/BookingTabs/People";
+import InputField from "../HomePage_Component/BookingTabPanel/BookingTabs/BookingFormField/InputField";
+import SelectField from "../HomePage_Component/BookingTabPanel/BookingTabs/BookingFormField/SelectField";
 
 type childAge = {
   age: number;
 };
 
 export type IBookingFormValue = {
-  city: IProvince | null;
   bookingDate: Dayjs | null;
   nightNumber: string;
   adult: number;
@@ -30,11 +26,10 @@ export type IBookingFormValue = {
 };
 
 export default function HotelBookingFormLayout() {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  // const dispatch = useDispatch();
+  // const navigate = useNavigate();
   const form = useForm<IBookingFormValue>({
     defaultValues: {
-      city: null,
       bookingDate: [dayjs(), dayjs().add(1, "day")],
       adult: 1,
       child: 0,
@@ -43,15 +38,7 @@ export default function HotelBookingFormLayout() {
     },
   });
 
-  const hotelsDataByLocation = useSelector(
-    (state: RootState) => state.hotelsByLocationReducer.hotelsListByLocation
-  );
-
-  const provinces = useSelector(
-    (state: RootState) => state.provincesReducer.listProvinces
-  );
-
-  const { control, handleSubmit, watch, setValue, reset } = form;
+  const { control, handleSubmit, watch, setValue } = form;
 
   const { append, fields, remove } = useFieldArray({
     name: "childsAge",
@@ -75,7 +62,7 @@ export default function HotelBookingFormLayout() {
   };
   const handleAddRoom = () => {
     const currentRoomValue = watch("room");
-    if (currentRoomValue < 40) {
+    if (currentRoomValue < 8) {
       const newRoomValue = currentRoomValue + 1;
       setValue("room", newRoomValue);
     }
@@ -106,19 +93,8 @@ export default function HotelBookingFormLayout() {
     }
   };
 
-  const { domain } = useParams<string>();
-
-  const currentSearchDomain = provinces.find(
-    (item) => provinces.length && item.domain === domain
-  );
-
   const onSubmit = (data: IBookingFormValue) => {
     console.log(data);
-    data &&
-      data.city &&
-      dispatch(getAllHotelsByLocation(data.city.id, data.room));
-    navigate(`/accommodation/${currentSearchDomain?.domain}`);
-    reset();
   };
 
   return (
@@ -126,11 +102,6 @@ export default function HotelBookingFormLayout() {
       <form onSubmit={handleSubmit(onSubmit)}>
         <Box>
           <Grid container spacing={3} justifyContent={"center"}>
-            {/* City */}
-            <Grid item xs={6}>
-              <CitySearchField />
-            </Grid>
-
             {/* Date */}
             <Grid item xs={6}>
               <Grid container spacing={2}>

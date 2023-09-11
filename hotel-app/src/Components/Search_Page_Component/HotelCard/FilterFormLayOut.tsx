@@ -21,10 +21,12 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { getAllHotelsByLocation } from "../../../actions/getHotels.actions";
 import { IProvince } from "../../../types/provinceType";
-import { RootState } from "../../../stores.ts/stores";
+// import { RootState } from "../../../stores.ts/stores";
+// import { useParams } from "react-router";
 export interface IFilterFormValue {
   radio: string;
   city: IProvince | null;
+  room: number;
 }
 
 export const FilterFormLayOut = () => {
@@ -32,6 +34,7 @@ export const FilterFormLayOut = () => {
     defaultValues: {
       radio: "1",
       city: null,
+      room: 1,
     },
   });
 
@@ -40,9 +43,9 @@ export const FilterFormLayOut = () => {
     (state: any) => state.sortHotel.locationHotelList
   );
 
-  const provinces = useSelector(
-    (state: RootState) => state.provincesReducer.listProvinces
-  );
+  // const provinces = useSelector(
+  //   (state: RootState) => state.provincesReducer.listProvinces
+  // );
 
   const [renderList, setRenderList] = useState<IHotel[]>(sortHotel);
 
@@ -98,9 +101,15 @@ export const FilterFormLayOut = () => {
 
   const dispatch = useDispatch();
 
+  // const { domain } = useParams<string>();
+
+  // const currentSearchDomain = provinces.find((item) => item.domain === domain);
+
   const onSubmit = (data: IFilterFormValue) => {
     console.log(data);
-    data && data.city && dispatch(getAllHotelsByLocation(data.city.id));
+    data &&
+      data.city &&
+      dispatch(getAllHotelsByLocation(data.city.id, data.room));
     reset();
   };
 
@@ -160,13 +169,25 @@ export const FilterFormLayOut = () => {
               >
                 Tìm thấy{" "}
                 <span style={{ color: "red" }}>{renderList.length}</span> kết
-                quả phù hợp với yêu cầu của bạn tại ${provinces[0].name}
+                quả phù hợp với yêu cầu của bạn tại
               </Typography>
             </Grid>
 
             {/* Map */}
             {renderList.map(
-              ({ name, address, stars, rating, price, image, type }, index) => {
+              (
+                {
+                  name,
+                  address,
+                  stars,
+                  rating,
+                  price,
+                  image,
+                  type,
+                  numberOfRoom,
+                },
+                index
+              ) => {
                 return (
                   <Grid
                     key={index}
@@ -184,6 +205,7 @@ export const FilterFormLayOut = () => {
                       imgUrl={image[0]}
                       subImgUrl={image[1]}
                       typeAccommodation={type}
+                      numberOfRoom={numberOfRoom}
                     />
                   </Grid>
                 );

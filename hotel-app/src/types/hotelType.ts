@@ -11,4 +11,5 @@ export interface IHotel {
   amenities: string[];
   description: string;
   image: string[];
+  numberOfRoom: number;
 }

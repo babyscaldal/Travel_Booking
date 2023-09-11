@@ -4,4 +4,5 @@ export interface IProvince {
   picture: string;
   image: string;
   slogan: string;
+  domain: string;
 }

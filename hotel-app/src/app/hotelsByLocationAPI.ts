@@ -6,8 +6,8 @@ const hotelsByLocationAPI = {
     return axiosClient.get(url);
   },
 
-  getById: (id: number) => {
-    const url = `http://localhost:3000/provinces/${id}/hotels`;
+  getById: (id: number, roomValue: number) => {
+    const url = `http://localhost:3000/provinces/${id}/hotels?numberOfRoom_gte=${roomValue}`;
     return axiosClient.get(url);
   },
 };

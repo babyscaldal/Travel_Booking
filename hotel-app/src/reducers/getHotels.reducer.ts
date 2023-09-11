@@ -34,8 +34,6 @@ const hotelsByLocationReducer = (state = initState, action: IAction) => {
         isError: true,
       };
 
- 
-
     default:
       return state;
   }

@@ -4,7 +4,6 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { ReactNode } from "react";
-import PeopleAltRoundedIcon from "@mui/icons-material/PeopleAltRounded";
 import PeopleRoundedIcon from "@mui/icons-material/PeopleRounded";
 import { Box } from "@mui/material";
 
@@ -40,24 +39,3 @@ export default function People({ children }: IPeople) {
     </div>
   );
 }
-
-// import Accordion from "react-bootstrap/Accordion";
-
-// export default function People() {
-//   return (
-//     <Accordion defaultActiveKey="0">
-//       <Accordion.Item eventKey="0">
-//         <Accordion.Header>Accordion Item #1</Accordion.Header>
-//         <Accordion.Body>
-//           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-//           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-//           minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-//           aliquip ex ea commodo consequat. Duis aute irure dolor in
-//           reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-//           pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-//           culpa qui officia deserunt mollit anim id est laborum.
-//         </Accordion.Body>
-//       </Accordion.Item>
-//     </Accordion>
-//   );
-// }

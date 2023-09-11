@@ -13,12 +13,13 @@ export const getHotelsByLocationError = () => {
   return { type: actionTypes.GET_HOTELS_BY_LOCATION_ERROR };
 };
 
-export const getAllHotelsByLocation = (id: number): any => {
+export const getAllHotelsByLocation = (id: number, roomValue: number): any => {
   return async (dispatch: any) => {
     dispatch(getHotelsByLocationRequest());
     try {
       const data: AxiosResponse<IHotel[]> = await hotelsByLocationAPI.getById(
-        id
+        id,
+        roomValue
       );
       dispatch(getHotelsByLocationSuccess(data));
     } catch (error) {
