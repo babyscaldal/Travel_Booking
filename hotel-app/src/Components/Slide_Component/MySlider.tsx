@@ -5,6 +5,9 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../stores.ts/stores";
 import { Box, Container } from "@mui/material";
 import { IProvince } from "../../types/provinceType";
+import { useDispatch } from "react-redux";
+import { getAllHotelsByLocation } from "../../actions/getHotels.actions";
+import { useNavigate } from "react-router-dom";
 
 const MySlider: React.FC = () => {
   const settings = {
@@ -56,6 +59,15 @@ const MySlider: React.FC = () => {
     (state: RootState) => state.provincesReducer.listProvinces
   );
 
+  // handle search
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handleOnClick = (id: number, bookingNums: number, domain: string) => {
+    // alert("onClick");
+    dispatch(getAllHotelsByLocation(id, bookingNums));
+    navigate(`/accommodation/${domain}`);
+  };
+
   return (
     <Box
       sx={{
@@ -69,7 +81,11 @@ const MySlider: React.FC = () => {
       <Container maxWidth="lg">
         <Slider {...settings}>
           {provincesList.map((province) => (
-            <PictureComponent key={province.name} url={province.image} />
+            <PictureComponent
+              key={province.name}
+              url={province.image}
+              onClick={() => handleOnClick(province.id, 0, province.domain)}
+            />
           ))}
         </Slider>
         <h2
@@ -77,9 +93,10 @@ const MySlider: React.FC = () => {
             textAlign: "center",
             marginTop: "30px",
             fontWeight: "bolder",
+            color: "#fff",
           }}
         >
-          Sale khách sạn hot 9.9
+          Sale khách sạn hot trong tháng này!
         </h2>
       </Container>
     </Box>

@@ -36,13 +36,41 @@ export default function AdvantageContainer() {
   ];
   return (
     <React.Fragment>
-      <Container maxWidth="lg" sx={{ padding: "48px 0" }}>
-        <h2 style={{ textAlign: "center", fontWeight: "bolder" }}>
+      <Container
+        maxWidth="lg"
+        sx={{
+          padding: "48px 0",
+        }}
+      >
+        <h2
+          style={{
+            textAlign: "center",
+            fontWeight: "bolder",
+            marginBottom: "35px",
+          }}
+        >
           Tại sao nên đặt chỗ với TravelDream?
         </h2>
-        <Grid container spacing={4}>
+        <Grid container justifyContent={"space-between"}>
           {advantage.map((item, index) => (
-            <Grid item xs={12} sm={6} md={3} key={index}>
+            <Grid
+              item
+              xs={11.8}
+              sm={5.8}
+              md={2.8}
+              key={index}
+              boxShadow={
+                "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"
+              }
+              marginBottom={"15px"}
+              sx={{
+                transition: "all 0.25s",
+                "&:hover": {
+                  cursor: "pointer",
+                  transform: "translateY(-15px)",
+                },
+              }}
+            >
               <AdvantageItem
                 imgSrc={item.imgSrc}
                 title={item.title}

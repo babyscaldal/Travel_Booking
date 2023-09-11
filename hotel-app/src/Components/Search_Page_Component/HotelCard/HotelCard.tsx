@@ -6,8 +6,6 @@ import Divider from "@mui/joy/Divider";
 import Typography from "@mui/joy/Typography";
 import { capitalizeFirstLetter } from "../../../Ultiliti/CapitalizeFirstLetter";
 import { Rating } from "@mui/material";
-import RatingComponent from "./RatingComponent";
-
 export interface IAccommodation {
   address: string;
   name: string;

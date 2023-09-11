@@ -8,20 +8,32 @@ import BookingTabPanel from "../../HomePage_Component/BookingTabPanel/BookingTab
 export default function BookingModal() {
   const [open, setOpen] = React.useState<boolean>(false);
 
-
-
   return (
     <React.Fragment>
       <Button
         sx={{
-          width: "100%",
-          color: "#fff",
+          width: "80%",
+          height: "60px",
           fontSize: "24px",
-          "&:hover": {
-            color: "#000",
+          marginTop: "20px",
+          // "&:hover": {
+          //   color: "#000",
+          // },
+          backgroundColor: "rgba(255, 255, 255,0.2)",
+          animation: "myAnimation 2s ease-in-out infinite",
+          "@keyframes myAnimation": {
+            "0%": {
+              transform: "scale(1)",
+            },
+            "50%": {
+              transform: "scale(1.2)",
+              boxShadow: "0 0 24px #ccc",
+            },
+            "100%": {
+              transform: "scale(1)",
+            },
           },
         }}
-        variant="outlined"
         onClick={() => setOpen(true)}
       >
         Start Booking Now

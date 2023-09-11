@@ -13,7 +13,7 @@ export default function AdvantageItem({
   description,
 }: IAdvatageItemProps) {
   return (
-    <Stack sx={{ textAlign: "center" }}>
+    <Stack sx={{ textAlign: "center", padding: "0 20px" }}>
       <div
         style={{
           display: "flex",

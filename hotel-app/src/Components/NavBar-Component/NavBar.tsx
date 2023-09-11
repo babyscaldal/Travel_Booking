@@ -15,11 +15,12 @@ import RegisterForm from "./Register/RegisterForm";
 import { UserState } from "../../reducers/login.reducer";
 import { useSelector } from "react-redux";
 import UserAccount from "./UserAccount/UserAccount";
-import { NavLink } from "react-router-dom";
+import { NavLink, Navigate, useNavigate } from "react-router-dom";
 
 export default function NavBar() {
   const userLogin: UserState = useSelector((state: any) => state.loginReducer);
   console.log("useLogin: ", userLogin);
+  const navigate = useNavigate();
   return (
     <React.Fragment>
       <CssBaseline />
@@ -44,7 +45,7 @@ export default function NavBar() {
 
                 {/* Logo Home */}
                 <Box sx={{ width: "50px", flexGrow: 1 }}>
-                  <NavLink to={"/homepage"}>
+                  <NavLink to={"/"}>
                     <img
                       src="../../../public/logo-black-aaabgRemoved.png"
                       // alt="logo"
@@ -59,7 +60,7 @@ export default function NavBar() {
                 <DownloadApp />
 
                 {/* Cooperate */}
-                <Button color="inherit">
+                <Button color="inherit" onClick={() => navigate("/contact")}>
                   <HandshakeOutlinedIcon
                     color="primary"
                     sx={{ mr: 0.5 }}

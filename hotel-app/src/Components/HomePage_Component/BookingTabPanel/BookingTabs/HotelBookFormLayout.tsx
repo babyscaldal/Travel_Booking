@@ -12,7 +12,7 @@ import People from "./People.tsx";
 import { IProvince } from "../../../../types/provinceType.ts";
 import { getAllHotelsByLocation } from "../../../../actions/getHotels.actions.ts";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { RootState } from "../../../../stores.ts/stores.tsx";
 
 type childAge = {
@@ -43,13 +43,11 @@ export default function HotelBookingFormLayout() {
     },
   });
 
-  const hotelsDataByLocation = useSelector(
-    (state: RootState) => state.hotelsByLocationReducer.hotelsListByLocation
-  );
-
+  // Provinces
   const provinces = useSelector(
     (state: RootState) => state.provincesReducer.listProvinces
   );
+  console.log("Provinces: ", provinces);
 
   const { control, handleSubmit, watch, setValue, reset } = form;
 
@@ -75,7 +73,7 @@ export default function HotelBookingFormLayout() {
   };
   const handleAddRoom = () => {
     const currentRoomValue = watch("room");
-    if (currentRoomValue < 40) {
+    if (currentRoomValue < 100) {
       const newRoomValue = currentRoomValue + 1;
       setValue("room", newRoomValue);
     }
@@ -106,18 +104,14 @@ export default function HotelBookingFormLayout() {
     }
   };
 
-  const { domain } = useParams<string>();
-
-  const currentSearchDomain = provinces.find(
-    (item) => provinces.length && item.domain === domain
-  );
-
   const onSubmit = (data: IBookingFormValue) => {
-    console.log(data);
+    console.log("data serach: ", data);
     data &&
       data.city &&
       dispatch(getAllHotelsByLocation(data.city.id, data.room));
-    navigate(`/accommodation/${currentSearchDomain?.domain}`);
+    const domain = data.city?.domain;
+    console.log("domain: ", domain);
+    navigate(`/accommodation/${domain}`);
     reset();
   };
 

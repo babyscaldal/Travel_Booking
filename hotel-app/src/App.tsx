@@ -9,10 +9,10 @@ import { fetchAllProvince } from "./actions/province.action";
 import styled from "styled-components";
 import { FilterFormLayOut } from "./Components/Search_Page_Component/HotelCard/FilterFormLayOut";
 import { Routes, Route, Navigate } from "react-router-dom";
-import { HomePage } from "./Pages/Homepage/HomePage";
 import { RootState } from "./stores.ts/stores";
 import { handleSearchHotelsByLocation } from "./actions/sortHotel.actions";
-import { HotelInfoPage } from "./Components/HotelInfoComponents/HotelInfoPage";
+import { HomePage } from "./pages/Homepage/HomePage";
+import Contact from "./Components/NavBar-Component/Contact/Contact";
 
 const NavBarWrapper = styled.div`
   position: fixed;
@@ -49,12 +49,22 @@ function App() {
       <Routes>
         <Route path="*" element={<Navigate to="/" />} />
         <Route path="/" element={<HomePage />} />
-        <Route path={`/accommodation/`} element={<FilterFormLayOut />}>
-          {/* <Route path=":domain" element={<FilterFormLayOut />} /> */}
-        </Route>
-        {/* <Route path={`/accommodation/:city/:number`} element={<FilterFormLayOut />} /> */}
+        <Route path={`/accommodation/:city/`} element={<FilterFormLayOut />} />
+        <Route
+          path="/accommodation/:city/:id"
+          element={
+            <h1>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Reiciendis veritatis nesciunt delectus itaque? Animi modi velit et
+              voluptatum eius labore molestias, odit dolor, error blanditiis
+              quisquam dolore, dicta totam fugit ad quas minima eveniet soluta
+              numquam a sint. In eos accusamus accusantium laboriosam sed.
+              Accusamus quam atque temporibus impedit eos.
+            </h1>
+          }
+        />
+        <Route path={"contact"} element={<Contact />} />
       </Routes>
-      <HotelInfoPage />
     </>
   );
 }

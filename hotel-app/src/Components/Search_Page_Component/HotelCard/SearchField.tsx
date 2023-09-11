@@ -5,20 +5,29 @@ import {
   Alert,
   Button,
   FormControl,
+  Box,
 } from "@mui/material";
+
 import { useSelector } from "react-redux";
 import { RootState } from "../../../stores.ts/stores";
 import { IProvince } from "../../../types/provinceType";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 
-export default function SearchField() {
+interface ISearchField {
+  onAddRoom: () => void;
+  onRemoveRoom: () => void;
+}
+
+export default function SearchField({ onAddRoom, onRemoveRoom }: ISearchField) {
   const cities = useSelector(
     (state: RootState) => state.provincesReducer.listProvinces
   );
-
   const {
     control,
     formState: { errors },
   } = useFormContext();
+
   return (
     <>
       <FormControl fullWidth>
@@ -49,6 +58,52 @@ export default function SearchField() {
             />
           )}
         />
+        <Box
+          display={"flex"}
+          justifyContent={"flex-start"}
+          alignItems={"stretch"}
+          gap={"4px"}
+          marginTop={"20px"}
+        >
+          <Button
+            onClick={() => {
+              onRemoveRoom();
+            }}
+            type="button"
+          >
+            <RemoveCircleIcon sx={{ fontSize: "24px" }} />
+          </Button>
+
+          <Controller
+            name="bookingNums"
+            control={control}
+            render={({
+              field: { value, onBlur, onChange },
+              fieldState: { error },
+            }) => (
+              <TextField
+                type="text"
+                onChange={onChange}
+                value={value}
+                helperText={error ? error?.message : null}
+                error={!!error}
+                onBlur={onBlur}
+                variant="outlined"
+                size="small"
+                label="Số phòng"
+              />
+            )}
+          />
+
+          <Button
+            onClick={() => {
+              onAddRoom();
+            }}
+            type="button"
+          >
+            <AddCircleIcon sx={{ fontSize: "24px" }} />
+          </Button>
+        </Box>
       </FormControl>
       <Button
         type="submit"
