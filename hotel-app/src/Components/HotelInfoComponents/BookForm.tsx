@@ -1,49 +1,34 @@
-import { Box, Button, Grid, MenuItem } from "@mui/material";
-import { FormProvider, useFieldArray, useForm } from "react-hook-form";
+import { Box, Button, Grid } from "@mui/material";
+import { FormProvider, useForm, useWatch } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
 import dayjs, { Dayjs } from "dayjs";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
-// import { useDispatch } from "react-redux";
-// import { useNavigate } from "react-router-dom";
 import DateRangePickerField from "../HomePage_Component/BookingTabPanel/BookingTabs/BookingFormField/DateRangePickerField";
-import { IProvince } from "../../types/provinceType";
 import People from "../HomePage_Component/BookingTabPanel/BookingTabs/People";
 import InputField from "../HomePage_Component/BookingTabPanel/BookingTabs/BookingFormField/InputField";
-import SelectField from "../HomePage_Component/BookingTabPanel/BookingTabs/BookingFormField/SelectField";
-
-type childAge = {
-  age: number;
-};
 
 export type IBookingFormValue = {
   bookingDate: Dayjs | null;
   nightNumber: string;
   adult: number;
   child: number;
+  baby: number;
   room: number;
-  childsAge: childAge[];
 };
 
 export default function HotelBookingFormLayout() {
-  // const dispatch = useDispatch();
-  // const navigate = useNavigate();
   const form = useForm<IBookingFormValue>({
     defaultValues: {
       bookingDate: [dayjs(), dayjs().add(1, "day")],
       adult: 1,
       child: 0,
+      baby: 0,
       room: 1,
-      childsAge: [] as childAge[],
     },
   });
 
   const { control, handleSubmit, watch, setValue } = form;
-
-  const { append, fields, remove } = useFieldArray({
-    name: "childsAge",
-    control,
-  });
 
   const handleAddAdult = () => {
     const currentAdultValue = watch("adult");
@@ -52,17 +37,25 @@ export default function HotelBookingFormLayout() {
       setValue("adult", newAdultValue);
     }
   };
+
   const handleAddChild = () => {
     const currentChildValue = watch("child");
-    if (currentChildValue < 6) {
+    if (currentChildValue < 100) {
       const newChildValue = currentChildValue + 1;
       setValue("child", newChildValue);
-      append({ age: 0 });
+    }
+  };
+
+  const handleAddBaby = () => {
+    const currentBabyValue = watch("baby");
+    if (currentBabyValue < 100) {
+      const newBabyValue = currentBabyValue + 1;
+      setValue("baby", newBabyValue);
     }
   };
   const handleAddRoom = () => {
     const currentRoomValue = watch("room");
-    if (currentRoomValue < 8) {
+    if (currentRoomValue < 100) {
       const newRoomValue = currentRoomValue + 1;
       setValue("room", newRoomValue);
     }
@@ -81,7 +74,14 @@ export default function HotelBookingFormLayout() {
     if (currentChildValue > 0) {
       const newChildValue = currentChildValue - 1;
       setValue("child", newChildValue);
-      remove(currentChildValue - 1);
+    }
+  };
+
+  const handleRemoveBaby = () => {
+    const currentBabyValue = watch("baby");
+    if (currentBabyValue > 0) {
+      const newBabyValue = currentBabyValue - 1;
+      setValue("baby", newBabyValue);
     }
   };
 
@@ -97,13 +97,20 @@ export default function HotelBookingFormLayout() {
     console.log(data);
   };
 
+  const watchedValues = useWatch({
+    control,
+    name: ["adult", "child", "room", "baby"],
+  });
+
+  console.log(watchedValues[0], watchedValues[1], watchedValues[2]);
+
   return (
     <FormProvider {...form}>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)} style={{ width: "100%" }}>
         <Box>
           <Grid container spacing={3} justifyContent={"center"}>
             {/* Date */}
-            <Grid item xs={6}>
+            <Grid item xs={12}>
               <Grid container spacing={2}>
                 <Grid item xs={12}>
                   <DateRangePickerField name={"bookingDate"} />
@@ -112,66 +119,15 @@ export default function HotelBookingFormLayout() {
             </Grid>
 
             {/* Adult */}
-            <Grid item xs={8}>
-              <People>
+            <Grid item xs={12}>
+              <People
+                adult={watchedValues[0]}
+                child={watchedValues[1]}
+                room={watchedValues[2]}
+                baby={watchedValues[3]}
+              >
                 <Grid container spacing={2}>
-                  <Grid item xs={4}>
-                    <Box
-                      display={"flex"}
-                      justifyContent={"flex-start"}
-                      alignItems={"stretch"}
-                      gap={"4px"}
-                    >
-                      <Button
-                        onClick={() => {
-                          handleRemoveAdult();
-                        }}
-                        type="button"
-                        variant="outlined"
-                      >
-                        <RemoveCircleIcon sx={{ fontSize: "24px" }} />
-                      </Button>
-                      <InputField name="adult" label="Người lớn" />
-                      <Button
-                        onClick={() => {
-                          handleAddAdult();
-                        }}
-                        type="button"
-                        variant="outlined"
-                      >
-                        <AddCircleIcon sx={{ fontSize: "24px" }} />
-                      </Button>
-                    </Box>
-                  </Grid>
-                  <Grid item xs={4}>
-                    <Box
-                      display={"flex"}
-                      justifyContent={"flex-start"}
-                      alignItems={"stretch"}
-                      gap={"4px"}
-                    >
-                      <Button
-                        onClick={() => {
-                          handleRemoveChild();
-                        }}
-                        type="button"
-                        variant="outlined"
-                      >
-                        <RemoveCircleIcon sx={{ fontSize: "24px" }} />
-                      </Button>
-                      <InputField name={"child"} label="Trẻ em" />
-                      <Button
-                        onClick={() => {
-                          handleAddChild();
-                        }}
-                        type="button"
-                        variant="outlined"
-                      >
-                        <AddCircleIcon sx={{ fontSize: "24px" }} />
-                      </Button>
-                    </Box>
-                  </Grid>
-                  <Grid item xs={4}>
+                  <Grid item xs={12}>
                     <Box
                       display={"flex"}
                       justifyContent={"flex-start"}
@@ -199,32 +155,105 @@ export default function HotelBookingFormLayout() {
                       </Button>
                     </Box>
                   </Grid>
-                  {fields.map((_, i) => (
-                    <Grid key={i + 1} item xs={2}>
-                      <SelectField
-                        name={`childsAge.${i}.age`}
-                        label={`Tuổi trẻ em ${i + 1}`}
+                  <Grid item xs={12}>
+                    <Box
+                      display={"flex"}
+                      justifyContent={"flex-start"}
+                      alignItems={"stretch"}
+                      gap={"4px"}
+                    >
+                      <Button
+                        onClick={() => {
+                          handleRemoveAdult();
+                        }}
+                        type="button"
+                        variant="outlined"
                       >
-                        <MenuItem value={0}>&lt; 1</MenuItem>
-                        {Array.from({ length: 17 }, (_, id) => (
-                          <MenuItem value={id + 1} key={id + 1}>
-                            {id + 1}
-                          </MenuItem>
-                        ))}
-                      </SelectField>
-                    </Grid>
-                  ))}
+                        <RemoveCircleIcon sx={{ fontSize: "24px" }} />
+                      </Button>
+                      <InputField name="adult" label="Người lớn" />
+                      <Button
+                        onClick={() => {
+                          handleAddAdult();
+                        }}
+                        type="button"
+                        variant="outlined"
+                      >
+                        <AddCircleIcon sx={{ fontSize: "24px" }} />
+                      </Button>
+                    </Box>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Box
+                      display={"flex"}
+                      justifyContent={"flex-start"}
+                      alignItems={"stretch"}
+                      gap={"4px"}
+                    >
+                      <Button
+                        onClick={() => {
+                          handleRemoveChild();
+                        }}
+                        type="button"
+                        variant="outlined"
+                      >
+                        <RemoveCircleIcon sx={{ fontSize: "24px" }} />
+                      </Button>
+                      <InputField
+                        name={"child"}
+                        label="Trẻ em độ tuổi 2 - 12"
+                      />
+                      <Button
+                        onClick={() => {
+                          handleAddChild();
+                        }}
+                        type="button"
+                        variant="outlined"
+                      >
+                        <AddCircleIcon sx={{ fontSize: "24px" }} />
+                      </Button>
+                    </Box>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Box
+                      display={"flex"}
+                      justifyContent={"flex-start"}
+                      alignItems={"stretch"}
+                      gap={"4px"}
+                    >
+                      <Button
+                        onClick={() => {
+                          handleRemoveBaby();
+                        }}
+                        type="button"
+                        variant="outlined"
+                      >
+                        <RemoveCircleIcon sx={{ fontSize: "24px" }} />
+                      </Button>
+                      <InputField name={"baby"} label="Trẻ em độ tuổi < 2" />
+                      <Button
+                        onClick={() => {
+                          handleAddBaby();
+                        }}
+                        type="button"
+                        variant="outlined"
+                      >
+                        <AddCircleIcon sx={{ fontSize: "24px" }} />
+                      </Button>
+                    </Box>
+                  </Grid>
                 </Grid>
               </People>
             </Grid>
 
             {/* Submit Btn */}
-            <Grid item xs={4} justifyContent={"center"} alignItems={"stretch"}>
+            <Grid item xs={12} justifyContent={"center"} alignItems={"stretch"}>
               <Button
                 size="large"
                 type="submit"
                 variant="contained"
                 sx={{ width: "100%", height: "48px" }}
+                color="success"
               >
                 Submit
               </Button>

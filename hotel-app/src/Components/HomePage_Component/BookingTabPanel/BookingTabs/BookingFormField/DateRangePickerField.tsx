@@ -22,7 +22,7 @@ export default function DateRangePickerField({ name }: IDateRangePickerField) {
           return (
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DateRangePicker
-                format="LL"
+                format="DD/MM/YYYY"
                 disablePast
                 value={value}
                 onChange={onChange}
@@ -31,7 +31,7 @@ export default function DateRangePickerField({ name }: IDateRangePickerField) {
                   end: "Check Out",
                 }}
                 slotProps={{
-                  fieldSeparator: { children: "To" },
+                  // fieldSeparator: { children: "To" },
                   textField: {
                     size: "small",
                     variant: "outlined",

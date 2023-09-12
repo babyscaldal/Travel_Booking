@@ -9,9 +9,20 @@ import { Box } from "@mui/material";
 
 interface IPeople {
   children: ReactNode;
+  adult: number;
+  child: number;
+  room: number;
+  baby: number;
 }
 
-export default function People({ children }: IPeople) {
+export default function People({
+  children,
+  adult,
+  child,
+  room,
+  baby,
+}: IPeople) {
+  const totalChilden = Number(child) + Number(baby);
   return (
     <div>
       <Accordion
@@ -31,7 +42,32 @@ export default function People({ children }: IPeople) {
         >
           <Box display={"flex"} gap={"15px"} alignItems={"center"}>
             <PeopleRoundedIcon sx={{ color: "primary.main" }} />
-            <Typography>Số lượng người + phòng</Typography>
+            <Typography component={"p"}>
+              <Typography
+                component={"span"}
+                variant="body1"
+                sx={{ color: "primary.main", fontWeight: "bold" }}
+              >
+                {adult}{" "}
+              </Typography>
+              người lớn,{" "}
+              <Typography
+                component={"span"}
+                variant="body1"
+                sx={{ color: "primary.main", fontWeight: "bold" }}
+              >
+                {totalChilden}
+              </Typography>{" "}
+              trẻ em,{" "}
+              <Typography
+                component={"span"}
+                variant="body1"
+                sx={{ color: "primary.main", fontWeight: "bold" }}
+              >
+                {room}{" "}
+              </Typography>{" "}
+              phòng
+            </Typography>
           </Box>
         </AccordionSummary>
         <AccordionDetails>{children}</AccordionDetails>
