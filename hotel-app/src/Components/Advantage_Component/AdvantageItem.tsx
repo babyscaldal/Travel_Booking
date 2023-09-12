@@ -1,7 +1,6 @@
-import { Stack } from "@mui/material";
-import * as React from "react";
+import styles from "../Advantage_Component/Advantage.module.css";
 
-export interface IAdvatageItemProps {
+export interface IAdvantageItemProps {
   imgSrc: string;
   title: string;
   description: string;
@@ -11,20 +10,45 @@ export default function AdvantageItem({
   imgSrc,
   title,
   description,
-}: IAdvatageItemProps) {
+}: IAdvantageItemProps) {
   return (
-    <Stack sx={{ textAlign: "center", padding: "0 20px" }}>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <img src={imgSrc} alt={title} style={{ width: 150, height: 150 }} />
+    <div
+      className={styles.flipCard}
+      style={{
+        cursor: "pointer",
+      }}
+    >
+      <div className={styles.flipCardFront}>
+        <div className={styles.inner}>
+          <img
+            src={imgSrc}
+            className={styles.icon}
+            style={{ width: 150, height: 150 }}
+          />
+
+          <h3>{title}</h3>
+
+          <p style={{ textAlign: "justify", padding: "0 10px" }}>
+            {description}
+          </p>
+        </div>
       </div>
-      <h4 style={{ margin: "48px 0 16px 0" }}>{title}</h4>
-      <p style={{ textAlign: "justify" }}>{description}</p>
-    </Stack>
+
+      <div className={styles.flipCardBack}>
+        <div className={styles.inner}>
+          <img
+            src={imgSrc}
+            className={styles.icon}
+            style={{ width: 150, height: 150 }}
+          />
+
+          <h3 style={{ textAlign: "center" }}>{title}</h3>
+
+          <p style={{ textAlign: "justify", padding: "0 10px" }}>
+            {description}
+          </p>
+        </div>
+      </div>
+    </div>
   );
 }

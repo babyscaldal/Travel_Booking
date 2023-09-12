@@ -1,12 +1,12 @@
 import { Container, Grid } from "@mui/material";
-import AdvantageItem, { IAdvatageItemProps } from "./AdvantageItem";
+import AdvantageItem, { IAdvantageItemProps } from "./AdvantageItem";
 
 import * as React from "react";
 
 export default function AdvantageContainer() {
-  const advantage: IAdvatageItemProps[] = [
+  const advantage: IAdvantageItemProps[] = [
     {
-      title: "Giải pháp tối ưu nhất",
+      title: "Giải pháp tối ưu",
       imgSrc:
         "https://ik.imagekit.io/tvlk/image/imageResource/2017/05/17/1495008495760-d92160ea2b56fc1128cbdff93aa43774.png?tr=h-150,q-75,w-150",
       description:
@@ -27,7 +27,7 @@ export default function AdvantageContainer() {
         "Giao dịch trực tuyến an toàn với nhiều lựa chọn như thanh toán tại cửa hàng tiện lợi, chuyển khoản ngân hàng, thẻ tín dụng đến Internet Banking. Không tính phí giao dịch.",
     },
     {
-      title: "Hỗ trợ khách hàng 24/7",
+      title: "Hỗ trợ khách hàng",
       imgSrc:
         "https://ik.imagekit.io/tvlk/image/imageResource/2017/05/17/1495008521046-3cee046bb3ddb863398300f89d83c0f9.png?tr=h-150,q-75,w-150",
       description:
@@ -36,7 +36,7 @@ export default function AdvantageContainer() {
   ];
   return (
     <React.Fragment>
-      <Container
+      {/* <Container
         maxWidth="lg"
         sx={{
           padding: "48px 0",
@@ -72,6 +72,41 @@ export default function AdvantageContainer() {
               }}
             >
               <AdvantageItem
+                imgSrc={item.imgSrc}
+                title={item.title}
+                description={item.description}
+              />
+            </Grid>
+          ))}
+        </Grid>
+      </Container> */}
+      <Container
+        maxWidth="lg"
+        sx={{
+          padding: "48px 0",
+        }}
+      >
+        <h2
+          style={{
+            textAlign: "center",
+
+            fontWeight: "bolder",
+
+            marginBottom: "35px",
+          }}
+        >
+          Tại sao nên đặt chỗ với TravelDream?
+        </h2>
+
+        <Grid
+          container
+          spacing={2}
+          sx={{ justifyContent: { xs: "center", md: "space-between" } }}
+        >
+          {advantage.map((item, index) => (
+            <Grid item xs={10} sm={6} md={3} key={index} marginBottom={"15px"}>
+              <AdvantageItem
+                key={item.title}
                 imgSrc={item.imgSrc}
                 title={item.title}
                 description={item.description}
