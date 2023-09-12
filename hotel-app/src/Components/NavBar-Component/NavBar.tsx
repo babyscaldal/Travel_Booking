@@ -33,15 +33,6 @@ export default function NavBar() {
             <Box>
               <Toolbar>
                 {/* Side bar */}
-                <IconButton
-                  size="large"
-                  edge="start"
-                  color="inherit"
-                  aria-label="menu"
-                  sx={{ mr: 2 }}
-                >
-                  <MenuIcon />
-                </IconButton>
 
                 {/* Logo Home */}
                 <Box sx={{ width: "50px", flexGrow: 1 }}>
@@ -55,42 +46,54 @@ export default function NavBar() {
                     />
                   </NavLink>
                 </Box>
+                <Box sx={{ display: { xs: "none", md: "flex" } }}>
+                  {/* Download app mobile */}
+                  <DownloadApp />
 
-                {/* Download app mobile */}
-                <DownloadApp />
+                  {/* Cooperate */}
+                  <Button color="inherit" onClick={() => navigate("/contact")}>
+                    <HandshakeOutlinedIcon
+                      color="primary"
+                      sx={{ mr: 0.5 }}
+                      fontSize="small"
+                    />
+                    Hợp tác
+                  </Button>
 
-                {/* Cooperate */}
-                <Button color="inherit" onClick={() => navigate("/contact")}>
-                  <HandshakeOutlinedIcon
-                    color="primary"
-                    sx={{ mr: 0.5 }}
-                    fontSize="small"
-                  />
-                  Hợp tác
-                </Button>
+                  {/* My booking */}
+                  <MyBooking />
 
-                {/* My booking */}
-                <MyBooking />
+                  <Box
+                    sx={{ display: `${userLogin.isLogin ? "none" : "flex"}` }}
+                  >
+                    {/* Login */}
+                    <LoginForm />
 
-                <Box sx={{ display: `${userLogin.isLogin ? "none" : "flex"}` }}>
-                  {/* Login */}
-                  <LoginForm />
-
-                  {/* Sign Up */}
-                  {/* <RegisterBtn /> */}
-                  <RegisterForm />
+                    {/* Sign Up */}
+                    {/* <RegisterBtn /> */}
+                    <RegisterForm />
+                  </Box>
+                  {/* Logged User */}
+                  <Box
+                    sx={{
+                      display: `${userLogin.isLogin ? "inline-block" : "none"}`,
+                    }}
+                  >
+                    <UserAccount
+                      username={userLogin.user.username}
+                      avatar={userLogin.user.image}
+                    />
+                  </Box>
                 </Box>
-                {/* Logged User */}
-                <Box
-                  sx={{
-                    display: `${userLogin.isLogin ? "inline-block" : "none"}`,
-                  }}
+                <IconButton
+                  size="large"
+                  edge="start"
+                  color="inherit"
+                  aria-label="menu"
+                  sx={{ mr: 2, display: { xs: "inline-block", md: "none" } }}
                 >
-                  <UserAccount
-                    username={userLogin.user.username}
-                    avatar={userLogin.user.image}
-                  />
-                </Box>
+                  <MenuIcon />
+                </IconButton>
               </Toolbar>
             </Box>
           </Container>

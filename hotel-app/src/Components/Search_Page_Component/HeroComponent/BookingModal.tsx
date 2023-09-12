@@ -16,9 +16,9 @@ export default function BookingModal() {
           height: "60px",
           fontSize: "24px",
           marginTop: "20px",
-          // "&:hover": {
-          //   color: "#000",
-          // },
+          "&:hover": {
+            backgroundColor: "rgba(76, 175,80,1)",
+          },
           backgroundColor: "rgba(255, 255, 255,0.2)",
           animation: "myAnimation 2s ease-in-out infinite",
           "@keyframes myAnimation": {
