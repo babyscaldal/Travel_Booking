@@ -1,9 +1,14 @@
 import { Box, Typography } from "@mui/material";
 import BookForm from "./BookForm";
+import { useSelector } from "react-redux";
+import { RootState } from "../../stores.ts/stores";
 
 export interface IHotelInfoPage {}
 
 export const HotelInfoPage = () => {
+  const selectedHotel = useSelector(
+    (state: RootState) => state.sortHotel.selectedHotel
+  );
   return (
     <Box
       border={"1px solid rgb(221, 221, 221)"}
@@ -54,7 +59,7 @@ export const HotelInfoPage = () => {
               component={"span"}
               variant="body1"
             >
-              $30
+              ${selectedHotel.price}
             </Typography>{" "}
             <Typography
               sx={{

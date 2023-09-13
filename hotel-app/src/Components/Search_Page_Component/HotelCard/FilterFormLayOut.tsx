@@ -17,7 +17,10 @@ import { useSelector } from "react-redux";
 import { IHotel } from "../../../types/hotelType";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { getAllHotelsByLocation } from "../../../actions/getHotels.actions";
+import {
+  getAllHotelsByLocation,
+  selectedHotel,
+} from "../../../actions/getHotels.actions";
 import { IProvince } from "../../../types/provinceType";
 import { Link, useNavigate } from "react-router-dom";
 import { RootState } from "../../../stores.ts/stores";
@@ -149,6 +152,11 @@ export const FilterFormLayOut = () => {
     }
   };
 
+  const handleOnClick = (selectedData: IHotel) => {
+    console.log("Selected data: ", selectedData);
+    dispatch(selectedHotel(selectedData));
+  };
+
   return (
     <Container maxWidth="lg" sx={{ paddingTop: 10 }}>
       <Grid
@@ -270,6 +278,7 @@ export const FilterFormLayOut = () => {
                         // subImgUrl={image}
                         typeAccommodation={type}
                         numberOfRoom={numberOfRoom}
+                        onClick={() => handleOnClick(renderList[index])}
                       />
                     </Link>
                   </Grid>

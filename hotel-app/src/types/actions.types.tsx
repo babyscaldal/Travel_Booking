@@ -38,4 +38,7 @@ export const actionTypes = {
 
   // Watch form value
   WATCH_FORM_VALUE: "WATCH_FORM_VALUE",
+
+  // Selected Hotel
+  SELECTED_HOTEL: "SELECTED_HOTEL",
 };

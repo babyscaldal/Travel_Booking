@@ -1,12 +1,4 @@
-import {
-  Box,
-  Button,
-  Grid,
-  List,
-  ListItem,
-  ListItemText,
-  Stack,
-} from "@mui/material";
+import { Box, Button, Grid, Stack } from "@mui/material";
 import { FormProvider, useForm, useWatch } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
 import dayjs, { Dayjs } from "dayjs";
@@ -16,9 +8,11 @@ import DateRangePickerField from "../HomePage_Component/BookingTabPanel/BookingT
 import People from "../HomePage_Component/BookingTabPanel/BookingTabs/People";
 import InputField from "../HomePage_Component/BookingTabPanel/BookingTabs/BookingFormField/InputField";
 import { Divider, Typography } from "@mui/joy";
+import { useSelector } from "react-redux";
+import { RootState } from "../../stores.ts/stores";
 
 export type IBookingFormValue = {
-  bookingDate: Dayjs | null;
+  bookingDate: Dayjs[];
   nightNumber: string;
   adult: number;
   child: number;
@@ -26,13 +20,11 @@ export type IBookingFormValue = {
   room: number;
 };
 
-const bookingRooms = 2;
-const money = 33;
-const night = 14;
-const total = bookingRooms * money * night;
-const typeOfHotel: string = "hotel";
-
 export default function BookForm() {
+  const selectedHotel = useSelector(
+    (state: RootState) => state.sortHotel.selectedHotel
+  );
+
   const form = useForm<IBookingFormValue>({
     defaultValues: {
       bookingDate: [dayjs(), dayjs().add(1, "day")],
@@ -114,10 +106,34 @@ export default function BookForm() {
 
   const watchedValues = useWatch({
     control,
-    name: ["adult", "child", "room", "baby"],
+    name: ["room", "adult", "child", "baby", "bookingDate"],
   });
 
-  console.log(watchedValues[0], watchedValues[1], watchedValues[2]);
+  console.log(
+    watchedValues[0],
+    watchedValues[1],
+    watchedValues[2],
+    watchedValues[3],
+    watchedValues[4]
+  );
+
+  const dateValue: any = watchedValues[4];
+
+  const start1 = dayjs(dateValue[0]).format("YYYY-MM-DD");
+  const end1 = dayjs(dateValue[1]).format("YYYY-MM-DD");
+
+  const dayConvert: number = 1000 * 3600 * 24;
+  const night =
+    start1 !== end1
+      ? Math.floor((Date.parse(end1) - Date.parse(start1)) / dayConvert)
+      : 1;
+
+  // console.log("Type number day: ", numberOfDate);
+
+  console.log("start: ", start1);
+  console.log("end: ", end1);
+
+  const total = watchedValues[0] * selectedHotel.price * night;
 
   return (
     <FormProvider {...form}>
@@ -135,9 +151,9 @@ export default function BookForm() {
             {/* Adult */}
             <Grid item xs={12}>
               <People
-                adult={watchedValues[0]}
-                child={watchedValues[1]}
-                room={watchedValues[2]}
+                adult={watchedValues[1]}
+                child={watchedValues[2]}
+                room={watchedValues[0]}
                 baby={watchedValues[3]}
               >
                 <Grid container spacing={2}>
@@ -261,17 +277,18 @@ export default function BookForm() {
               <span>
                 *
                 <em style={{ fontSize: "14px" }}>
-                  {typeOfHotel === "resort" && "1 phòng tối đa 12 người"}
+                  {selectedHotel.type === "resort" &&
+                    "Resort cho phép tối đa 12 người"}
                 </em>
               </span>
               <span>
                 <em style={{ fontSize: "14px" }}>
-                  {typeOfHotel === "hotel" && "1 phòng tối đa 4 người"}
+                  {selectedHotel.type === "hotel" && "1 phòng tối đa 4 người"}
                 </em>
               </span>
               <span>
                 <em style={{ fontSize: "14px" }}>
-                  {typeOfHotel === "motel" && "1 phòng tối đa 4 người"}
+                  {selectedHotel.type === "motel" && "1 phòng tối đa 4 người"}
                 </em>
               </span>
             </Grid>
@@ -309,7 +326,7 @@ export default function BookForm() {
                       textAlign: "left",
                     }}
                   >
-                    {bookingRooms} phòng
+                    {watchedValues[0]} phòng
                   </Typography>
                 </Box>
                 <Box sx={{ display: "flex", justifyContent: "space-between" }}>
@@ -325,7 +342,7 @@ export default function BookForm() {
                       textAlign: "left",
                     }}
                   >
-                    ${money}/đêm
+                    ${selectedHotel.price}/đêm
                   </Typography>
                 </Box>
                 <Box sx={{ display: "flex", justifyContent: "space-between" }}>

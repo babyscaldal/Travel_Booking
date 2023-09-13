@@ -28,3 +28,7 @@ export const getAllHotelsByLocation = (id: number, roomValue: number): any => {
     }
   };
 };
+
+export const selectedHotel = (selectedHotel: IHotel) => {
+  return { type: actionTypes.SELECTED_HOTEL, payload: selectedHotel };
+};

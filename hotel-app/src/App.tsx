@@ -11,10 +11,10 @@ import { FilterFormLayOut } from "./Components/Search_Page_Component/HotelCard/F
 import { Routes, Route, Navigate } from "react-router-dom";
 import { RootState } from "./stores.ts/stores";
 import { handleSearchHotelsByLocation } from "./actions/sortHotel.actions";
-import { HomePage } from "./Pages/Homepage/HomePage";
 import Contact from "./Components/NavBar-Component/Contact/Contact";
 import DetailPage from "./Components/DetailPage_Component/DetailePage";
 import Footer from "./Components/Footer_Component/footer/Footer";
+import { HomePage } from "./pages/Homepage/HomePage";
 
 const NavBarWrapper = styled.div`
   position: fixed;

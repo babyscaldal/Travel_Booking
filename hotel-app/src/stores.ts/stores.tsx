@@ -6,7 +6,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
 import provincesReducer from "../reducers/ProvincesReducer";
 import { IProvince } from "../types/provinceType";
-import sortHotel from "../reducers/hotelList.reducer";
+import sortHotel, { IInitHotelState } from "../reducers/hotelList.reducer";
 import { IHotel } from "../types/hotelType";
 import hotelsByLocationReducer from "../reducers/getHotels.reducer";
 
@@ -19,6 +19,7 @@ export interface RootState {
   hotelsByLocationReducer: {
     hotelsListByLocation: IHotel[];
   };
+  sortHotel: IInitHotelState;
 }
 
 const allReducers = combineReducers({

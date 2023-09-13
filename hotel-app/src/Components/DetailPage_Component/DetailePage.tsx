@@ -1,6 +1,5 @@
-import * as React from "react";
 import { IHotel } from "../../types/hotelType";
-import { Box, Container, Grid } from "@mui/material";
+import { Container, Grid } from "@mui/material";
 import { capitalizeFirstLetter } from "../../Ultiliti/CapitalizeFirstLetter";
 import IntroDialog from "./IntroDialog";
 import BedRoom from "./BedRoom";
@@ -8,8 +7,9 @@ import SpecialFeatures from "./SpecialFeatures";
 import SpecialFeaturesDialog from "./SpecialFeaturesDialog";
 import detailMap from "../../../public/detail_image/detail-map.png";
 import PlaceRules from "./PlaceRules";
-import Footer from "../Footer_Component/footer/Footer";
 import { HotelInfoPage } from "./HotelInfoPage";
+import { useSelector } from "react-redux";
+import { RootState } from "../../stores.ts/stores";
 
 const hotel: IHotel = {
   provinceId: 1,
@@ -54,12 +54,17 @@ export default function DetailPage() {
 
   const landlordsName: string =
     landlords[Math.floor(Math.random() * landlords.length)];
+
+  const selectedHotel = useSelector(
+    (state: RootState) => state.sortHotel.selectedHotel
+  );
   return (
     <>
       <Container maxWidth="lg" sx={{ paddingTop: 12 }}>
         {/* Title */}
         <h3 style={{ textAlign: "center", paddingBottom: 20 }}>
-          {capitalizeFirstLetter(hotel.type)} {hotel.name} tại {hotel.address}
+          {capitalizeFirstLetter(selectedHotel.type)} {selectedHotel.name} tại{" "}
+          {selectedHotel.address}
         </h3>
 
         {/* Image layout */}
@@ -114,12 +119,13 @@ export default function DetailPage() {
         </Grid>
 
         <Grid container spacing={2} justifyContent={"space-between"}>
+          {/* left */}
           <Grid item xs={7}>
             {/* landlords */}
             <div>
-              <h5>Chủ {hotel.type}</h5>
+              <h5>Chủ {selectedHotel.type}</h5>
               <p>
-                Anh chủ {hotel.type}{" "}
+                Anh chủ {selectedHotel.type}{" "}
                 {character[Math.floor(Math.random() * character.length)]} -{" "}
                 <span style={{ fontWeight: "bold" }}>{landlordsName}</span>
               </p>
@@ -168,7 +174,7 @@ export default function DetailPage() {
                   height={"100%"}
                   style={{ objectFit: "cover" }}
                 />
-                <p>{hotel.address}</p>
+                <p>{selectedHotel.address}</p>
               </div>
             </div>
 
@@ -177,6 +183,7 @@ export default function DetailPage() {
               <PlaceRules />
             </div>
           </Grid>
+          {/* right */}
           <Grid item xs={4.5}>
             <HotelInfoPage />
           </Grid>

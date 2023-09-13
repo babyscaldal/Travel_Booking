@@ -14,12 +14,28 @@ export interface IInitHotelState {
   locationHotelList: IHotel[];
   filterStarHotel: number[];
   filterTypeAccommodation: string[];
+  selectedHotel: IHotel;
 }
 
 const initState: IInitHotelState = {
   locationHotelList: [],
   filterStarHotel: [],
   filterTypeAccommodation: [],
+  selectedHotel: {
+    provinceId: 0,
+    location: "",
+    type: "",
+    id: 0,
+    name: "",
+    address: "",
+    rating: 0,
+    price: 0,
+    stars: 0,
+    amenities: [],
+    description: "",
+    image: [],
+    numberOfRoom: 0,
+  },
 };
 
 const sortHotel = (state = initState, action: IActionProps) => {
@@ -43,6 +59,8 @@ const sortHotel = (state = initState, action: IActionProps) => {
           .slice()
           .sort((a: IHotel, b: IHotel) => b.price - a.price),
       };
+    case actionTypes.SELECTED_HOTEL:
+      return { ...state, selectedHotel: action.payload };
 
     default:
       return state;
