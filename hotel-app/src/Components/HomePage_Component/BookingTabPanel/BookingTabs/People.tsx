@@ -1,10 +1,17 @@
 import Accordion from "@mui/material/Accordion";
+
 import AccordionSummary from "@mui/material/AccordionSummary";
+
 import AccordionDetails from "@mui/material/AccordionDetails";
+
 import Typography from "@mui/material/Typography";
+
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+
 import { ReactNode } from "react";
+
 import PeopleRoundedIcon from "@mui/icons-material/PeopleRounded";
+
 import { Box } from "@mui/material";
 
 interface IPeople {
@@ -29,7 +36,9 @@ export default function People({
         disableGutters
         sx={{
           border: "1px solid #00000033",
+
           boxShadow: "none",
+
           "&:hover": {
             border: "1px solid #00000099",
           },
@@ -70,6 +79,7 @@ export default function People({
             </Typography>
           </Box>
         </AccordionSummary>
+
         <AccordionDetails>{children}</AccordionDetails>
       </Accordion>
     </div>

@@ -1,20 +1,18 @@
-import { Box, Button, Grid, MenuItem } from "@mui/material";
-import { FormProvider, useFieldArray, useForm } from "react-hook-form";
+import { Box, Button, Grid } from "@mui/material";
+import { FormProvider, useForm } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
 import dayjs, { Dayjs } from "dayjs";
 import DateRangePickerField from "./BookingFormField/DateRangePickerField.tsx";
 import InputField from "./BookingFormField/InputField.tsx";
-import SelectField from "./BookingFormField/SelectField.tsx";
-import AddCircleIcon from "@mui/icons-material/AddCircle";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
 import CitySearchField from "./BookingFormField/CitySearchField.tsx";
-import People from "./People.tsx";
 import { IProvince } from "../../../../types/provinceType.ts";
-import { getAllHotelsByLocation } from "../../../../actions/getHotels.actions.ts";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { RootState } from "../../../../stores.ts/stores.tsx";
 import { setFormValue } from "../../../../actions/province.action.ts";
+import { getAllHotelsByLocation } from "../../../../actions/getHotels.actions.ts";
 
 type childAge = {
   age: number;
@@ -69,48 +67,11 @@ export default function HotelBookingFormLayout() {
 
   const { control, handleSubmit, watch, setValue, reset } = form;
 
-  const { append, fields, remove } = useFieldArray({
-    name: "childsAge",
-    control,
-  });
-
-  const handleAddAdult = () => {
-    const currentAdultValue = watch("adult");
-    if (currentAdultValue < 30) {
-      const newAdultValue = currentAdultValue + 1;
-      setValue("adult", newAdultValue);
-    }
-  };
-  const handleAddChild = () => {
-    const currentChildValue = watch("child");
-    if (currentChildValue < 6) {
-      const newChildValue = currentChildValue + 1;
-      setValue("child", newChildValue);
-      append({ age: 0 });
-    }
-  };
   const handleAddRoom = () => {
     const currentRoomValue = watch("room");
     if (currentRoomValue < 100) {
       const newRoomValue = currentRoomValue + 1;
       setValue("room", newRoomValue);
-    }
-  };
-
-  const handleRemoveAdult = () => {
-    const currentAdultValue = watch("adult");
-    if (currentAdultValue > 1) {
-      const newAdultValue = currentAdultValue - 1;
-      setValue("adult", newAdultValue);
-    }
-  };
-
-  const handleRemoveChild = () => {
-    const currentChildValue = watch("child");
-    if (currentChildValue > 0) {
-      const newChildValue = currentChildValue - 1;
-      setValue("child", newChildValue);
-      remove(currentChildValue - 1);
     }
   };
 
@@ -153,115 +114,38 @@ export default function HotelBookingFormLayout() {
               </Grid>
             </Grid>
 
-            {/* Adult */}
-            <Grid item xs={8}>
-              <People adult={0} child={0} room={0} baby={0}>
-                <Grid container spacing={2}>
-                  <Grid item xs={4}>
-                    <Box
-                      display={"flex"}
-                      justifyContent={"flex-start"}
-                      alignItems={"stretch"}
-                      gap={"4px"}
-                    >
-                      <Button
-                        onClick={() => {
-                          handleRemoveAdult();
-                        }}
-                        type="button"
-                        variant="outlined"
-                      >
-                        <RemoveCircleIcon sx={{ fontSize: "24px" }} />
-                      </Button>
-                      <InputField name="adult" label="Người lớn" />
-                      <Button
-                        onClick={() => {
-                          handleAddAdult();
-                        }}
-                        type="button"
-                        variant="outlined"
-                      >
-                        <AddCircleIcon sx={{ fontSize: "24px" }} />
-                      </Button>
-                    </Box>
-                  </Grid>
-                  <Grid item xs={4}>
-                    <Box
-                      display={"flex"}
-                      justifyContent={"flex-start"}
-                      alignItems={"stretch"}
-                      gap={"4px"}
-                    >
-                      <Button
-                        onClick={() => {
-                          handleRemoveChild();
-                        }}
-                        type="button"
-                        variant="outlined"
-                      >
-                        <RemoveCircleIcon sx={{ fontSize: "24px" }} />
-                      </Button>
-                      <InputField name={"child"} label="Trẻ em" />
-                      <Button
-                        onClick={() => {
-                          handleAddChild();
-                        }}
-                        type="button"
-                        variant="outlined"
-                      >
-                        <AddCircleIcon sx={{ fontSize: "24px" }} />
-                      </Button>
-                    </Box>
-                  </Grid>
-                  <Grid item xs={4}>
-                    <Box
-                      display={"flex"}
-                      justifyContent={"flex-start"}
-                      alignItems={"stretch"}
-                      gap={"4px"}
-                    >
-                      <Button
-                        onClick={() => {
-                          handleRemoveRoom();
-                        }}
-                        type="button"
-                        variant="outlined"
-                      >
-                        <RemoveCircleIcon sx={{ fontSize: "24px" }} />
-                      </Button>
-                      <InputField name="room" label="Số phòng" />
-                      <Button
-                        onClick={() => {
-                          handleAddRoom();
-                        }}
-                        type="button"
-                        variant="outlined"
-                      >
-                        <AddCircleIcon sx={{ fontSize: "24px" }} />
-                      </Button>
-                    </Box>
-                  </Grid>
-                  {fields.map((_, i) => (
-                    <Grid key={i + 1} item xs={2}>
-                      <SelectField
-                        name={`childsAge.${i}.age`}
-                        label={`Tuổi trẻ em ${i + 1}`}
-                      >
-                        <MenuItem value={0}>&lt; 1</MenuItem>
-                        {Array.from({ length: 17 }, (_, id) => (
-                          <MenuItem value={id + 1} key={id + 1}>
-                            {id + 1}
-                          </MenuItem>
-                        ))}
-                      </SelectField>
-                    </Grid>
-                  ))}
-                </Grid>
-              </People>
+            {/* Rooms */}
+            <Grid item xs={6}>
+              <Box
+                display={"flex"}
+                justifyContent={"flex-start"}
+                alignItems={"stretch"}
+                gap={"4px"}
+              >
+                <Button
+                  onClick={() => {
+                    handleRemoveRoom();
+                  }}
+                  type="button"
+                  variant="outlined"
+                >
+                  <RemoveCircleIcon sx={{ fontSize: "24px" }} />
+                </Button>
+                <InputField name="room" label="Số phòng" />
+                <Button
+                  onClick={() => {
+                    handleAddRoom();
+                  }}
+                  type="button"
+                  variant="outlined"
+                >
+                  <AddCircleIcon sx={{ fontSize: "24px" }} />
+                </Button>
+              </Box>
             </Grid>
 
             {/* Submit Btn */}
-            <Grid item xs={4} justifyContent={"center"} alignItems={"stretch"}>
+            <Grid item xs={6} justifyContent={"center"} alignItems={"stretch"}>
               <Button
                 size="large"
                 type="submit"

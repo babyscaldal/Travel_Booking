@@ -1,7 +1,7 @@
 import { Box } from "@mui/system";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { CssBaseline, Typography, Grid, Container } from "@mui/material";
+import { CssBaseline } from "@mui/material";
 import NavBar from "./Components/NavBar-Component/NavBar";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,11 +13,8 @@ import { RootState } from "./stores.ts/stores";
 import { handleSearchHotelsByLocation } from "./actions/sortHotel.actions";
 import { HomePage } from "./Pages/Homepage/HomePage";
 import Contact from "./Components/NavBar-Component/Contact/Contact";
-import { HotelCard } from "./Components/Search_Page_Component/HotelCard/HotelCard";
-import { createTheme } from "@mui/material/styles";
-import { HotelInfoPage } from "./Components/HotelInfoComponents/HotelInfoPage";
-
-const defaultTheme = createTheme();
+import DetailPage from "./Components/DetailPage_Component/DetailePage";
+import Footer from "./Components/Footer_Component/footer/Footer";
 
 const NavBarWrapper = styled.div`
   position: fixed;
@@ -55,21 +52,10 @@ function App() {
         <Route path="*" element={<Navigate to="/" />} />
         <Route path="/" element={<HomePage />} />
         <Route path={`/accommodation/:city/`} element={<FilterFormLayOut />} />
-        <Route
-          path="/accommodation/:city/:id"
-          element={
-            <h1>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Reiciendis veritatis nesciunt delectus itaque? Animi modi velit et
-              voluptatum eius labore molestias, odit dolor, error blanditiis
-              quisquam dolore, dicta totam fugit ad quas minima eveniet soluta
-              numquam a sint. In eos accusamus accusantium laboriosam sed.
-              Accusamus quam atque temporibus impedit eos.
-            </h1>
-          }
-        />
+        <Route path={"/accommodation/:city/:id"} element={<DetailPage />} />
         <Route path={"contact"} element={<Contact />} />
       </Routes>
+      <Footer />
     </>
   );
 }
