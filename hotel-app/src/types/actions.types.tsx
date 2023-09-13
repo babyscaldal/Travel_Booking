@@ -35,4 +35,7 @@ export const actionTypes = {
 
   // Reset filter
   RESET_FILTER: "RESET_FILTER",
+
+  // Watch form value
+  WATCH_FORM_VALUE: "WATCH_FORM_VALUE",
 };

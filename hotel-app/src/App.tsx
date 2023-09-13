@@ -11,9 +11,13 @@ import { FilterFormLayOut } from "./Components/Search_Page_Component/HotelCard/F
 import { Routes, Route, Navigate } from "react-router-dom";
 import { RootState } from "./stores.ts/stores";
 import { handleSearchHotelsByLocation } from "./actions/sortHotel.actions";
-import { HomePage } from "./pages/Homepage/HomePage";
+import { HomePage } from "./Pages/Homepage/HomePage";
 import Contact from "./Components/NavBar-Component/Contact/Contact";
+import { HotelCard } from "./Components/Search_Page_Component/HotelCard/HotelCard";
+import { createTheme } from "@mui/material/styles";
 import { HotelInfoPage } from "./Components/HotelInfoComponents/HotelInfoPage";
+
+const defaultTheme = createTheme();
 
 const NavBarWrapper = styled.div`
   position: fixed;
@@ -41,7 +45,7 @@ function App() {
 
   return (
     <>
-      {/* <Box>
+      <Box>
         <CssBaseline />
         <NavBarWrapper>
           <NavBar />
@@ -65,24 +69,12 @@ function App() {
           }
         />
         <Route path={"contact"} element={<Contact />} />
-      </Routes> */}
-      <div style={{ marginBottom: "200px" }}></div>
+      </Routes>
       <Container maxWidth="lg">
         <Grid container>
-          <Grid item xs={4}></Grid>
           <Grid item xs={4.5}>
-            <Box
-              border={"1px solid rgb(221, 221, 221)"}
-              boxShadow="0 4px 12px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"
-              sx={{
-                borderRadius: "12px",
-                // minWidth: "382px",
-              }}
-            >
-              <HotelInfoPage />
-            </Box>
+            <HotelInfoPage />
           </Grid>
-          <Grid item xs={4}></Grid>
         </Grid>
       </Container>
     </>

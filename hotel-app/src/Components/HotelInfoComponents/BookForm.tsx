@@ -1,4 +1,12 @@
-import { Box, Button, Grid } from "@mui/material";
+import {
+  Box,
+  Button,
+  Grid,
+  List,
+  ListItem,
+  ListItemText,
+  Stack,
+} from "@mui/material";
 import { FormProvider, useForm, useWatch } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
 import dayjs, { Dayjs } from "dayjs";
@@ -7,6 +15,7 @@ import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import DateRangePickerField from "../HomePage_Component/BookingTabPanel/BookingTabs/BookingFormField/DateRangePickerField";
 import People from "../HomePage_Component/BookingTabPanel/BookingTabs/People";
 import InputField from "../HomePage_Component/BookingTabPanel/BookingTabs/BookingFormField/InputField";
+import { Divider, Typography } from "@mui/joy";
 
 export type IBookingFormValue = {
   bookingDate: Dayjs | null;
@@ -16,6 +25,21 @@ export type IBookingFormValue = {
   baby: number;
   room: number;
 };
+
+const style = {
+  width: "100%",
+  maxWidth: 360,
+  bgcolor: "background.paper",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "space-between",
+};
+
+const bookingRooms = 2;
+const money = 33;
+const night = 14;
+const total = bookingRooms * money * night;
+const typeOfHotel: string = "hotel";
 
 export default function HotelBookingFormLayout() {
   const form = useForm<IBookingFormValue>({
@@ -108,7 +132,7 @@ export default function HotelBookingFormLayout() {
     <FormProvider {...form}>
       <form onSubmit={handleSubmit(onSubmit)} style={{ width: "100%" }}>
         <Box>
-          <Grid container spacing={3} justifyContent={"center"}>
+          <Grid container spacing={2} justifyContent={"center"}>
             {/* Date */}
             <Grid item xs={12}>
               <Grid container spacing={2}>
@@ -117,7 +141,6 @@ export default function HotelBookingFormLayout() {
                 </Grid>
               </Grid>
             </Grid>
-
             {/* Adult */}
             <Grid item xs={12}>
               <People
@@ -244,19 +267,133 @@ export default function HotelBookingFormLayout() {
                   </Grid>
                 </Grid>
               </People>
+              <span>
+                *
+                <em style={{ fontSize: "14px" }}>
+                  {typeOfHotel === "resort" && "1 phòng tối đa 12 người"}
+                </em>
+              </span>
+              <span>
+                <em style={{ fontSize: "14px" }}>
+                  {typeOfHotel === "hotel" && "1 phòng tối đa 4 người"}
+                </em>
+              </span>
+              <span>
+                <em style={{ fontSize: "14px" }}>
+                  {typeOfHotel === "motel" && "1 phòng tối đa 4 người"}
+                </em>
+              </span>
             </Grid>
 
-            {/* Submit Btn */}
             <Grid item xs={12} justifyContent={"center"} alignItems={"stretch"}>
               <Button
                 size="large"
                 type="submit"
                 variant="contained"
-                sx={{ width: "100%", height: "48px" }}
+                sx={{ width: "100%", height: "40px" }}
                 color="success"
               >
-                Submit
+                Đặt phòng
               </Button>
+            </Grid>
+            <Grid item xs={12}>
+              <Divider
+                sx={{
+                  backgroundColor: "#000",
+                  height: "2px",
+                  marginBottom: "16px",
+                }}
+              />
+              <Stack spacing={2}>
+                <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                  <Typography
+                    sx={{
+                      textAlign: "left",
+                    }}
+                  >
+                    🏠 Số phòng đặt:
+                  </Typography>
+                  <Typography
+                    sx={{
+                      textAlign: "left",
+                    }}
+                  >
+                    {bookingRooms} phòng
+                  </Typography>
+                </Box>
+                <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                  <Typography
+                    sx={{
+                      textAlign: "left",
+                    }}
+                  >
+                    💸 Giá mỗi phòng:
+                  </Typography>
+                  <Typography
+                    sx={{
+                      textAlign: "left",
+                    }}
+                  >
+                    ${money}/đêm
+                  </Typography>
+                </Box>
+                <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                  <Typography
+                    sx={{
+                      textAlign: "left",
+                    }}
+                  >
+                    🕐 Số đêm muốn đặt:
+                  </Typography>
+                  <Typography
+                    sx={{
+                      textAlign: "left",
+                    }}
+                  >
+                    {night} đêm
+                  </Typography>
+                </Box>
+                <Divider sx={{ backgroundColor: "#000", height: "2px" }} />
+                <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                  <Typography
+                    sx={{
+                      textAlign: "right",
+                    }}
+                  >
+                    🤑 Total
+                  </Typography>
+                  <Typography
+                    sx={{
+                      fontWeight: "bold",
+                      textAlign: "right",
+                      color: "red",
+                    }}
+                  >
+                    ${total}
+                  </Typography>
+                </Box>
+              </Stack>
+
+              {/* <Typography variant="body1" color="initial">
+                      $33 x 14 đêm
+                    </Typography>
+                    <Typography variant="body1" color="initial">
+                      $465
+                    </Typography> */}
+              {/* <Typography variant="body1" color="initial">
+                      $33 x 14 đêm
+                    </Typography>
+                    <Typography variant="body1" color="initial">
+                      $465
+                    </Typography> */}
+              {/* <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                <Typography variant="body1" color="initial">
+                  $33 x 14 đêm
+                </Typography>
+                <Typography variant="body1" color="initial">
+                  $465
+                </Typography>
+              </Box> */}
             </Grid>
           </Grid>
         </Box>

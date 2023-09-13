@@ -34,3 +34,13 @@ export const fetchAllProvince = (): any => {
     }
   };
 };
+
+// Set_Form_Value_After_Click_Picture
+
+export const setFormValue = (data: IProvince) => {
+  console.log("formValue action:", data);
+  return {
+    type: actionTypes.WATCH_FORM_VALUE,
+    payload: data,
+  };
+};

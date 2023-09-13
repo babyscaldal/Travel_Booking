@@ -6,19 +6,12 @@ import {
   Divider,
   Grid,
 } from "@mui/material";
-
 import map from "../../../assets/map.png";
-
 import { RadioField } from "./RadioField";
-
 import { FormProvider, useForm } from "react-hook-form";
-
 import FilterSubMenu from "./FilterSubMenu";
-
 import { DevTool } from "@hookform/devtools";
-
 import SearchField from "./SearchField";
-
 import { HotelCard } from "./HotelCard";
 import { useSelector } from "react-redux";
 import { IHotel } from "../../../types/hotelType";
@@ -27,6 +20,7 @@ import { useDispatch } from "react-redux";
 import { getAllHotelsByLocation } from "../../../actions/getHotels.actions";
 import { IProvince } from "../../../types/provinceType";
 import { Link, useNavigate } from "react-router-dom";
+import { RootState } from "../../../stores.ts/stores";
 export interface IFilterFormValue {
   radio: string;
   city: IProvince | null;
@@ -36,16 +30,34 @@ export interface IFilterFormValue {
 
 export const FilterFormLayOut = () => {
   const navigate = useNavigate();
+
+  const selectedProvince: IProvince = useSelector(
+    (state: RootState) => state.provincesReducer.selectedProvince
+  );
+
+  console.log(selectedProvince);
+
   const form = useForm<IFilterFormValue>({
     defaultValues: {
       radio: "1",
-      city: null,
+      city: Object.keys(selectedProvince).length
+        ? selectedProvince
+        : {
+            domain: "hanoi",
+            id: 1,
+            image:
+              "https://ik.imagekit.io/tvlk/mchitm/imageResource/template/304/vi_VN/2023/08/25/e75b05f4-bd30-3060-9e83-1a49acbfeed0?tr=w-256",
+            name: "Hà Nội",
+            picture:
+              "https://ik.imagekit.io/tvlk/image/imageResource/2022/12/13/1670914149934-a914657087e8c5f1a01724d92eb3f7b9.jpeg?tr=q-75,w-320",
+            slogan: "Vùng đất của những bí ẩn và huyền thoại sâu thẳm.",
+          },
       room: 1,
       bookingNums: 1,
     },
   });
 
-  const { handleSubmit, control, reset, setValue, watch } = form;
+  const { handleSubmit, control, setValue, watch } = form;
 
   const sortHotel: IHotel[] = useSelector(
     (state: any) => state.sortHotel.locationHotelList
@@ -86,7 +98,6 @@ export const FilterFormLayOut = () => {
     }
 
     // by type accommodation
-
     if (!starsValue.length) {
       const newHotelList: IHotel[] = sortHotel.filter((item) =>
         accommodationValue.includes(item.type)
@@ -110,10 +121,6 @@ export const FilterFormLayOut = () => {
   }, [check, starsValue, accommodationValue]);
 
   const dispatch = useDispatch();
-
-  // const { domain } = useParams<string>();
-
-  // const currentSearchDomain = provinces.find((item) => item.domain === domain);
 
   const onSubmit = (data: IFilterFormValue) => {
     console.log(data);
@@ -203,7 +210,10 @@ export const FilterFormLayOut = () => {
               <Typography
                 variant="body1"
                 color="initial"
-                sx={{ textIndent: "10px", fontWeight: "bold" }}
+                style={{
+                  textIndent: "10px",
+                  fontWeight: "bold",
+                }}
               >
                 Tìm thấy{" "}
                 <span style={{ color: "red" }}>{renderList.length}</span> kết
@@ -224,7 +234,7 @@ export const FilterFormLayOut = () => {
                   stars,
                   rating,
                   price,
-                  image,
+                  // image,
                   type,
                   numberOfRoom,
                   id,
@@ -256,8 +266,8 @@ export const FilterFormLayOut = () => {
                         star={stars}
                         rating={rating}
                         price={price}
-                        imgUrl={image[0]}
-                        subImgUrl={image[1]}
+                        // imgUrl={image}
+                        // subImgUrl={image}
                         typeAccommodation={type}
                         numberOfRoom={numberOfRoom}
                       />

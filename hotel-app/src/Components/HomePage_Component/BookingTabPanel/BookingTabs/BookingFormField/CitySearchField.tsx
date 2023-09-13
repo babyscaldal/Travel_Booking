@@ -1,12 +1,5 @@
 import { Controller, useFormContext } from "react-hook-form";
-import LocationOnRoundedIcon from "@mui/icons-material/LocationOnRounded";
-import {
-  Autocomplete,
-  TextField,
-  InputAdornment,
-  FormControl,
-  Alert,
-} from "@mui/material";
+import { Autocomplete, TextField, FormControl, Alert } from "@mui/material";
 import { IProvince } from "../../../../../types/provinceType";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../../stores.ts/stores";
@@ -16,12 +9,11 @@ export default function CitySearchField() {
     (state: RootState) => state.provincesReducer.listProvinces
   );
 
-  console.log(cities);
-
   const {
     control,
     formState: { errors },
   } = useFormContext();
+
   return (
     <FormControl fullWidth>
       <Controller
@@ -31,11 +23,9 @@ export default function CitySearchField() {
         render={({ field: { onChange, value } }) => (
           <>
             <Autocomplete
+              autoSelect
               autoHighlight
               autoComplete
-              // value={
-              //   value ? cities.find((city) => city.id === value.id) ?? null : null
-              // }
               value={value}
               options={cities}
               getOptionLabel={(city: IProvince) => city.name}
@@ -46,17 +36,9 @@ export default function CitySearchField() {
                   {...params}
                   label={"Thành phố, địa điểm:"}
                   variant="outlined"
-                  InputProps={{
-                    ...params.InputProps,
-                    type: "search",
-                    endAdornment: (
-                      <InputAdornment position="start">
-                        <LocationOnRoundedIcon sx={{ color: "primary.main" }} />
-                      </InputAdornment>
-                    ),
-                  }}
                   error={!!errors.city}
                   size="small"
+                  autoComplete="off"
                 />
               )}
             />

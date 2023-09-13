@@ -14,6 +14,7 @@ export interface RootState {
   loginReducer: any;
   provincesReducer: {
     listProvinces: IProvince[];
+    selectedProvince: IProvince;
   };
   hotelsByLocationReducer: {
     hotelsListByLocation: IHotel[];

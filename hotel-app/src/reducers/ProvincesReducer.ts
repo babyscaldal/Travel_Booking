@@ -8,9 +8,11 @@ export interface IAction {
 
 const INITIAL_STATE = {
   listProvinces: [],
+  selectedProvince: {} as IProvince,
 };
 
 const provincesReducer = (state = INITIAL_STATE, action: IAction) => {
+  // console.log(action.payload);
   switch (action.type) {
     case actionTypes.GET_PROVINCE_REQUEST:
       // console.log("FETCH_USERS_REQUEST:", action);
@@ -36,6 +38,13 @@ const provincesReducer = (state = INITIAL_STATE, action: IAction) => {
         ...state,
         isLoading: false,
         isError: true,
+      };
+
+    case actionTypes.WATCH_FORM_VALUE:
+      console.log("Tao đã Set lại value:", action);
+      return {
+        ...state,
+        selectedProvince: { ...action.payload },
       };
 
     default:

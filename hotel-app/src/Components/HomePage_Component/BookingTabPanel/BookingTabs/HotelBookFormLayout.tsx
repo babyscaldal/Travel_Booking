@@ -14,6 +14,7 @@ import { getAllHotelsByLocation } from "../../../../actions/getHotels.actions.ts
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { RootState } from "../../../../stores.ts/stores.tsx";
+import { setFormValue } from "../../../../actions/province.action.ts";
 
 type childAge = {
   age: number;
@@ -31,10 +32,27 @@ export type IBookingFormValue = {
 
 export default function HotelBookingFormLayout() {
   const dispatch = useDispatch();
+
   const navigate = useNavigate();
+
+  const selectedProvince: IProvince = useSelector(
+    (state: RootState) => state.provincesReducer.selectedProvince
+  );
+
   const form = useForm<IBookingFormValue>({
     defaultValues: {
-      city: null,
+      city: Object.keys(selectedProvince).length
+        ? selectedProvince
+        : {
+            domain: "hanoi",
+            id: 1,
+            image:
+              "https://ik.imagekit.io/tvlk/mchitm/imageResource/template/304/vi_VN/2023/08/25/e75b05f4-bd30-3060-9e83-1a49acbfeed0?tr=w-256",
+            name: "Hà Nội",
+            picture:
+              "https://ik.imagekit.io/tvlk/image/imageResource/2022/12/13/1670914149934-a914657087e8c5f1a01724d92eb3f7b9.jpeg?tr=q-75,w-320",
+            slogan: "Vùng đất của những bí ẩn và huyền thoại sâu thẳm.",
+          },
       bookingDate: [dayjs(), dayjs().add(1, "day")],
       adult: 1,
       child: 0,
@@ -109,6 +127,7 @@ export default function HotelBookingFormLayout() {
     data &&
       data.city &&
       dispatch(getAllHotelsByLocation(data.city.id, data.room));
+    data && data.city && dispatch(setFormValue(data.city));
     const domain = data.city?.domain;
     console.log("domain: ", domain);
     navigate(`/accommodation/${domain}`);
@@ -136,7 +155,7 @@ export default function HotelBookingFormLayout() {
 
             {/* Adult */}
             <Grid item xs={8}>
-              <People>
+              <People adult={0} child={0} room={0} baby={0}>
                 <Grid container spacing={2}>
                   <Grid item xs={4}>
                     <Box

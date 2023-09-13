@@ -1,4 +1,3 @@
-import React from "react";
 import Slider from "react-slick";
 import PictureComponent from "./PictureComponent";
 import { useSelector } from "react-redux";
@@ -8,6 +7,7 @@ import { IProvince } from "../../types/provinceType";
 import { useDispatch } from "react-redux";
 import { getAllHotelsByLocation } from "../../actions/getHotels.actions";
 import { useNavigate } from "react-router-dom";
+import { setFormValue } from "../../actions/province.action";
 
 const MySlider: React.FC = () => {
   const settings = {
@@ -62,11 +62,22 @@ const MySlider: React.FC = () => {
   // handle search
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const handleOnClick = (id: number, bookingNums: number, domain: string) => {
-    // alert("onClick");
+
+  const handleOnClick = (
+    id: number,
+    bookingNums: number,
+    domain: string,
+    selectedProvince: IProvince
+  ) => {
+    console.log("selectedProvince: ", selectedProvince);
     dispatch(getAllHotelsByLocation(id, bookingNums));
+    dispatch(setFormValue(selectedProvince));
     navigate(`/accommodation/${domain}`);
   };
+
+  // useEffect(() => {
+  //   dispatch(setFormValue(selectedProvince));
+  // }, [selectedProvince]);
 
   return (
     <Box
@@ -84,7 +95,9 @@ const MySlider: React.FC = () => {
             <PictureComponent
               key={province.name}
               url={province.image}
-              onClick={() => handleOnClick(province.id, 0, province.domain)}
+              onClick={() =>
+                handleOnClick(province.id, 0, province.domain, province)
+              }
             />
           ))}
         </Slider>
