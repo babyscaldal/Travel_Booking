@@ -13,6 +13,8 @@ import { RootState } from "./stores.ts/stores";
 import { handleSearchHotelsByLocation } from "./actions/sortHotel.actions";
 import { HomePage } from "./pages/Homepage/HomePage";
 import Contact from "./Components/NavBar-Component/Contact/Contact";
+import DetailPage from "./Components/DetailPage_Component/DetailePage";
+import Footer from "./Components/Footer_Component/footer/Footer";
 
 const NavBarWrapper = styled.div`
   position: fixed;
@@ -50,21 +52,10 @@ function App() {
         <Route path="*" element={<Navigate to="/" />} />
         <Route path="/" element={<HomePage />} />
         <Route path={`/accommodation/:city/`} element={<FilterFormLayOut />} />
-        <Route
-          path="/accommodation/:city/:id"
-          element={
-            <h1>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Reiciendis veritatis nesciunt delectus itaque? Animi modi velit et
-              voluptatum eius labore molestias, odit dolor, error blanditiis
-              quisquam dolore, dicta totam fugit ad quas minima eveniet soluta
-              numquam a sint. In eos accusamus accusantium laboriosam sed.
-              Accusamus quam atque temporibus impedit eos.
-            </h1>
-          }
-        />
+        <Route path={"/accommodation/:city/:id"} element={<DetailPage />} />
         <Route path={"contact"} element={<Contact />} />
       </Routes>
+      <Footer />
     </>
   );
 }

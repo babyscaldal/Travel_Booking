@@ -11,7 +11,6 @@ export const HomePage = () => {
         <ControlledCarousel />
         <MySlider />
         <AdvantageContainer />
-        <Footer />
       </Box>
     </>
   );

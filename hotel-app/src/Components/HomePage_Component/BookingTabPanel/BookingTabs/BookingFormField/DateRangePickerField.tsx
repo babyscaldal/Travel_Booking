@@ -22,7 +22,7 @@ export default function DateRangePickerField({ name }: IDateRangePickerField) {
           return (
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DateRangePicker
-                format="LL"
+                format="DD/MM/YYYY"
                 disablePast
                 value={value}
                 onChange={onChange}

@@ -1,15 +1,18 @@
+import { url } from "inspector";
 import styles from "../Advantage_Component/Advantage.module.css";
 
 export interface IAdvantageItemProps {
   imgSrc: string;
   title: string;
   description: string;
+  bgImage: string;
 }
 
 export default function AdvantageItem({
   imgSrc,
   title,
   description,
+  bgImage,
 }: IAdvantageItemProps) {
   return (
     <div
@@ -18,7 +21,10 @@ export default function AdvantageItem({
         cursor: "pointer",
       }}
     >
-      <div className={styles.flipCardFront}>
+      <div
+        className={styles.flipCardFront}
+        style={{ backgroundImage: `url(${bgImage})` }}
+      >
         <div className={styles.inner}>
           <img
             src={imgSrc}
@@ -34,7 +40,10 @@ export default function AdvantageItem({
         </div>
       </div>
 
-      <div className={styles.flipCardBack}>
+      <div
+        className={styles.flipCardBack}
+        style={{ backgroundImage: `url(${bgImage})` }}
+      >
         <div className={styles.inner}>
           <img
             src={imgSrc}

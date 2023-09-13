@@ -5,7 +5,7 @@ interface IPictureComponent {
   url: string;
   width?: string;
   height?: string;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 export default function PictureComponent({
@@ -26,8 +26,6 @@ export default function PictureComponent({
         height: { height },
         width: { width },
         margin: "auto",
-        boxShadow:
-          "0 4px 12px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
       }}
     >
       <CardCover>

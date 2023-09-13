@@ -1,51 +1,25 @@
 .flipCard {
   position: relative;
-
   transform-style: preserve-3d;
-
   perspective: 1000px;
 }
 
 .flipCardFront,
 .flipCardBack {
   width: 100%;
-
   min-height: 450px;
-
   height: auto;
-
   border-radius: 15px;
-
   background-color: #000000;
 
-  background-image: url("../../../public/advantageImage/1.jpg");
+  /* background-image: url("../../../public/advantageImage/1.jpg"); */
 
   background-size: cover;
-
   background-position: center;
-
   text-align: center;
-
   backface-visibility: hidden;
-
   transform-style: preserve-3d;
-
   transition: transform 0.8s cubic-bezier(0.4, 0.2, 0.2, 1);
-}
-
-.flipCard:nth-of-type(2) .flipCardFront,
-.flipCard:nth-of-type(2) .flipCardBack {
-  background-image: url("../../../public/advantageImage/2.jpg");
-}
-
-.flipCard:nth-of-type(3) .flipCardFront,
-.flipCard:nth-of-type(3) .flipCardBack {
-  background-image: url("../../../public/advantageImage/3.jpg");
-}
-
-.flipCard:nth-of-type(4) .flipCardFront,
-.flipCard:nth-of-type(4) .flipCardBack {
-  background-image: url("../../../public/advantageImage/4.jpg");
 }
 
 .flipCardFront {
