@@ -5,6 +5,8 @@ import {
   Typography,
   Divider,
   Grid,
+  TablePagination,
+  Pagination,
 } from "@mui/material";
 import map from "../../../assets/map.png";
 import { RadioField } from "./RadioField";
@@ -157,6 +159,25 @@ export const FilterFormLayOut = () => {
     dispatch(selectedHotel(selectedData));
   };
 
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+
+  const handleChangePage = (event: unknown, newPage: number) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
+
+  // const [page, setPage] = useState(1);
+  // const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+  //   setPage(value);
+  // };
+
   return (
     <Container maxWidth="lg" sx={{ paddingTop: 10 }}>
       <Grid
@@ -234,60 +255,73 @@ export const FilterFormLayOut = () => {
 
             {/* Map */}
 
-            {renderList.map(
-              (
-                {
-                  name,
-                  address,
-                  stars,
-                  rating,
-                  price,
-                  // image,
-                  type,
-                  numberOfRoom,
-                  id,
-                },
+            {renderList
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map(
+                (
+                  {
+                    name,
+                    address,
+                    stars,
+                    rating,
+                    price,
+                    // image,
+                    type,
+                    numberOfRoom,
+                    id,
+                  },
 
-                index
-              ) => {
-                return (
-                  <Grid
-                    key={index}
-                    item
-                    xs={12}
-                    md={6}
-                    lg={4}
-                    sx={{
-                      margin: "auto",
-                      marginBottom: "15px",
-                      transition: "all 0.25s",
-                      "&:hover": {
-                        cursor: "pointer",
-                        transform: "translateY(-15px)",
-                      },
-                    }}
-                  >
-                    <Link to={String(id)} style={{ textDecoration: "none" }}>
-                      <HotelCard
-                        address={address}
-                        name={name}
-                        star={stars}
-                        rating={rating}
-                        price={price}
-                        // imgUrl={image}
-                        // subImgUrl={image}
-                        typeAccommodation={type}
-                        numberOfRoom={numberOfRoom}
-                        onClick={() => handleOnClick(renderList[index])}
-                      />
-                    </Link>
-                  </Grid>
-                );
-              }
-            )}
+                  index
+                ) => {
+                  return (
+                    <Grid
+                      key={index}
+                      item
+                      xs={12}
+                      md={6}
+                      lg={4}
+                      sx={{
+                        margin: "auto",
+                        marginBottom: "15px",
+                        transition: "all 0.25s",
+                        "&:hover": {
+                          cursor: "pointer",
+                          transform: "translateY(-15px)",
+                        },
+                      }}
+                    >
+                      <Link to={String(id)} style={{ textDecoration: "none" }}>
+                        <HotelCard
+                          address={address}
+                          name={name}
+                          star={stars}
+                          rating={rating}
+                          price={price}
+                          // imgUrl={image}
+                          // subImgUrl={image}
+                          typeAccommodation={type}
+                          numberOfRoom={numberOfRoom}
+                          onClick={() => handleOnClick(renderList[index])}
+                        />
+                      </Link>
+                    </Grid>
+                  );
+                }
+              )}
           </Grid>
         </Grid>
       </Grid>
+      <Stack spacing={2}>
+        <TablePagination
+          rowsPerPageOptions={[6, 25, 100]}
+          component="div"
+          count={renderList.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
+      </Stack>
 
       <DevTool control={control} />
     </Container>

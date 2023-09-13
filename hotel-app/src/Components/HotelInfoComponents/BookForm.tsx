@@ -1,12 +1,4 @@
-import {
-  Box,
-  Button,
-  Grid,
-  List,
-  ListItem,
-  ListItemText,
-  Stack,
-} from "@mui/material";
+import { Box, Button, Grid, Stack } from "@mui/material";
 import { FormProvider, useForm, useWatch } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
 import dayjs, { Dayjs } from "dayjs";
@@ -16,23 +8,16 @@ import DateRangePickerField from "../HomePage_Component/BookingTabPanel/BookingT
 import People from "../HomePage_Component/BookingTabPanel/BookingTabs/People";
 import InputField from "../HomePage_Component/BookingTabPanel/BookingTabs/BookingFormField/InputField";
 import { Divider, Typography } from "@mui/joy";
+import { useSelector } from "react-redux";
+import { RootState } from "../../stores.ts/stores";
 
 export type IBookingFormValue = {
-  bookingDate: Dayjs | null;
+  bookingDate: Dayjs;
   nightNumber: string;
   adult: number;
   child: number;
   baby: number;
   room: number;
-};
-
-const style = {
-  width: "100%",
-  maxWidth: 360,
-  bgcolor: "background.paper",
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "space-between",
 };
 
 const bookingRooms = 2;
@@ -117,16 +102,16 @@ export default function HotelBookingFormLayout() {
     }
   };
 
-  const onSubmit = (data: IBookingFormValue) => {
-    console.log(data);
-  };
-
   const watchedValues = useWatch({
     control,
-    name: ["adult", "child", "room", "baby"],
+    name: ["adult", "child", "room", "baby", "bookingDate"],
   });
 
   console.log(watchedValues[0], watchedValues[1], watchedValues[2]);
+
+  const onSubmit = (data: IBookingFormValue) => {
+    console.log(data);
+  };
 
   return (
     <FormProvider {...form}>
