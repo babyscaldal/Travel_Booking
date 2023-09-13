@@ -70,13 +70,6 @@ function App() {
         />
         <Route path={"contact"} element={<Contact />} />
       </Routes>
-      <Container maxWidth="lg">
-        <Grid container>
-          <Grid item xs={4.5}>
-            <HotelInfoPage />
-          </Grid>
-        </Grid>
-      </Container>
     </>
   );
 }
