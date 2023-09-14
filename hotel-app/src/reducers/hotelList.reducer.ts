@@ -1,6 +1,7 @@
 import { IHotel } from "../types/hotelType";
 // Test Ha Noi hotel
 import { actionTypes } from "../types/actions.types";
+import { UserState, getUserFromLocal } from "./login.reducer";
 
 export interface IActionProps {
   type: string;
@@ -8,13 +9,43 @@ export interface IActionProps {
   message?: any;
 }
 
+export interface IBookedUser {
+  username: string;
+  orderHotelList: IOrderHotel[];
+}
 // interface hanoiHotelList extends IHotel[]
-
 export interface IInitHotelState {
   locationHotelList: IHotel[];
   filterStarHotel: number[];
   filterTypeAccommodation: string[];
   selectedHotel: IHotel;
+  orderHotelList: IOrderHotel[];
+  infoUser: IBookedUser;
+}
+
+export interface IOrderHotel extends IHotel {
+  adultQuantity: number;
+  childrenQuantity: number;
+  checkInDate: string;
+  checkOutDate: string;
+  totalPrice: number;
+  roomQuantity: number;
+}
+
+// Call data from local storage
+// function getUserFromLocal(): UserState {
+//   const res = localStorage.getItem("userLogin") as string;
+//   return JSON.parse(res);
+// }
+
+const initInfoUser: IBookedUser = {
+  username: "",
+  orderHotelList: [],
+};
+
+export function getInfoUserLocal(): IBookedUser {
+  const res = localStorage.getItem("infoUser") as string;
+  return JSON.parse(res) || initInfoUser;
 }
 
 const initState: IInitHotelState = {
@@ -36,6 +67,12 @@ const initState: IInitHotelState = {
     image: [],
     numberOfRoom: 0,
   },
+  orderHotelList: [],
+  // infoUser: {
+  //   username: getUserFromLocal().user.username,
+  //   orderHotelList: [],
+  // },
+  infoUser: getInfoUserLocal(),
 };
 
 const sortHotel = (state = initState, action: IActionProps) => {
@@ -61,6 +98,25 @@ const sortHotel = (state = initState, action: IActionProps) => {
       };
     case actionTypes.SELECTED_HOTEL:
       return { ...state, selectedHotel: action.payload };
+
+    // Order hotel
+    case actionTypes.ORDER_HOTEL:
+      localStorage.setItem(
+        "infoUser",
+        JSON.stringify({
+          ...state.infoUser,
+          username: getUserFromLocal().user.username,
+          orderHotelList: [action.payload, ...state.infoUser.orderHotelList],
+        })
+      );
+      return {
+        ...state,
+        // orderHotelList: [action.payload, ...state.orderHotelList],
+        infoUser: {
+          ...state.infoUser,
+          orderHotelList: [action.payload, ...state.infoUser.orderHotelList],
+        },
+      };
 
     default:
       return state;

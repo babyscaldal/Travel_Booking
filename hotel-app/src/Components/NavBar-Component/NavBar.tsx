@@ -21,6 +21,7 @@ export default function NavBar() {
   const userLogin: UserState = useSelector((state: any) => state.loginReducer);
   console.log("useLogin: ", userLogin);
   const navigate = useNavigate();
+
   return (
     <React.Fragment>
       <CssBaseline />
@@ -50,7 +51,7 @@ export default function NavBar() {
                   {/* Download app mobile */}
                   <DownloadApp />
 
-                  {/* Cooperate */}
+                  {/* Contact */}
                   <Button color="inherit" onClick={() => navigate("/contact")}>
                     <HandshakeOutlinedIcon
                       color="primary"

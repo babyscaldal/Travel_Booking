@@ -22,12 +22,21 @@ const initState: UserState = {
   },
 };
 
-const loginReducer = (state = initState, action: IActionProps) => {
+//Call data from localStorage
+export function getUserFromLocal(): UserState {
+  const res = localStorage.getItem("userLogin") as string;
+  return JSON.parse(res) || initState;
+}
+
+const loginReducer = (state = getUserFromLocal(), action: IActionProps) => {
   switch (action.type) {
     case actionTypes.USER_LOGIN_SUCCEEDED:
       // console.log("action: ", action);
       // alert(`Đăng nhập thành công`);
-
+      localStorage.setItem(
+        "userLogin",
+        JSON.stringify({ isLogin: true, user: action.payload.user })
+      );
       return { isLogin: true, user: action.payload.user };
     case actionTypes.USER_LOGIN_FAILED:
       // console.log("aloho", action);
@@ -36,7 +45,11 @@ const loginReducer = (state = initState, action: IActionProps) => {
       return { ...state };
     case actionTypes.USER_REGISTER_SUCCEEDED:
       // console.log("action: ", action);
-      alert(`Đăng ký thành công`);
+      // alert(`Đăng ký thành công`);
+      localStorage.setItem(
+        "userLogin",
+        JSON.stringify({ isLogin: true, user: action.payload.user })
+      );
       return { isLogin: true, user: action.payload.user };
     case actionTypes.USER_REGISTER_FAILED:
       // console.log("aloho", action);

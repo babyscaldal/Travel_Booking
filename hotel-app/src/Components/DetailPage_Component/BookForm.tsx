@@ -10,6 +10,8 @@ import InputField from "../HomePage_Component/BookingTabPanel/BookingTabs/Bookin
 import { Divider, Typography } from "@mui/joy";
 import { useSelector } from "react-redux";
 import { RootState } from "../../stores.ts/stores";
+import { useDispatch } from "react-redux";
+import { handleOrderHotel } from "../../actions/getHotels.actions";
 
 export type IBookingFormValue = {
   bookingDate: Dayjs[];
@@ -100,10 +102,6 @@ export default function BookForm() {
     }
   };
 
-  const onSubmit = (data: IBookingFormValue) => {
-    console.log(data);
-  };
-
   const watchedValues = useWatch({
     control,
     name: ["room", "adult", "child", "baby", "bookingDate"],
@@ -134,6 +132,22 @@ export default function BookForm() {
   console.log("end: ", end1);
 
   const total = watchedValues[0] * selectedHotel.price * night;
+
+  const dispatch = useDispatch();
+  const onSubmit = (data: IBookingFormValue) => {
+    console.log(data);
+
+    const bookingInfoData = {
+      ...selectedHotel,
+      adultQuantity: data.adult,
+      childrenQuantity: Number(data.baby) + Number(data.child),
+      totalPrice: total,
+      checkInDate: start1,
+      checkOutDate: end1,
+      roomQuantity: data.room,
+    };
+    dispatch(handleOrderHotel(bookingInfoData));
+  };
 
   return (
     <FormProvider {...form}>

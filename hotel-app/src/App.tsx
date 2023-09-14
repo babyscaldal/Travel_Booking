@@ -15,6 +15,9 @@ import Contact from "./Components/NavBar-Component/Contact/Contact";
 import DetailPage from "./Components/DetailPage_Component/DetailePage";
 import Footer from "./Components/Footer_Component/footer/Footer";
 import { HomePage } from "./pages/Homepage/HomePage";
+import OrderHotelList from "./Components/NavBar-Component/MyBooking/OrderHotelList";
+import LoginWarning from "./Components/LoginWarning/LoginWarning";
+import { UserState } from "./reducers/login.reducer";
 
 const NavBarWrapper = styled.div`
   position: fixed;
@@ -40,6 +43,8 @@ function App() {
     dispatch(handleSearchHotelsByLocation(hotelsDataByLocation));
   }, [hotelsDataByLocation]);
 
+  const userLogin: UserState = useSelector((state: any) => state.loginReducer);
+
   return (
     <>
       <Box>
@@ -47,6 +52,7 @@ function App() {
         <NavBarWrapper>
           <NavBar />
         </NavBarWrapper>
+        {/* <LoginWarning booleanState={!userLogin.isLogin} /> */}
       </Box>
       <Routes>
         <Route path="*" element={<Navigate to="/" />} />
@@ -54,6 +60,7 @@ function App() {
         <Route path={`/accommodation/:city/`} element={<FilterFormLayOut />} />
         <Route path={"/accommodation/:city/:id"} element={<DetailPage />} />
         <Route path={"contact"} element={<Contact />} />
+        <Route path={"order-hotel"} element={<OrderHotelList />} />
       </Routes>
       <Footer />
     </>

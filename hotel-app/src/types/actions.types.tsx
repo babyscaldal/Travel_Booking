@@ -41,4 +41,7 @@ export const actionTypes = {
 
   // Selected Hotel
   SELECTED_HOTEL: "SELECTED_HOTEL",
+
+  // Order Hotel
+  ORDER_HOTEL: "ORDER_HOTEL",
 };
