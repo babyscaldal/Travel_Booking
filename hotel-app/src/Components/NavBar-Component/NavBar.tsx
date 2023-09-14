@@ -6,7 +6,6 @@ import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Button from "@mui/material/Button";
-import MenuIcon from "@mui/icons-material/Menu";
 import HandshakeOutlinedIcon from "@mui/icons-material/HandshakeOutlined";
 import DownloadApp from "./DownLoad/DownloadApp";
 import MyBooking from "./MyBooking/MyBooking";
@@ -16,6 +15,7 @@ import { UserState } from "../../reducers/login.reducer";
 import { useSelector } from "react-redux";
 import UserAccount from "./UserAccount/UserAccount";
 import { NavLink, Navigate, useNavigate } from "react-router-dom";
+import MenuResponsive from "./Menu/Menu";
 
 export default function NavBar() {
   const userLogin: UserState = useSelector((state: any) => state.loginReducer);
@@ -33,8 +33,6 @@ export default function NavBar() {
           <Container maxWidth="lg">
             <Box>
               <Toolbar>
-                {/* Side bar */}
-
                 {/* Logo Home */}
                 <Box sx={{ width: "50px", flexGrow: 1 }}>
                   <NavLink to={"/"}>
@@ -47,6 +45,9 @@ export default function NavBar() {
                     />
                   </NavLink>
                 </Box>
+
+                {/* Right */}
+
                 <Box sx={{ display: { xs: "none", md: "flex" } }}>
                   {/* Download app mobile */}
                   <DownloadApp />
@@ -71,7 +72,6 @@ export default function NavBar() {
                     <LoginForm />
 
                     {/* Sign Up */}
-                    {/* <RegisterBtn /> */}
                     <RegisterForm />
                   </Box>
                   {/* Logged User */}
@@ -86,15 +86,9 @@ export default function NavBar() {
                     />
                   </Box>
                 </Box>
-                <IconButton
-                  size="large"
-                  edge="start"
-                  color="inherit"
-                  aria-label="menu"
-                  sx={{ mr: 2, display: { xs: "inline-block", md: "none" } }}
-                >
-                  <MenuIcon />
-                </IconButton>
+
+                {/* Menu responsive */}
+                <MenuResponsive />
               </Toolbar>
             </Box>
           </Container>

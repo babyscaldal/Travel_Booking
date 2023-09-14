@@ -8,3 +8,9 @@ export function LoginRes(user: IUserLoginReq) {
     payload: user,
   };
 }
+
+export function LogoutRes() {
+  return {
+    type: actionTypes.USER_LOGOUT_RES,
+  };
+}

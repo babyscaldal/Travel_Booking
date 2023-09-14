@@ -9,9 +9,14 @@ import DialogTitle from "@mui/material/DialogTitle";
 interface IBooleanState {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  handleCloseMenu?: () => void;
 }
 
-export default function LoginWarning({ open, setOpen }: IBooleanState) {
+export default function LoginWarning({
+  open,
+  setOpen,
+  handleCloseMenu,
+}: IBooleanState) {
   // const [open, setOpen] = React.useState(props.booleanState);
 
   const handleClickOpen = () => {
@@ -20,6 +25,7 @@ export default function LoginWarning({ open, setOpen }: IBooleanState) {
 
   const handleClose = () => {
     setOpen(false);
+    handleCloseMenu && handleCloseMenu();
   };
 
   return (
@@ -43,8 +49,12 @@ export default function LoginWarning({ open, setOpen }: IBooleanState) {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          {/* <Button onClick={handleClose}>Disagree</Button> */}
-          <Button onClick={handleClose} autoFocus>
+          <Button
+            onClick={() => {
+              handleClose();
+            }}
+            autoFocus
+          >
             Tôi đã hiểu
           </Button>
         </DialogActions>

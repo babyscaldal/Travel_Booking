@@ -37,11 +37,11 @@ export interface IFormValues {
   password: string;
 }
 
-// interface IEditForm {
-//   user: IUser;
-// }
+export interface IRegisterForm {
+  handleCloseMenu?: () => void;
+}
 
-export default function RegisterForm() {
+export default function RegisterForm({ handleCloseMenu }: IRegisterForm) {
   const [open, setOpen] = React.useState(false);
   const [showPassword, setShowPassword] = React.useState<boolean>(false);
 
@@ -51,6 +51,7 @@ export default function RegisterForm() {
 
   const handleClose = () => {
     setOpen(false);
+    handleCloseMenu && handleCloseMenu();
   };
 
   const schema = yup.object().shape({

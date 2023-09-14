@@ -33,7 +33,11 @@ const Transition = React.forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function LoginForm() {
+export interface ILoginForm {
+  handleCloseMenu?: () => void;
+}
+
+export default function LoginForm({ handleCloseMenu }: ILoginForm) {
   const [open, setOpen] = React.useState(false);
   const [showPassword, setShowPassword] = React.useState<boolean>(false);
 
@@ -43,6 +47,7 @@ export default function LoginForm() {
 
   const handleClose = () => {
     setOpen(false);
+    handleCloseMenu && handleCloseMenu();
   };
 
   const schema = yup.object().shape({
@@ -87,6 +92,7 @@ export default function LoginForm() {
     };
     dispatch(LoginRes(body));
     reset();
+    // handleCloseMenu && handleCloseMenu();
   };
 
   return (
@@ -95,6 +101,7 @@ export default function LoginForm() {
         variant="text"
         sx={{ color: "text.primary" }}
         onClick={() => {
+          // handleCloseMenu && handleCloseMenu();
           handleClickOpen();
         }}
       >

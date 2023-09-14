@@ -23,6 +23,8 @@ const NavBarWrapper = styled.div`
   position: fixed;
   z-index: 3;
   width: 100%;
+  top: 0;
+  left: 0;
 `;
 
 function App() {
