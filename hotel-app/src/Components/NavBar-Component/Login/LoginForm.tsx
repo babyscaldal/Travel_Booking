@@ -139,7 +139,7 @@ export default function LoginForm() {
                     label="Change to display password"
                   />
 
-                  <Button variant="contained" color="primary" type="submit">
+                  <Button variant="contained" type="submit">
                     Login
                   </Button>
                   <Grid container>

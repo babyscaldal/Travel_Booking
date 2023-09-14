@@ -13,22 +13,37 @@ import MyBooking from "./MyBooking/MyBooking";
 import LoginForm from "./Login/LoginForm";
 import RegisterForm from "./Register/RegisterForm";
 import { UserState } from "../../reducers/login.reducer";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import UserAccount from "./UserAccount/UserAccount";
-import { NavLink, Navigate, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { RootState } from "../../stores.ts/stores";
+import { Favorite, FavoriteBorder } from "@mui/icons-material";
+import { changeTheme } from "../../actions/changeTheme";
+import { Checkbox } from "@mui/material";
+
+const styleLight = {
+  backgroundColor: "background.paper",
+  top: "0",
+};
+const styleDark = {
+  backgroundColor: "#121212",
+  top: "0",
+};
 
 export default function NavBar() {
   const userLogin: UserState = useSelector((state: any) => state.loginReducer);
   console.log("useLogin: ", userLogin);
   const navigate = useNavigate();
+  const themeApply = useSelector(
+    (state: RootState) => state.darkModeReducer.isDark
+  );
+
+  const dispatch = useDispatch();
   return (
     <React.Fragment>
       <CssBaseline />
-      <Box sx={{}}>
-        <AppBar
-          position="static"
-          sx={{ color: "#000", bgcolor: "#fff", top: "0" }}
-        >
+      <Box>
+        <AppBar position="static" sx={themeApply ? styleDark : styleLight}>
           <Container maxWidth="lg">
             <Box>
               <Toolbar>
@@ -38,11 +53,12 @@ export default function NavBar() {
                 <Box sx={{ width: "50px", flexGrow: 1 }}>
                   <NavLink to={"/"}>
                     <img
-                      src="../../../public/logo-black-aaabgRemoved.png"
-                      // alt="logo"
-                      // width="50%"
+                      src={
+                        themeApply
+                          ? "../../../public/white1.png"
+                          : "../../../public/Black1.png"
+                      }
                       height="60px"
-                      // style={{ objectFit: "cover" }}
                     />
                   </NavLink>
                 </Box>
@@ -51,7 +67,12 @@ export default function NavBar() {
                   <DownloadApp />
 
                   {/* Cooperate */}
-                  <Button color="inherit" onClick={() => navigate("/contact")}>
+                  <Button
+                    sx={{
+                      color: "text.primary",
+                    }}
+                    onClick={() => navigate("/contact")}
+                  >
                     <HandshakeOutlinedIcon
                       color="primary"
                       sx={{ mr: 0.5 }}
@@ -64,7 +85,11 @@ export default function NavBar() {
                   <MyBooking />
 
                   <Box
-                    sx={{ display: `${userLogin.isLogin ? "none" : "flex"}` }}
+                    sx={{
+                      display: `${userLogin.isLogin ? "none" : "flex"}`,
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                    }}
                   >
                     {/* Login */}
                     <LoginForm />
@@ -72,6 +97,11 @@ export default function NavBar() {
                     {/* Sign Up */}
                     {/* <RegisterBtn /> */}
                     <RegisterForm />
+                    <Checkbox
+                      icon={<FavoriteBorder sx={{ color: "primary.main" }} />}
+                      checkedIcon={<Favorite sx={{ color: "error.main" }} />}
+                      onChange={() => dispatch(changeTheme())}
+                    />
                   </Box>
                   {/* Logged User */}
                   <Box
@@ -84,11 +114,12 @@ export default function NavBar() {
                       avatar={userLogin.user.image}
                     />
                   </Box>
+                  {/*Dark mode nav */}
+                  <Box></Box>
                 </Box>
                 <IconButton
                   size="large"
                   edge="start"
-                  color="inherit"
                   aria-label="menu"
                   sx={{ mr: 2, display: { xs: "inline-block", md: "none" } }}
                 >

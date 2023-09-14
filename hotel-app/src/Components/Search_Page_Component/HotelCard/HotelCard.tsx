@@ -5,7 +5,7 @@ import CardOverflow from "@mui/joy/CardOverflow";
 import Divider from "@mui/joy/Divider";
 import Typography from "@mui/joy/Typography";
 import { capitalizeFirstLetter } from "../../../Ultiliti/CapitalizeFirstLetter";
-import { Box, Rating } from "@mui/material";
+import { Box, Checkbox, Rating } from "@mui/material";
 import IconButton from "@mui/joy/IconButton";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import Carousel from "react-bootstrap/Carousel";
@@ -15,6 +15,7 @@ import { IHotel } from "../../../types/hotelType";
 import FavoriteTwoToneIcon from "@mui/icons-material/FavoriteTwoTone";
 import getRandomImage from "../../../Ultiliti/Random";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import { Favorite, FavoriteBorder } from "@mui/icons-material";
 export interface IAccommodation {
   address: string;
   name: string;
@@ -65,16 +66,8 @@ export function HotelCard({
                 </Carousel.Item>
               ))}
             </Carousel>
-            {/* <div>
-            <img
-              src={imgUrl}
-              srcSet={subImgUrl}
-              loading="lazy"
-              alt="hotel image"
-            />
-          </div> */}
           </AspectRatio>
-          <IconButton
+          {/* <IconButton
             aria-label="Like minimal photography"
             size="md"
             sx={{
@@ -87,7 +80,12 @@ export function HotelCard({
             }}
           >
             <FavoriteIcon color={"error"} />
-          </IconButton>
+          </IconButton> */}
+          <Checkbox
+            icon={<FavoriteBorder sx={{ color: "primary.main" }} />}
+            checkedIcon={<Favorite sx={{ color: "error.main" }} />}
+            // onChange={() => dispatch(changeTheme())}
+          />
         </CardOverflow>
         <CardContent>
           <Typography

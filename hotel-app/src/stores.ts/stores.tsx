@@ -9,6 +9,7 @@ import { IProvince } from "../types/provinceType";
 import sortHotel, { IInitHotelState } from "../reducers/hotelList.reducer";
 import { IHotel } from "../types/hotelType";
 import hotelsByLocationReducer from "../reducers/getHotels.reducer";
+import darkModeReducer from "../reducers/changeTheme.reducer";
 
 export interface RootState {
   loginReducer: any;
@@ -20,6 +21,9 @@ export interface RootState {
     hotelsListByLocation: IHotel[];
   };
   sortHotel: IInitHotelState;
+  darkModeReducer: {
+    isDark: boolean;
+  };
 }
 
 const allReducers = combineReducers({
@@ -27,6 +31,7 @@ const allReducers = combineReducers({
   provincesReducer,
   sortHotel,
   hotelsByLocationReducer,
+  darkModeReducer,
 });
 
 const sagaMiddleware = createSagaMiddleware();

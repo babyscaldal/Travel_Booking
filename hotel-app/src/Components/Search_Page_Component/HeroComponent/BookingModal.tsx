@@ -4,6 +4,8 @@ import Modal from "@mui/joy/Modal";
 import ModalClose from "@mui/joy/ModalClose";
 import Sheet from "@mui/joy/Sheet";
 import BookingTabPanel from "../../HomePage_Component/BookingTabPanel/BookingTabs/BookingTabPanel";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../stores.ts/stores";
 
 export default function BookingModal() {
   const [open, setOpen] = React.useState<boolean>(false);
@@ -38,13 +40,16 @@ export default function BookingModal() {
       >
         Start Booking Now
       </Button>
-
       <Modal
         aria-labelledby="modal-title"
         aria-describedby="modal-desc"
         open={open}
         onClose={() => setOpen(false)}
-        sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
       >
         <Sheet
           variant="outlined"

@@ -41,4 +41,7 @@ export const actionTypes = {
 
   // Selected Hotel
   SELECTED_HOTEL: "SELECTED_HOTEL",
+
+  //DarkMode:
+  CHANGE_THEME:"CHANGE_THEME"
 };

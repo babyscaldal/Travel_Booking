@@ -100,10 +100,6 @@ export default function BookForm() {
     }
   };
 
-  const onSubmit = (data: IBookingFormValue) => {
-    console.log(data);
-  };
-
   const watchedValues = useWatch({
     control,
     name: ["room", "adult", "child", "baby", "bookingDate"],
@@ -134,6 +130,20 @@ export default function BookForm() {
   console.log("end: ", end1);
 
   const total = watchedValues[0] * selectedHotel.price * night;
+
+  const onSubmit = (data: IBookingFormValue) => {
+    console.log(data);
+    const bookingInfoData = {
+      ...selectedHotel,
+      adultQuantity: data.adult,
+      childrenQuantity: Number(data.baby) + Number(data.child),
+      totalPrice: total,
+      checkInDate: start1,
+      checkOutDate: end1,
+      roomQuantity: data.room,
+    };
+    console.log(bookingInfoData);
+  };
 
   return (
     <FormProvider {...form}>
