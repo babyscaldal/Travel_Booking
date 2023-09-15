@@ -6,19 +6,14 @@ import NavBar from "./Components/NavBar-Component/NavBar";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllProvince } from "./actions/province.action";
-import styled from "styled-components";
 import { FilterFormLayOut } from "./Components/Search_Page_Component/HotelCard/FilterFormLayOut";
 import { Routes, Route, Navigate } from "react-router-dom";
-import { RootState } from "./stores.ts/stores";
-import { handleSearchHotelsByLocation } from "./actions/sortHotel.actions";
 import Contact from "./Components/NavBar-Component/Contact/Contact";
 import DetailPage from "./Components/DetailPage_Component/DetailePage";
 import Footer from "./Components/Footer_Component/footer/Footer";
 import OrderHotelList from "./Components/NavBar-Component/MyBooking/OrderHotelList";
 import { UserState } from "./reducers/login.reducer";
 import { HomePage } from "./Pages/Homepage/HomePage";
-import LoginSuccess from "./Components/NavBar-Component/Login/LoginSusccess";
-import TemporaryDrawer from "./Components/Search_Page_Component/HotelCard/Drawer";
 
 function App() {
   const dispatch = useDispatch();

@@ -30,32 +30,58 @@ export function getUserFromLocal(): UserState {
 
 const loginReducer = (state = getUserFromLocal(), action: IActionProps) => {
   switch (action.type) {
+    // login succeeded
     case actionTypes.USER_LOGIN_SUCCEEDED:
-      // console.log("action: ", action);
-      // alert(`Đăng nhập thành công`);
       localStorage.setItem(
         "userLogin",
         JSON.stringify({ isLogin: true, user: action.payload.user })
       );
       return { isLogin: true, user: action.payload.user };
+
+    // login failed
     case actionTypes.USER_LOGIN_FAILED:
-      // console.log("aloho", action);
-      // alert(`Tài khoảng hoặc mật khẩu không chính xác`);
       alert(`Tài khoản hoặc mật khẩu không chính xác (${action.message})`);
       return { ...state };
+
+    // register succeeded
     case actionTypes.USER_REGISTER_SUCCEEDED:
-      // console.log("action: ", action);
-      // alert(`Đăng ký thành công`);
       localStorage.setItem(
         "userLogin",
         JSON.stringify({ isLogin: true, user: action.payload.user })
       );
       return { isLogin: true, user: action.payload.user };
+
+    // register failed
     case actionTypes.USER_REGISTER_FAILED:
-      // console.log("aloho", action);
-      // alert(`Tài khoảng hoặc mật khẩu không chính xác`);
       alert(`Tài khoản có thể đã tồn tại (${action.message})`);
       return { ...state };
+
+    // logout
+    case actionTypes.USER_LOGOUT_RES:
+      confirm("Logout hả!!!");
+      localStorage.setItem(
+        "userLogin",
+        JSON.stringify({
+          isLogin: false,
+          user: {
+            bio: null,
+            email: "",
+            token: "",
+            image: "",
+            username: "",
+          },
+        })
+      );
+      return {
+        isLogin: false,
+        user: {
+          bio: null,
+          email: "",
+          token: "",
+          image: "",
+          username: "",
+        },
+      };
     default:
       return state;
   }

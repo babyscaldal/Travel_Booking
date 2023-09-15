@@ -39,7 +39,7 @@ export default function Contact() {
           >
             Giới thiệu
           </h2>
-          <p>
+          <p style={{ textAlign: "justify" }}>
             Travel Dream là một công ty hàng đầu trong lĩnh vực du lịch và trải
             nghiệm số tại khu vực Đông Nam Á. Chúng tôi tận tâm giúp bạn khám
             phá và trải nghiệm đa dạng các dịch vụ du lịch, giúp bạn tạo nên
@@ -52,7 +52,7 @@ export default function Contact() {
             ra, chúng tôi cũng cung cấp dịch vụ thuê xe để bạn khám phá địa điểm
             du lịch một cách tự do và thuận tiện.
           </p>
-          <p>
+          <p style={{ textAlign: "justify" }}>
             Travel Dream cũng là địa chỉ đáng tin cậy để bạn tìm kiếm và đặt
             phòng khách sạn. Chúng tôi liên kết với hàng ngàn khách sạn chất
             lượng trên khắp Đông Nam Á, đảm bảo rằng bạn sẽ tìm thấy nơi lưu trú
@@ -60,7 +60,7 @@ export default function Contact() {
             sang trọng, khách sạn tiết kiệm chi phí hoặc chỗ ở độc đáo, chúng
             tôi có đủ lựa chọn cho mọi phong cách và ngân sách.
           </p>
-          <p>
+          <p style={{ textAlign: "justify" }}>
             Ngoài ra, Travel Dream còn cung cấp một loạt các hoạt động thú vị và
             trải nghiệm độc đáo. Bạn có thể tham gia các tour du lịch đặc sắc,
             tham quan các danh lam thắng cảnh nổi tiếng hoặc thưởng thức các
@@ -68,7 +68,7 @@ export default function Contact() {
             những trải nghiệm đáng nhớ và giúp bạn tạo dựng những kỷ niệm đáng
             chờ đợi.
           </p>
-          <p>
+          <p style={{ textAlign: "justify" }}>
             Travel Dream luôn đặt lợi ích của khách hàng lên hàng đầu. Với dịch
             vụ chăm sóc khách hàng 24/7, chúng tôi luôn sẵn lòng hỗ trợ và giải
             đáp mọi thắc mắc của bạn. Đồng thời, chúng tôi cung cấp hơn 30

@@ -14,7 +14,6 @@ export interface RootState {
     listProvinces: IProvince[];
     selectedProvince: IProvince;
   };
-
   sortHotel: IInitHotelState;
 }
 

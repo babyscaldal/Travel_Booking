@@ -48,12 +48,17 @@ interface ILoginForm {
     | "error";
 }
 
+interface ILoginForm {
+  handleCloseMenu?: () => void;
+}
+
 export default function LoginForm({
   children,
   type = "text",
   material = "text.primary",
   width = "100%",
   color,
+  handleCloseMenu,
 }: ILoginForm) {
   const [open, setOpen] = React.useState(false);
   const [showPassword, setShowPassword] = React.useState<boolean>(false);
@@ -64,6 +69,7 @@ export default function LoginForm({
 
   const handleClose = () => {
     setOpen(false);
+    handleCloseMenu && handleCloseMenu();
   };
 
   const schema = yup.object().shape({
@@ -103,6 +109,7 @@ export default function LoginForm({
     };
     dispatch(LoginRes(body));
     reset();
+    // handleCloseMenu && handleCloseMenu();
   };
 
   return (
@@ -112,6 +119,7 @@ export default function LoginForm({
         color={color}
         variant={type}
         onClick={() => {
+          // handleCloseMenu && handleCloseMenu();
           handleClickOpen();
         }}
       >

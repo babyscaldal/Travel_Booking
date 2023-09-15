@@ -1,7 +1,7 @@
 import { IHotel } from "../types/hotelType";
 // Test Ha Noi hotel
 import { actionTypes } from "../types/actions.types";
-import { UserState, getUserFromLocal } from "./login.reducer";
+import { getUserFromLocal } from "./login.reducer";
 
 export interface IActionProps {
   type: string;
@@ -19,7 +19,7 @@ export interface IInitHotelState {
   filterStarHotel: number[];
   filterTypeAccommodation: string[];
   selectedHotel: IHotel;
-  orderHotelList: IOrderHotel[];
+  // orderHotelList: IOrderHotel[];
   infoUser: IBookedUser;
 }
 
@@ -32,12 +32,37 @@ export interface IOrderHotel extends IHotel {
   roomQuantity: number;
 }
 
-// Call data from local storage
-// function getUserFromLocal(): UserState {
-//   const res = localStorage.getItem("userLogin") as string;
-//   return JSON.parse(res);
-// }
+// init location Hotel List
+const initLocationHotelList: IHotel[] = [];
 
+export function getLocationHotelList(): IHotel[] {
+  const res = localStorage.getItem("locationHotelList") as string;
+  return JSON.parse(res) || initLocationHotelList;
+}
+
+// init Selected hotel
+const initSelectedHotel: IHotel = {
+  provinceId: 0,
+  location: "",
+  type: "",
+  id: 0,
+  name: "",
+  address: "",
+  rating: 0,
+  price: 0,
+  stars: 0,
+  amenities: [],
+  description: "",
+  image: [],
+  numberOfRoom: 0,
+};
+
+export function getSelectedHotel(): IHotel {
+  const res = localStorage.getItem("selectedHotel") as string;
+  return JSON.parse(res) || initSelectedHotel;
+}
+
+//init use login
 const initInfoUser: IBookedUser = {
   username: "",
   orderHotelList: [],
@@ -48,35 +73,19 @@ export function getInfoUserLocal(): IBookedUser {
   return JSON.parse(res) || initInfoUser;
 }
 
+// init state
 const initState: IInitHotelState = {
-  locationHotelList: [],
+  locationHotelList: getLocationHotelList(),
+  // locationHotelList: [],
   filterStarHotel: [],
   filterTypeAccommodation: [],
-  selectedHotel: {
-    provinceId: 0,
-    location: "",
-    type: "",
-    id: 0,
-    name: "",
-    address: "",
-    rating: 0,
-    price: 0,
-    stars: 0,
-    amenities: [],
-    description: "",
-    image: [],
-    numberOfRoom: 0,
-  },
-  orderHotelList: [],
-  // infoUser: {
-  //   username: getUserFromLocal().user.username,
-  //   orderHotelList: [],
-  // },
+  selectedHotel: getSelectedHotel(),
   infoUser: getInfoUserLocal(),
 };
 
 const sortHotel = (state = initState, action: IActionProps) => {
   switch (action.type) {
+    // start: get hotel location
     case actionTypes.GET_HOTELS_BY_LOCATION_REQUEST:
       console.log("GET_HOTELS_BY_LOCATION_REQUEST:", action);
       return {
@@ -87,6 +96,14 @@ const sortHotel = (state = initState, action: IActionProps) => {
 
     case actionTypes.GET_HOTELS_BY_LOCATION_SUCCESS:
       console.log("GET_HOTELS_BY_LOCATION_SUCCESS:", action);
+      localStorage.setItem(
+        "locationHotelList",
+        JSON.stringify([
+          ...action.payload
+            .slice()
+            .sort((a: IHotel, b: IHotel) => b.price - a.price),
+        ])
+      );
 
       return {
         ...state,
@@ -104,8 +121,8 @@ const sortHotel = (state = initState, action: IActionProps) => {
         isLoading: false,
         isError: true,
       };
+    // end: get hotel location
 
-    //
     case actionTypes.SORT_BY_HIGHEST_PRICE:
       return { ...state, locationHotelList: action.payload };
     case actionTypes.SORT_BY_LOWEST_PRICE:
@@ -118,14 +135,15 @@ const sortHotel = (state = initState, action: IActionProps) => {
       return { ...state, filterTypeAccommodation: action.payload };
     case actionTypes.RESET_FILTER:
       return { ...state, filterStarHotel: [], filterTypeAccommodation: [] };
-    // case actionTypes.SEARCH_HOTELS_BY_LOCATION:
-    //   return {
-    //     ...state,
-    //     locationHotelList: action.payload
-    //       .slice()
-    //       .sort((a: IHotel, b: IHotel) => b.price - a.price),
-    //   };
+
+    //selectedHotel
     case actionTypes.SELECTED_HOTEL:
+      localStorage.setItem(
+        "selectedHotel",
+        JSON.stringify({
+          ...action.payload,
+        })
+      );
       return { ...state, selectedHotel: action.payload };
 
     // Order hotel
@@ -140,7 +158,6 @@ const sortHotel = (state = initState, action: IActionProps) => {
       );
       return {
         ...state,
-        // orderHotelList: [action.payload, ...state.orderHotelList],
         infoUser: {
           ...state.infoUser,
           orderHotelList: [action.payload, ...state.infoUser.orderHotelList],

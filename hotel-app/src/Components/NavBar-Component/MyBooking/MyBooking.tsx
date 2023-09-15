@@ -8,9 +8,11 @@ import LoginForm from "../Login/LoginForm";
 import LoginWarning from "../../LoginWarning/LoginWarning";
 import { useState } from "react";
 
-export interface IMyBookingProps {}
+export interface IMyBookingProps {
+  handleClose?: () => void;
+}
 
-export default function MyBooking(props: IMyBookingProps) {
+export default function MyBooking({ handleClose }: IMyBookingProps) {
   const [open, setOpen] = useState<boolean>(false);
   const userLogin: UserState = useSelector((state: any) => state.loginReducer);
   const navigate = useNavigate();
@@ -25,7 +27,13 @@ export default function MyBooking(props: IMyBookingProps) {
       >
         <ListAltIcon color="primary" sx={{ mr: 0.5 }} /> Chỗ đã đặt
       </Button>
-      {<LoginWarning open={open} setOpen={setOpen} />}
+      {
+        <LoginWarning
+          open={open}
+          setOpen={setOpen}
+          handleCloseMenu={handleClose}
+        />
+      }
     </React.Fragment>
   );
 }

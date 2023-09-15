@@ -6,15 +6,10 @@ import Divider from "@mui/joy/Divider";
 import Typography from "@mui/joy/Typography";
 import { capitalizeFirstLetter } from "../../../Ultiliti/CapitalizeFirstLetter";
 import { Box, Rating } from "@mui/material";
-import IconButton from "@mui/joy/IconButton";
-import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import Carousel from "react-bootstrap/Carousel";
 import { useSelector } from "react-redux";
-import { RootState } from "../../../stores.ts/stores";
-import { IHotel } from "../../../types/hotelType";
-import FavoriteTwoToneIcon from "@mui/icons-material/FavoriteTwoTone";
 import getRandomImage from "../../../Ultiliti/Random";
-import FavoriteIcon from "@mui/icons-material/Favorite";
+import { IHotel } from "../../../types/hotelType";
 export interface IAccommodation {
   address: string;
   name: string;

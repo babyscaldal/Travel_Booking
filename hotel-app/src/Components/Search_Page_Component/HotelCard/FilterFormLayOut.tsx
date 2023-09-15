@@ -43,18 +43,7 @@ export const FilterFormLayOut = () => {
   const form = useForm<IFilterFormValue>({
     defaultValues: {
       radio: "1",
-      city: Object.keys(selectedProvince).length
-        ? selectedProvince
-        : {
-            domain: "hanoi",
-            id: 1,
-            image:
-              "https://ik.imagekit.io/tvlk/mchitm/imageResource/template/304/vi_VN/2023/08/25/e75b05f4-bd30-3060-9e83-1a49acbfeed0?tr=w-256",
-            name: "Hà Nội",
-            picture:
-              "https://ik.imagekit.io/tvlk/image/imageResource/2022/12/13/1670914149934-a914657087e8c5f1a01724d92eb3f7b9.jpeg?tr=q-75,w-320",
-            slogan: "Vùng đất của những bí ẩn và huyền thoại sâu thẳm.",
-          },
+      city: selectedProvince,
       room: 1,
       bookingNums: 1,
     },
@@ -130,6 +119,7 @@ export const FilterFormLayOut = () => {
     data &&
       data.city &&
       dispatch(getAllHotelsByLocation(data.city.id, data.bookingNums));
+    localStorage.setItem("selectedProvince", JSON.stringify({ ...data.city }));
     const domain = data.city?.domain;
     console.log("domain: ", domain);
     navigate(`/accommodation/${domain}`);
@@ -160,7 +150,7 @@ export const FilterFormLayOut = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
-  const handleChangePage = (event: unknown, newPage: number) => {
+  const handleChangePage = (e: unknown, newPage: number) => {
     setPage(newPage);
   };
 

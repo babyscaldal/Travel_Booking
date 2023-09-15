@@ -8,7 +8,6 @@ import IconButton from "@mui/material/IconButton";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import FilterSubMenu from "./FilterSubMenu";
-import SearchField from "./SearchField";
 import map from "../../../assets/map.png";
 import { RadioField } from "./RadioField";
 import { Button, Container } from "@mui/material";
