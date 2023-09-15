@@ -104,7 +104,8 @@ export default function OrderHotelList() {
                           checkinDate={item.checkInDate}
                           checkoutDate={item.checkOutDate}
                           roomQuantity={item.roomQuantity}
-                          imageUrl={item.image}
+                          id={item.id}
+                          imageUrl={[]}
                         />
                       ))}
                 </TableBody>

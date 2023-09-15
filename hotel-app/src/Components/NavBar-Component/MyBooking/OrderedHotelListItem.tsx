@@ -8,6 +8,7 @@ import getRandomImage from "../../../Ultiliti/Random";
 // import { IHotel } from "../../types/hotelType";
 
 interface IOrderedHotelListItem {
+  id: number;
   imageUrl: string[];
   hotelName: string;
   address: string;
@@ -22,6 +23,7 @@ interface IOrderedHotelListItem {
 
 export const OrderedHotelListItem = ({
   arr,
+  id,
   imageUrl,
   hotelName,
   address,
@@ -135,7 +137,7 @@ export const OrderedHotelListItem = ({
         <NavLink to={"/"}>Detail</NavLink>
       </TableCell>
       <TableCell align="center">
-        <DeleteButton />
+        <DeleteButton hotelId={id} />
       </TableCell>
     </TableRow>
   );

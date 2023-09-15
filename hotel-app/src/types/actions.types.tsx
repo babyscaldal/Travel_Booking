@@ -50,4 +50,7 @@ export const actionTypes = {
 
   // Favorite hotel
   FAVORITE_HOTEL: "FAVORITE_HOTEL",
+
+  // Cancel order
+  CANCEL_ORDER: "CANCEL_ORDER",
 };
