@@ -50,4 +50,6 @@ export const actionTypes = {
 
   //DarkMode:
   CHANGE_THEME: "CHANGE_THEME",
+  // Favorite hotel
+  FAVORITE_HOTEL: "FAVORITE_HOTEL",
 };

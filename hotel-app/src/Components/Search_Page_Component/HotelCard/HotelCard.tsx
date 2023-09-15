@@ -5,11 +5,12 @@ import CardOverflow from "@mui/joy/CardOverflow";
 import Divider from "@mui/joy/Divider";
 import Typography from "@mui/joy/Typography";
 import { capitalizeFirstLetter } from "../../../Ultiliti/CapitalizeFirstLetter";
-import { Box, Rating } from "@mui/material";
+import { Box, IconButton, Rating } from "@mui/material";
 import { useSelector } from "react-redux";
 import getRandomImage from "../../../Ultiliti/Random";
 import { IHotel } from "../../../types/hotelType";
 import { Carousel } from "react-bootstrap";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 export interface IAccommodation {
   address: string;
   name: string;
@@ -21,6 +22,7 @@ export interface IAccommodation {
   typeAccommodation: string;
   numberOfRoom: number;
   onClick: () => void;
+  favoriteToggle: () => void;
 }
 
 export function HotelCard({
@@ -33,6 +35,7 @@ export function HotelCard({
   typeAccommodation,
   numberOfRoom,
   onClick,
+  favoriteToggle,
 }: IAccommodation) {
   // console.log(imgUrl);
 
@@ -61,6 +64,19 @@ export function HotelCard({
               ))}
             </Carousel>
           </AspectRatio>
+          <IconButton
+            aria-label="Like minimal photography"
+            sx={{
+              position: "absolute",
+              zIndex: 2,
+              borderRadius: "inherit",
+              right: "0",
+              top: 0,
+            }}
+            onClick={favoriteToggle}
+          >
+            <FavoriteIcon color={"error"} />
+          </IconButton>
         </CardOverflow>
         <CardContent>
           <Typography

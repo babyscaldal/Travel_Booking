@@ -14,6 +14,8 @@ import OrderHotelList from "./Components/NavBar-Component/MyBooking/OrderHotelLi
 import { HomePage } from "./Pages/Homepage/HomePage";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { RootState } from "./stores.ts/stores";
+import DetailPage from "./Components/DetailPage_Component/DetailePage";
+import { FavoriteList } from "./Components/NavBar-Component/Favorite/FavoriteList";
 
 function App() {
   const dispatch = useDispatch();
@@ -53,6 +55,8 @@ function App() {
         {/* <Route path={"/accommodation/:city/:id"} element={<DetailPage />} /> */}
         <Route path={"contact"} element={<Contact />} />
         <Route path={"order-hotel"} element={<OrderHotelList />} />
+        <Route path={"favorite-hotel"} element={<FavoriteList />} />
+        <Route path={"favorite-hotel/:id"} element={<DetailPage />} />
       </Routes>
       <Footer />
       {/* <Button onClick={() => dispatch(changeTheme())}>Toggle Theme</Button> */}

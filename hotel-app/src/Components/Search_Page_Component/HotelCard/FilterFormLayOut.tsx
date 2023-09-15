@@ -4,8 +4,6 @@ import {
   Typography,
   Grid,
   TablePagination,
-  Pagination,
-  Box,
 } from "@mui/material";
 import { FormProvider, useForm } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
@@ -150,7 +148,7 @@ export const FilterFormLayOut = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
-  const handleChangePage = (e: unknown, newPage: number) => {
+  const handleChangePage = (_: unknown, newPage: number) => {
     setPage(newPage);
   };
 
@@ -230,17 +228,7 @@ export const FilterFormLayOut = () => {
             .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             .map(
               (
-                {
-                  name,
-                  address,
-                  stars,
-                  rating,
-                  price,
-                  // image,
-                  type,
-                  numberOfRoom,
-                  id,
-                },
+                { name, address, stars, rating, price, type, numberOfRoom, id },
 
                 index
               ) => {
@@ -250,8 +238,9 @@ export const FilterFormLayOut = () => {
                     item
                     xs={12}
                     md={6}
-                    lg={3}
+                    lg={4}
                     sx={{
+                      margin: "auto",
                       marginBottom: "15px",
                       transition: "all 0.25s",
                       "&:hover": {
@@ -267,11 +256,10 @@ export const FilterFormLayOut = () => {
                         star={stars}
                         rating={rating}
                         price={price}
-                        // imgUrl={image}
-                        // subImgUrl={image}
                         typeAccommodation={type}
                         numberOfRoom={numberOfRoom}
                         onClick={() => handleOnClick(renderList[index])}
+                        favoriteToggle={() => handleToggle(renderList[index])}
                       />
                     </Link>
                   </Grid>

@@ -30,6 +30,7 @@ const styleDark = {
   backgroundColor: "#121212",
   top: "0",
 };
+import FavoriteBtn from "./Favorite/FavoriteBtn";
 
 export default function NavBar() {
   const userLogin: UserState = useSelector((state: any) => state.loginReducer);
@@ -84,6 +85,9 @@ export default function NavBar() {
                     />
                     Hợp tác
                   </Button>
+
+                  {/* Favorite */}
+                  <FavoriteBtn />
 
                   {/* My booking */}
                   <MyBooking />

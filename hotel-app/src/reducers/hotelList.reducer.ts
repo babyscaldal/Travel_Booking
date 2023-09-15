@@ -19,8 +19,8 @@ export interface IInitHotelState {
   filterStarHotel: number[];
   filterTypeAccommodation: string[];
   selectedHotel: IHotel;
-  // orderHotelList: IOrderHotel[];
   infoUser: IBookedUser;
+  favoriteList: IHotel[];
 }
 
 export interface IOrderHotel extends IHotel {
@@ -73,14 +73,20 @@ export function getInfoUserLocal(): IBookedUser {
   return JSON.parse(res) || initInfoUser;
 }
 
+// init favorite hotel list
+export function getFavoriteLocal(): IHotel[] {
+  const res = localStorage.getItem("favoriteList") as string;
+  return JSON.parse(res) || [];
+}
+
 // init state
 const initState: IInitHotelState = {
   locationHotelList: getLocationHotelList(),
-  // locationHotelList: [],
   filterStarHotel: [],
   filterTypeAccommodation: [],
   selectedHotel: getSelectedHotel(),
   infoUser: getInfoUserLocal(),
+  favoriteList: getFavoriteLocal(),
 };
 
 const sortHotel = (state = initState, action: IActionProps) => {
@@ -164,6 +170,10 @@ const sortHotel = (state = initState, action: IActionProps) => {
         },
       };
 
+    // Favorite list
+    case actionTypes.FAVORITE_HOTEL:
+      localStorage.setItem("favoriteList", JSON.stringify([...action.payload]));
+      return { ...state, favoriteList: action.payload };
     default:
       return state;
   }
