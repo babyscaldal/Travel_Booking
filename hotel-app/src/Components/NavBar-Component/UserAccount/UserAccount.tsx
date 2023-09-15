@@ -36,7 +36,7 @@ export default function UserAccount({ username, avatar }: IUserAccountProps) {
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
         endIcon={<ArrowDropDownIcon />}
-        color="inherit"
+        sx={{ color: "text.primary" }}
       >
         <img
           src={avatar}

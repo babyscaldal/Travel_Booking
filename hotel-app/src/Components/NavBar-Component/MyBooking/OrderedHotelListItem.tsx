@@ -18,9 +18,11 @@ interface IOrderedHotelListItem {
   checkoutDate: string;
   roomQuantity: number;
   arr: IHotel[];
+  id: number;
 }
 
 export const OrderedHotelListItem = ({
+  id,
   arr,
   imageUrl,
   hotelName,
@@ -114,7 +116,7 @@ export const OrderedHotelListItem = ({
         <NavLink to={"/"}>Detail</NavLink>
       </TableCell>
       <TableCell align="center">
-        <DeleteButton />
+        <DeleteButton hotelId={id} />
       </TableCell>
     </TableRow>
   );

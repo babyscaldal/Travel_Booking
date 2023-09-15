@@ -94,6 +94,7 @@ export default function OrderHotelList() {
                       )
                       .map((item, index) => (
                         <OrderedHotelListItem
+                          id={item.id}
                           arr={orderHotelList}
                           key={index}
                           hotelName={item.name}

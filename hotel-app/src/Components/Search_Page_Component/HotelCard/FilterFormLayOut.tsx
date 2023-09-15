@@ -15,6 +15,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import {
   getAllHotelsByLocation,
+  handleToggleFavoriteHotelList,
   selectedHotel,
 } from "../../../actions/getHotels.actions";
 import { IProvince } from "../../../types/provinceType";
@@ -159,6 +160,36 @@ export const FilterFormLayOut = () => {
     setPage(0);
   };
 
+  const favoriteList = useSelector(
+    (state: RootState) => state.sortHotel.favoriteList
+  );
+
+  const handleToggle = (selectedData: IHotel) => {
+    console.log("Selected data: ", selectedData);
+
+    console.log("favoriteList: ", favoriteList);
+
+    if (!favoriteList.length) {
+      const newFavoriteList: IHotel[] = [selectedData];
+
+      console.log("newFavoriteList: ", newFavoriteList);
+
+      dispatch(handleToggleFavoriteHotelList(newFavoriteList));
+    } else {
+      const newFavoriteList = favoriteList.filter((item) => {
+        return item.id !== selectedData.id;
+      });
+
+      if (newFavoriteList.length !== favoriteList.length) {
+        dispatch(handleToggleFavoriteHotelList(newFavoriteList));
+      } else {
+        dispatch(
+          handleToggleFavoriteHotelList([selectedData, ...newFavoriteList])
+        );
+      }
+    }
+  };
+
   return (
     <Container maxWidth="lg" sx={{ paddingTop: "78px" }}>
       <Grid container spacing={2}>
@@ -238,9 +269,8 @@ export const FilterFormLayOut = () => {
                     item
                     xs={12}
                     md={6}
-                    lg={4}
+                    lg={3}
                     sx={{
-                      margin: "auto",
                       marginBottom: "15px",
                       transition: "all 0.25s",
                       "&:hover": {

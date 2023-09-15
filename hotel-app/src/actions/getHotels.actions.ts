@@ -42,3 +42,8 @@ export const handleToggleFavoriteHotelList = (item: IHotel[]) => {
   console.log("payload - item: ", item);
   return { type: actionTypes.FAVORITE_HOTEL, payload: item };
 };
+
+// Cancel order
+export const handleCancelOrderHotel = (id: number) => {
+  return { type: actionTypes.CANCEL_ORDER, payload: id };
+};

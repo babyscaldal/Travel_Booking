@@ -107,12 +107,8 @@ export default function NavBar() {
 
                     {/* Sign Up */}
                     <RegisterForm />
-                    <Checkbox
-                      icon={<FavoriteBorder sx={{ color: "primary.main" }} />}
-                      checkedIcon={<Favorite sx={{ color: "error.main" }} />}
-                      onChange={() => dispatch(changeTheme())}
-                    />
                   </Box>
+
                   {/* Logged User */}
                   <Box
                     sx={{
@@ -124,6 +120,11 @@ export default function NavBar() {
                       avatar={userLogin.user.image}
                     />
                   </Box>
+                  <Checkbox
+                    icon={<FavoriteBorder sx={{ color: "primary.main" }} />}
+                    checkedIcon={<Favorite sx={{ color: "error.main" }} />}
+                    onChange={() => dispatch(changeTheme())}
+                  />
                   {/*Dark mode nav */}
                   <Box></Box>
                 </Box>

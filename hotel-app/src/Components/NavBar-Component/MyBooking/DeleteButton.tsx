@@ -7,8 +7,14 @@ import DialogContentText from "@mui/material/DialogContentText";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import { useDispatch } from "react-redux";
+import { handleCancelOrderHotel } from "../../../actions/getHotels.actions";
 
-export default function DeleteButton() {
+interface IDeleteButton {
+  hotelId: number;
+}
+
+export default function DeleteButton({ hotelId }: IDeleteButton) {
   const [open, setOpen] = React.useState(false);
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
@@ -20,6 +26,8 @@ export default function DeleteButton() {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const dispatch = useDispatch();
 
   return (
     <div>
@@ -47,8 +55,11 @@ export default function DeleteButton() {
           </Button>
           <Button
             // sx={{ color: "success.main" }}
-            onClick={handleClose}
             autoFocus
+            onClick={() => {
+              handleClose();
+              dispatch(handleCancelOrderHotel(hotelId));
+            }}
           >
             OK
           </Button>

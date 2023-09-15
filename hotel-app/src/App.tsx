@@ -52,15 +52,13 @@ function App() {
         <Route path="*" element={<Navigate to="/" />} />
         <Route path="/" element={<HomePage />} />
         <Route path={`/accommodation/:city/`} element={<FilterFormLayOut />} />
-        {/* <Route path={"/accommodation/:city/:id"} element={<DetailPage />} /> */}
+        <Route path={"/accommodation/:city/:id"} element={<DetailPage />} />
         <Route path={"contact"} element={<Contact />} />
         <Route path={"order-hotel"} element={<OrderHotelList />} />
         <Route path={"favorite-hotel"} element={<FavoriteList />} />
         <Route path={"favorite-hotel/:id"} element={<DetailPage />} />
       </Routes>
       <Footer />
-      {/* <Button onClick={() => dispatch(changeTheme())}>Toggle Theme</Button> */}
-      {/* <OrderdHotelList /> */}
     </>
   );
 }

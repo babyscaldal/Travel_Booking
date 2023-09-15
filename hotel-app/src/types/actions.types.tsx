@@ -52,4 +52,7 @@ export const actionTypes = {
   CHANGE_THEME: "CHANGE_THEME",
   // Favorite hotel
   FAVORITE_HOTEL: "FAVORITE_HOTEL",
+
+  //Cancel order:
+  CANCEL_ORDER: "CANCEL_ORDER",
 };

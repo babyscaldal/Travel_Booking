@@ -174,6 +174,34 @@ const sortHotel = (state = initState, action: IActionProps) => {
     case actionTypes.FAVORITE_HOTEL:
       localStorage.setItem("favoriteList", JSON.stringify([...action.payload]));
       return { ...state, favoriteList: action.payload };
+
+    // Cancel order
+    case actionTypes.CANCEL_ORDER:
+      localStorage.setItem(
+        "infoUser",
+
+        JSON.stringify({
+          ...state.infoUser,
+
+          username: getUserFromLocal().user.username,
+
+          orderHotelList: state.infoUser.orderHotelList.filter(
+            (item) => item.id !== action.payload
+          ),
+        })
+      );
+
+      return {
+        ...state,
+
+        infoUser: {
+          ...state.infoUser,
+
+          orderHotelList: state.infoUser.orderHotelList.filter(
+            (item) => item.id !== action.payload
+          ),
+        },
+      };
     default:
       return state;
   }
