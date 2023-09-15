@@ -17,18 +17,21 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import MenuResponsive from "./Menu/Menu";
 import { Button, IconButton } from "@mui/material";
 import { RootState } from "../../stores.ts/stores";
-import { Favorite, FavoriteBorder } from "@mui/icons-material";
 import { changeTheme } from "../../actions/changeTheme";
 import { Checkbox } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
+import LightModeSharpIcon from "@mui/icons-material/LightModeSharp";
+import DarkModeSharpIcon from "@mui/icons-material/DarkModeSharp";
 
 const styleLight = {
   backgroundColor: "background.paper",
   top: "0",
+  zIndex: 10,
 };
 const styleDark = {
   backgroundColor: "#121212",
   top: "0",
+  zIndex: 10,
 };
 import FavoriteBtn from "./Favorite/FavoriteBtn";
 
@@ -121,8 +124,10 @@ export default function NavBar() {
                     />
                   </Box>
                   <Checkbox
-                    icon={<FavoriteBorder sx={{ color: "primary.main" }} />}
-                    checkedIcon={<Favorite sx={{ color: "error.main" }} />}
+                    icon={<LightModeSharpIcon sx={{ color: "primary.main" }} />}
+                    checkedIcon={
+                      <DarkModeSharpIcon sx={{ color: "primary.main" }} />
+                    }
                     onChange={() => dispatch(changeTheme())}
                   />
                   {/*Dark mode nav */}
@@ -131,14 +136,6 @@ export default function NavBar() {
 
                 {/* Menu responsive */}
                 <MenuResponsive />
-                <IconButton
-                  size="large"
-                  edge="start"
-                  aria-label="menu"
-                  sx={{ mr: 2, display: { xs: "inline-block", md: "none" } }}
-                >
-                  <MenuIcon />
-                </IconButton>
               </Toolbar>
             </Box>
           </Container>

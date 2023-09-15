@@ -16,6 +16,7 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { RootState } from "./stores.ts/stores";
 import DetailPage from "./Components/DetailPage_Component/DetailePage";
 import { FavoriteList } from "./Components/NavBar-Component/Favorite/FavoriteList";
+import HotelListSkeleton from "./Components/Search_Page_Component/HotelCard/hotelListSkeleton";
 
 function App() {
   const dispatch = useDispatch();
@@ -45,7 +46,6 @@ function App() {
       <ThemeProvider theme={darkTheme}>
         <Box>
           <NavBar />
-          {/* <LoginWarning booleanState={!userLogin.isLogin} /> */}
         </Box>
       </ThemeProvider>
       <Routes>
@@ -59,6 +59,7 @@ function App() {
         <Route path={"favorite-hotel/:id"} element={<DetailPage />} />
       </Routes>
       <Footer />
+      {/* <HotelListSkeleton /> */}
     </>
   );
 }

@@ -4,9 +4,9 @@ import {
   Typography,
   Grid,
   TablePagination,
+  Checkbox,
 } from "@mui/material";
 import { FormProvider, useForm } from "react-hook-form";
-import { DevTool } from "@hookform/devtools";
 import SearchField from "./SearchField";
 import { HotelCard } from "./HotelCard";
 import { useSelector } from "react-redux";
@@ -23,6 +23,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { RootState } from "../../../stores.ts/stores";
 import AppBar from "@mui/material/AppBar";
 import PersistentDrawerLeft from "./Drawer";
+import PaginationControlled from "./Pagination";
+import HotelListSkeleton from "./hotelListSkeleton";
+import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
+import Favorite from "@mui/icons-material/Favorite";
 export interface IFilterFormValue {
   radio: string;
   city: IProvince | null;
@@ -37,8 +41,6 @@ export const FilterFormLayOut = () => {
     (state: RootState) => state.provincesReducer.selectedProvince
   );
 
-  console.log(selectedProvince);
-
   const form = useForm<IFilterFormValue>({
     defaultValues: {
       radio: "1",
@@ -48,11 +50,20 @@ export const FilterFormLayOut = () => {
     },
   });
 
-  const { handleSubmit, control, setValue, watch } = form;
+  const { handleSubmit, setValue, watch } = form;
 
   const sortHotel: IHotel[] = useSelector(
     (state: any) => state.sortHotel.locationHotelList
   );
+
+  const isLoading: IHotel[] = useSelector(
+    (state: any) => state.sortHotel.isLoading
+  );
+  // console.log(isLoading);
+  const itemPerPage: number = 10;
+  const totalPages: number = sortHotel.length
+    ? Math.ceil(sortHotel.length / itemPerPage)
+    : 1;
 
   const [renderList, setRenderList] = useState<IHotel[]>(sortHotel);
 
@@ -147,7 +158,7 @@ export const FilterFormLayOut = () => {
   };
 
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [rowsPerPage, setRowsPerPage] = useState(12);
 
   const handleChangePage = (_: unknown, newPage: number) => {
     setPage(newPage);
@@ -190,6 +201,8 @@ export const FilterFormLayOut = () => {
     }
   };
 
+  //Pagination:
+
   return (
     <Container maxWidth="lg" sx={{ paddingTop: "78px" }}>
       <Grid container spacing={2}>
@@ -199,108 +212,150 @@ export const FilterFormLayOut = () => {
             backgroundColor: "#fff",
             marginTop: "64px",
             paddingTop: "20px",
-            zIndex: 2,
+            zIndex: 9,
           }}
         >
-          <Grid container spacing={2} justifyContent={"space-between"}>
-            <Grid item xs={12}>
-              <FormProvider {...form}>
-                <form onSubmit={handleSubmit(onSubmit)}>
-                  <Grid container spacing={2} justifyContent={"space-between"}>
-                    <Grid item xs={12} md={2.5}>
-                      <PersistentDrawerLeft />
+          <Grid item xs={12}>
+            <Grid container spacing={2} justifyContent={"space-between"}>
+              <Grid item xs={12}>
+                <FormProvider {...form}>
+                  <form onSubmit={handleSubmit(onSubmit)}>
+                    <Grid
+                      container
+                      spacing={2}
+                      justifyContent={"space-between"}
+                    >
+                      <Grid item xs={12} md={2.5}>
+                        <PersistentDrawerLeft />
+                      </Grid>
+                      <Grid item xs={12} md={8}>
+                        <SearchField
+                          onAddRoom={handleAddRoom}
+                          onRemoveRoom={handleRemoveRoom}
+                        />
+                      </Grid>
                     </Grid>
-                    <Grid item xs={12} md={8}>
-                      <SearchField
-                        onAddRoom={handleAddRoom}
-                        onRemoveRoom={handleRemoveRoom}
-                      />
-                    </Grid>
-                  </Grid>
-                </form>
-              </FormProvider>
-            </Grid>
-            <Grid item xs={6}>
-              <Typography
-                variant="body1"
-                color="initial"
-                style={{
-                  textIndent: "10px",
-                  fontWeight: "bold",
-                }}
-              >
-                Tìm thấy{" "}
-                <span style={{ color: "red" }}>{renderList.length}</span> kết
-                quả phù hợp với yêu cầu của bạn tại{" "}
-                <span style={{ color: "red" }}>
-                  {renderList.length && renderList[0].location}
-                </span>
-              </Typography>
-            </Grid>
-            <Grid item xs={6}>
-              <Stack spacing={2}>
-                <TablePagination
-                  rowsPerPageOptions={[6, 25, 100]}
-                  component="div"
-                  count={renderList.length}
-                  rowsPerPage={rowsPerPage}
-                  page={page}
-                  onPageChange={handleChangePage}
-                  onRowsPerPageChange={handleChangeRowsPerPage}
-                />
-              </Stack>
+                  </form>
+                </FormProvider>
+              </Grid>
+              <Grid item xs={6}>
+                <Typography
+                  variant="body1"
+                  color="initial"
+                  style={{
+                    textIndent: "10px",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Tìm thấy{" "}
+                  <span style={{ color: "red" }}>{renderList.length}</span> kết
+                  quả phù hợp với yêu cầu của bạn tại{" "}
+                  <span style={{ color: "red" }}>
+                    {renderList.length && renderList[0].location}
+                  </span>
+                </Typography>
+              </Grid>
+              <Grid item xs={6}>
+                <Stack spacing={2}>
+                  <TablePagination
+                    rowsPerPageOptions={[6, 12]}
+                    component="div"
+                    count={renderList.length}
+                    rowsPerPage={rowsPerPage}
+                    page={page}
+                    onPageChange={handleChangePage}
+                    onRowsPerPageChange={handleChangeRowsPerPage}
+                  />
+                  {/* <PaginationControlled totalPages={totalPages} /> */}
+                </Stack>
+              </Grid>
             </Grid>
           </Grid>
         </AppBar>
 
         {/* Map */}
-        <Grid container marginTop={"140px"}>
-          {renderList
-            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-            .map(
-              (
-                { name, address, stars, rating, price, type, numberOfRoom, id },
+        <>
+          {!isLoading ? (
+            <Grid
+              container
+              marginTop={"140px"}
+              sx={{ justifyContent: { xs: "center", md: "center" } }}
+            >
+              {renderList
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map(
+                  (
+                    {
+                      name,
+                      address,
+                      stars,
+                      rating,
+                      price,
+                      type,
+                      numberOfRoom,
+                      id,
+                    },
 
-                index
-              ) => {
-                return (
-                  <Grid
-                    key={index}
-                    item
-                    xs={12}
-                    md={6}
-                    lg={3}
-                    sx={{
-                      marginBottom: "15px",
-                      transition: "all 0.25s",
-                      "&:hover": {
-                        cursor: "pointer",
-                        transform: "translateY(-15px)",
-                      },
-                    }}
-                  >
-                    <Link to={String(id)} style={{ textDecoration: "none" }}>
-                      <HotelCard
-                        address={address}
-                        name={name}
-                        star={stars}
-                        rating={rating}
-                        price={price}
-                        typeAccommodation={type}
-                        numberOfRoom={numberOfRoom}
-                        onClick={() => handleOnClick(renderList[index])}
-                        favoriteToggle={() => handleToggle(renderList[index])}
-                      />
-                    </Link>
-                  </Grid>
-                );
-              }
-            )}
-        </Grid>
+                    index
+                  ) => {
+                    return (
+                      <Grid
+                        key={index}
+                        item
+                        xs={12}
+                        md={4}
+                        lg={3}
+                        sx={{
+                          marginBottom: "15px",
+                          transition: "all 0.25s",
+                          "&:hover": {
+                            cursor: "pointer",
+                            transform: "translateY(-15px)",
+                            position: "relative",
+                          },
+                        }}
+                      >
+                        <Checkbox
+                          sx={{
+                            position: "absolute",
+                            top: "10px",
+                            right: "10px",
+                            zIndex: 8,
+                          }}
+                          icon={<FavoriteBorder />}
+                          checkedIcon={<Favorite />}
+                        />
+                        <Link
+                          to={String(id)}
+                          style={{ textDecoration: "none" }}
+                        >
+                          <HotelCard
+                            address={address}
+                            name={name}
+                            star={stars}
+                            rating={rating}
+                            price={price}
+                            typeAccommodation={type}
+                            numberOfRoom={numberOfRoom}
+                            onClick={() => handleOnClick(renderList[index])}
+                            favoriteToggle={() =>
+                              handleToggle(renderList[index])
+                            }
+                          />
+                        </Link>
+                      </Grid>
+                    );
+                  }
+                )}
+            </Grid>
+          ) : (
+            <HotelListSkeleton length={renderList.length} />
+          )}
+        </>
       </Grid>
       <Stack spacing={2}>
         <TablePagination
-          rowsPerPageOptions={[6, 25, 100]}
+          rowsPerPageOptions={[6, 12]}
           component="div"
           count={renderList.length}
           rowsPerPage={rowsPerPage}
@@ -309,8 +364,6 @@ export const FilterFormLayOut = () => {
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </Stack>
-
-      <DevTool control={control} />
     </Container>
   );
 };

@@ -31,14 +31,11 @@ export function HotelCard({
   star,
   rating,
   price,
-  // imgUrl,
   typeAccommodation,
   numberOfRoom,
   onClick,
   favoriteToggle,
 }: IAccommodation) {
-  // console.log(imgUrl);
-
   const sortHotel: IHotel[] = useSelector(
     (state: any) => state.sortHotel.locationHotelList
   );
@@ -47,7 +44,7 @@ export function HotelCard({
     <Box onClick={onClick}>
       <Card
         variant="outlined"
-        sx={{ width: 270, margin: "auto", borderRadius: "" }}
+        sx={{ width: 270, margin: { xs: "auto", md: "auto" } }}
       >
         <CardOverflow>
           <AspectRatio ratio="2">
@@ -64,19 +61,19 @@ export function HotelCard({
               ))}
             </Carousel>
           </AspectRatio>
-          <IconButton
+          {/* <IconButton
             aria-label="Like minimal photography"
             sx={{
               position: "absolute",
               zIndex: 2,
-              borderRadius: "inherit",
+              borderRadius: "50%",
               right: "0",
               top: 0,
             }}
             onClick={favoriteToggle}
           >
             <FavoriteIcon color={"error"} />
-          </IconButton>
+          </IconButton> */}
         </CardOverflow>
         <CardContent>
           <Typography

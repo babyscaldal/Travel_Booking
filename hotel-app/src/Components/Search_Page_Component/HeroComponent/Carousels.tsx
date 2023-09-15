@@ -4,6 +4,7 @@ import { useState } from "react";
 import BookingModal from "./BookingModal";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../stores.ts/stores";
+import { Box, Typography } from "@mui/material";
 
 const Hero = styled.div`
   position: relative;
@@ -111,12 +112,20 @@ function ControlledCarousel() {
           ))}
         </Carousel>
         <Caption>
-          <div className="mb-3">
-            <h1 className="mb-3" style={{ fontSize: "60px" }}>
-              ✈ Discover the World ✈
-              <br /> Live Your Travel Dream!
-            </h1>
-          </div>
+          <Box>
+            <Typography
+              sx={{
+                fontSize: {
+                  xs: "32px",
+                  md: "48px",
+                  lg: "60px",
+                },
+                overflowWrap: "break-word",
+              }}
+            >
+              ✈ Discover the World ✈ Live Your Travel Dream!
+            </Typography>
+          </Box>
           <BookingModal />
         </Caption>
       </CarouselsBox>
