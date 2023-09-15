@@ -7,6 +7,7 @@ import thunk from "redux-thunk";
 import provincesReducer from "../reducers/ProvincesReducer";
 import { IProvince } from "../types/provinceType";
 import sortHotel, { IInitHotelState } from "../reducers/hotelList.reducer";
+import darkModeReducer from "../reducers/changeTheme.reducer";
 
 export interface RootState {
   loginReducer: any;
@@ -15,12 +16,16 @@ export interface RootState {
     selectedProvince: IProvince;
   };
   sortHotel: IInitHotelState;
+  darkModeReducer: {
+    isDark: boolean;
+  };
 }
 
 const allReducers = combineReducers({
   loginReducer,
   provincesReducer,
   sortHotel,
+  darkModeReducer,
 });
 
 const sagaMiddleware = createSagaMiddleware();

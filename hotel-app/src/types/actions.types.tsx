@@ -47,4 +47,7 @@ export const actionTypes = {
 
   // Order Hotel
   ORDER_HOTEL: "ORDER_HOTEL",
+
+  //DarkMode:
+  CHANGE_THEME: "CHANGE_THEME",
 };

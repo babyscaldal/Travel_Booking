@@ -158,7 +158,6 @@ export default function HotelBookingFormLayout() {
           </Grid>
         </Box>
       </form>
-      <DevTool control={control} />
     </FormProvider>
   );
 }

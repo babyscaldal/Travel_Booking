@@ -80,7 +80,7 @@ export default function Contact() {
           </p>
         </div>
       </Container>
-      <div style={{ backgroundColor: "#e9ecef" }}>
+      <div>
         <Container
           sx={{
             padding: "20px",
@@ -144,42 +144,6 @@ export default function Contact() {
               </div>
             </Grid>
           </Grid>
-          {/* <div style={{ marginBottom: "20px" }}>
-          <h5 style={{ fontWeight: "bold" }}>Đối tác</h5>
-          <div>
-            <PhoneInTalkIcon /> <span>1900 123 456</span>
-          </div>
-          <div>
-            <EmailIcon /> <span>partnership@traveldream.com</span>
-          </div>
-        </div> */}
-          {/* <div style={{ marginBottom: "20px" }}>
-          <h5 style={{ fontWeight: "bold" }}>Quảng cáo</h5>
-          <div>
-            <PhoneInTalkIcon /> <span>1900 456 789</span>
-          </div>
-          <div>
-            <EmailIcon /> <span>advertisement@traveldream.com</span>
-          </div>
-        </div> */}
-          {/* <div style={{ marginBottom: "20px" }}>
-          <h5 style={{ fontWeight: "bold" }}>Ấn phẩm & Truyền thông</h5>
-          <div>
-            <PhoneInTalkIcon /> <span>1900 987 654</span>
-          </div>
-          <div>
-            <EmailIcon /> <span>digitalmarketing@traveldream.com</span>
-          </div>
-        </div> */}
-          {/* <div style={{ marginBottom: "20px" }}>
-          <h5 style={{ fontWeight: "bold" }}>Chăm sóc khách hàng</h5>
-          <div>
-            <PhoneInTalkIcon /> <span>1900 654 321</span>
-          </div>
-          <div>
-            <EmailIcon /> <span>customercare@traveldream.com</span>
-          </div>
-        </div> */}
         </Container>
       </div>
     </Container>

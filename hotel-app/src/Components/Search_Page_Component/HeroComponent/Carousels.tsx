@@ -40,12 +40,6 @@ const Caption = styled.div`
   }
 `;
 
-// const NavBarWrapper = styled.div`
-//   position: fixed;
-//   z-index: 3;
-//   width: 100%;
-// `;
-
 const captionStyle = {
   color: "#fff",
   zIndex: "4",

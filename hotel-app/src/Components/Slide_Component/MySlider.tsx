@@ -75,10 +75,6 @@ const MySlider: React.FC = () => {
     navigate(`/accommodation/${domain}`);
   };
 
-  // useEffect(() => {
-  //   dispatch(setFormValue(selectedProvince));
-  // }, [selectedProvince]);
-
   return (
     <Box
       sx={{
@@ -101,6 +97,7 @@ const MySlider: React.FC = () => {
             />
           ))}
         </Slider>
+
         <h2
           style={{
             textAlign: "center",

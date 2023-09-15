@@ -6,10 +6,10 @@ import Divider from "@mui/joy/Divider";
 import Typography from "@mui/joy/Typography";
 import { capitalizeFirstLetter } from "../../../Ultiliti/CapitalizeFirstLetter";
 import { Box, Rating } from "@mui/material";
-import Carousel from "react-bootstrap/Carousel";
 import { useSelector } from "react-redux";
 import getRandomImage from "../../../Ultiliti/Random";
 import { IHotel } from "../../../types/hotelType";
+import { Carousel } from "react-bootstrap";
 export interface IAccommodation {
   address: string;
   name: string;

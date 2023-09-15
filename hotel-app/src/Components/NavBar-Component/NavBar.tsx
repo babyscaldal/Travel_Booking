@@ -10,26 +10,43 @@ import MyBooking from "./MyBooking/MyBooking";
 import LoginForm from "./Login/LoginForm";
 import RegisterForm from "./Register/RegisterForm";
 import { UserState } from "../../reducers/login.reducer";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import UserAccount from "./UserAccount/UserAccount";
 import { NavLink, useNavigate } from "react-router-dom";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import MenuResponsive from "./Menu/Menu";
-import { Button } from "@mui/material";
+import { Button, IconButton } from "@mui/material";
+import { RootState } from "../../stores.ts/stores";
+import { Favorite, FavoriteBorder } from "@mui/icons-material";
+import { changeTheme } from "../../actions/changeTheme";
+import { Checkbox } from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
+
+const styleLight = {
+  backgroundColor: "background.paper",
+  top: "0",
+};
+const styleDark = {
+  backgroundColor: "#121212",
+  top: "0",
+};
 
 export default function NavBar() {
   const userLogin: UserState = useSelector((state: any) => state.loginReducer);
   console.log("useLogin: ", userLogin);
   const navigate = useNavigate();
 
+  const dispatch = useDispatch();
+
+  const themeApply = useSelector(
+    (state: RootState) => state.darkModeReducer.isDark
+  );
+
   return (
     <React.Fragment>
       <CssBaseline />
-      <Box sx={{}}>
-        <AppBar
-          position="fixed"
-          sx={{ color: "#000", bgcolor: "#fff", top: "0" }}
-        >
+      <Box>
+        <AppBar position="fixed" sx={themeApply ? styleDark : styleLight}>
           <Container maxWidth="lg">
             <Box>
               <Toolbar>
@@ -37,11 +54,12 @@ export default function NavBar() {
                 <Box sx={{ width: "50px", flexGrow: 1 }}>
                   <NavLink to={"/"}>
                     <img
-                      src="../../../public/logo-black-aaabgRemoved.png"
-                      // alt="logo"
-                      // width="50%"
+                      src={
+                        themeApply
+                          ? "../../../public/white1.png"
+                          : "../../../public/Black1.png"
+                      }
                       height="60px"
-                      // style={{ objectFit: "cover" }}
                     />
                   </NavLink>
                 </Box>
@@ -52,8 +70,13 @@ export default function NavBar() {
                   {/* Download app mobile */}
                   <DownloadApp />
 
-                  {/* Contact */}
-                  <Button color="inherit" onClick={() => navigate("/contact")}>
+                  {/* Cooperate */}
+                  <Button
+                    sx={{
+                      color: "text.primary",
+                    }}
+                    onClick={() => navigate("/contact")}
+                  >
                     <HandshakeOutlinedIcon
                       color="primary"
                       sx={{ mr: 0.5 }}
@@ -66,7 +89,11 @@ export default function NavBar() {
                   <MyBooking />
 
                   <Box
-                    sx={{ display: `${userLogin.isLogin ? "none" : "flex"}` }}
+                    sx={{
+                      display: `${userLogin.isLogin ? "none" : "flex"}`,
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                    }}
                   >
                     {/* Login */}
                     <LoginForm type="text">
@@ -76,6 +103,11 @@ export default function NavBar() {
 
                     {/* Sign Up */}
                     <RegisterForm />
+                    <Checkbox
+                      icon={<FavoriteBorder sx={{ color: "primary.main" }} />}
+                      checkedIcon={<Favorite sx={{ color: "error.main" }} />}
+                      onChange={() => dispatch(changeTheme())}
+                    />
                   </Box>
                   {/* Logged User */}
                   <Box
@@ -88,16 +120,25 @@ export default function NavBar() {
                       avatar={userLogin.user.image}
                     />
                   </Box>
+                  {/*Dark mode nav */}
+                  <Box></Box>
                 </Box>
 
                 {/* Menu responsive */}
                 <MenuResponsive />
+                <IconButton
+                  size="large"
+                  edge="start"
+                  aria-label="menu"
+                  sx={{ mr: 2, display: { xs: "inline-block", md: "none" } }}
+                >
+                  <MenuIcon />
+                </IconButton>
               </Toolbar>
             </Box>
           </Container>
         </AppBar>
       </Box>
-      <h1></h1>
     </React.Fragment>
   );
 }
