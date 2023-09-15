@@ -76,15 +76,53 @@ export function getInfoUserLocal(): IBookedUser {
 // init state
 const initState: IInitHotelState = {
   locationHotelList: getLocationHotelList(),
+  // locationHotelList: [],
   filterStarHotel: [],
   filterTypeAccommodation: [],
   selectedHotel: getSelectedHotel(),
-  // orderHotelList: [],
   infoUser: getInfoUserLocal(),
 };
 
 const sortHotel = (state = initState, action: IActionProps) => {
   switch (action.type) {
+    // start: get hotel location
+    case actionTypes.GET_HOTELS_BY_LOCATION_REQUEST:
+      console.log("GET_HOTELS_BY_LOCATION_REQUEST:", action);
+      return {
+        ...state,
+        isLoading: true,
+        isError: false,
+      };
+
+    case actionTypes.GET_HOTELS_BY_LOCATION_SUCCESS:
+      console.log("GET_HOTELS_BY_LOCATION_SUCCESS:", action);
+      localStorage.setItem(
+        "locationHotelList",
+        JSON.stringify([
+          ...action.payload
+            .slice()
+            .sort((a: IHotel, b: IHotel) => b.price - a.price),
+        ])
+      );
+
+      return {
+        ...state,
+        locationHotelList: action.payload
+          .slice()
+          .sort((a: IHotel, b: IHotel) => b.price - a.price),
+        isLoading: false,
+        isError: false,
+      };
+
+    case actionTypes.GET_HOTELS_BY_LOCATION_ERROR:
+      console.log("GET_HOTELS_BY_LOCATION_ERROR:", action);
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+      };
+    // end: get hotel location
+
     case actionTypes.SORT_BY_HIGHEST_PRICE:
       return { ...state, locationHotelList: action.payload };
     case actionTypes.SORT_BY_LOWEST_PRICE:
@@ -97,23 +135,6 @@ const sortHotel = (state = initState, action: IActionProps) => {
       return { ...state, filterTypeAccommodation: action.payload };
     case actionTypes.RESET_FILTER:
       return { ...state, filterStarHotel: [], filterTypeAccommodation: [] };
-
-    // selected location
-    case actionTypes.SEARCH_HOTELS_BY_LOCATION:
-      localStorage.setItem(
-        "locationHotelList",
-        JSON.stringify(
-          action.payload
-            .slice()
-            .sort((a: IHotel, b: IHotel) => b.price - a.price)
-        )
-      );
-      return {
-        ...state,
-        locationHotelList: action.payload
-          .slice()
-          .sort((a: IHotel, b: IHotel) => b.price - a.price),
-      };
 
     //selectedHotel
     case actionTypes.SELECTED_HOTEL:

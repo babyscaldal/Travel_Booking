@@ -6,9 +6,14 @@ export interface IAction {
   payload?: IProvince[];
 }
 
+export function getSelectedProvince(): IProvince {
+  const res = localStorage.getItem("selectedProvince") as string;
+  return JSON.parse(res) || {};
+}
+
 const INITIAL_STATE = {
   listProvinces: [],
-  selectedProvince: {} as IProvince,
+  selectedProvince: getSelectedProvince(),
 };
 
 const provincesReducer = (state = INITIAL_STATE, action: IAction) => {
@@ -42,6 +47,10 @@ const provincesReducer = (state = INITIAL_STATE, action: IAction) => {
 
     case actionTypes.WATCH_FORM_VALUE:
       console.log("Tao đã Set lại value:", action);
+      localStorage.setItem(
+        "selectedProvince",
+        JSON.stringify({ ...action.payload })
+      );
       return {
         ...state,
         selectedProvince: { ...action.payload },

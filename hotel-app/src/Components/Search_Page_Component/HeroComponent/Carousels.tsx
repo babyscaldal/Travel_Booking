@@ -76,7 +76,7 @@ function ControlledCarousel() {
     (state: RootState) => state.provincesReducer.listProvinces
   );
 
-  console.log(provincesList);
+  // console.log(provincesList);
 
   const heroImageUrl: string[] = Array.from(
     { length: 10 },

@@ -29,21 +29,10 @@ const NavBarWrapper = styled.div`
 
 function App() {
   const dispatch = useDispatch();
-  const hotelsDataByLocation = useSelector(
-    (state: RootState) => state.hotelsByLocationReducer.hotelsListByLocation
-  );
-
-  // const provinces = useSelector(
-  //   (state: RootState) => state.provincesReducer.listProvinces
-  // );
 
   useEffect(() => {
     dispatch(fetchAllProvince());
   }, []);
-
-  useEffect(() => {
-    dispatch(handleSearchHotelsByLocation(hotelsDataByLocation));
-  }, [hotelsDataByLocation]);
 
   const userLogin: UserState = useSelector((state: any) => state.loginReducer);
 
