@@ -26,6 +26,7 @@ export interface IAccommodation {
   typeAccommodation: string;
   numberOfRoom: number;
   onClick: () => void;
+  favoriteToggle: () => void;
 }
 
 export function HotelCard({
@@ -38,6 +39,7 @@ export function HotelCard({
   typeAccommodation,
   numberOfRoom,
   onClick,
+  favoriteToggle,
 }: IAccommodation) {
   // console.log(imgUrl);
 
@@ -65,14 +67,6 @@ export function HotelCard({
                 </Carousel.Item>
               ))}
             </Carousel>
-            {/* <div>
-            <img
-              src={imgUrl}
-              srcSet={subImgUrl}
-              loading="lazy"
-              alt="hotel image"
-            />
-          </div> */}
           </AspectRatio>
           <IconButton
             aria-label="Like minimal photography"
@@ -83,8 +77,8 @@ export function HotelCard({
               borderRadius: "inherit",
               right: "0",
               top: 0,
-              // transform: "translateY(-50%)",
             }}
+            onClick={favoriteToggle}
           >
             <FavoriteIcon color={"error"} />
           </IconButton>

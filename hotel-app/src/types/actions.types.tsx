@@ -47,4 +47,7 @@ export const actionTypes = {
 
   // Order Hotel
   ORDER_HOTEL: "ORDER_HOTEL",
+
+  // Favorite hotel
+  FAVORITE_HOTEL: "FAVORITE_HOTEL",
 };

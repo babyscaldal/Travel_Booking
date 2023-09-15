@@ -16,6 +16,7 @@ import { useSelector } from "react-redux";
 import UserAccount from "./UserAccount/UserAccount";
 import { NavLink, Navigate, useNavigate } from "react-router-dom";
 import MenuResponsive from "./Menu/Menu";
+import FavoriteBtn from "./Favorite/FavoriteBtn";
 
 export default function NavBar() {
   const userLogin: UserState = useSelector((state: any) => state.loginReducer);
@@ -61,6 +62,9 @@ export default function NavBar() {
                     />
                     Hợp tác
                   </Button>
+
+                  {/* Favorite */}
+                  <FavoriteBtn />
 
                   {/* My booking */}
                   <MyBooking />

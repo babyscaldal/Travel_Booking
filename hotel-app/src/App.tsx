@@ -18,6 +18,7 @@ import { HomePage } from "./pages/Homepage/HomePage";
 import OrderHotelList from "./Components/NavBar-Component/MyBooking/OrderHotelList";
 import LoginWarning from "./Components/LoginWarning/LoginWarning";
 import { UserState } from "./reducers/login.reducer";
+import { FavoriteList } from "./Components/NavBar-Component/Favorite/FavoriteList";
 
 const NavBarWrapper = styled.div`
   position: fixed;
@@ -52,6 +53,8 @@ function App() {
         <Route path={"/accommodation/:city/:id"} element={<DetailPage />} />
         <Route path={"contact"} element={<Contact />} />
         <Route path={"order-hotel"} element={<OrderHotelList />} />
+        <Route path={"favorite-hotel"} element={<FavoriteList />} />
+        <Route path={"favorite-hotel/:id"} element={<DetailPage />} />
       </Routes>
       <Footer />
     </>

@@ -21,6 +21,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import {
   getAllHotelsByLocation,
+  handleToggleFavoriteHotelList,
   selectedHotel,
 } from "../../../actions/getHotels.actions";
 import { IProvince } from "../../../types/provinceType";
@@ -163,10 +164,30 @@ export const FilterFormLayOut = () => {
     setPage(0);
   };
 
-  // const [page, setPage] = useState(1);
-  // const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
-  //   setPage(value);
-  // };
+  const favoriteList: IHotel[] = useSelector(
+    (state: any) => state.sortHotel.favoriteList
+  );
+
+  const handleToggle = (selectedData: IHotel) => {
+    console.log("Selected data: ", selectedData);
+    console.log("favoriteList: ", favoriteList);
+    if (!favoriteList.length) {
+      const newFavoriteList: IHotel[] = [selectedData];
+      console.log("newFavoriteList: ", newFavoriteList);
+      dispatch(handleToggleFavoriteHotelList(newFavoriteList));
+    } else {
+      const newFavoriteList = favoriteList.filter((item) => {
+        return item.id !== selectedData.id;
+      });
+      if (newFavoriteList.length !== favoriteList.length) {
+        dispatch(handleToggleFavoriteHotelList(newFavoriteList));
+      } else {
+        dispatch(
+          handleToggleFavoriteHotelList([selectedData, ...newFavoriteList])
+        );
+      }
+    }
+  };
 
   return (
     <Container maxWidth="lg" sx={{ paddingTop: 10 }}>
@@ -255,7 +276,6 @@ export const FilterFormLayOut = () => {
                     stars,
                     rating,
                     price,
-                    // image,
                     type,
                     numberOfRoom,
                     id,
@@ -287,11 +307,10 @@ export const FilterFormLayOut = () => {
                           star={stars}
                           rating={rating}
                           price={price}
-                          // imgUrl={image}
-                          // subImgUrl={image}
                           typeAccommodation={type}
                           numberOfRoom={numberOfRoom}
                           onClick={() => handleOnClick(renderList[index])}
+                          favoriteToggle={() => handleToggle(renderList[index])}
                         />
                       </Link>
                     </Grid>
