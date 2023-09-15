@@ -1,17 +1,13 @@
 import {
-  Box,
   Container,
   Stack,
   Typography,
-  Divider,
   Grid,
   TablePagination,
   Pagination,
+  Box,
 } from "@mui/material";
-import map from "../../../assets/map.png";
-import { RadioField } from "./RadioField";
 import { FormProvider, useForm } from "react-hook-form";
-import FilterSubMenu from "./FilterSubMenu";
 import { DevTool } from "@hookform/devtools";
 import SearchField from "./SearchField";
 import { HotelCard } from "./HotelCard";
@@ -26,6 +22,8 @@ import {
 import { IProvince } from "../../../types/provinceType";
 import { Link, useNavigate } from "react-router-dom";
 import { RootState } from "../../../stores.ts/stores";
+import AppBar from "@mui/material/AppBar";
+import PersistentDrawerLeft from "./Drawer";
 export interface IFilterFormValue {
   radio: string;
   city: IProvince | null;
@@ -173,69 +171,37 @@ export const FilterFormLayOut = () => {
     setPage(0);
   };
 
-  // const [page, setPage] = useState(1);
-  // const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
-  //   setPage(value);
-  // };
-
   return (
-    <Container maxWidth="lg" sx={{ paddingTop: 10 }}>
-      <Grid
-        container
-        spacing={2}
-        sx={{ flexWrap: "nowrap", justifyContent: "center" }}
-      >
-        <Grid item xs={3} sx={{ minWidth: "250px" }}>
-          <FormProvider {...form}>
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <Stack spacing={2}>
-                {/* Map */}
-
-                <Box>
-                  <img
-                    src={map}
-                    alt="map"
-                    width={"100%"}
-                    height={"100%"}
-                    style={{ borderRadius: "6px" }}
-                  />
-                </Box>
-
-                <SearchField
-                  onAddRoom={handleAddRoom}
-                  onRemoveRoom={handleRemoveRoom}
-                />
-
-                {/* Radio */}
-
-                <Box bgcolor="white" padding="10px" borderRadius="6px">
-                  <Typography
-                    sx={{ fontSize: "16px", fontWeight: "bold" }}
-                    component="p"
-                  >
-                    Sắp xếp kết quả
-                  </Typography>
-
-                  <Typography sx={{ fontSize: "14px", color: "#687176" }}>
-                    Sắp xếp kết quả theo lựa chọn
-                  </Typography>
-
-                  <Divider />
-
-                  <RadioField name="radio" />
-                </Box>
-
-                <Box>
-                  <FilterSubMenu />
-                </Box>
-              </Stack>
-            </form>
-          </FormProvider>
-        </Grid>
-
-        <Grid item xs={9}>
-          <Grid container sx={{ justifyItems: "center" }}>
-            <Grid item xs={12} sx={{ margin: "0 0 16px 0" }}>
+    <Container maxWidth="lg" sx={{ paddingTop: "78px" }}>
+      <Grid container spacing={2}>
+        <AppBar
+          position={"fixed"}
+          sx={{
+            backgroundColor: "#fff",
+            marginTop: "64px",
+            paddingTop: "20px",
+            zIndex: 2,
+          }}
+        >
+          <Grid container spacing={2} justifyContent={"space-between"}>
+            <Grid item xs={12}>
+              <FormProvider {...form}>
+                <form onSubmit={handleSubmit(onSubmit)}>
+                  <Grid container spacing={2} justifyContent={"space-between"}>
+                    <Grid item xs={12} md={2.5}>
+                      <PersistentDrawerLeft />
+                    </Grid>
+                    <Grid item xs={12} md={8}>
+                      <SearchField
+                        onAddRoom={handleAddRoom}
+                        onRemoveRoom={handleRemoveRoom}
+                      />
+                    </Grid>
+                  </Grid>
+                </form>
+              </FormProvider>
+            </Grid>
+            <Grid item xs={6}>
               <Typography
                 variant="body1"
                 color="initial"
@@ -252,63 +218,76 @@ export const FilterFormLayOut = () => {
                 </span>
               </Typography>
             </Grid>
-
-            {/* Map */}
-
-            {renderList
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map(
-                (
-                  {
-                    name,
-                    address,
-                    stars,
-                    rating,
-                    price,
-                    // image,
-                    type,
-                    numberOfRoom,
-                    id,
-                  },
-
-                  index
-                ) => {
-                  return (
-                    <Grid
-                      key={index}
-                      item
-                      xs={12}
-                      md={6}
-                      lg={4}
-                      sx={{
-                        margin: "auto",
-                        marginBottom: "15px",
-                        transition: "all 0.25s",
-                        "&:hover": {
-                          cursor: "pointer",
-                          transform: "translateY(-15px)",
-                        },
-                      }}
-                    >
-                      <Link to={String(id)} style={{ textDecoration: "none" }}>
-                        <HotelCard
-                          address={address}
-                          name={name}
-                          star={stars}
-                          rating={rating}
-                          price={price}
-                          // imgUrl={image}
-                          // subImgUrl={image}
-                          typeAccommodation={type}
-                          numberOfRoom={numberOfRoom}
-                          onClick={() => handleOnClick(renderList[index])}
-                        />
-                      </Link>
-                    </Grid>
-                  );
-                }
-              )}
+            <Grid item xs={6}>
+              <Stack spacing={2}>
+                <TablePagination
+                  rowsPerPageOptions={[6, 25, 100]}
+                  component="div"
+                  count={renderList.length}
+                  rowsPerPage={rowsPerPage}
+                  page={page}
+                  onPageChange={handleChangePage}
+                  onRowsPerPageChange={handleChangeRowsPerPage}
+                />
+              </Stack>
+            </Grid>
           </Grid>
+        </AppBar>
+
+        {/* Map */}
+        <Grid container marginTop={"140px"}>
+          {renderList
+            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+            .map(
+              (
+                {
+                  name,
+                  address,
+                  stars,
+                  rating,
+                  price,
+                  // image,
+                  type,
+                  numberOfRoom,
+                  id,
+                },
+
+                index
+              ) => {
+                return (
+                  <Grid
+                    key={index}
+                    item
+                    xs={12}
+                    md={6}
+                    lg={3}
+                    sx={{
+                      marginBottom: "15px",
+                      transition: "all 0.25s",
+                      "&:hover": {
+                        cursor: "pointer",
+                        transform: "translateY(-15px)",
+                      },
+                    }}
+                  >
+                    <Link to={String(id)} style={{ textDecoration: "none" }}>
+                      <HotelCard
+                        address={address}
+                        name={name}
+                        star={stars}
+                        rating={rating}
+                        price={price}
+                        // imgUrl={image}
+                        // subImgUrl={image}
+                        typeAccommodation={type}
+                        numberOfRoom={numberOfRoom}
+                        onClick={() => handleOnClick(renderList[index])}
+                      />
+                    </Link>
+                  </Grid>
+                );
+              }
+            )}
         </Grid>
       </Grid>
       <Stack spacing={2}>

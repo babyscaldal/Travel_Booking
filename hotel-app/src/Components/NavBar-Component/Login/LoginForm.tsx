@@ -16,13 +16,13 @@ import {
 import { FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 // import { IUsers } from "../../types/users";
 
 import { useDispatch } from "react-redux";
 import { IUserLoginReq } from "../../../types/userType";
 import { LoginRes } from "../../../actions/login.actions";
 import { IFormLoginValues } from "../../../types/LoginTypes";
+import LoginSuccess from "./LoginSusccess";
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -33,7 +33,28 @@ const Transition = React.forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function LoginForm() {
+interface ILoginForm {
+  children: React.ReactNode;
+  type?: "text" | "contained" | "outlined";
+  material?: string;
+  width?: string;
+  color?:
+    | "inherit"
+    | "primary"
+    | "success"
+    | "warning"
+    | "secondary"
+    | "info"
+    | "error";
+}
+
+export default function LoginForm({
+  children,
+  type = "text",
+  material = "text.primary",
+  width = "100%",
+  color,
+}: ILoginForm) {
   const [open, setOpen] = React.useState(false);
   const [showPassword, setShowPassword] = React.useState<boolean>(false);
 
@@ -63,12 +84,7 @@ export default function LoginForm() {
     resolver: yupResolver(schema),
   });
 
-  const {
-    control,
-    formState: { errors },
-    handleSubmit,
-    reset,
-  } = form;
+  const { handleSubmit, reset } = form;
 
   const dispatch = useDispatch();
 
@@ -92,13 +108,14 @@ export default function LoginForm() {
   return (
     <div>
       <Button
-        variant="text"
-        sx={{ color: "text.primary" }}
+        sx={{ color: material, width: width }}
+        color={color}
+        variant={type}
         onClick={() => {
           handleClickOpen();
         }}
       >
-        <AccountCircleIcon color="primary" sx={{ mr: 0.5 }} /> Đăng nhập
+        {children}
       </Button>
       <Dialog
         open={open}
@@ -139,9 +156,10 @@ export default function LoginForm() {
                     label="Change to display password"
                   />
 
-                  <Button variant="contained" color="primary" type="submit">
+                  {/* <Button variant="contained" color="primary" type="submit">
                     Login
-                  </Button>
+                  </Button> */}
+                  <LoginSuccess />
                   <Grid container>
                     <Grid item xs>
                       <Link href="#" variant="body2">

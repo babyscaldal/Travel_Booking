@@ -92,10 +92,10 @@ export default function OrderHotelList() {
                         page * rowsPerPage,
                         page * rowsPerPage + rowsPerPage
                       )
-                      .map((item) => (
+                      .map((item, index) => (
                         <OrderedHotelListItem
                           arr={orderHotelList}
-                          key={item.id}
+                          key={index}
                           hotelName={item.name}
                           address={item.address}
                           totalPrice={item.price}

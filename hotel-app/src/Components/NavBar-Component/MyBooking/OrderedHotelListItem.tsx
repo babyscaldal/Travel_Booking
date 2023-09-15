@@ -38,38 +38,17 @@ export const OrderedHotelListItem = ({
         "&:last-child td, &:last-child th": { border: 0 },
       }}
     >
-      <Carousel
-        data-bs-theme="dark"
-        slide={false}
-        fade
-        indicators={false}
-        controls={false}
-      >
-        {arr.map((item) => (
-          <Carousel.Item>
-            <Box
-              sx={{
-                height: "100px",
-                width: "200px",
-                padding: "2.5px 0",
-                backgroundColor: "transparent",
-              }}
-            >
-              <img
-                height="100%"
-                width="100%"
-                className="d-block w-100"
-                src={getRandomImage(item.image)}
-                srcSet={getRandomImage(item.image)}
-                alt="hotel image"
-                style={{ objectFit: "cover" }}
-              />
-            </Box>
-          </Carousel.Item>
-        ))}
-      </Carousel>
-      {/* </Box> */}
-      {/* </TableCell> */}
+      <TableCell align="center">
+        <img
+          height="100px"
+          width="100%"
+          className="d-block w-100"
+          src={getRandomImage(imageUrl)}
+          srcSet={getRandomImage(imageUrl)}
+          alt="hotel image"
+          style={{ objectFit: "cover" }}
+        />
+      </TableCell>
       <TableCell align="center">
         <Typography
           component={"span"}

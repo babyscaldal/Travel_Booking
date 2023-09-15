@@ -77,6 +77,35 @@ const initState: IInitHotelState = {
 
 const sortHotel = (state = initState, action: IActionProps) => {
   switch (action.type) {
+    case actionTypes.GET_HOTELS_BY_LOCATION_REQUEST:
+      console.log("GET_HOTELS_BY_LOCATION_REQUEST:", action);
+      return {
+        ...state,
+        isLoading: true,
+        isError: false,
+      };
+
+    case actionTypes.GET_HOTELS_BY_LOCATION_SUCCESS:
+      console.log("GET_HOTELS_BY_LOCATION_SUCCESS:", action);
+
+      return {
+        ...state,
+        locationHotelList: action.payload
+          .slice()
+          .sort((a: IHotel, b: IHotel) => b.price - a.price),
+        isLoading: false,
+        isError: false,
+      };
+
+    case actionTypes.GET_HOTELS_BY_LOCATION_ERROR:
+      console.log("GET_HOTELS_BY_LOCATION_ERROR:", action);
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+      };
+
+    //
     case actionTypes.SORT_BY_HIGHEST_PRICE:
       return { ...state, locationHotelList: action.payload };
     case actionTypes.SORT_BY_LOWEST_PRICE:
@@ -89,13 +118,13 @@ const sortHotel = (state = initState, action: IActionProps) => {
       return { ...state, filterTypeAccommodation: action.payload };
     case actionTypes.RESET_FILTER:
       return { ...state, filterStarHotel: [], filterTypeAccommodation: [] };
-    case actionTypes.SEARCH_HOTELS_BY_LOCATION:
-      return {
-        ...state,
-        locationHotelList: action.payload
-          .slice()
-          .sort((a: IHotel, b: IHotel) => b.price - a.price),
-      };
+    // case actionTypes.SEARCH_HOTELS_BY_LOCATION:
+    //   return {
+    //     ...state,
+    //     locationHotelList: action.payload
+    //       .slice()
+    //       .sort((a: IHotel, b: IHotel) => b.price - a.price),
+    //   };
     case actionTypes.SELECTED_HOTEL:
       return { ...state, selectedHotel: action.payload };
 

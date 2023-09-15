@@ -65,29 +65,7 @@ export function HotelCard({
                 </Carousel.Item>
               ))}
             </Carousel>
-            {/* <div>
-            <img
-              src={imgUrl}
-              srcSet={subImgUrl}
-              loading="lazy"
-              alt="hotel image"
-            />
-          </div> */}
           </AspectRatio>
-          <IconButton
-            aria-label="Like minimal photography"
-            size="md"
-            sx={{
-              position: "absolute",
-              zIndex: 2,
-              borderRadius: "inherit",
-              right: "0",
-              top: 0,
-              // transform: "translateY(-50%)",
-            }}
-          >
-            <FavoriteIcon color={"error"} />
-          </IconButton>
         </CardOverflow>
         <CardContent>
           <Typography

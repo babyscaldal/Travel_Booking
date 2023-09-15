@@ -12,6 +12,9 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../stores.ts/stores";
 import { useDispatch } from "react-redux";
 import { handleOrderHotel } from "../../actions/getHotels.actions";
+import BookingSuccessAlert from "./BookingSuccessAlert";
+import { UserState } from "../../reducers/login.reducer";
+import LoginForm from "../NavBar-Component/Login/LoginForm";
 
 export type IBookingFormValue = {
   bookingDate: Dayjs[];
@@ -37,7 +40,13 @@ export default function BookForm() {
     },
   });
 
-  const { control, handleSubmit, watch, setValue } = form;
+  const {
+    control,
+    handleSubmit,
+    watch,
+    setValue,
+    formState: { isSubmitting },
+  } = form;
 
   const handleAddAdult = () => {
     const currentAdultValue = watch("adult");
@@ -134,6 +143,11 @@ export default function BookForm() {
   const total = watchedValues[0] * selectedHotel.price * night;
 
   const dispatch = useDispatch();
+
+  const isLogin: UserState = useSelector(
+    (state: any) => state.loginReducer.isLogin
+  );
+
   const onSubmit = (data: IBookingFormValue) => {
     console.log(data);
 
@@ -159,9 +173,29 @@ export default function BookForm() {
               <Grid container spacing={2}>
                 <Grid item xs={12}>
                   <DateRangePickerField name={"bookingDate"} />
+                  <span>
+                    *
+                    <em style={{ fontSize: "14px" }}>
+                      {selectedHotel.type === "resort" &&
+                        "Resort cho phép tối đa 12 người"}
+                    </em>
+                  </span>
+                  <span>
+                    <em style={{ fontSize: "14px" }}>
+                      {selectedHotel.type === "hotel" &&
+                        "1 phòng tối đa 4 người"}
+                    </em>
+                  </span>
+                  <span>
+                    <em style={{ fontSize: "14px" }}>
+                      {selectedHotel.type === "motel" &&
+                        "1 phòng tối đa 4 người"}
+                    </em>
+                  </span>
                 </Grid>
               </Grid>
             </Grid>
+
             {/* Adult */}
             <Grid item xs={12}>
               <People
@@ -288,27 +322,10 @@ export default function BookForm() {
                   </Grid>
                 </Grid>
               </People>
-              <span>
-                *
-                <em style={{ fontSize: "14px" }}>
-                  {selectedHotel.type === "resort" &&
-                    "Resort cho phép tối đa 12 người"}
-                </em>
-              </span>
-              <span>
-                <em style={{ fontSize: "14px" }}>
-                  {selectedHotel.type === "hotel" && "1 phòng tối đa 4 người"}
-                </em>
-              </span>
-              <span>
-                <em style={{ fontSize: "14px" }}>
-                  {selectedHotel.type === "motel" && "1 phòng tối đa 4 người"}
-                </em>
-              </span>
             </Grid>
 
             <Grid item xs={12} justifyContent={"center"} alignItems={"stretch"}>
-              <Button
+              {/* <Button
                 size="large"
                 type="submit"
                 variant="contained"
@@ -316,7 +333,18 @@ export default function BookForm() {
                 color="success"
               >
                 Đặt phòng
-              </Button>
+              </Button> */}
+              {isLogin ? (
+                <BookingSuccessAlert />
+              ) : (
+                <LoginForm
+                  color="warning"
+                  type="contained"
+                  material="background.paper"
+                >
+                  Đăng nhập để đặt phòng
+                </LoginForm>
+              )}
             </Grid>
             <Grid item xs={12}>
               <Divider

@@ -15,7 +15,8 @@ import RegisterForm from "./Register/RegisterForm";
 import { UserState } from "../../reducers/login.reducer";
 import { useSelector } from "react-redux";
 import UserAccount from "./UserAccount/UserAccount";
-import { NavLink, Navigate, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 export default function NavBar() {
   const userLogin: UserState = useSelector((state: any) => state.loginReducer);
@@ -27,7 +28,7 @@ export default function NavBar() {
       <CssBaseline />
       <Box sx={{}}>
         <AppBar
-          position="static"
+          position="fixed"
           sx={{ color: "#000", bgcolor: "#fff", top: "0" }}
         >
           <Container maxWidth="lg">
@@ -68,7 +69,10 @@ export default function NavBar() {
                     sx={{ display: `${userLogin.isLogin ? "none" : "flex"}` }}
                   >
                     {/* Login */}
-                    <LoginForm />
+                    <LoginForm type="text">
+                      <AccountCircleIcon color="primary" sx={{ mr: 0.5 }} />
+                      Đăng nhập
+                    </LoginForm>
 
                     {/* Sign Up */}
                     {/* <RegisterBtn /> */}

@@ -14,34 +14,18 @@ import { handleSearchHotelsByLocation } from "./actions/sortHotel.actions";
 import Contact from "./Components/NavBar-Component/Contact/Contact";
 import DetailPage from "./Components/DetailPage_Component/DetailePage";
 import Footer from "./Components/Footer_Component/footer/Footer";
-import { HomePage } from "./pages/Homepage/HomePage";
 import OrderHotelList from "./Components/NavBar-Component/MyBooking/OrderHotelList";
-import LoginWarning from "./Components/LoginWarning/LoginWarning";
 import { UserState } from "./reducers/login.reducer";
-
-const NavBarWrapper = styled.div`
-  position: fixed;
-  z-index: 3;
-  width: 100%;
-`;
+import { HomePage } from "./Pages/Homepage/HomePage";
+import LoginSuccess from "./Components/NavBar-Component/Login/LoginSusccess";
+import TemporaryDrawer from "./Components/Search_Page_Component/HotelCard/Drawer";
 
 function App() {
   const dispatch = useDispatch();
-  const hotelsDataByLocation = useSelector(
-    (state: RootState) => state.hotelsByLocationReducer.hotelsListByLocation
-  );
-
-  // const provinces = useSelector(
-  //   (state: RootState) => state.provincesReducer.listProvinces
-  // );
 
   useEffect(() => {
     dispatch(fetchAllProvince());
   }, []);
-
-  useEffect(() => {
-    dispatch(handleSearchHotelsByLocation(hotelsDataByLocation));
-  }, [hotelsDataByLocation]);
 
   const userLogin: UserState = useSelector((state: any) => state.loginReducer);
 
@@ -49,9 +33,7 @@ function App() {
     <>
       <Box>
         <CssBaseline />
-        <NavBarWrapper>
-          <NavBar />
-        </NavBarWrapper>
+        <NavBar />
         {/* <LoginWarning booleanState={!userLogin.isLogin} /> */}
       </Box>
       <Routes>
