@@ -1,11 +1,8 @@
-import { Box, Button, Grid } from "@mui/material";
+import { Box, Button, Grid, Typography } from "@mui/material";
 import { FormProvider, useForm } from "react-hook-form";
-import { DevTool } from "@hookform/devtools";
 import dayjs, { Dayjs } from "dayjs";
 import DateRangePickerField from "./BookingFormField/DateRangePickerField.tsx";
 import InputField from "./BookingFormField/InputField.tsx";
-import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
-import AddCircleIcon from "@mui/icons-material/AddCircle";
 import CitySearchField from "./BookingFormField/CitySearchField.tsx";
 import { IProvince } from "../../../../types/provinceType.ts";
 import { useDispatch, useSelector } from "react-redux";
@@ -65,7 +62,7 @@ export default function HotelBookingFormLayout() {
   );
   console.log("Provinces: ", provinces);
 
-  const { control, handleSubmit, watch, setValue, reset } = form;
+  const { handleSubmit, watch, setValue, reset } = form;
 
   const handleAddRoom = () => {
     const currentRoomValue = watch("room");
@@ -100,52 +97,66 @@ export default function HotelBookingFormLayout() {
       <form onSubmit={handleSubmit(onSubmit)}>
         <Box>
           <Grid container spacing={3} justifyContent={"center"}>
+            <Grid item xs={12}>
+              <Typography
+                variant="h5"
+                component={"h3"}
+                sx={{
+                  textAlign: "center",
+                  fontWeight: "bold",
+                  color: "text.primary",
+                }}
+              >
+                TÌM TỔ ẤM VỚI TRAVEL DREAM HOMES
+              </Typography>
+              <Typography
+                variant="h6"
+                component={"p"}
+                sx={{ textAlign: "center", color: "text.primary" }}
+              >
+                Rộng rãi hơn, chân thực hơn, nhiều lý do để đi du lịch hơn.
+              </Typography>
+            </Grid>
             {/* City */}
-            <Grid item xs={6}>
+            <Grid item xs={12} md={5} lg={3}>
               <CitySearchField />
             </Grid>
 
             {/* Date */}
-            <Grid item xs={6}>
+            <Grid item xs={12} md={7} lg={4}>
               <Grid container spacing={2}>
-                <Grid item xs={12}>
+                <Grid item lg={12}>
                   <DateRangePickerField name={"bookingDate"} />
                 </Grid>
               </Grid>
             </Grid>
 
             {/* Rooms */}
-            <Grid item xs={6}>
+            <Grid item xs={12} md={5} lg={2}>
               <Box
                 display={"flex"}
                 justifyContent={"flex-start"}
                 alignItems={"stretch"}
                 gap={"4px"}
               >
-                <Button
-                  onClick={() => {
-                    handleRemoveRoom();
-                  }}
-                  type="button"
-                  variant="outlined"
-                >
-                  <RemoveCircleIcon sx={{ fontSize: "24px" }} />
-                </Button>
-                <InputField name="room" label="Số phòng" />
-                <Button
-                  onClick={() => {
-                    handleAddRoom();
-                  }}
-                  type="button"
-                  variant="outlined"
-                >
-                  <AddCircleIcon sx={{ fontSize: "24px" }} />
-                </Button>
+                <InputField
+                  name="room"
+                  label="Số phòng"
+                  onAdd={handleAddRoom}
+                  onRemove={handleRemoveRoom}
+                />
               </Box>
             </Grid>
 
             {/* Submit Btn */}
-            <Grid item xs={6} justifyContent={"center"} alignItems={"stretch"}>
+            <Grid
+              item
+              xs={12}
+              md={7}
+              lg={3}
+              justifyContent={"center"}
+              alignItems={"stretch"}
+            >
               <Button
                 size="large"
                 type="submit"

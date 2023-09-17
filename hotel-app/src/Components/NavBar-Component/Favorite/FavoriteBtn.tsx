@@ -19,12 +19,13 @@ export default function FavoriteBtn({ handleClose }: IMyBookingProps) {
   return (
     <React.Fragment>
       <Button
-        sx={{ color: "text.primary" }}
+        sx={{ color: "text.primary", display: "block" }}
         onClick={() =>
           userLogin.isLogin ? navigate("favorite-hotel") : setOpen(true)
         }
       >
-        <FavoriteIcon color="primary" sx={{ mr: 0.5 }} /> Yêu thích
+        <FavoriteIcon color="primary" sx={{ mr: 0.5 }} />
+        Yêu thích
       </Button>
       {
         <LoginWarning

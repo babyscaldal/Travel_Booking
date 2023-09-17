@@ -4,7 +4,7 @@ import { useState } from "react";
 import BookingModal from "./BookingModal";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../stores.ts/stores";
-import { Box, Typography } from "@mui/material";
+import { Box, ThemeProvider, Typography, createTheme } from "@mui/material";
 
 const Hero = styled.div`
   position: relative;
@@ -82,6 +82,21 @@ function ControlledCarousel() {
     return { ...province, heroImageUrl: heroImageUrl[index] };
   });
 
+  const themeApply = useSelector(
+    (state: RootState) => state.darkModeReducer.isDark
+  );
+
+  console.log(themeApply);
+
+  const darkTheme = createTheme({
+    palette: {
+      mode: themeApply ? "dark" : "light",
+    },
+    typography: {
+      fontSize: 16,
+    },
+  });
+
   return (
     <>
       <CarouselsBox>
@@ -126,7 +141,9 @@ function ControlledCarousel() {
               ✈ Discover the World ✈ Live Your Travel Dream!
             </Typography>
           </Box>
-          <BookingModal />
+          <ThemeProvider theme={darkTheme}>
+            <BookingModal />
+          </ThemeProvider>
         </Caption>
       </CarouselsBox>
     </>

@@ -1,4 +1,4 @@
-import { Container, Grid } from "@mui/material";
+import { Box, Container, Grid, Typography } from "@mui/material";
 import AdvantageItem, { IAdvantageItemProps } from "./AdvantageItem";
 
 import * as React from "react";
@@ -42,42 +42,52 @@ export default function AdvantageContainer() {
   ];
   return (
     <React.Fragment>
-      <Container
-        maxWidth="lg"
-        sx={{
-          padding: "48px 0",
-        }}
-      >
-        <h2
-          style={{
-            textAlign: "center",
-
-            fontWeight: "bolder",
-
-            marginBottom: "35px",
+      <Box sx={{ backgroundColor: "background.paper" }}>
+        <Container
+          maxWidth="lg"
+          sx={{
+            padding: "48px 0",
           }}
         >
-          Tại sao nên đặt chỗ với TravelDream?
-        </h2>
+          <Typography
+            variant="h4"
+            component={"h3"}
+            sx={{
+              textAlign: "center",
+              fontWeight: "bolder",
+              marginBottom: "35px",
+              color: "text.primary",
+            }}
+          >
+            Tại sao nên đặt chỗ với Travel Dream?
+          </Typography>
 
-        <Grid
-          container
-          spacing={2}
-          sx={{ justifyContent: { xs: "center", md: "space-between" } }}
-        >
-          {advantage.map((item, index) => (
-            <Grid item xs={10} sm={6} md={3} key={index} marginBottom={"15px"}>
-              <AdvantageItem
-                key={item.title}
-                imgSrc={item.imgSrc}
-                title={item.title}
-                description={item.description}
-                bgImage={item.bgImage}
-              />
-            </Grid>
-          ))}
-        </Grid>
-      </Container>
+          <Grid
+            container
+            spacing={2}
+            sx={{ justifyContent: { xs: "center", md: "space-between" } }}
+          >
+            {advantage.map((item, index) => (
+              <Grid
+                item
+                xs={10}
+                sm={6}
+                md={3}
+                key={index}
+                marginBottom={"15px"}
+              >
+                <AdvantageItem
+                  key={item.title}
+                  imgSrc={item.imgSrc}
+                  title={item.title}
+                  description={item.description}
+                  bgImage={item.bgImage}
+                />
+              </Grid>
+            ))}
+          </Grid>
+        </Container>
+      </Box>
     </React.Fragment>
   );
 }

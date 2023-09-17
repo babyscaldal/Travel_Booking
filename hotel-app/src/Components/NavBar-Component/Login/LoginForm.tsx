@@ -9,20 +9,20 @@ import {
   DialogTitle,
   FormControlLabel,
   Grid,
-  Link,
   Slide,
   Stack,
 } from "@mui/material";
 import { FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-// import { IUsers } from "../../types/users";
-
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { IUserLoginReq } from "../../../types/userType";
 import { LoginRes } from "../../../actions/login.actions";
 import { IFormLoginValues } from "../../../types/LoginTypes";
-import LoginSuccess from "./LoginSusccess";
+import RegisterForm from "../Register/RegisterForm";
+import LockResetIcon from "@mui/icons-material/LockReset";
+import { UserState } from "../../../reducers/login.reducer";
+import HowToRegIcon from "@mui/icons-material/HowToReg";
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -56,7 +56,6 @@ export default function LoginForm({
   children,
   type = "text",
   material = "text.primary",
-  width = "100%",
   color,
   handleCloseMenu,
 }: ILoginForm) {
@@ -66,6 +65,10 @@ export default function LoginForm({
   const handleClickOpen = () => {
     setOpen(true);
   };
+
+  const isLogin: UserState = useSelector(
+    (state: any) => state.loginReducer.isLogin
+  );
 
   const handleClose = () => {
     setOpen(false);
@@ -86,7 +89,6 @@ export default function LoginForm({
       email: "",
       password: "",
     },
-    // mode: "all",
     resolver: yupResolver(schema),
   });
 
@@ -94,7 +96,7 @@ export default function LoginForm({
 
   const dispatch = useDispatch();
 
-  const handleShowPassword = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleShowPassword = (_: React.ChangeEvent<HTMLInputElement>) => {
     setShowPassword(!showPassword);
   };
 
@@ -108,18 +110,19 @@ export default function LoginForm({
       },
     };
     dispatch(LoginRes(body));
+
     reset();
-    // handleCloseMenu && handleCloseMenu();
   };
+
+  console.log(isLogin);
 
   return (
     <div>
       <Button
-        sx={{ color: material, width: width }}
+        sx={{ color: material }}
         color={color}
         variant={type}
         onClick={() => {
-          // handleCloseMenu && handleCloseMenu();
           handleClickOpen();
         }}
       >
@@ -133,7 +136,7 @@ export default function LoginForm({
         aria-describedby="alert-dialog-slide-description"
       >
         <DialogActions>
-          <Stack spacing={3} sx={{ padding: "48px 32px", width: "450px" }}>
+          <Stack spacing={1.5} sx={{ padding: "48px 32px", width: "450px" }}>
             <DialogTitle
               sx={{
                 fontWeight: "bold",
@@ -146,7 +149,7 @@ export default function LoginForm({
             </DialogTitle>
             <form onSubmit={handleSubmit(onSubmit)} noValidate>
               <FormProvider {...form}>
-                <Stack spacing={2}>
+                <Stack spacing={1.5}>
                   <InputField name="email" title="Email" type="email" />
                   <InputField
                     name="password"
@@ -164,27 +167,35 @@ export default function LoginForm({
                     label="Change to display password"
                   />
 
-                  {/* <Button variant="contained" color="primary" type="submit">
+                  <Button variant="contained" color="primary" type="submit">
                     Login
-                  </Button> */}
-                  <LoginSuccess />
-                  <Grid container>
-                    <Grid item xs>
-                      <Link href="#" variant="body2">
+                  </Button>
+                  {/* <LoginSuccess /> */}
+                  <Grid container justifyContent={"space-between"}>
+                    <Grid item>
+                      <Button
+                        variant="text"
+                        sx={{ color: "text.primary" }}
+                        startIcon={
+                          <LockResetIcon color="primary" sx={{ mr: 0.5 }} />
+                        }
+                      >
                         Quên mật khẩu
-                      </Link>
+                      </Button>
                     </Grid>
                     <Grid item>
-                      <Link href="#" variant="body2">
-                        {"Đăng kí"}
-                      </Link>
+                      <RegisterForm
+                        closeLogin={handleClose}
+                        icon={<HowToRegIcon color="primary" sx={{ mr: 0.5 }} />}
+                      >
+                        Đăng ký
+                      </RegisterForm>
                     </Grid>
                   </Grid>
                 </Stack>
               </FormProvider>
             </form>
           </Stack>
-          {/* <DevTool control={control} /> */}
         </DialogActions>
       </Dialog>
     </div>

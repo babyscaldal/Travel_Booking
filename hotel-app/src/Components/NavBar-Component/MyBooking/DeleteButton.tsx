@@ -31,8 +31,13 @@ export default function DeleteButton({ hotelId }: IDeleteButton) {
 
   return (
     <div>
-      <Button variant="outlined" color="error" onClick={handleClickOpen}>
-        <DeleteForeverIcon />
+      <Button
+        startIcon={<DeleteForeverIcon />}
+        variant="text"
+        color="error"
+        onClick={handleClickOpen}
+      >
+        Delete
       </Button>
       <Dialog
         fullScreen={fullScreen}

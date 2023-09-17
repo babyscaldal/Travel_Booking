@@ -1,13 +1,10 @@
-import { Box, Button, Grid, Stack } from "@mui/material";
+import { Box, Divider, Grid, Stack, Typography } from "@mui/material";
 import { FormProvider, useForm, useWatch } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
 import dayjs, { Dayjs } from "dayjs";
-import AddCircleIcon from "@mui/icons-material/AddCircle";
-import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import DateRangePickerField from "../HomePage_Component/BookingTabPanel/BookingTabs/BookingFormField/DateRangePickerField";
 import People from "../HomePage_Component/BookingTabPanel/BookingTabs/People";
 import InputField from "../HomePage_Component/BookingTabPanel/BookingTabs/BookingFormField/InputField";
-import { Divider, Typography } from "@mui/joy";
 import { useSelector } from "react-redux";
 import { RootState } from "../../stores.ts/stores";
 import { useDispatch } from "react-redux";
@@ -29,7 +26,6 @@ export default function BookForm() {
   const selectedHotel = useSelector(
     (state: RootState) => state.sortHotel.selectedHotel
   );
-
   const form = useForm<IBookingFormValue>({
     defaultValues: {
       bookingDate: [dayjs(), dayjs().add(1, "day")],
@@ -40,13 +36,7 @@ export default function BookForm() {
     },
   });
 
-  const {
-    control,
-    handleSubmit,
-    watch,
-    setValue,
-    formState: { isSubmitting },
-  } = form;
+  const { control, handleSubmit, watch, setValue } = form;
 
   const handleAddAdult = () => {
     const currentAdultValue = watch("adult");
@@ -173,25 +163,25 @@ export default function BookForm() {
               <Grid container spacing={2}>
                 <Grid item xs={12}>
                   <DateRangePickerField name={"bookingDate"} />
-                  <span>
+                  <Typography component={"span"}>
                     *
-                    <em style={{ fontSize: "14px" }}>
+                    <Typography component={"span"} sx={{ fontSize: "14px" }}>
                       {selectedHotel.type === "resort" &&
                         "Resort cho phép tối đa 12 người"}
-                    </em>
-                  </span>
-                  <span>
-                    <em style={{ fontSize: "14px" }}>
+                    </Typography>
+                  </Typography>
+                  <Typography component={"span"}>
+                    <Typography component={"em"} sx={{ fontSize: "14px" }}>
                       {selectedHotel.type === "hotel" &&
                         "1 phòng tối đa 4 người"}
-                    </em>
-                  </span>
-                  <span>
-                    <em style={{ fontSize: "14px" }}>
+                    </Typography>
+                  </Typography>
+                  <Typography component={"span"}>
+                    <Typography component={"em"} sx={{ fontSize: "14px" }}>
                       {selectedHotel.type === "motel" &&
                         "1 phòng tối đa 4 người"}
-                    </em>
-                  </span>
+                    </Typography>
+                  </Typography>
                 </Grid>
               </Grid>
             </Grid>
@@ -206,119 +196,36 @@ export default function BookForm() {
               >
                 <Grid container spacing={2}>
                   <Grid item xs={12}>
-                    <Box
-                      display={"flex"}
-                      justifyContent={"flex-start"}
-                      alignItems={"stretch"}
-                      gap={"4px"}
-                    >
-                      <Button
-                        onClick={() => {
-                          handleRemoveRoom();
-                        }}
-                        type="button"
-                        variant="outlined"
-                      >
-                        <RemoveCircleIcon sx={{ fontSize: "24px" }} />
-                      </Button>
-                      <InputField name="room" label="Số phòng" />
-                      <Button
-                        onClick={() => {
-                          handleAddRoom();
-                        }}
-                        type="button"
-                        variant="outlined"
-                      >
-                        <AddCircleIcon sx={{ fontSize: "24px" }} />
-                      </Button>
-                    </Box>
+                    <InputField
+                      name="room"
+                      label="Số phòng"
+                      onAdd={handleAddRoom}
+                      onRemove={handleRemoveRoom}
+                    />
                   </Grid>
                   <Grid item xs={12}>
-                    <Box
-                      display={"flex"}
-                      justifyContent={"flex-start"}
-                      alignItems={"stretch"}
-                      gap={"4px"}
-                    >
-                      <Button
-                        onClick={() => {
-                          handleRemoveAdult();
-                        }}
-                        type="button"
-                        variant="outlined"
-                      >
-                        <RemoveCircleIcon sx={{ fontSize: "24px" }} />
-                      </Button>
-                      <InputField name="adult" label="Người lớn" />
-                      <Button
-                        onClick={() => {
-                          handleAddAdult();
-                        }}
-                        type="button"
-                        variant="outlined"
-                      >
-                        <AddCircleIcon sx={{ fontSize: "24px" }} />
-                      </Button>
-                    </Box>
+                    <InputField
+                      name="adult"
+                      label="Người lớn"
+                      onAdd={handleAddAdult}
+                      onRemove={handleRemoveAdult}
+                    />
                   </Grid>
                   <Grid item xs={12}>
-                    <Box
-                      display={"flex"}
-                      justifyContent={"flex-start"}
-                      alignItems={"stretch"}
-                      gap={"4px"}
-                    >
-                      <Button
-                        onClick={() => {
-                          handleRemoveChild();
-                        }}
-                        type="button"
-                        variant="outlined"
-                      >
-                        <RemoveCircleIcon sx={{ fontSize: "24px" }} />
-                      </Button>
-                      <InputField
-                        name={"child"}
-                        label="Trẻ em độ tuổi 2 - 12"
-                      />
-                      <Button
-                        onClick={() => {
-                          handleAddChild();
-                        }}
-                        type="button"
-                        variant="outlined"
-                      >
-                        <AddCircleIcon sx={{ fontSize: "24px" }} />
-                      </Button>
-                    </Box>
+                    <InputField
+                      name={"child"}
+                      label="Trẻ em độ tuổi 2 - 12"
+                      onAdd={handleAddChild}
+                      onRemove={handleRemoveChild}
+                    />
                   </Grid>
                   <Grid item xs={12}>
-                    <Box
-                      display={"flex"}
-                      justifyContent={"flex-start"}
-                      alignItems={"stretch"}
-                      gap={"4px"}
-                    >
-                      <Button
-                        onClick={() => {
-                          handleRemoveBaby();
-                        }}
-                        type="button"
-                        variant="outlined"
-                      >
-                        <RemoveCircleIcon sx={{ fontSize: "24px" }} />
-                      </Button>
-                      <InputField name={"baby"} label="Trẻ em độ tuổi < 2" />
-                      <Button
-                        onClick={() => {
-                          handleAddBaby();
-                        }}
-                        type="button"
-                        variant="outlined"
-                      >
-                        <AddCircleIcon sx={{ fontSize: "24px" }} />
-                      </Button>
-                    </Box>
+                    <InputField
+                      name={"baby"}
+                      label="Trẻ em độ tuổi <Grid 2"
+                      onAdd={handleAddBaby}
+                      onRemove={handleRemoveBaby}
+                    />
                   </Grid>
                 </Grid>
               </People>
@@ -349,7 +256,7 @@ export default function BookForm() {
             <Grid item xs={12}>
               <Divider
                 sx={{
-                  backgroundColor: "#000",
+                  backgroundColor: "text.primary",
                   height: "2px",
                   marginBottom: "16px",
                 }}
@@ -403,7 +310,9 @@ export default function BookForm() {
                     {night} đêm
                   </Typography>
                 </Box>
-                <Divider sx={{ backgroundColor: "#000", height: "2px" }} />
+                <Divider
+                  sx={{ backgroundColor: "text.primary", height: "2px" }}
+                />
                 <Box sx={{ display: "flex", justifyContent: "space-between" }}>
                   <Typography
                     sx={{
@@ -423,27 +332,6 @@ export default function BookForm() {
                   </Typography>
                 </Box>
               </Stack>
-
-              {/* <Typography variant="body1" color="initial">
-                      $33 x 14 đêm
-                    </Typography>
-                    <Typography variant="body1" color="initial">
-                      $465
-                    </Typography> */}
-              {/* <Typography variant="body1" color="initial">
-                      $33 x 14 đêm
-                    </Typography>
-                    <Typography variant="body1" color="initial">
-                      $465
-                    </Typography> */}
-              {/* <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-                <Typography variant="body1" color="initial">
-                  $33 x 14 đêm
-                </Typography>
-                <Typography variant="body1" color="initial">
-                  $465
-                </Typography>
-              </Box> */}
             </Grid>
           </Grid>
         </Box>

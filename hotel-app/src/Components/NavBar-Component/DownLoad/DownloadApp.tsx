@@ -3,10 +3,8 @@ import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import InstallMobileIcon from "@mui/icons-material/InstallMobile";
 import DownloadLink from "./DownloadLink";
-import { useSelector } from "react-redux";
-import { RootState } from "../../../stores.ts/stores";
+import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
 
 export default function DownloadApp() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -18,24 +16,18 @@ export default function DownloadApp() {
     setAnchorEl(null);
   };
 
-  const themeApply = useSelector(
-    (state: RootState) => state.darkModeReducer.isDark
-  );
-
   return (
     <div>
       <Button
-        sx={{
-          color: "text.primary",
-        }}
         id="basic-button"
         aria-controls={open ? "basic-menu" : undefined}
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
         endIcon={<ArrowDropDownIcon />}
+        sx={{ color: "text.primary" }}
       >
-        <InstallMobileIcon color="primary" sx={{ mr: 0.5 }} fontSize="small" />
+        <CloudDownloadIcon color="primary" sx={{ mr: 0.5 }} fontSize="small" />
         Tải ứng dụng
       </Button>
 

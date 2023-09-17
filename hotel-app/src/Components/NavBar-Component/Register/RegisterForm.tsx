@@ -16,12 +16,10 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
 import { useDispatch } from "react-redux";
-import { IUserLoginReq, IUserRegisterReq } from "../../../types/userType";
-import { LoginRes } from "../../../actions/login.actions";
 import InputField from "../Login/InputField";
 import { IFormRegisterValues } from "../../../types/LoginTypes";
-import HowToRegIcon from "@mui/icons-material/HowToReg";
 import { RegisterRes } from "../../../actions/register.actions";
+import { IUserRegisterReq } from "../../../types/userType";
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -39,9 +37,17 @@ export interface IFormValues {
 
 export interface IRegisterForm {
   handleCloseMenu?: () => void;
+  closeLogin?: () => void;
+  children?: React.ReactNode;
+  icon?: React.ReactNode;
 }
 
-export default function RegisterForm({ handleCloseMenu }: IRegisterForm) {
+export default function RegisterForm({
+  handleCloseMenu,
+  closeLogin,
+  children,
+  icon,
+}: IRegisterForm) {
   const [open, setOpen] = React.useState(false);
   const [showPassword, setShowPassword] = React.useState<boolean>(false);
 
@@ -58,7 +64,7 @@ export default function RegisterForm({ handleCloseMenu }: IRegisterForm) {
     email: yup.string().required("Email is required").email("Invalid email"),
     password: yup
       .string()
-      .required("Name is required")
+      .required("Passwords is required")
       .min(6, "Password length must be between 6 and 12 character!")
       .max(30, "Password length must be between 6 and 30 character!"),
     confirmPassword: yup
@@ -79,21 +85,15 @@ export default function RegisterForm({ handleCloseMenu }: IRegisterForm) {
     resolver: yupResolver(schema),
   });
 
-  const {
-    control,
-    formState: { errors },
-    handleSubmit,
-    reset,
-  } = form;
+  const { handleSubmit, reset } = form;
 
   const dispatch = useDispatch();
 
-  const handleShowPassword = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleShowPassword = (_: React.ChangeEvent<HTMLInputElement>) => {
     setShowPassword(!showPassword);
   };
 
   const onSubmit = (data: IFormRegisterValues) => {
-    // console.log("data: ", data);
     console.log("submit Value: ", data);
     handleClose();
     const body: IUserRegisterReq = {
@@ -110,13 +110,15 @@ export default function RegisterForm({ handleCloseMenu }: IRegisterForm) {
   return (
     <div>
       <Button
+        startIcon={icon}
         variant="text"
         sx={{ color: "text.primary" }}
         onClick={() => {
           handleClickOpen();
+          closeLogin && closeLogin();
         }}
       >
-        <HowToRegIcon color="primary" sx={{ mr: 0.5 }} /> Đăng ký
+        {children}
       </Button>
       <Dialog
         open={open}
@@ -124,11 +126,17 @@ export default function RegisterForm({ handleCloseMenu }: IRegisterForm) {
         keepMounted
         onClose={handleClose}
         aria-describedby="alert-dialog-slide-description"
+        PaperProps={{
+          style: {
+            height: "100vh",
+          },
+        }}
       >
         <DialogActions>
-          <Stack spacing={3} sx={{ padding: "48px 32px", width: "450px" }}>
+          <Stack spacing={1} sx={{ padding: "10px 32px", width: "550px" }}>
             <DialogTitle
               sx={{
+                height: "auto",
                 fontWeight: "bold",
                 fontSize: "30px",
                 textAlign: "center",
@@ -168,7 +176,7 @@ export default function RegisterForm({ handleCloseMenu }: IRegisterForm) {
                     }
                     label="Change to display password"
                   />
-                  <Box sx={{ width: "100%", paddingTop: "32px" }}>
+                  <Box sx={{ width: "100%" }}>
                     <Button
                       variant="contained"
                       color="primary"

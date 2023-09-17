@@ -6,38 +6,26 @@ import { useSelector } from "react-redux";
 import { UserState } from "../../../reducers/login.reducer";
 import LoginWarning from "../../LoginWarning/LoginWarning";
 import { useState } from "react";
-import { RootState } from "../../../stores.ts/stores";
 
-export interface IMyBookingProps {
-  handleClose?: () => void;
-}
+export interface IMyBookingProps {}
 
-export default function MyBooking({ handleClose }: IMyBookingProps) {
+export default function MyBooking() {
   const [open, setOpen] = useState<boolean>(false);
   const userLogin: UserState = useSelector((state: any) => state.loginReducer);
   const navigate = useNavigate();
-  const themeApply = useSelector(
-    (state: RootState) => state.darkModeReducer.isDark
-  );
+
   return (
     <React.Fragment>
       <Button
-        sx={{
-          color: "text.primary",
-        }}
+        sx={{ color: "text.primary", display: "block" }}
         onClick={() =>
           userLogin.isLogin ? navigate("order-hotel") : setOpen(true)
         }
       >
-        <ListAltIcon color="primary" sx={{ mr: 0.5 }} /> Chỗ đã đặt
+        <ListAltIcon color="primary" sx={{ mr: 0.5 }} />
+        Chỗ đã đặt
       </Button>
-      {
-        <LoginWarning
-          open={open}
-          setOpen={setOpen}
-          handleCloseMenu={handleClose}
-        />
-      }
+      {<LoginWarning open={open} setOpen={setOpen} />}
     </React.Fragment>
   );
 }

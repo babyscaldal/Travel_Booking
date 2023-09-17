@@ -1,5 +1,5 @@
 import { IHotel } from "../../types/hotelType";
-import { Container, Grid } from "@mui/material";
+import { Box, Container, Grid } from "@mui/material";
 import { capitalizeFirstLetter } from "../../Ultiliti/CapitalizeFirstLetter";
 import IntroDialog from "./IntroDialog";
 import BedRoom from "./BedRoom";
@@ -58,8 +58,20 @@ export default function DetailPage() {
   const selectedHotel = useSelector(
     (state: RootState) => state.sortHotel.selectedHotel
   );
+
+  const themeApply = useSelector(
+    (state: RootState) => state.darkModeReducer.isDark
+  );
+
+  console.log(themeApply);
+
   return (
-    <>
+    <Box
+      sx={{
+        backgroundColor: themeApply ? "text.primary" : "background.paper",
+        color: themeApply ? "background.paper" : "text.primary",
+      }}
+    >
       <Container maxWidth="lg" sx={{ paddingTop: 12 }}>
         {/* Title */}
         <h3 style={{ textAlign: "center", paddingBottom: 20 }}>
@@ -95,13 +107,7 @@ export default function DetailPage() {
               {hotel.image.map(
                 (item, index) =>
                   index > 0 && (
-                    <Grid
-                      key={index}
-                      item
-                      xs={12}
-                      sm={6}
-                      // sx={{ marginBottom: "15px" }}
-                    >
+                    <Grid key={index} item xs={12} sm={6}>
                       <div style={{ height: "175px" }}>
                         <img
                           src={item}
@@ -119,9 +125,7 @@ export default function DetailPage() {
         </Grid>
 
         <Grid container spacing={2} justifyContent={"space-between"}>
-          {/* left */}
           <Grid item xs={7}>
-            {/* landlords */}
             <div>
               <h5>Chủ {selectedHotel.type}</h5>
               <p>
@@ -189,6 +193,6 @@ export default function DetailPage() {
           </Grid>
         </Grid>
       </Container>
-    </>
+    </Box>
   );
 }

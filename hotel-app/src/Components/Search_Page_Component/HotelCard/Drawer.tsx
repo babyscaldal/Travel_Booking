@@ -60,11 +60,18 @@ export default function PersistentDrawerLeft() {
       <CssBaseline />
       <Button
         fullWidth
-        sx={{ height: "40px", borderRadius: "10px", width: "100%" }}
-        color="secondary"
-        variant="contained"
+        sx={{
+          border: "1px solid ",
+          color: "text.primary",
+          height: "55px",
+          borderRadius: "6px",
+          width: "100%",
+          boxShadow:
+            "0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)",
+        }}
+        variant="text"
         onClick={handleDrawerOpen}
-        startIcon={<TuneIcon />}
+        startIcon={<TuneIcon sx={{ color: "primary.main" }} />}
       >
         Bộ lọc
       </Button>
@@ -94,9 +101,9 @@ export default function PersistentDrawerLeft() {
         </DrawerHeader>
         <Container>
           {/* Radio */}
-          <Box bgcolor="white" padding="10px" borderRadius="6px">
+          <Box bgcolor="background.paper" padding="10px" borderRadius="6px">
             <Typography
-              sx={{ fontSize: "16px", fontWeight: "bold" }}
+              sx={{ fontSize: "14px", fontWeight: "bold" }}
               component="p"
             >
               Sắp xếp kết quả

@@ -1,4 +1,4 @@
-import { Box, Slide } from "@mui/material";
+import { Box } from "@mui/material";
 import React from "react";
 import Slider from "react-slick";
 import PictureComponent from "../Slide_Component/PictureComponent";
@@ -63,9 +63,6 @@ const BedRoom: React.FC = () => {
   return (
     <Box
       sx={{
-        //   display: "flex",
-        //   justifyContent: "center",
-        //   alignItems: "center",
         paddingBottom: "48px",
       }}
     >

@@ -1,10 +1,12 @@
 import {
   Container,
   Stack,
-  Typography,
   Grid,
   TablePagination,
   Checkbox,
+  createTheme,
+  ThemeProvider,
+  Box,
 } from "@mui/material";
 import { FormProvider, useForm } from "react-hook-form";
 import SearchField from "./SearchField";
@@ -19,14 +21,19 @@ import {
   selectedHotel,
 } from "../../../actions/getHotels.actions";
 import { IProvince } from "../../../types/provinceType";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { RootState } from "../../../stores.ts/stores";
 import AppBar from "@mui/material/AppBar";
 import PersistentDrawerLeft from "./Drawer";
-import PaginationControlled from "./Pagination";
 import HotelListSkeleton from "./hotelListSkeleton";
 import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 import Favorite from "@mui/icons-material/Favorite";
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import Typography from "@mui/material/Typography";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import SearchIcon from "@mui/icons-material/Search";
 export interface IFilterFormValue {
   radio: string;
   city: IProvince | null;
@@ -40,6 +47,19 @@ export const FilterFormLayOut = () => {
   const selectedProvince: IProvince = useSelector(
     (state: RootState) => state.provincesReducer.selectedProvince
   );
+
+  const themeApply = useSelector(
+    (state: RootState) => state.darkModeReducer.isDark
+  );
+
+  const darkTheme = createTheme({
+    palette: {
+      mode: themeApply ? "dark" : "light",
+    },
+    typography: {
+      fontSize: 16,
+    },
+  });
 
   const form = useForm<IFilterFormValue>({
     defaultValues: {
@@ -55,15 +75,13 @@ export const FilterFormLayOut = () => {
   const sortHotel: IHotel[] = useSelector(
     (state: any) => state.sortHotel.locationHotelList
   );
+  const selectedHotelState: IHotel = useSelector(
+    (state: RootState) => state.sortHotel.selectedHotel
+  );
 
   const isLoading: IHotel[] = useSelector(
     (state: any) => state.sortHotel.isLoading
   );
-  // console.log(isLoading);
-  const itemPerPage: number = 10;
-  const totalPages: number = sortHotel.length
-    ? Math.ceil(sortHotel.length / itemPerPage)
-    : 1;
 
   const [renderList, setRenderList] = useState<IHotel[]>(sortHotel);
 
@@ -206,95 +224,110 @@ export const FilterFormLayOut = () => {
   return (
     <Container maxWidth="lg" sx={{ paddingTop: "78px" }}>
       <Grid container spacing={2}>
-        <AppBar
-          position={"fixed"}
-          sx={{
-            backgroundColor: "#fff",
-            marginTop: "64px",
-            paddingTop: "20px",
-            zIndex: 9,
-          }}
-        >
-          <Grid item xs={12}>
-            <Grid container spacing={2} justifyContent={"space-between"}>
-              <Grid item xs={12}>
-                <FormProvider {...form}>
-                  <form onSubmit={handleSubmit(onSubmit)}>
-                    <Grid
-                      container
-                      spacing={2}
-                      justifyContent={"space-between"}
-                    >
-                      <Grid item xs={12} md={2.5}>
-                        <PersistentDrawerLeft />
+        <ThemeProvider theme={darkTheme}>
+          <AppBar
+            position={"fixed"}
+            sx={{
+              backgroundColor: "background.paper",
+              marginTop: "64px",
+              padding: "10px 0",
+              zIndex: 9,
+            }}
+          >
+            <Grid item xs={12}>
+              <Grid container spacing={2} justifyContent={"space-between"}>
+                <Grid item xs={12}>
+                  <FormProvider {...form}>
+                    <form onSubmit={handleSubmit(onSubmit)}>
+                      <Grid container spacing={2} justifyContent={"start"}>
+                        <Grid item xs={6} md={2}>
+                          <PersistentDrawerLeft />
+                        </Grid>
+                        <Grid item xs={6} md={3}>
+                          <Accordion
+                            sx={{
+                              backgroundColor: "background.paper",
+                              border: "1px solid ",
+                            }}
+                          >
+                            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                              <Typography>
+                                <SearchIcon sx={{ color: "primary.main" }} />
+                                Tìm kiếm
+                              </Typography>
+                            </AccordionSummary>
+                            <AccordionDetails>
+                              <Box>
+                                <SearchField
+                                  onAdd={handleAddRoom}
+                                  onRemove={handleRemoveRoom}
+                                />
+                              </Box>
+                            </AccordionDetails>
+                          </Accordion>
+                        </Grid>
+                        <Grid item xs={4} md={3}>
+                          <Typography
+                            variant="body1"
+                            sx={{
+                              color: "text.primary",
+                              textAlign: "justify",
+                            }}
+                          >
+                            Tìm thấy{" "}
+                            <Typography
+                              component="span"
+                              sx={{ color: "error.main", fontWeight: "bold" }}
+                            >
+                              {renderList.length}
+                            </Typography>{" "}
+                            kết quả phù hợp với bạn tại{" "}
+                            <Typography
+                              component="span"
+                              sx={{ color: "error.main", fontWeight: "bold" }}
+                            >
+                              {renderList.length && renderList[0].location}
+                            </Typography>
+                          </Typography>
+                        </Grid>
+                        <Grid item xs={7} md={4}>
+                          <Stack spacing={2}>
+                            <TablePagination
+                              labelRowsPerPage="Hotel per page"
+                              rowsPerPageOptions={[6, 12]}
+                              component="div"
+                              count={renderList.length}
+                              rowsPerPage={rowsPerPage}
+                              page={page}
+                              onPageChange={handleChangePage}
+                              onRowsPerPageChange={handleChangeRowsPerPage}
+                            />
+                          </Stack>
+                        </Grid>
                       </Grid>
-                      <Grid item xs={12} md={8}>
-                        <SearchField
-                          onAddRoom={handleAddRoom}
-                          onRemoveRoom={handleRemoveRoom}
-                        />
-                      </Grid>
-                    </Grid>
-                  </form>
-                </FormProvider>
-              </Grid>
-              <Grid item xs={6}>
-                <Typography
-                  variant="body1"
-                  color="initial"
-                  style={{
-                    textIndent: "10px",
-                    fontWeight: "bold",
-                  }}
-                >
-                  Tìm thấy{" "}
-                  <span style={{ color: "red" }}>{renderList.length}</span> kết
-                  quả phù hợp với yêu cầu của bạn tại{" "}
-                  <span style={{ color: "red" }}>
-                    {renderList.length && renderList[0].location}
-                  </span>
-                </Typography>
-              </Grid>
-              <Grid item xs={6}>
-                <Stack spacing={2}>
-                  <TablePagination
-                    rowsPerPageOptions={[6, 12]}
-                    component="div"
-                    count={renderList.length}
-                    rowsPerPage={rowsPerPage}
-                    page={page}
-                    onPageChange={handleChangePage}
-                    onRowsPerPageChange={handleChangeRowsPerPage}
-                  />
-                  {/* <PaginationControlled totalPages={totalPages} /> */}
-                </Stack>
+                    </form>
+                  </FormProvider>
+                </Grid>
               </Grid>
             </Grid>
-          </Grid>
-        </AppBar>
+          </AppBar>
+        </ThemeProvider>
 
         {/* Map */}
         <>
           {!isLoading ? (
             <Grid
               container
-              marginTop={"140px"}
-              sx={{ justifyContent: { xs: "center", md: "center" } }}
+              sx={{
+                justifyContent: { xs: "center", md: "center" },
+                marginTop: { xs: "200px", md: "100px" },
+              }}
             >
               {renderList
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map(
                   (
-                    {
-                      name,
-                      address,
-                      stars,
-                      rating,
-                      price,
-                      type,
-                      numberOfRoom,
-                      id,
-                    },
+                    { name, address, stars, rating, price, type, numberOfRoom },
 
                     index
                   ) => {
@@ -325,45 +358,53 @@ export const FilterFormLayOut = () => {
                           icon={<FavoriteBorder />}
                           checkedIcon={<Favorite />}
                         />
-                        <Link
+                        {/* <Link
                           to={String(id)}
                           style={{ textDecoration: "none" }}
-                        >
-                          <HotelCard
-                            address={address}
-                            name={name}
-                            star={stars}
-                            rating={rating}
-                            price={price}
-                            typeAccommodation={type}
-                            numberOfRoom={numberOfRoom}
-                            onClick={() => handleOnClick(renderList[index])}
-                            favoriteToggle={() =>
-                              handleToggle(renderList[index])
-                            }
-                          />
-                        </Link>
+                        > */}
+                        <HotelCard
+                          address={address}
+                          name={name}
+                          star={stars}
+                          rating={rating}
+                          price={price}
+                          typeAccommodation={type}
+                          numberOfRoom={numberOfRoom}
+                          onClick={() => {
+                            handleOnClick(renderList[index]);
+                            navigate(
+                              `/accommodation/${selectedProvince.domain}/${selectedHotelState.id}`
+                            );
+                          }}
+                          favoriteToggle={() => handleToggle(renderList[index])}
+                        />
+                        {/* </Link> */}
                       </Grid>
                     );
                   }
                 )}
             </Grid>
           ) : (
-            <HotelListSkeleton length={renderList.length} />
+            <ThemeProvider theme={darkTheme}>
+              <HotelListSkeleton length={renderList.length} />
+            </ThemeProvider>
           )}
         </>
       </Grid>
-      <Stack spacing={2}>
-        <TablePagination
-          rowsPerPageOptions={[6, 12]}
-          component="div"
-          count={renderList.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
-      </Stack>
+      <ThemeProvider theme={darkTheme}>
+        <Stack spacing={2}>
+          <TablePagination
+            labelRowsPerPage="Hotel per page"
+            rowsPerPageOptions={[6, 12]}
+            component="div"
+            count={renderList.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+          />
+        </Stack>
+      </ThemeProvider>
     </Container>
   );
 };

@@ -7,10 +7,11 @@ import DialogContentText from "@mui/material/DialogContentText";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 import { useFormContext } from "react-hook-form";
-import { UserState } from "../../reducers/login.reducer";
-import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 export default function BookingSuccessAlert() {
+  const navigate = useNavigate();
+
   const [open, setOpen] = React.useState(false);
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
@@ -27,8 +28,6 @@ export default function BookingSuccessAlert() {
     formState: { isSubmitting },
   } = useFormContext();
 
-  console.log(isSubmitting);
-
   return (
     <div>
       <Button
@@ -38,7 +37,7 @@ export default function BookingSuccessAlert() {
         variant="contained"
         sx={{ width: "100%", height: "40px" }}
         color="success"
-        // disabled={isSubmitting}
+        disabled={isSubmitting === true}
       >
         Đặt phòng
       </Button>
@@ -62,7 +61,10 @@ export default function BookingSuccessAlert() {
             variant="contained"
             sx={{ fontWeight: "bold" }}
             autoFocus
-            onClick={handleClose}
+            onClick={() => {
+              navigate("/order-hotel");
+              handleClose();
+            }}
           >
             OK
           </Button>

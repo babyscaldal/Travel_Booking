@@ -11,8 +11,6 @@ import DirectionsCarFilledRoundedIcon from "@mui/icons-material/DirectionsCarFil
 import { Container } from "@mui/material";
 import HotelBookingFormLayout from "./HotelBookFormLayout";
 import { ComingSoon } from "./ComingSoonTab";
-import { useSelector } from "react-redux";
-import { RootState } from "../../../../stores.ts/stores";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -55,10 +53,6 @@ export default function BookingTabPanel() {
     setValue(newValue);
   };
 
-  const themeApply = useSelector(
-    (state: RootState) => state.darkModeReducer.isDark
-  );
-
   return (
     <Container maxWidth="lg">
       <Box
@@ -67,7 +61,7 @@ export default function BookingTabPanel() {
           border: "1px solid black",
           height: "fit-content",
           borderRadius: "6px",
-          bgcolor: "gray",
+          bgcolor: "background.paper",
         }}
       >
         <Box
@@ -78,10 +72,10 @@ export default function BookingTabPanel() {
         >
           <Tabs
             centered
-            variant="fullWidth"
             value={value}
             onChange={handleChange}
             aria-label="basic tabs example"
+            scrollButtons="auto"
           >
             <Tab
               iconPosition="start"

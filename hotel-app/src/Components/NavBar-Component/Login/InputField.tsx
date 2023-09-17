@@ -23,7 +23,9 @@ export default function InputField({
   return (
     <FormControl fullWidth>
       <Stack spacing="4px">
-        <Typography sx={{ fontWeight: "bold" }}>{title}</Typography>
+        <Typography sx={{ fontWeight: "bold", fontSize: "16px" }}>
+          {title}
+        </Typography>
         <Controller
           name={name}
           control={control}
