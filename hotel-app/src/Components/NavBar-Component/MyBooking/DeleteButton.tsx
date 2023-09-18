@@ -11,10 +11,10 @@ import { useDispatch } from "react-redux";
 import { handleCancelOrderHotel } from "../../../actions/getHotels.actions";
 
 interface IDeleteButton {
-  hotelId: number;
+  listIndex: number;
 }
 
-export default function DeleteButton({ hotelId }: IDeleteButton) {
+export default function DeleteButton({ listIndex }: IDeleteButton) {
   const [open, setOpen] = React.useState(false);
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
@@ -63,7 +63,7 @@ export default function DeleteButton({ hotelId }: IDeleteButton) {
             autoFocus
             onClick={() => {
               handleClose();
-              dispatch(handleCancelOrderHotel(hotelId));
+              dispatch(handleCancelOrderHotel(listIndex));
             }}
           >
             OK

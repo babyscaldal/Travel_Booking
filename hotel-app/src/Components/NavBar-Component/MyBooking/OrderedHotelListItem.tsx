@@ -19,6 +19,7 @@ interface IOrderedHotelListItem {
   roomQuantity: number;
   arr: IHotel[];
   id: number;
+  listIndex: number;
 }
 
 export const OrderedHotelListItem = ({
@@ -32,6 +33,7 @@ export const OrderedHotelListItem = ({
   checkinDate,
   checkoutDate,
   roomQuantity,
+  listIndex,
 }: IOrderedHotelListItem) => {
   const navigate = useNavigate();
   const selectedProvince = useSelector(
@@ -134,7 +136,7 @@ export const OrderedHotelListItem = ({
         </Button>
       </TableCell>
       <TableCell align="center">
-        <DeleteButton hotelId={id} />
+        <DeleteButton listIndex={listIndex} />
       </TableCell>
     </TableRow>
   );

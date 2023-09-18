@@ -185,9 +185,11 @@ const sortHotel = (state = initState, action: IActionProps) => {
 
           username: getUserFromLocal().user.username,
 
-          orderHotelList: state.infoUser.orderHotelList.filter(
-            (item) => item.id !== action.payload
-          ),
+          orderHotelList: [
+            ...state.infoUser.orderHotelList.filter(
+              (item, index) => index !== action.payload
+            ),
+          ],
         })
       );
 
@@ -197,9 +199,11 @@ const sortHotel = (state = initState, action: IActionProps) => {
         infoUser: {
           ...state.infoUser,
 
-          orderHotelList: state.infoUser.orderHotelList.filter(
-            (item) => item.id !== action.payload
-          ),
+          orderHotelList: [
+            ...state.infoUser.orderHotelList.filter(
+              (item, index) => index !== action.payload
+            ),
+          ],
         },
       };
     default:

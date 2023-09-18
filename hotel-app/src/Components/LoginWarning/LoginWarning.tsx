@@ -45,7 +45,7 @@ export default function LoginWarning({
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
             Để đặt được khách sạn và có trải nghiệm tốt nhất, bạn nên đăng nhập
-            / đăng kí tài khoản trước!
+            / đăng ký tài khoản trước!
           </DialogContentText>
         </DialogContent>
         <DialogActions>

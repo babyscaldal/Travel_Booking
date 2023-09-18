@@ -31,6 +31,8 @@ import HowToRegIcon from "@mui/icons-material/HowToReg";
 import { UserState } from "../../reducers/login.reducer";
 import { LogoutRes } from "../../actions/login.actions";
 import LogoutIcon from "@mui/icons-material/Logout";
+import SucceededLoginAlert from "./Login/succeededLoginAlert";
+// import SucceededLoginAlert from "./Login/SucceededLoginAlert";
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -62,9 +64,17 @@ function ResponsiveAppBar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const userLogin: UserState = useSelector((state: any) => state.loginReducer);
-  const isLogin: UserState = useSelector(
+  const isLogin: boolean = useSelector(
     (state: any) => state.loginReducer.isLogin
   );
+
+  const [show, setShow] = React.useState<boolean>(false);
+
+  // React.useEffect(() => {
+  //   setShow(isLogin);
+  //   setTimeout(() => setShow(false), 3000);
+  // }, [isLogin]);
+
   return (
     <AppBar position="fixed" sx={{ backgroundColor: "background.paper" }}>
       <Container maxWidth="lg">
@@ -252,3 +262,6 @@ function ResponsiveAppBar() {
   );
 }
 export default ResponsiveAppBar;
+function setState(): [any, any] {
+  throw new Error("Function not implemented.");
+}

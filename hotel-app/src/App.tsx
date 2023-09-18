@@ -9,13 +9,16 @@ import { FilterFormLayOut } from "./Components/Search_Page_Component/HotelCard/F
 import { Routes, Route, Navigate } from "react-router-dom";
 import Footer from "./Components/Footer_Component/footer/Footer";
 import OrderHotelList from "./Components/NavBar-Component/MyBooking/OrderHotelList";
-import { HomePage } from "./Pages/Homepage/HomePage";
+// import { HomePage } from "./Pages/Homepage/HomePage";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { RootState } from "./stores.ts/stores";
 import DetailPage from "./Components/DetailPage_Component/DetailePage";
 import { FavoriteList } from "./Components/NavBar-Component/Favorite/FavoriteList";
 import ResponsiveAppBar from "./Components/NavBar-Component/ResponsiveAppBar";
 import Contact from "./Components/NavBar-Component/Contact/Contact";
+import React from "react";
+import SucceededLoginAlert from "./Components/NavBar-Component/Login/succeededLoginAlert";
+import { HomePage } from "./pages/Homepage/HomePage";
 
 function App() {
   const dispatch = useDispatch();
@@ -38,6 +41,17 @@ function App() {
       fontSize: 16,
     },
   });
+
+  const isLogin: boolean = useSelector(
+    (state: any) => state.loginReducer.isLogin
+  );
+
+  const [show, setShow] = React.useState<boolean>(false);
+
+  React.useEffect(() => {
+    setShow(isLogin);
+    setTimeout(() => setShow(false), 3000);
+  }, [isLogin]);
 
   return (
     <>
@@ -64,6 +78,7 @@ function App() {
         <Route path={"favorite-hotel"} element={<FavoriteList />} />
         <Route path={"favorite-hotel/:id"} element={<DetailPage />} />
       </Routes>
+      <SucceededLoginAlert show={show} />;
       <Footer />
     </>
   );

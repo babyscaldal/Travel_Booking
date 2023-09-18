@@ -65,7 +65,7 @@ export default function RegisterForm({
     password: yup
       .string()
       .required("Passwords is required")
-      .min(6, "Password length must be between 6 and 12 character!")
+      .min(6, "Password length must be between 6 and 30 character!")
       .max(30, "Password length must be between 6 and 30 character!"),
     confirmPassword: yup
       .string()
@@ -128,12 +128,12 @@ export default function RegisterForm({
         aria-describedby="alert-dialog-slide-description"
         PaperProps={{
           style: {
-            height: "100vh",
+            height: "auto",
           },
         }}
       >
         <DialogActions>
-          <Stack spacing={1} sx={{ padding: "10px 32px", width: "550px" }}>
+          <Stack spacing={1} sx={{ padding: "32px 32px", width: "550px" }}>
             <DialogTitle
               sx={{
                 height: "auto",
@@ -157,7 +157,7 @@ export default function RegisterForm({
                     name="password"
                     title="Password"
                     type={showPassword ? "text" : "password"}
-                    placeholder="Password length must be between 6 and 12 character!"
+                    placeholder="Password length must be between 6 and 30 character!"
                   />
                   {/* Confirm password */}
                   <InputField
