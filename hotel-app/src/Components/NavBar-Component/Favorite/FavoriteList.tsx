@@ -1,4 +1,4 @@
-import { Container, Typography, Grid, Stack } from "@mui/material";
+import { Container, Typography, Grid, Button } from "@mui/material";
 import { useSelector } from "react-redux";
 import { IHotel } from "../../../types/hotelType";
 import { useDispatch } from "react-redux";
@@ -57,18 +57,27 @@ export const FavoriteList = () => {
         fontSize: "90px",
         height: "100vh",
         backgroundColor: themeApply ? "text.primary" : "background.paper",
-        color: themeApply ? "#fff" : "text.primary",
+        color: themeApply ? "background.paper" : "text.primary",
         textAlign: "center",
       }}
     >
       <Container maxWidth="lg" sx={{ paddingTop: 10 }}>
         {favoriteList.length ? (
           <Grid container sx={{ justifyItems: "center" }}>
-            <Grid item xs={12} sx={{ margin: "0 0 16px 0" }}>
+            <Grid
+              item
+              xs={12}
+              sx={{
+                margin: "0 0 16px 0",
+                backgroundColor: themeApply
+                  ? "text.primary"
+                  : "background.paper",
+                color: themeApply ? "background.paper" : "text.primary",
+              }}
+            >
               <Typography
                 variant="body1"
-                color="text.primary"
-                style={{
+                sx={{
                   textIndent: "10px",
                   fontWeight: "bold",
                 }}
@@ -129,11 +138,30 @@ export const FavoriteList = () => {
             )}
           </Grid>
         ) : (
-          <Stack spacing={3} justifyContent={"center"} alignItems={"center"}>
-            <Typography variant="h4">
-              Bạn chưa thêm mục gì vào danh sách yêu thích của bạn
+          <Box
+            height="100vh"
+            mb={"30px"}
+            textAlign={"center"}
+            display={"flex"}
+            justifyContent={"center"}
+            alignItems={"center"}
+            flexDirection={"column"}
+            color="text.primary"
+          >
+            <Typography
+              variant="h6"
+              component={"h3"}
+              sx={{ color: themeApply ? "background.paper" : "text.primary" }}
+            >
+              Thông báo
             </Typography>
-            <Box height={400} width={400}>
+            <Typography
+              sx={{ color: themeApply ? "background.paper" : "text.primary" }}
+            >
+              Theo như dữ liệu hệ thống thì bạn chưa thêm phòng nào vào mục yêu
+              thích.
+            </Typography>
+            <Box height={200} width={200}>
               <img
                 src="https://deo.shopeemobile.com/shopee/shopee-pcmall-live-sg/9bdd8040b334d31946f49e36beaf32db.png"
                 alt="order-nothing"
@@ -142,7 +170,14 @@ export const FavoriteList = () => {
                 style={{ objectFit: "cover" }}
               />
             </Box>
-          </Stack>
+            <Button
+              variant="contained"
+              color="success"
+              onClick={() => navigate("/")}
+            >
+              Start Booking Now
+            </Button>
+          </Box>
         )}
       </Container>
     </Box>

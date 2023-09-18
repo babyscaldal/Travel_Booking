@@ -5,11 +5,12 @@ import CardOverflow from "@mui/joy/CardOverflow";
 import Divider from "@mui/joy/Divider";
 import Typography from "@mui/joy/Typography";
 import { capitalizeFirstLetter } from "../../../Ultiliti/CapitalizeFirstLetter";
-import { Box, IconButton, Rating } from "@mui/material";
+import { Box, Checkbox, Rating } from "@mui/material";
 import { useSelector } from "react-redux";
 import getRandomImage from "../../../Ultiliti/Random";
 import { IHotel } from "../../../types/hotelType";
 import { Carousel } from "react-bootstrap";
+
 import FavoriteIcon from "@mui/icons-material/Favorite";
 export interface IAccommodation {
   address: string;
@@ -61,19 +62,20 @@ export function HotelCard({
               ))}
             </Carousel>
           </AspectRatio>
-          {/* <IconButton
-            aria-label="Like minimal photography"
+          <Checkbox
             sx={{
               position: "absolute",
-              zIndex: 2,
-              borderRadius: "50%",
-              right: "0",
-              top: 0,
+              top: "10px",
+              right: "10px",
+              zIndex: 8,
             }}
-            onClick={favoriteToggle}
-          >
-            <FavoriteIcon color={"error"} />
-          </IconButton> */}
+            icon={<FavoriteIcon sx={{ color: "secondary.main" }} />}
+            checkedIcon={<FavoriteIcon sx={{ color: "error.main" }} />}
+            onClick={(e) => {
+              e.stopPropagation();
+              favoriteToggle();
+            }}
+          />
         </CardOverflow>
         <CardContent>
           <Typography

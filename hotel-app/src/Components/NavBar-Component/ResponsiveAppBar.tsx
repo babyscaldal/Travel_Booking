@@ -67,7 +67,7 @@ function ResponsiveAppBar() {
   );
   return (
     <AppBar position="fixed" sx={{ backgroundColor: "background.paper" }}>
-      <Container maxWidth="xl">
+      <Container maxWidth="lg">
         <Toolbar disableGutters>
           <Checkbox
             icon={<LightModeSharpIcon sx={{ color: "primary.main" }} />}
@@ -152,27 +152,28 @@ function ResponsiveAppBar() {
                 textAlign: "start",
               }}
             >
-              {/* <Stack> */}
-              {/* <UserAccount
-                username={userLogin.user.username}
-                avatar={userLogin.user.image}
-              /> */}
-              <MenuItem onClick={() => handleCloseUserMenu()}>
+              <MenuItem
+                onClick={() => handleCloseNavMenu()}
+                sx={{ display: isLogin ? "none" : "block" }}
+              >
                 <LoginForm type="text">
                   <AccountCircleIcon color="primary" sx={{ mr: 0.5 }} />
                   Đăng nhập
                 </LoginForm>
               </MenuItem>
-              <MenuItem onClick={() => handleCloseUserMenu()}>
+              <MenuItem
+                onClick={() => handleCloseNavMenu()}
+                sx={{ display: isLogin ? "none" : "block" }}
+              >
                 <RegisterForm>
                   <HowToRegIcon color="primary" sx={{ mr: 0.5 }} />
                   Đăng ký
                 </RegisterForm>
               </MenuItem>
-              <MenuItem onClick={() => handleCloseUserMenu()}>
+              <MenuItem onClick={() => handleCloseNavMenu()}>
                 <DownloadApp />
               </MenuItem>
-              <MenuItem onClick={() => handleCloseUserMenu()}>
+              <MenuItem onClick={() => handleCloseNavMenu()}>
                 <Button
                   sx={{ color: "text.primary", display: "block" }}
                   onClick={() => navigate("/contact")}
@@ -185,19 +186,17 @@ function ResponsiveAppBar() {
                   Hợp tác
                 </Button>
               </MenuItem>
-              <MenuItem onClick={() => handleCloseUserMenu()}>
+              <MenuItem onClick={() => handleCloseNavMenu()}>
                 <FavoriteBtn />
               </MenuItem>
-              <MenuItem onClick={() => handleCloseUserMenu()}>
+              <MenuItem onClick={() => handleCloseNavMenu()}>
                 <MyBooking />
               </MenuItem>
             </Menu>
           </Box>
 
           {/* register&Login */}
-          <Box
-            sx={{ flexGrow: 0, display: !isLogin ? "none" : "inline-block" }}
-          >
+          <Box sx={{ flexGrow: 0, display: !isLogin ? "none" : "block" }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar

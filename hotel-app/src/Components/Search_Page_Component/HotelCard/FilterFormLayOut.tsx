@@ -3,7 +3,6 @@ import {
   Stack,
   Grid,
   TablePagination,
-  Checkbox,
   createTheme,
   ThemeProvider,
   Box,
@@ -26,8 +25,6 @@ import { RootState } from "../../../stores.ts/stores";
 import AppBar from "@mui/material/AppBar";
 import PersistentDrawerLeft from "./Drawer";
 import HotelListSkeleton from "./hotelListSkeleton";
-import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
-import Favorite from "@mui/icons-material/Favorite";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
@@ -219,8 +216,6 @@ export const FilterFormLayOut = () => {
     }
   };
 
-  //Pagination:
-
   return (
     <Container maxWidth="lg" sx={{ paddingTop: "78px" }}>
       <Grid container spacing={2}>
@@ -344,11 +339,11 @@ export const FilterFormLayOut = () => {
                           "&:hover": {
                             cursor: "pointer",
                             transform: "translateY(-15px)",
-                            position: "relative",
+                            // position: "relative",
                           },
                         }}
                       >
-                        <Checkbox
+                        {/* <Checkbox
                           sx={{
                             position: "absolute",
                             top: "10px",
@@ -357,7 +352,7 @@ export const FilterFormLayOut = () => {
                           }}
                           icon={<FavoriteBorder />}
                           checkedIcon={<Favorite />}
-                        />
+                        /> */}
                         {/* <Link
                           to={String(id)}
                           style={{ textDecoration: "none" }}
