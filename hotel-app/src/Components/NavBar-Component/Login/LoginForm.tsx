@@ -23,6 +23,7 @@ import RegisterForm from "../Register/RegisterForm";
 import LockResetIcon from "@mui/icons-material/LockReset";
 import { UserState } from "../../../reducers/login.reducer";
 import HowToRegIcon from "@mui/icons-material/HowToReg";
+import LoginSuccess from "./LoginSusccess";
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -61,6 +62,8 @@ export default function LoginForm({
 }: ILoginForm) {
   const [open, setOpen] = React.useState(false);
   const [showPassword, setShowPassword] = React.useState<boolean>(false);
+  const [showSuccess, setShowSuccess] = React.useState(true);
+  const [showFail, setShowFail] = React.useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -92,7 +95,11 @@ export default function LoginForm({
     resolver: yupResolver(schema),
   });
 
-  const { handleSubmit, reset } = form;
+  const {
+    handleSubmit,
+    reset,
+    formState: { isSubmitSuccessful },
+  } = form;
 
   const dispatch = useDispatch();
 
@@ -113,6 +120,12 @@ export default function LoginForm({
 
     reset();
   };
+
+  React.useEffect(() => {
+    if (isLogin) {
+      setShowSuccess(true);
+    } else setShowFail(true);
+  }, [isLogin]);
 
   console.log(isLogin);
 
@@ -198,6 +211,7 @@ export default function LoginForm({
           </Stack>
         </DialogActions>
       </Dialog>
+      <LoginSuccess showSuccess={showSuccess} onSuccess={setShowSuccess} />
     </div>
   );
 }

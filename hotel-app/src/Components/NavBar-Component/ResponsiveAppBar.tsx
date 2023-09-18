@@ -70,6 +70,11 @@ function ResponsiveAppBar() {
       <Container maxWidth="lg">
         <Toolbar disableGutters>
           <Checkbox
+            size="small"
+            sx={{
+              border: "1px solid",
+              borderBlockColor: "primary.main",
+            }}
             icon={<LightModeSharpIcon sx={{ color: "primary.main" }} />}
             checkedIcon={<DarkModeSharpIcon sx={{ color: "primary.main" }} />}
             onChange={() => dispatch(changeTheme())}
@@ -236,6 +241,7 @@ function ResponsiveAppBar() {
                 onClick={() => {
                   handleCloseUserMenu();
                   dispatch(LogoutRes());
+                  navigate("/");
                 }}
                 sx={{ alignItems: "center" }}
               >

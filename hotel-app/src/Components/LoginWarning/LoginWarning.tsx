@@ -17,12 +17,6 @@ export default function LoginWarning({
   setOpen,
   handleCloseMenu,
 }: IBooleanState) {
-  // const [open, setOpen] = React.useState(props.booleanState);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
   const handleClose = () => {
     setOpen(false);
     handleCloseMenu && handleCloseMenu();
@@ -30,9 +24,6 @@ export default function LoginWarning({
 
   return (
     <div>
-      {/* <Button variant="outlined" onClick={handleClickOpen}>
-        Open alert dialog
-      </Button> */}
       <Dialog
         open={open}
         onClose={handleClose}
@@ -50,7 +41,8 @@ export default function LoginWarning({
         </DialogContent>
         <DialogActions>
           <Button
-            onClick={() => {
+            onClick={(e) => {
+              e.stopPropagation();
               handleClose();
             }}
             autoFocus

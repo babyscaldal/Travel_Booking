@@ -45,6 +45,10 @@ export const FilterFormLayOut = () => {
     (state: RootState) => state.provincesReducer.selectedProvince
   );
 
+  const favoriteList: IHotel[] = useSelector(
+    (state: any) => state.sortHotel.favoriteList
+  );
+
   const themeApply = useSelector(
     (state: RootState) => state.darkModeReducer.isDark
   );
@@ -186,9 +190,9 @@ export const FilterFormLayOut = () => {
     setPage(0);
   };
 
-  const favoriteList = useSelector(
-    (state: RootState) => state.sortHotel.favoriteList
-  );
+  // const favoriteList = useSelector(
+  //   (state: RootState) => state.sortHotel.favoriteList
+  // );
 
   const handleToggle = (selectedData: IHotel) => {
     console.log("Selected data: ", selectedData);
@@ -322,10 +326,22 @@ export const FilterFormLayOut = () => {
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map(
                   (
-                    { name, address, stars, rating, price, type, numberOfRoom },
+                    {
+                      name,
+                      address,
+                      stars,
+                      rating,
+                      price,
+                      type,
+                      numberOfRoom,
+                      id,
+                    },
 
                     index
                   ) => {
+                    const isFavorite = favoriteList.some(
+                      (hotel) => hotel.id === id
+                    );
                     return (
                       <Grid
                         key={index}
@@ -339,25 +355,11 @@ export const FilterFormLayOut = () => {
                           "&:hover": {
                             cursor: "pointer",
                             transform: "translateY(-15px)",
-                            // position: "relative",
                           },
                         }}
                       >
-                        {/* <Checkbox
-                          sx={{
-                            position: "absolute",
-                            top: "10px",
-                            right: "10px",
-                            zIndex: 8,
-                          }}
-                          icon={<FavoriteBorder />}
-                          checkedIcon={<Favorite />}
-                        /> */}
-                        {/* <Link
-                          to={String(id)}
-                          style={{ textDecoration: "none" }}
-                        > */}
                         <HotelCard
+                          isFavorite={isFavorite}
                           address={address}
                           name={name}
                           star={stars}

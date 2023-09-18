@@ -5,28 +5,34 @@ import CardOverflow from "@mui/joy/CardOverflow";
 import Divider from "@mui/joy/Divider";
 import Typography from "@mui/joy/Typography";
 import { capitalizeFirstLetter } from "../../../Ultiliti/CapitalizeFirstLetter";
-import { Box, Checkbox, Rating } from "@mui/material";
+import { Box, Checkbox, Rating, Tooltip } from "@mui/material";
 import { useSelector } from "react-redux";
 import getRandomImage from "../../../Ultiliti/Random";
 import { IHotel } from "../../../types/hotelType";
 import { Carousel } from "react-bootstrap";
 
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import { UserState } from "../../../reducers/login.reducer";
+import LoginWarning from "../../LoginWarning/LoginWarning";
+import { useState } from "react";
+
 export interface IAccommodation {
   address: string;
   name: string;
   star: number;
   rating: number;
   price: number;
-  // imgUrl: string[];
-  // subImgUrl: string[];
   typeAccommodation: string;
   numberOfRoom: number;
   onClick: () => void;
   favoriteToggle: () => void;
+  favoriteColor?: boolean;
+  isFavorite?: boolean;
 }
 
 export function HotelCard({
+  isFavorite,
+  favoriteColor,
   address,
   name,
   star,
@@ -40,6 +46,11 @@ export function HotelCard({
   const sortHotel: IHotel[] = useSelector(
     (state: any) => state.sortHotel.locationHotelList
   );
+  const isLogin: UserState = useSelector(
+    (state: any) => state.loginReducer.isLogin
+  );
+
+  const [open, setOpen] = useState<boolean>(false);
 
   return (
     <Box onClick={onClick}>
@@ -62,20 +73,28 @@ export function HotelCard({
               ))}
             </Carousel>
           </AspectRatio>
-          <Checkbox
-            sx={{
-              position: "absolute",
-              top: "10px",
-              right: "10px",
-              zIndex: 8,
-            }}
-            icon={<FavoriteIcon sx={{ color: "secondary.main" }} />}
-            checkedIcon={<FavoriteIcon sx={{ color: "error.main" }} />}
-            onClick={(e) => {
-              e.stopPropagation();
-              favoriteToggle();
-            }}
-          />
+          <Tooltip title="Thêm vào mục ưa thích" arrow placement="left">
+            <Checkbox
+              sx={{
+                position: "absolute",
+                top: "5px",
+                right: "5px",
+                zIndex: 8,
+              }}
+              checked={isFavorite}
+              icon={<FavoriteIcon sx={{ color: "secondary.main" }} />}
+              checkedIcon={
+                <FavoriteIcon
+                  sx={{ color: isLogin ? "error.main" : "secondary.main" }}
+                />
+              }
+              onClick={(e) => {
+                e.stopPropagation();
+                isLogin ? favoriteToggle() : setOpen(true);
+              }}
+            />
+          </Tooltip>
+          {<LoginWarning open={open} setOpen={setOpen} />}
         </CardOverflow>
         <CardContent>
           <Typography

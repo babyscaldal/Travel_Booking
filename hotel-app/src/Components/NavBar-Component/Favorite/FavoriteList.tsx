@@ -69,9 +69,6 @@ export const FavoriteList = () => {
               xs={12}
               sx={{
                 margin: "0 0 16px 0",
-                backgroundColor: themeApply
-                  ? "text.primary"
-                  : "background.paper",
                 color: themeApply ? "background.paper" : "text.primary",
               }}
             >
@@ -117,6 +114,7 @@ export const FavoriteList = () => {
                     }}
                   >
                     <HotelCard
+                      isFavorite={true}
                       address={address}
                       name={name}
                       star={stars}
