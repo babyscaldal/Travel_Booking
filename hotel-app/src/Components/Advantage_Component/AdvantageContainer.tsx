@@ -40,6 +40,7 @@ export default function AdvantageContainer() {
       bgImage: "../../../public/advantageImage/4.jpg",
     },
   ];
+
   return (
     <React.Fragment>
       <Box sx={{ backgroundColor: "background.paper" }}>

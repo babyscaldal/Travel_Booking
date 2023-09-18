@@ -35,7 +35,7 @@ export default function FavoriteBtn({ handleClose }: IMyBookingProps) {
         <Badge
           badgeContent={isLogin ? favoriteList.length : null}
           color="error"
-          sx={{ mr: 1.5 }}
+          sx={{ mr: 0.8 }}
         >
           <FavoriteIcon color="primary" />
           {/* <FavoriteIcon color="primary" sx={{ mr: 0.5 }} /> */}

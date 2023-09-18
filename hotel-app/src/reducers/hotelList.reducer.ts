@@ -93,7 +93,6 @@ const sortHotel = (state = initState, action: IActionProps) => {
   switch (action.type) {
     // start: get hotel location
     case actionTypes.GET_HOTELS_BY_LOCATION_REQUEST:
-      console.log("GET_HOTELS_BY_LOCATION_REQUEST:", action);
       return {
         ...state,
         isLoading: true,
@@ -101,7 +100,6 @@ const sortHotel = (state = initState, action: IActionProps) => {
       };
 
     case actionTypes.GET_HOTELS_BY_LOCATION_SUCCESS:
-      console.log("GET_HOTELS_BY_LOCATION_SUCCESS:", action);
       localStorage.setItem(
         "locationHotelList",
         JSON.stringify([
@@ -121,7 +119,6 @@ const sortHotel = (state = initState, action: IActionProps) => {
       };
 
     case actionTypes.GET_HOTELS_BY_LOCATION_ERROR:
-      console.log("GET_HOTELS_BY_LOCATION_ERROR:", action);
       return {
         ...state,
         isLoading: false,
@@ -187,7 +184,7 @@ const sortHotel = (state = initState, action: IActionProps) => {
 
           orderHotelList: [
             ...state.infoUser.orderHotelList.filter(
-              (item, index) => index !== action.payload
+              (_, index) => index !== action.payload
             ),
           ],
         })
@@ -201,7 +198,7 @@ const sortHotel = (state = initState, action: IActionProps) => {
 
           orderHotelList: [
             ...state.infoUser.orderHotelList.filter(
-              (item, index) => index !== action.payload
+              (_, index) => index !== action.payload
             ),
           ],
         },

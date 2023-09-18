@@ -144,13 +144,11 @@ export const FilterFormLayOut = () => {
   const dispatch = useDispatch();
 
   const onSubmit = (data: IFilterFormValue) => {
-    console.log(data);
     data &&
       data.city &&
       dispatch(getAllHotelsByLocation(data.city.id, data.bookingNums));
     localStorage.setItem("selectedProvince", JSON.stringify({ ...data.city }));
     const domain = data.city?.domain;
-    console.log("domain: ", domain);
     navigate(`/accommodation/${domain}`);
   };
 
@@ -172,7 +170,6 @@ export const FilterFormLayOut = () => {
   };
 
   const handleOnClick = (selectedData: IHotel) => {
-    console.log("Selected data: ", selectedData);
     dispatch(selectedHotel(selectedData));
   };
 
@@ -195,14 +192,8 @@ export const FilterFormLayOut = () => {
   // );
 
   const handleToggle = (selectedData: IHotel) => {
-    console.log("Selected data: ", selectedData);
-
-    console.log("favoriteList: ", favoriteList);
-
     if (!favoriteList.length) {
       const newFavoriteList: IHotel[] = [selectedData];
-
-      console.log("newFavoriteList: ", newFavoriteList);
 
       dispatch(handleToggleFavoriteHotelList(newFavoriteList));
     } else {
@@ -359,6 +350,7 @@ export const FilterFormLayOut = () => {
                         }}
                       >
                         <HotelCard
+                          tooltip="Thêm vào mục ưa thích"
                           isFavorite={isFavorite}
                           address={address}
                           name={name}

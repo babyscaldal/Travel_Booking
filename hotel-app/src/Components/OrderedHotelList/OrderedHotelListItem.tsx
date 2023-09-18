@@ -20,7 +20,6 @@ interface IOrderedHotelListItem {
 
 export const OrderedHotelListItem = ({
   arr,
-  imageUrl,
   hotelName,
   address,
   totalPrice,
@@ -49,8 +48,7 @@ export const OrderedHotelListItem = ({
           </Carousel.Item>
         ))}
       </Carousel>
-      {/* </Box> */}
-      {/* </TableCell> */}
+
       <TableCell align="center">
         <Typography
           component={"span"}

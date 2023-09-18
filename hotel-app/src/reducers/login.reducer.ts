@@ -58,7 +58,7 @@ const loginReducer = (state = getUserFromLocal(), action: IActionProps) => {
 
     // logout
     case actionTypes.USER_LOGOUT_RES:
-      confirm("Logout hả!!!");
+      // confirm("Logout hả!!!");
       localStorage.setItem(
         "userLogin",
         JSON.stringify({

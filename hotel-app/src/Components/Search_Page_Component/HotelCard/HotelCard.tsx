@@ -28,11 +28,11 @@ export interface IAccommodation {
   favoriteToggle: () => void;
   favoriteColor?: boolean;
   isFavorite?: boolean;
+  tooltip?: string;
 }
 
 export function HotelCard({
   isFavorite,
-  favoriteColor,
   address,
   name,
   star,
@@ -42,6 +42,7 @@ export function HotelCard({
   numberOfRoom,
   onClick,
   favoriteToggle,
+  tooltip,
 }: IAccommodation) {
   const sortHotel: IHotel[] = useSelector(
     (state: any) => state.sortHotel.locationHotelList
@@ -73,7 +74,7 @@ export function HotelCard({
               ))}
             </Carousel>
           </AspectRatio>
-          <Tooltip title="Thêm vào mục ưa thích" arrow placement="left">
+          <Tooltip title={tooltip} arrow placement="left">
             <Checkbox
               sx={{
                 position: "absolute",

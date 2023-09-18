@@ -2,14 +2,13 @@ import { Box } from "@mui/system";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { CssBaseline } from "@mui/material";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllProvince } from "./actions/province.action";
 import { FilterFormLayOut } from "./Components/Search_Page_Component/HotelCard/FilterFormLayOut";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Footer from "./Components/Footer_Component/footer/Footer";
 import OrderHotelList from "./Components/NavBar-Component/MyBooking/OrderHotelList";
-// import { HomePage } from "./Pages/Homepage/HomePage";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { RootState } from "./stores.ts/stores";
 import DetailPage from "./Components/DetailPage_Component/DetailePage";
@@ -17,11 +16,18 @@ import { FavoriteList } from "./Components/NavBar-Component/Favorite/FavoriteLis
 import ResponsiveAppBar from "./Components/NavBar-Component/ResponsiveAppBar";
 import Contact from "./Components/NavBar-Component/Contact/Contact";
 import React from "react";
-import SucceededLoginAlert from "./Components/NavBar-Component/Login/succeededLoginAlert";
-import { HomePage } from "./pages/Homepage/HomePage";
+import { HomePage } from "./Pages/Homepage/HomePage";
+import LoginSuccess from "./Components/NavBar-Component/Login/LoginSusccess";
 
 function App() {
   const dispatch = useDispatch();
+
+  const [submittedDone, setSubmittedDone] = useState(false);
+  const [showSuccess, setShowSuccess] = React.useState(false);
+
+  const handleSubmittedDone = () => {
+    setSubmittedDone(true);
+  };
 
   useEffect(() => {
     dispatch(fetchAllProvince());
@@ -30,8 +36,6 @@ function App() {
   const themeApply = useSelector(
     (state: RootState) => state.darkModeReducer.isDark
   );
-
-  console.log(themeApply);
 
   const darkTheme = createTheme({
     palette: {
@@ -46,19 +50,20 @@ function App() {
     (state: any) => state.loginReducer.isLogin
   );
 
-  const [show, setShow] = React.useState<boolean>(false);
-
   React.useEffect(() => {
-    setShow(isLogin);
-    setTimeout(() => setShow(false), 3000);
-  }, [isLogin]);
+    if (isLogin && submittedDone) {
+      setShowSuccess(true);
+      setSubmittedDone(false);
+      return;
+    }
+  }, [isLogin, submittedDone]);
 
   return (
     <>
       <CssBaseline />
       <ThemeProvider theme={darkTheme}>
         <Box>
-          <ResponsiveAppBar />
+          <ResponsiveAppBar handleSubmittedDone={handleSubmittedDone} />
         </Box>
       </ThemeProvider>
       <Routes>
@@ -78,7 +83,7 @@ function App() {
         <Route path={"favorite-hotel"} element={<FavoriteList />} />
         <Route path={"favorite-hotel/:id"} element={<DetailPage />} />
       </Routes>
-      <SucceededLoginAlert show={show} />;
+      <LoginSuccess showSuccess={showSuccess} onSuccess={setShowSuccess} />
       <Footer />
     </>
   );

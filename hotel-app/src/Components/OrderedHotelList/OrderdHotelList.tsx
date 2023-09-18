@@ -212,7 +212,7 @@ export default function OrderdHotelList() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-  const handleChangePage = (event: unknown, newPage: number) => {
+  const handleChangePage = (_: unknown, newPage: number) => {
     setPage(newPage);
   };
 
@@ -222,13 +222,15 @@ export default function OrderdHotelList() {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
-  // const orderedHotel = useSelector(
-  //   (state: RootState) => state.hotelsByLocationReducer.hotelsListByLocation
-  // );
 
   return (
     <Stack>
-      <Paper sx={{ width: "100%", overflow: "hidden" }}>
+      <Paper
+        sx={{
+          width: "100%",
+          overflow: "hidden",
+        }}
+      >
         <TableContainer sx={{ maxHeight: 450 }}>
           <Table stickyHeader aria-label="sticky table">
             <TableHead>

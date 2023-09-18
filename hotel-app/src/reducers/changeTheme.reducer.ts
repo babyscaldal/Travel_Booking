@@ -6,7 +6,6 @@ const darkMode = {
 };
 
 const darkModeReducer = (state = darkMode, action: IAction) => {
-  console.log(state);
   switch (action.type) {
     case actionTypes.CHANGE_THEME:
       return { ...state, isDark: !state.isDark };

@@ -39,7 +39,6 @@ export const handleOrderHotel = (orderHotel: IOrderHotel) => {
 };
 
 export const handleToggleFavoriteHotelList = (item: IHotel[]) => {
-  console.log("payload - item: ", item);
   return { type: actionTypes.FAVORITE_HOTEL, payload: item };
 };
 

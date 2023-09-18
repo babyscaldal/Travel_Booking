@@ -190,7 +190,6 @@ export default function RegisterForm({
               </FormProvider>
             </form>
           </Stack>
-          {/* <DevTool control={control} /> */}
         </DialogActions>
       </Dialog>
     </div>

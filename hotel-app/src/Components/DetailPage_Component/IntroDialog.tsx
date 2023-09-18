@@ -51,7 +51,6 @@ export default function IntroDialog() {
   const handleClose = () => {
     setOpen(false);
   };
-  console.log("hotel dialof: ", hotel);
   return (
     <div>
       <p

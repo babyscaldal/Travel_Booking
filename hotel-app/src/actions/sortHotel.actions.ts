@@ -2,7 +2,6 @@ import { IHotel } from "../types/hotelType";
 import { actionTypes } from "../types/actions.types";
 
 export const handleSortHotel = (value: string, initHotel: IHotel[]) => {
-  console.log("Init hotel actions: ", initHotel);
   // sort by highest price
   if (value === "1") {
     const sortedHotel: IHotel[] = initHotel

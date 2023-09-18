@@ -40,7 +40,6 @@ export default function OrderHotelList() {
   const orderHotelList: IOrderHotel[] = useSelector(
     (state: RootState) => state.sortHotel.infoUser.orderHotelList
   );
-  console.log("orderList: ", orderHotelList);
 
   const themeApply = useSelector(
     (state: RootState) => state.darkModeReducer.isDark
@@ -142,15 +141,14 @@ export default function OrderHotelList() {
           </Paper>
         ) : (
           <Box
-            height="100vh"
-            mb={"30px"}
+            py={"30px"}
             textAlign={"center"}
             display={"flex"}
             justifyContent={"center"}
             alignItems={"center"}
             flexDirection={"column"}
           >
-            <Typography variant="h6" component={"h3"}>
+            <Typography variant="h5" component={"h3"}>
               Thông báo
             </Typography>
             <Typography>
@@ -166,8 +164,12 @@ export default function OrderHotelList() {
               />
             </Box>
             <Button
+              sx={{
+                backgroundColor: "primary.main",
+                color: "background.paper",
+                "&:hover": { backgroundColor: "primary.dark" },
+              }}
               variant="contained"
-              color="success"
               onClick={() => navigate("/")}
             >
               Start Booking Now

@@ -8,6 +8,9 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 import { useFormContext } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { RootState } from "../../stores.ts/stores";
+import { Box } from "@mui/material";
 
 export default function BookingSuccessAlert() {
   const navigate = useNavigate();
@@ -28,6 +31,10 @@ export default function BookingSuccessAlert() {
     formState: { isSubmitting },
   } = useFormContext();
 
+  const themeApply = useSelector(
+    (state: RootState) => state.darkModeReducer.isDark
+  );
+
   return (
     <div>
       <Button
@@ -35,9 +42,13 @@ export default function BookingSuccessAlert() {
         size="large"
         type="submit"
         variant="contained"
-        sx={{ width: "100%", height: "40px" }}
-        color="success"
+        color="warning"
         disabled={isSubmitting === true}
+        sx={{
+          color: themeApply ? "#text.primary" : "#fff",
+          width: "100%",
+          height: "40px",
+        }}
       >
         Đặt phòng
       </Button>
@@ -57,17 +68,52 @@ export default function BookingSuccessAlert() {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button
-            variant="contained"
-            sx={{ fontWeight: "bold" }}
-            autoFocus
-            onClick={() => {
-              navigate("/order-hotel");
-              handleClose();
-            }}
-          >
-            OK
-          </Button>
+          <Box sx={{ display: "flex", justifyContent: "center", gap: "10px" }}>
+            <Button
+              variant="contained"
+              color="success"
+              sx={{
+                fontWeight: "bold",
+                color: themeApply ? "#text.primary" : "#fff",
+              }}
+              autoFocus
+              onClick={() => {
+                navigate("/");
+                handleClose();
+              }}
+            >
+              Quay về Trang chủ
+            </Button>
+            <Button
+              variant="contained"
+              color="secondary"
+              sx={{
+                fontWeight: "bold",
+                color: themeApply ? "#text.primary" : "#fff",
+              }}
+              autoFocus
+              onClick={() => {
+                navigate("/order-hotel");
+                handleClose();
+              }}
+            >
+              Chỗ đã đặt
+            </Button>
+            <Button
+              variant="contained"
+              color="primary"
+              sx={{
+                fontWeight: "bold",
+                color: themeApply ? "#text.primary" : "#fff",
+              }}
+              autoFocus
+              onClick={() => {
+                handleClose();
+              }}
+            >
+              Đặt tiếp
+            </Button>
+          </Box>
         </DialogActions>
       </Dialog>
     </div>

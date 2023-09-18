@@ -86,8 +86,6 @@ function ControlledCarousel() {
     (state: RootState) => state.darkModeReducer.isDark
   );
 
-  console.log(themeApply);
-
   const darkTheme = createTheme({
     palette: {
       mode: themeApply ? "dark" : "light",

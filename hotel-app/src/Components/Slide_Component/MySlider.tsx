@@ -69,7 +69,6 @@ const MySlider: React.FC = () => {
     domain: string,
     selectedProvince: IProvince
   ) => {
-    console.log("selectedProvince: ", selectedProvince);
     dispatch(getAllHotelsByLocation(id, bookingNums));
     dispatch(setFormValue(selectedProvince));
     navigate(`/accommodation/${domain}`);

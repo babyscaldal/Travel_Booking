@@ -21,7 +21,6 @@ export const FavoriteList = () => {
   const dispatch = useDispatch();
 
   const handleOnClick = (selectedData: IHotel) => {
-    console.log("Selected data: ", selectedData);
     dispatch(selectedHotel(selectedData));
   };
 
@@ -55,7 +54,6 @@ export const FavoriteList = () => {
     <Box
       sx={{
         fontSize: "90px",
-        height: "100vh",
         backgroundColor: themeApply ? "text.primary" : "background.paper",
         color: themeApply ? "background.paper" : "text.primary",
         textAlign: "center",
@@ -114,6 +112,7 @@ export const FavoriteList = () => {
                     }}
                   >
                     <HotelCard
+                      tooltip="Xóa khỏi mục ưa thích"
                       isFavorite={true}
                       address={address}
                       name={name}
@@ -137,8 +136,7 @@ export const FavoriteList = () => {
           </Grid>
         ) : (
           <Box
-            height="100vh"
-            mb={"30px"}
+            py={"30px"}
             textAlign={"center"}
             display={"flex"}
             justifyContent={"center"}
@@ -147,7 +145,7 @@ export const FavoriteList = () => {
             color="text.primary"
           >
             <Typography
-              variant="h6"
+              variant="h5"
               component={"h3"}
               sx={{ color: themeApply ? "background.paper" : "text.primary" }}
             >
@@ -168,11 +166,7 @@ export const FavoriteList = () => {
                 style={{ objectFit: "cover" }}
               />
             </Box>
-            <Button
-              variant="contained"
-              color="success"
-              onClick={() => navigate("/")}
-            >
+            <Button variant="contained" onClick={() => navigate("/")}>
               Start Booking Now
             </Button>
           </Box>

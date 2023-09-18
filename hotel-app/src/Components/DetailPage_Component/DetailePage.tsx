@@ -63,8 +63,6 @@ export default function DetailPage() {
     (state: RootState) => state.darkModeReducer.isDark
   );
 
-  console.log(themeApply);
-
   return (
     <Box
       sx={{

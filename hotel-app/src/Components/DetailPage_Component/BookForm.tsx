@@ -1,6 +1,5 @@
 import { Box, Divider, Grid, Stack, Typography } from "@mui/material";
 import { FormProvider, useForm, useWatch } from "react-hook-form";
-import { DevTool } from "@hookform/devtools";
 import dayjs, { Dayjs } from "dayjs";
 import DateRangePickerField from "../HomePage_Component/BookingTabPanel/BookingTabs/BookingFormField/DateRangePickerField";
 import People from "../HomePage_Component/BookingTabPanel/BookingTabs/People";
@@ -106,14 +105,6 @@ export default function BookForm() {
     name: ["room", "adult", "child", "baby", "bookingDate"],
   });
 
-  console.log(
-    watchedValues[0],
-    watchedValues[1],
-    watchedValues[2],
-    watchedValues[3],
-    watchedValues[4]
-  );
-
   const dateValue: any = watchedValues[4];
 
   const start1 = dayjs(dateValue[0]).format("YYYY-MM-DD");
@@ -125,11 +116,6 @@ export default function BookForm() {
       ? Math.floor((Date.parse(end1) - Date.parse(start1)) / dayConvert)
       : 1;
 
-  // console.log("Type number day: ", numberOfDate);
-
-  console.log("start: ", start1);
-  console.log("end: ", end1);
-
   const total = watchedValues[0] * selectedHotel.price * night;
 
   const dispatch = useDispatch();
@@ -139,8 +125,6 @@ export default function BookForm() {
   );
 
   const onSubmit = (data: IBookingFormValue) => {
-    console.log(data);
-
     const bookingInfoData = {
       ...selectedHotel,
       adultQuantity: data.adult,
@@ -232,15 +216,6 @@ export default function BookForm() {
             </Grid>
 
             <Grid item xs={12} justifyContent={"center"} alignItems={"stretch"}>
-              {/* <Button
-                size="large"
-                type="submit"
-                variant="contained"
-                sx={{ width: "100%", height: "40px" }}
-                color="success"
-              >
-                Đặt phòng
-              </Button> */}
               {isLogin ? (
                 <BookingSuccessAlert />
               ) : (
@@ -336,7 +311,6 @@ export default function BookForm() {
           </Grid>
         </Box>
       </form>
-      <DevTool control={control} />
     </FormProvider>
   );
 }

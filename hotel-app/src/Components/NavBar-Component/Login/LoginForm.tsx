@@ -15,15 +15,13 @@ import {
 import { FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { IUserLoginReq } from "../../../types/userType";
 import { LoginRes } from "../../../actions/login.actions";
 import { IFormLoginValues } from "../../../types/LoginTypes";
 import RegisterForm from "../Register/RegisterForm";
 import LockResetIcon from "@mui/icons-material/LockReset";
-import { UserState } from "../../../reducers/login.reducer";
 import HowToRegIcon from "@mui/icons-material/HowToReg";
-import LoginSuccess from "./LoginSusccess";
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -35,6 +33,7 @@ const Transition = React.forwardRef(function Transition(
 });
 
 interface ILoginForm {
+  handleSubmittedDone?: () => void;
   children: React.ReactNode;
   type?: "text" | "contained" | "outlined";
   material?: string;
@@ -54,6 +53,7 @@ interface ILoginForm {
 }
 
 export default function LoginForm({
+  handleSubmittedDone: handleSubmittedDone,
   children,
   type = "text",
   material = "text.primary",
@@ -62,16 +62,10 @@ export default function LoginForm({
 }: ILoginForm) {
   const [open, setOpen] = React.useState(false);
   const [showPassword, setShowPassword] = React.useState<boolean>(false);
-  const [showSuccess, setShowSuccess] = React.useState(true);
-  const [showFail, setShowFail] = React.useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
   };
-
-  const isLogin: UserState = useSelector(
-    (state: any) => state.loginReducer.isLogin
-  );
 
   const handleClose = () => {
     setOpen(false);
@@ -95,11 +89,7 @@ export default function LoginForm({
     resolver: yupResolver(schema),
   });
 
-  const {
-    handleSubmit,
-    reset,
-    formState: { isSubmitSuccessful },
-  } = form;
+  const { handleSubmit, reset } = form;
 
   const dispatch = useDispatch();
 
@@ -108,8 +98,6 @@ export default function LoginForm({
   };
 
   const onSubmit = (data: any) => {
-    // console.log("data: ", data);
-    console.log("submit Value: ", data);
     handleClose();
     const body: IUserLoginReq = {
       user: {
@@ -117,101 +105,97 @@ export default function LoginForm({
       },
     };
     dispatch(LoginRes(body));
-
+    handleSubmittedDone && handleSubmittedDone();
     reset();
   };
 
-  React.useEffect(() => {
-    if (isLogin) {
-      setShowSuccess(true);
-    } else setShowFail(true);
-  }, [isLogin]);
-
-  console.log(isLogin);
-
   return (
-    <div>
-      <Button
-        sx={{ color: material }}
-        color={color}
-        variant={type}
-        onClick={() => {
-          handleClickOpen();
-        }}
-      >
-        {children}
-      </Button>
-      <Dialog
-        open={open}
-        TransitionComponent={Transition}
-        keepMounted
-        onClose={handleClose}
-        aria-describedby="alert-dialog-slide-description"
-      >
-        <DialogActions>
-          <Stack spacing={1.5} sx={{ padding: "48px 32px", width: "450px" }}>
-            <DialogTitle
-              sx={{
-                fontWeight: "bold",
-                fontSize: "30px",
-                textAlign: "center",
-                padding: 0,
-              }}
-            >
-              {"Đăng nhập"}
-            </DialogTitle>
-            <form onSubmit={handleSubmit(onSubmit)} noValidate>
-              <FormProvider {...form}>
-                <Stack spacing={1.5}>
-                  <InputField name="email" title="Email" type="email" />
-                  <InputField
-                    name="password"
-                    title="Password"
-                    type={showPassword ? "text" : "password"}
-                  />
+    <>
+      <div>
+        <Button
+          type="submit"
+          sx={{ color: material }}
+          color={color}
+          variant={type}
+          onClick={() => {
+            handleClickOpen();
+          }}
+        >
+          {children}
+        </Button>
+        <Dialog
+          open={open}
+          TransitionComponent={Transition}
+          keepMounted
+          onClose={handleClose}
+          aria-describedby="alert-dialog-slide-description"
+        >
+          <DialogActions>
+            <Stack spacing={1.5} sx={{ padding: "48px 32px", width: "450px" }}>
+              <DialogTitle
+                sx={{
+                  fontWeight: "bold",
+                  fontSize: "30px",
+                  textAlign: "center",
+                  padding: 0,
+                }}
+              >
+                {"Đăng nhập"}
+              </DialogTitle>
+              <form onSubmit={handleSubmit(onSubmit)} noValidate>
+                <FormProvider {...form}>
+                  <Stack spacing={1.5}>
+                    <InputField name="email" title="Email" type="email" />
+                    <InputField
+                      name="password"
+                      title="Password"
+                      type={showPassword ? "text" : "password"}
+                    />
 
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        checked={showPassword}
-                        onChange={handleShowPassword}
-                      />
-                    }
-                    label="Change to display password"
-                  />
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          checked={showPassword}
+                          onChange={handleShowPassword}
+                        />
+                      }
+                      label="Change to display password"
+                    />
 
-                  <Button variant="contained" color="primary" type="submit">
-                    Login
-                  </Button>
-                  {/* <LoginSuccess /> */}
-                  <Grid container justifyContent={"space-between"}>
-                    <Grid item>
-                      <Button
-                        variant="text"
-                        sx={{ color: "text.primary" }}
-                        startIcon={
-                          <LockResetIcon color="primary" sx={{ mr: 0.5 }} />
-                        }
-                      >
-                        Quên mật khẩu
-                      </Button>
+                    <Button variant="contained" color="primary" type="submit">
+                      Login
+                    </Button>
+                    {/* <LoginSuccess /> */}
+                    <Grid container justifyContent={"space-between"}>
+                      <Grid item>
+                        <Button
+                          variant="text"
+                          sx={{ color: "text.primary" }}
+                          startIcon={
+                            <LockResetIcon color="primary" sx={{ mr: 0.5 }} />
+                          }
+                        >
+                          Quên mật khẩu
+                        </Button>
+                      </Grid>
+                      <Grid item>
+                        <RegisterForm
+                          closeLogin={handleClose}
+                          icon={
+                            <HowToRegIcon color="primary" sx={{ mr: 0.5 }} />
+                          }
+                        >
+                          Đăng ký
+                        </RegisterForm>
+                      </Grid>
                     </Grid>
-                    <Grid item>
-                      <RegisterForm
-                        closeLogin={handleClose}
-                        icon={<HowToRegIcon color="primary" sx={{ mr: 0.5 }} />}
-                      >
-                        Đăng ký
-                      </RegisterForm>
-                    </Grid>
-                  </Grid>
-                </Stack>
-              </FormProvider>
-            </form>
-          </Stack>
-        </DialogActions>
-      </Dialog>
-      <LoginSuccess showSuccess={showSuccess} onSuccess={setShowSuccess} />
-    </div>
+                  </Stack>
+                </FormProvider>
+              </form>
+            </Stack>
+          </DialogActions>
+        </Dialog>
+      </div>
+    </>
   );
 }

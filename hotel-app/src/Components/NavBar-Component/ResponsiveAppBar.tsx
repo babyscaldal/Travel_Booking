@@ -31,10 +31,14 @@ import HowToRegIcon from "@mui/icons-material/HowToReg";
 import { UserState } from "../../reducers/login.reducer";
 import { LogoutRes } from "../../actions/login.actions";
 import LogoutIcon from "@mui/icons-material/Logout";
-import SucceededLoginAlert from "./Login/succeededLoginAlert";
-// import SucceededLoginAlert from "./Login/SucceededLoginAlert";
 
-function ResponsiveAppBar() {
+interface IResponsiveAppBar {
+  handleSubmittedDone: () => void;
+}
+
+function ResponsiveAppBar({
+  handleSubmittedDone: handleSubmittedDone,
+}: IResponsiveAppBar) {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -67,13 +71,6 @@ function ResponsiveAppBar() {
   const isLogin: boolean = useSelector(
     (state: any) => state.loginReducer.isLogin
   );
-
-  const [show, setShow] = React.useState<boolean>(false);
-
-  // React.useEffect(() => {
-  //   setShow(isLogin);
-  //   setTimeout(() => setShow(false), 3000);
-  // }, [isLogin]);
 
   return (
     <AppBar position="fixed" sx={{ backgroundColor: "background.paper" }}>
@@ -119,7 +116,7 @@ function ResponsiveAppBar() {
             <FavoriteBtn />
             <MyBooking />
             <Box sx={{ display: isLogin ? "none" : "inline-block" }}>
-              <LoginForm type="text">
+              <LoginForm type="text" handleSubmittedDone={handleSubmittedDone}>
                 <AccountCircleIcon color="primary" sx={{ mr: 0.5 }} />
                 Đăng nhập
               </LoginForm>
@@ -268,6 +265,3 @@ function ResponsiveAppBar() {
   );
 }
 export default ResponsiveAppBar;
-function setState(): [any, any] {
-  throw new Error("Function not implemented.");
-}

@@ -57,10 +57,6 @@ export default function HotelBookingFormLayout() {
   });
 
   // Provinces
-  const provinces = useSelector(
-    (state: RootState) => state.provincesReducer.listProvinces
-  );
-  console.log("Provinces: ", provinces);
 
   const { handleSubmit, watch, setValue, reset } = form;
 
@@ -81,13 +77,11 @@ export default function HotelBookingFormLayout() {
   };
 
   const onSubmit = (data: IBookingFormValue) => {
-    console.log("data serach: ", data);
     data &&
       data.city &&
       dispatch(getAllHotelsByLocation(data.city.id, data.room));
     data && data.city && dispatch(setFormValue(data.city));
     const domain = data.city?.domain;
-    console.log("domain: ", domain);
     navigate(`/accommodation/${domain}`);
     reset();
   };
