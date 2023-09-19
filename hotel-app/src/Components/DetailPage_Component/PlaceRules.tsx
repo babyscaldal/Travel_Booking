@@ -13,8 +13,6 @@ const safeAccommodation: string[] = [
   "Vị trí trên cao không có lan can hoặc cấu trúc bảo vệ",
 ];
 
-const CancellationPolicy: string[] = ["Hủy phòng tối thiểu trước 3 ngày"];
-
 export default function PlaceRules() {
   return (
     <React.Fragment>

@@ -71,7 +71,6 @@ export const RatingCheckBoxField = ({ name, label }: IRatingCheckBoxField) => {
     }
   };
   useEffect(() => {
-    // console.log("start handleSelect: ", selectedItems);
     dispatch(handleFilterStarsHotel(selectedItems));
   }, [selectedItems]);
 
@@ -98,8 +97,7 @@ export const RatingCheckBoxField = ({ name, label }: IRatingCheckBoxField) => {
                   <Controller
                     name={name}
                     control={control}
-                    render={({ field: { value } }) => {
-                      // console.log(value);
+                    render={() => {
                       return (
                         <Checkbox
                           checked={selectedItems.includes(Number(option.value))}

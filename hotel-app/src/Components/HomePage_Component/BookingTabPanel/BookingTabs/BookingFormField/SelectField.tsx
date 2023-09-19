@@ -1,14 +1,6 @@
-import {
-  FormControl,
-  InputAdornment,
-  InputLabel,
-  ListItemIcon,
-  Select,
-  Typography,
-} from "@mui/material";
+import { FormControl, InputLabel, Select, Typography } from "@mui/material";
 import { ReactNode } from "react";
 import { Controller, useFormContext } from "react-hook-form";
-import NightsStayRoundedIcon from "@mui/icons-material/NightsStayRounded";
 
 export interface ISelectFieldProps {
   name: string;

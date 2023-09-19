@@ -11,7 +11,7 @@ export default function ToggleButtonsMultiple() {
   const [formats, setFormats] = React.useState(() => ["bold", "italic"]);
 
   const handleFormat = (
-    event: React.MouseEvent<HTMLElement>,
+    _: React.MouseEvent<HTMLElement>,
     newFormats: string[]
   ) => {
     setFormats(newFormats);

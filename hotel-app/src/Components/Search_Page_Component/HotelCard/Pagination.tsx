@@ -11,7 +11,7 @@ export default function PaginationControlled({
   totalPages,
 }: IPaginationControlled) {
   const [page, setPage] = React.useState(1);
-  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+  const handleChange = (_: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
   };
 

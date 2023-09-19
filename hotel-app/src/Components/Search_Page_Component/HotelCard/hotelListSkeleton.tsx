@@ -1,5 +1,4 @@
 import Skeleton from "@mui/material/Skeleton";
-import * as React from "react";
 import Grid from "@mui/material/Grid";
 import { Box, Stack } from "@mui/material";
 

@@ -1,6 +1,5 @@
 import * as React from "react";
 import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import { SnackbarOrigin } from "@mui/material/Snackbar";
@@ -26,11 +25,7 @@ export default function SucceededLoginAlert({ show }: ISucceededLoginAlert) {
     horizontal: "right",
   });
 
-  const { vertical, horizontal, open } = state;
-
-  const handleClick = () => {
-    setState({ ...state, open: true });
-  };
+  const { vertical, horizontal } = state;
 
   const handleClose = () => {
     setState({ ...state, open: false });
