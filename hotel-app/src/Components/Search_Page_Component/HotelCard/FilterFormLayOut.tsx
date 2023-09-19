@@ -219,87 +219,89 @@ export const FilterFormLayOut = () => {
             position={"fixed"}
             sx={{
               backgroundColor: "background.paper",
-              marginTop: "64px",
+              marginTop: "60px",
               padding: "10px 0",
               zIndex: 9,
             }}
           >
-            <Grid item xs={12}>
-              <Grid container spacing={2} justifyContent={"space-between"}>
-                <Grid item xs={12}>
-                  <FormProvider {...form}>
-                    <form onSubmit={handleSubmit(onSubmit)}>
-                      <Grid container spacing={2} justifyContent={"start"}>
-                        <Grid item xs={6} md={2}>
-                          <PersistentDrawerLeft />
-                        </Grid>
-                        <Grid item xs={6} md={3}>
-                          <Accordion
-                            sx={{
-                              backgroundColor: "background.paper",
-                              border: "1px solid ",
-                            }}
-                          >
-                            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                              <Typography>
-                                <SearchIcon sx={{ color: "primary.main" }} />
-                                Tìm kiếm
+            <Container maxWidth="lg">
+              <Grid item xs={12}>
+                <Grid container spacing={2} justifyContent={"space-between"}>
+                  <Grid item xs={12}>
+                    <FormProvider {...form}>
+                      <form onSubmit={handleSubmit(onSubmit)}>
+                        <Grid container spacing={2} justifyContent={"start"}>
+                          <Grid item xs={6} md={1}>
+                            <PersistentDrawerLeft />
+                          </Grid>
+                          <Grid item xs={6} md={3}>
+                            <Accordion
+                              sx={{
+                                backgroundColor: "background.paper",
+                                border: "1px solid ",
+                              }}
+                            >
+                              <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                                <Typography>
+                                  <SearchIcon sx={{ color: "primary.main" }} />
+                                  Tìm kiếm
+                                </Typography>
+                              </AccordionSummary>
+                              <AccordionDetails>
+                                <Box>
+                                  <SearchField
+                                    onAdd={handleAddRoom}
+                                    onRemove={handleRemoveRoom}
+                                  />
+                                </Box>
+                              </AccordionDetails>
+                            </Accordion>
+                          </Grid>
+                          <Grid item xs={4} md={3.5}>
+                            <Typography
+                              variant="body1"
+                              sx={{
+                                color: "text.primary",
+                                textAlign: "justify",
+                              }}
+                            >
+                              Tìm thấy{" "}
+                              <Typography
+                                component="span"
+                                sx={{ color: "error.main", fontWeight: "bold" }}
+                              >
+                                {renderList.length}
+                              </Typography>{" "}
+                              kết quả phù hợp với bạn tại{" "}
+                              <Typography
+                                component="span"
+                                sx={{ color: "error.main", fontWeight: "bold" }}
+                              >
+                                {renderList.length && renderList[0].location}
                               </Typography>
-                            </AccordionSummary>
-                            <AccordionDetails>
-                              <Box>
-                                <SearchField
-                                  onAdd={handleAddRoom}
-                                  onRemove={handleRemoveRoom}
-                                />
-                              </Box>
-                            </AccordionDetails>
-                          </Accordion>
-                        </Grid>
-                        <Grid item xs={4} md={3}>
-                          <Typography
-                            variant="body1"
-                            sx={{
-                              color: "text.primary",
-                              textAlign: "justify",
-                            }}
-                          >
-                            Tìm thấy{" "}
-                            <Typography
-                              component="span"
-                              sx={{ color: "error.main", fontWeight: "bold" }}
-                            >
-                              {renderList.length}
-                            </Typography>{" "}
-                            kết quả phù hợp với bạn tại{" "}
-                            <Typography
-                              component="span"
-                              sx={{ color: "error.main", fontWeight: "bold" }}
-                            >
-                              {renderList.length && renderList[0].location}
                             </Typography>
-                          </Typography>
+                          </Grid>
+                          <Grid item xs={7} md={4.5}>
+                            <Stack spacing={2}>
+                              <TablePagination
+                                labelRowsPerPage="Hotel per page"
+                                rowsPerPageOptions={[6, 12]}
+                                component="div"
+                                count={renderList.length}
+                                rowsPerPage={rowsPerPage}
+                                page={page}
+                                onPageChange={handleChangePage}
+                                onRowsPerPageChange={handleChangeRowsPerPage}
+                              />
+                            </Stack>
+                          </Grid>
                         </Grid>
-                        <Grid item xs={7} md={4}>
-                          <Stack spacing={2}>
-                            <TablePagination
-                              labelRowsPerPage="Hotel per page"
-                              rowsPerPageOptions={[6, 12]}
-                              component="div"
-                              count={renderList.length}
-                              rowsPerPage={rowsPerPage}
-                              page={page}
-                              onPageChange={handleChangePage}
-                              onRowsPerPageChange={handleChangeRowsPerPage}
-                            />
-                          </Stack>
-                        </Grid>
-                      </Grid>
-                    </form>
-                  </FormProvider>
+                      </form>
+                    </FormProvider>
+                  </Grid>
                 </Grid>
               </Grid>
-            </Grid>
+            </Container>
           </AppBar>
         </ThemeProvider>
 
@@ -350,7 +352,11 @@ export const FilterFormLayOut = () => {
                         }}
                       >
                         <HotelCard
-                          tooltip="Thêm vào mục ưa thích"
+                          tooltip={
+                            !isFavorite
+                              ? "Thêm vào mục ưa thích"
+                              : "Xóa khỏi mục yêu thích"
+                          }
                           isFavorite={isFavorite}
                           address={address}
                           name={name}
