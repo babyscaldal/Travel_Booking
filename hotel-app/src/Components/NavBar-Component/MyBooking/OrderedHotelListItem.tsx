@@ -23,7 +23,6 @@ interface IOrderedHotelListItem {
 }
 
 export const OrderedHotelListItem = ({
-  id,
   imageUrl,
   hotelName,
   address,
