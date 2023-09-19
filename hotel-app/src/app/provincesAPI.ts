@@ -2,12 +2,12 @@ import { axiosClient } from "./axiosClient";
 
 const provincesAPI = {
   getAll: () => {
-    const url = "http://localhost:3000/provinces";
+    const url = "https://travel-booking-api-b3x7.onrender.com/provinces";
     return axiosClient.get(url);
   },
 
   getById: (id: number) => {
-    const url = `http://localhost:3000/provinces/${id}`;
+    const url = `https://travel-booking-api-b3x7.onrender.com/provinces/${id}`;
     return axiosClient.get(url);
   },
 };
