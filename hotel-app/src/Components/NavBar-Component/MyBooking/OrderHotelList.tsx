@@ -91,10 +91,10 @@ export default function OrderHotelList() {
                         Giá
                       </TableCell>
                       <TableCell align="center" sx={{ fontWeight: "bold" }}>
-                        Ngày check in
+                        Check in
                       </TableCell>
                       <TableCell align="center" sx={{ fontWeight: "bold" }}>
-                        Ngày check out
+                        Check out
                       </TableCell>
                       <TableCell align="center" sx={{ fontWeight: "bold" }}>
                         Chi tiết
