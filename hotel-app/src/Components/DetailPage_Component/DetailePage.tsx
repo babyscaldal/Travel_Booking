@@ -5,7 +5,7 @@ import IntroDialog from "./IntroDialog";
 import BedRoom from "./BedRoom";
 import SpecialFeatures from "./SpecialFeatures";
 import SpecialFeaturesDialog from "./SpecialFeaturesDialog";
-import detailMap from "../../../public/detail_image/detail-map.png";
+import detailMap from "/detail_image/detail-map.png";
 import PlaceRules from "./PlaceRules";
 import { HotelInfoPage } from "./HotelInfoPage";
 import { useSelector } from "react-redux";

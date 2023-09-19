@@ -89,11 +89,7 @@ function ResponsiveAppBar({
           <Box sx={{ width: "50px", flexGrow: 1 }}>
             <NavLink to={"/"}>
               <img
-                src={
-                  themeApply
-                    ? "../../../public/white1.png"
-                    : "../../../public/Black1.png"
-                }
+                src={themeApply ? "/white1.png" : "/Black1.png"}
                 height="60px"
               />
             </NavLink>

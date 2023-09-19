@@ -103,7 +103,7 @@ const MockComponent = () => {
               >
                 <Box width={"100%"}>
                   <img
-                    src={"../../../../public/Untitled-removebg-preview.png"}
+                    src={"/Untitled-removebg-preview.png"}
                     alt="logo"
                     style={{
                       objectFit: "contain",

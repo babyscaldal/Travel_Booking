@@ -12,7 +12,7 @@ export default function AdvantageContainer() {
       description:
         "Giải pháp toàn diện - giúp bạn tìm chuyến bay và khách sạn khắp Việt Nam và Đông Nam Á một cách tiết kiệm.",
 
-      bgImage: "../../../public/advantageImage/1.jpg",
+      bgImage: "/advantageImage/1.jpg",
     },
     {
       title: "Giá rẻ mỗi ngày",
@@ -21,7 +21,7 @@ export default function AdvantageContainer() {
       description:
         "Giá bạn thấy là giá bạn trả! Dễ dàng so sánh khi không cần phải trả thêm chi phí ẩn! ",
 
-      bgImage: "../../../public/advantageImage/2.jpg",
+      bgImage: "/advantageImage/2.jpg",
     },
     {
       title: "Thanh toán tiện lợi",
@@ -29,7 +29,7 @@ export default function AdvantageContainer() {
         "https://ik.imagekit.io/tvlk/image/imageResource/2017/05/17/1495008514239-c1d0a51538cd02053c9b1a6c567fe5b5.png?tr=h-150,q-75,w-150",
       description:
         "Giao dịch trực tuyến an toàn với nhiều lựa chọn như thanh toán tại cửa hàng tiện lợi, chuyển khoản ngân hàng, thẻ tín dụng đến Internet Banking. Không tính phí giao dịch.",
-      bgImage: "../../../public/advantageImage/3.jpg",
+      bgImage: "/advantageImage/3.jpg",
     },
     {
       title: "Hỗ trợ khách hàng",
@@ -37,7 +37,7 @@ export default function AdvantageContainer() {
         "https://ik.imagekit.io/tvlk/image/imageResource/2017/05/17/1495008521046-3cee046bb3ddb863398300f89d83c0f9.png?tr=h-150,q-75,w-150",
       description:
         "Đội ngũ nhân viên hỗ trợ khách hàng luôn sẵn sàng giúp đỡ bạn trong từng bước của quá trình đặt vé",
-      bgImage: "../../../public/advantageImage/4.jpg",
+      bgImage: "/advantageImage/4.jpg",
     },
   ];
 

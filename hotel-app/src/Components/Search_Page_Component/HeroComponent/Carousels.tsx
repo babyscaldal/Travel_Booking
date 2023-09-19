@@ -75,7 +75,7 @@ function ControlledCarousel() {
 
   const heroImageUrl: string[] = Array.from(
     { length: 10 },
-    (_, i) => `../../../../public/hero_image/image_${i + 1}.jpg`
+    (_, i) => `/hero_image/image_${i + 1}.jpg`
   );
 
   const newProvinceList = provincesList.map((province, index) => {

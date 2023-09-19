@@ -1,5 +1,5 @@
 import { Container } from "@mui/system";
-import introImg from "../../../../public/contact_image/intro img.png";
+import introImg from "/contact_image/intro img.png";
 import PhoneInTalkIcon from "@mui/icons-material/PhoneInTalk";
 import EmailIcon from "@mui/icons-material/Email";
 import { Box, Grid, ThemeProvider, createTheme } from "@mui/material";
