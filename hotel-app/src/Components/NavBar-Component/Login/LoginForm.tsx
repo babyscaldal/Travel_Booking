@@ -113,6 +113,7 @@ export default function LoginForm({
     <>
       <div>
         <Button
+          fullWidth
           type="submit"
           sx={{ color: material }}
           color={color}

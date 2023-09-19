@@ -4,8 +4,7 @@ import Dialog from "@mui/material/Dialog";
 import Slide from "@mui/material/Slide";
 import { TransitionProps } from "@mui/material/transitions";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import LoginForm from "../Login/LoginFormTest";
-import RegisterForm from "./RegisterFormTest";
+import RegisterForm from "./RegisterForm";
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {

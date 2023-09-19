@@ -1,4 +1,3 @@
-import { url } from "inspector";
 import styles from "../Advantage_Component/Advantage.module.css";
 
 export interface IAdvantageItemProps {
