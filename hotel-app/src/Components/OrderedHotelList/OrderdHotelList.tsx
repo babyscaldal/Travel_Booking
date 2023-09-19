@@ -7,7 +7,6 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
-import { Stack } from "@mui/material";
 import { OrderedHotelListItem } from "./OrderedHotelListItem";
 
 const arr = [
@@ -224,83 +223,78 @@ export default function OrderdHotelList() {
   };
 
   return (
-    <Stack>
-      <Paper
-        sx={{
-          width: "100%",
-          overflow: "hidden",
-        }}
-      >
-        <TableContainer sx={{ maxHeight: 450 }}>
-          <Table stickyHeader aria-label="sticky table">
-            <TableHead>
-              <TableRow className="MuiTableRow-divider">
-                <TableCell
-                  align="center"
-                  sx={{ fontWeight: "bold" }}
-                ></TableCell>
-                <TableCell align="center" sx={{ fontWeight: "bold" }}>
-                  Nơi đặt
-                </TableCell>
+    <Paper
+      sx={{
+        // width: "100%",
+        overflow: "hidden",
+      }}
+    >
+      <TableContainer sx={{ maxHeight: 450 }}>
+        <Table stickyHeader aria-label="sticky table">
+          <TableHead>
+            <TableRow className="MuiTableRow-divider">
+              <TableCell align="center" sx={{ fontWeight: "bold" }}></TableCell>
+              <TableCell align="center" sx={{ fontWeight: "bold" }}>
+                Nơi đặt
+              </TableCell>
 
-                <TableCell align="center" sx={{ fontWeight: "bold" }}>
-                  Số phòng
-                </TableCell>
-                <TableCell align="center" sx={{ fontWeight: "bold" }}>
-                  Người lớn
-                </TableCell>
-                <TableCell align="center" sx={{ fontWeight: "bold" }}>
-                  Trẻ em
-                </TableCell>
-                <TableCell align="center" sx={{ fontWeight: "bold" }}>
-                  Giá
-                </TableCell>
-                <TableCell align="center" sx={{ fontWeight: "bold" }}>
-                  Ngày check in
-                </TableCell>
-                <TableCell align="center" sx={{ fontWeight: "bold" }}>
-                  Ngày check out
-                </TableCell>
-                <TableCell align="center" sx={{ fontWeight: "bold" }}>
-                  Chi tiết
-                </TableCell>
-                <TableCell align="center" sx={{ fontWeight: "bold" }}>
-                  Hủy đặt phòng
-                </TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {arr.length &&
-                arr
-                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map((item) => (
-                    <OrderedHotelListItem
-                      arr={arr}
-                      key={item.id}
-                      hotelName={item.name}
-                      address={item.address}
-                      totalPrice={item.price}
-                      adultQuantity={item.adultQuantity}
-                      childrenQuantity={item.childrenQuantity}
-                      checkinDate={item.checkInDate}
-                      checkoutDate={item.checkOutDate}
-                      roomQuantity={item.roomQuantity}
-                      imageUrl={item.image}
-                    />
-                  ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[5, 10]}
-          component="div"
-          count={arr.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
-      </Paper>
-    </Stack>
+              <TableCell align="center" sx={{ fontWeight: "bold" }}>
+                Số phòng
+              </TableCell>
+              <TableCell align="center" sx={{ fontWeight: "bold" }}>
+                Người lớn
+              </TableCell>
+              <TableCell align="center" sx={{ fontWeight: "bold" }}>
+                Trẻ em
+              </TableCell>
+              <TableCell align="center" sx={{ fontWeight: "bold" }}>
+                Giá
+              </TableCell>
+              <TableCell align="center" sx={{ fontWeight: "bold" }}>
+                Ngày check in
+              </TableCell>
+              <TableCell align="center" sx={{ fontWeight: "bold" }}>
+                Ngày check out
+              </TableCell>
+              <TableCell align="center" sx={{ fontWeight: "bold" }}>
+                Chi tiết
+              </TableCell>
+              <TableCell align="center" sx={{ fontWeight: "bold" }}>
+                Hủy đặt phòng
+              </TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {arr.length &&
+              arr
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((item) => (
+                  <OrderedHotelListItem
+                    arr={arr}
+                    key={item.id}
+                    hotelName={item.name}
+                    address={item.address}
+                    totalPrice={item.price}
+                    adultQuantity={item.adultQuantity}
+                    childrenQuantity={item.childrenQuantity}
+                    checkinDate={item.checkInDate}
+                    checkoutDate={item.checkOutDate}
+                    roomQuantity={item.roomQuantity}
+                    imageUrl={item.image}
+                  />
+                ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <TablePagination
+        rowsPerPageOptions={[5, 10]}
+        component="div"
+        count={arr.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+      />
+    </Paper>
   );
 }

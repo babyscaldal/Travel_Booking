@@ -38,12 +38,11 @@ export default function InputField({
         render={({ field: { onBlur, onChange, value } }) => {
           return (
             <FormControl variant="outlined">
-              <InputLabel htmlFor="outlined-adornment-password">
+              <InputLabel htmlFor="outlined-adornment-number">
                 {label}
               </InputLabel>
               <OutlinedInput
-                sx={{ textAlign: "center" }}
-                className="outlined-adornment-password"
+                className="outlined-adornment-number"
                 label={label}
                 onChange={onChange}
                 onBlur={onBlur}
@@ -53,7 +52,6 @@ export default function InputField({
                 startAdornment={
                   <InputAdornment position="start">
                     <IconButton
-                      aria-label="toggle password visibility"
                       onClick={() => onRemove && onRemove()}
                       edge="end"
                     >
@@ -68,11 +66,7 @@ export default function InputField({
                 }
                 endAdornment={
                   <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={() => onAdd && onAdd()}
-                      edge="end"
-                    >
+                    <IconButton onClick={() => onAdd && onAdd()} edge="end">
                       <AddCircleIcon sx={{ color: "primary.main" }} />
                     </IconButton>
                   </InputAdornment>

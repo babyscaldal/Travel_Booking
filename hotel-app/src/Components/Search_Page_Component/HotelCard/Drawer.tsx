@@ -10,29 +10,12 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import FilterSubMenu from "./FilterSubMenu";
 import map from "../../../assets/map.png";
 import { RadioField } from "./RadioField";
-import { Button, Container } from "@mui/material";
+import { Container } from "@mui/material";
 import TuneIcon from "@mui/icons-material/Tune";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../stores.ts/stores";
 
 const drawerWidth = 300;
-
-const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })<{
-  open?: boolean;
-}>(({ theme, open }) => ({
-  flexGrow: 1,
-  padding: theme.spacing(3),
-  transition: theme.transitions.create("margin", {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  marginLeft: `-${drawerWidth}px`,
-  ...(open && {
-    transition: theme.transitions.create("margin", {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-    marginLeft: 0,
-  }),
-}));
 
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
@@ -55,26 +38,28 @@ export default function PersistentDrawerLeft() {
     setOpen(false);
   };
 
+  const themeApply = useSelector(
+    (state: RootState) => state.darkModeReducer.isDark
+  );
+
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <Button
-        fullWidth
-        sx={{
-          border: "1px solid ",
-          color: "text.primary",
-          height: "55px",
-          borderRadius: "6px",
-          width: "100%",
-          boxShadow:
-            "0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)",
-        }}
-        variant="text"
-        onClick={handleDrawerOpen}
-        startIcon={<TuneIcon sx={{ color: "primary.main" }} />}
+      <Box
+        sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
       >
-        Bộ lọc
-      </Button>
+        <IconButton aria-label="delete" onClick={handleDrawerOpen}>
+          <TuneIcon sx={{ color: "primary.main" }} />
+        </IconButton>
+
+        <Typography
+          sx={{ color: themeApply ? "#fff" : "#000" }}
+          variant="body1"
+          color="initial"
+        >
+          Filter
+        </Typography>
+      </Box>
       <Drawer
         sx={{
           width: drawerWidth,
@@ -130,10 +115,6 @@ export default function PersistentDrawerLeft() {
           </Box>
         </Container>
       </Drawer>
-      <Main open={open} sx={{ padding: 0 }}>
-        {/* <DrawerHeader />
-        aaaaa */}
-      </Main>
     </Box>
   );
 }
