@@ -123,7 +123,7 @@ export default function DetailPage() {
         </Grid>
 
         <Grid container spacing={2} justifyContent={"space-between"}>
-          <Grid item xs={7}>
+          <Grid item xs={12} md={7}>
             <div>
               <h5>Chủ {selectedHotel.type}</h5>
               <p>
@@ -186,7 +186,7 @@ export default function DetailPage() {
             </div>
           </Grid>
           {/* right */}
-          <Grid item xs={4.5}>
+          <Grid item xs={12} md={4.5} marginBottom={5}>
             <HotelInfoPage />
           </Grid>
         </Grid>
