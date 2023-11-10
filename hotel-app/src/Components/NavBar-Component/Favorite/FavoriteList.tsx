@@ -15,7 +15,7 @@ import { Box } from "@mui/joy";
 export const FavoriteList = () => {
   const navigate = useNavigate();
   const favoriteList: IHotel[] = useSelector(
-    (state: any) => state.sortHotel.favoriteList
+    (state: RootState) => state.sortHotel.favoriteList
   );
 
   const dispatch = useDispatch();
@@ -24,18 +24,36 @@ export const FavoriteList = () => {
     dispatch(selectedHotel(selectedData));
   };
 
+  // const handleToggle = (selectedData: IHotel) => {
+  //   console.log("Selected data: ", selectedData);
+  //   const newFavoriteList = favoriteList.filter((item) => {
+  //     return item.id !== selectedData.id;
+  //   });
+  //   if (newFavoriteList.length !== favoriteList.length) {
+  //     dispatch(handleToggleFavoriteHotelList(newFavoriteList));
+  //   } else {
+  //     dispatch(
+  //       handleToggleFavoriteHotelList([selectedData, ...newFavoriteList])
+  //     );
+  //   }
+  // };
+
   const handleToggle = (selectedData: IHotel) => {
-    console.log("Selected data: ", selectedData);
-    const newFavoriteList = favoriteList.filter((item) => {
-      return item.id !== selectedData.id;
-    });
-    if (newFavoriteList.length !== favoriteList.length) {
-      dispatch(handleToggleFavoriteHotelList(newFavoriteList));
-    } else {
-      dispatch(
-        handleToggleFavoriteHotelList([selectedData, ...newFavoriteList])
+    const isDataInFavoriteList = favoriteList.some(
+      (item) => item.id === selectedData.id
+    );
+
+    let newFavoriteList: IHotel[];
+
+    if (isDataInFavoriteList) {
+      newFavoriteList = favoriteList.filter(
+        (item) => item.id !== selectedData.id
       );
+    } else {
+      newFavoriteList = [selectedData, ...favoriteList];
     }
+
+    dispatch(handleToggleFavoriteHotelList(newFavoriteList));
   };
 
   const selectedHotelState: IHotel = useSelector(

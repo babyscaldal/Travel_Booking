@@ -46,7 +46,7 @@ export const FilterFormLayOut = () => {
   );
 
   const favoriteList: IHotel[] = useSelector(
-    (state: any) => state.sortHotel.favoriteList
+    (state: RootState) => state.sortHotel.favoriteList
   );
 
   const themeApply = useSelector(
@@ -74,14 +74,14 @@ export const FilterFormLayOut = () => {
   const { handleSubmit, setValue, watch } = form;
 
   const sortHotel: IHotel[] = useSelector(
-    (state: any) => state.sortHotel.locationHotelList
+    (state: RootState) => state.sortHotel.locationHotelList
   );
   const selectedHotelState: IHotel = useSelector(
     (state: RootState) => state.sortHotel.selectedHotel
   );
 
-  const isLoading: IHotel[] = useSelector(
-    (state: any) => state.sortHotel.isLoading
+  const isLoading: boolean = useSelector(
+    (state: RootState) => state.sortHotel.isLoading
   );
 
   const [renderList, setRenderList] = useState<IHotel[]>(sortHotel);
@@ -89,12 +89,12 @@ export const FilterFormLayOut = () => {
   // get stars
 
   const starsValue: number[] = useSelector(
-    (state: any) => state.sortHotel.filterStarHotel
+    (state: RootState) => state.sortHotel.filterStarHotel
   );
 
   // get type accommodation
   const accommodationValue: string[] = useSelector(
-    (state: any) => state.sortHotel.filterTypeAccommodation
+    (state: RootState) => state.sortHotel.filterTypeAccommodation
   );
 
   // following
@@ -139,7 +139,7 @@ export const FilterFormLayOut = () => {
       setRenderList(newHotelList);
       return;
     }
-  }, [check, starsValue, accommodationValue]);
+  }, [check, starsValue, accommodationValue, sortHotel]);
 
   const dispatch = useDispatch();
 
@@ -191,24 +191,42 @@ export const FilterFormLayOut = () => {
   //   (state: RootState) => state.sortHotel.favoriteList
   // );
 
+  // const handleToggle = (selectedData: IHotel) => {
+  //   if (!favoriteList.length) {
+  //     const newFavoriteList: IHotel[] = [selectedData];
+
+  //     dispatch(handleToggleFavoriteHotelList(newFavoriteList));
+  //   } else {
+  //     const newFavoriteList = favoriteList.filter((item) => {
+  //       return item.id !== selectedData.id;
+  //     });
+
+  //     if (newFavoriteList.length !== favoriteList.length) {
+  //       dispatch(handleToggleFavoriteHotelList(newFavoriteList));
+  //     } else {
+  //       dispatch(
+  //         handleToggleFavoriteHotelList([selectedData, ...newFavoriteList])
+  //       );
+  //     }
+  //   }
+  // };
+
   const handleToggle = (selectedData: IHotel) => {
-    if (!favoriteList.length) {
-      const newFavoriteList: IHotel[] = [selectedData];
+    const isDataInFavoriteList = favoriteList.some(
+      (item) => item.id === selectedData.id
+    );
 
-      dispatch(handleToggleFavoriteHotelList(newFavoriteList));
+    let newFavoriteList: IHotel[];
+
+    if (isDataInFavoriteList) {
+      newFavoriteList = favoriteList.filter(
+        (item) => item.id !== selectedData.id
+      );
     } else {
-      const newFavoriteList = favoriteList.filter((item) => {
-        return item.id !== selectedData.id;
-      });
-
-      if (newFavoriteList.length !== favoriteList.length) {
-        dispatch(handleToggleFavoriteHotelList(newFavoriteList));
-      } else {
-        dispatch(
-          handleToggleFavoriteHotelList([selectedData, ...newFavoriteList])
-        );
-      }
+      newFavoriteList = [selectedData, ...favoriteList];
     }
+
+    dispatch(handleToggleFavoriteHotelList(newFavoriteList));
   };
 
   return (

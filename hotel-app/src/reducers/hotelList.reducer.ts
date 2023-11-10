@@ -16,6 +16,8 @@ export interface IBookedUser {
 // interface hanoiHotelList extends IHotel[]
 export interface IInitHotelState {
   locationHotelList: IHotel[];
+  isLoading: boolean;
+  isError: boolean;
   filterStarHotel: number[];
   filterTypeAccommodation: string[];
   selectedHotel: IHotel;
@@ -82,6 +84,8 @@ export function getFavoriteLocal(): IHotel[] {
 // init state
 const initState: IInitHotelState = {
   locationHotelList: getLocationHotelList(),
+  isLoading: false,
+  isError: false,
   filterStarHotel: [],
   filterTypeAccommodation: [],
   selectedHotel: getSelectedHotel(),
